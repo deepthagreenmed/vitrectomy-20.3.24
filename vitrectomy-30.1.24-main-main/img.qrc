@@ -1,0 +1,120 @@
+<RCC>
+    <qresource prefix="/new/prefix1"/>
+    <qresource prefix="/new"/>
+    <qresource prefix="/new/prefix1" lang="git">
+        <file>downnew1.png</file>
+        <file>Footpedal.png</file>
+        <file>Rectangle 15.png</file>
+        <file>Settimg 3.png</file>
+        <file>upnew1.png</file>
+        <file>img/AIR INJECTOR.png</file>
+        <file>img/backbg3.png</file>
+        <file>img/backbgon.png</file>
+        <file>img/bg1.png</file>
+        <file>img/bg2.png</file>
+        <file>img/DIATHERMY.png</file>
+        <file>img/docnamebox1.png</file>
+        <file>img/docnamebox2.png</file>
+        <file>img/DOCTOR ID.png</file>
+        <file>img/fpled.png</file>
+        <file>img/fpled1.png</file>
+        <file>img/LED.png</file>
+        <file>img/lin1.png</file>
+        <file>img/linbg.png</file>
+        <file>img/linbg1.png</file>
+        <file>img/linbg2.png</file>
+        <file>img/linbg3.png</file>
+        <file>img/linbgnon.png</file>
+        <file>img/LINEAR.png</file>
+        <file>img/nonbg1.png</file>
+        <file>img/nonl1.png</file>
+        <file>img/off1.png</file>
+        <file>img/offnew1 1.png</file>
+        <file>img/on1.png</file>
+        <file>img/onnew1 1.png</file>
+        <file>img/Rectangle 45.png</file>
+        <file>img/secbg1.png</file>
+        <file>img/SILICON OIL.png</file>
+        <file>img/textbox1.png</file>
+        <file>img/VACCUM.png</file>
+        <file>img/VITRECTOMY.png</file>
+        <file>newdoc 1.png</file>
+        <file>img/DOCTOR NAME.png</file>
+        <file>img/AIR INJECTOR1.png</file>
+        <file>img/DIATHERMY1.png</file>
+        <file>img/LED1.png</file>
+        <file>img/SILICON OIL1.png</file>
+        <file>img/VITRECTOMY1.png</file>
+        <file>img/icon1.png</file>
+        <file>img/Ellipse 21.png</file>
+        <file>img/Ellipse 201.png</file>
+        <file>img/docidbox.png</file>
+        <file>img/tabbg.png</file>
+        <file>img/textbox2.png</file>
+        <file>img/dialscale1.png</file>
+        <file>img/down1.png</file>
+        <file>img/up1.png</file>
+        <file>img/airscale1.png</file>
+        <file>img/airscale2.png</file>
+        <file>img/homeicon1.png</file>
+        <file>img/homeicon2.png</file>
+        <file>img/viticon.png</file>
+        <file>img/diaicon1.png</file>
+        <file>img/fpsicon.png</file>
+        <file>img/iaicon1.png</file>
+        <file>img/fpicon.png</file>
+        <file>img/homeicon3.png</file>
+        <file>img/fpsicon1.png</file>
+        <file>img/box1.png</file>
+        <file>img/diaicon2.png</file>
+        <file>img/footswitchicon1.png</file>
+        <file>img/fsseticon1.png</file>
+        <file>img/fsseticon2.png</file>
+        <file>img/fswitch1.png</file>
+        <file>img/viticon1.png</file>
+        <file>img/iaicon2.png</file>
+        <file>img/iaicon3.png</file>
+        <file>img/iconbg1.png</file>
+        <file>img/iconbg2.png</file>
+        <file>img/fp1.png</file>
+        <file>img/ball1.png</file>
+        <file>img/diaselected1.png</file>
+        <file>img/fpselected1.png</file>
+        <file>img/fpsselected.png</file>
+        <file>img/iaselected1.png</file>
+        <file>img/ring3.png</file>
+        <file>img/ring3 1.png</file>
+        <file>img/vitselected1.png</file>
+        <file>img/diaselected2.png</file>
+        <file>img/keypadbg1.png</file>
+        <file>img/fpbg1.png</file>
+        <file>img/save-button 1.png</file>
+        <file>img/saveforall1.png</file>
+        <file>img/notsave1.png</file>
+        <file>img/keypadbg2.png</file>
+        <file>img/keypadbg3.png</file>
+        <file>img/Calendar_add.png</file>
+        <file>img/Time.png</file>
+        <file>img/dateimg1.png</file>
+        <file>img/timeimg1.png</file>
+        <file>img/timeimg2.png</file>
+        <file>img/linvit1.png</file>
+        <file>img/nlinvit1.png</file>
+        <file>img/nlinvit2.png</file>
+        <file>img/doc 1.png</file>
+        <file>img/homeicon4.png</file>
+        <file>img/down2.png</file>
+        <file>img/up2.png</file>
+        <file>img/keypadbg3 1.png</file>
+        <file>img/textkeypad1.png</file>
+        <file>img/ENTER1.png</file>
+        <file>img/ring4.png</file>
+        <file>img/ring5.png</file>
+        <file>img/ring6.png</file>
+        <file>img/logo1.png</file>
+        <file>img/reload1.png</file>
+        <file>img/logo2.png</file>
+        <file>img/logo3.png</file>
+        <file>img/back1.png</file>
+    </qresource>
+</RCC>
