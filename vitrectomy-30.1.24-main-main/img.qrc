@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/new/prefix1"/>
     <qresource prefix="/new"/>
-    <qresource prefix="/new/prefix1" lang="git">
+    <qresource lang="git" prefix="/new/prefix1">
         <file>downnew1.png</file>
         <file>Footpedal.png</file>
         <file>Rectangle 15.png</file>
@@ -116,5 +116,6 @@
         <file>img/logo2.png</file>
         <file>img/logo3.png</file>
         <file>img/back1.png</file>
+        <file>img/ledsw.png</file>
     </qresource>
 </RCC>

@@ -35,6 +35,12 @@ public:
     QLabel *label_15;
     QLabel *label_25;
     QWidget *tab_6;
+    QLabel *label_45;
+    QLineEdit *lineEdit_9;
+    QLineEdit *lineEdit_10;
+    QLabel *label_42;
+    QLabel *label_44;
+    QPushButton *pushButton_8;
     QWidget *tab_8;
     QPushButton *pushButton_6;
     QLabel *label_30;
@@ -125,6 +131,8 @@ public:
     QLabel *label_2;
     QLabel *label_18;
     QLabel *label_22;
+    QLabel *label_41;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *settingswindow)
     {
@@ -135,7 +143,7 @@ public:
         settingswindow->setStyleSheet(QString::fromUtf8(""));
         tabWidget_2 = new QTabWidget(settingswindow);
         tabWidget_2->setObjectName(QString::fromUtf8("tabWidget_2"));
-        tabWidget_2->setGeometry(QRect(380, 10, 1121, 1071));
+        tabWidget_2->setGeometry(QRect(390, -10, 1121, 1071));
         QFont font;
         font.setFamily(QString::fromUtf8("Ubuntu"));
         font.setPointSize(1);
@@ -196,6 +204,42 @@ public:
         tab_6 = new QWidget();
         tab_6->setObjectName(QString::fromUtf8("tab_6"));
         tab_6->setEnabled(true);
+        label_45 = new QLabel(tab_6);
+        label_45->setObjectName(QString::fromUtf8("label_45"));
+        label_45->setGeometry(QRect(-30, 80, 1151, 1191));
+        label_45->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"font: 30pt \"Ubuntu\";border-radius: 20px;\n"
+"background-color: rgb(53, 63, 99);"));
+        lineEdit_9 = new QLineEdit(tab_6);
+        lineEdit_9->setObjectName(QString::fromUtf8("lineEdit_9"));
+        lineEdit_9->setGeometry(QRect(750, 290, 281, 81));
+        lineEdit_9->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";\n"
+"background-color: rgb(255, 255, 255);border-radius: 20px;"));
+        lineEdit_9->setAlignment(Qt::AlignCenter);
+        lineEdit_10 = new QLineEdit(tab_6);
+        lineEdit_10->setObjectName(QString::fromUtf8("lineEdit_10"));
+        lineEdit_10->setGeometry(QRect(750, 140, 281, 81));
+        lineEdit_10->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";\n"
+"background-color: rgb(255, 255, 255);border-radius: 20px;"));
+        lineEdit_10->setAlignment(Qt::AlignCenter);
+        label_42 = new QLabel(tab_6);
+        label_42->setObjectName(QString::fromUtf8("label_42"));
+        label_42->setGeometry(QRect(410, 140, 261, 91));
+        label_42->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"font: 35pt \"Ubuntu\";\n"
+"background-color: rgba(191, 64, 64, 0);"));
+        label_44 = new QLabel(tab_6);
+        label_44->setObjectName(QString::fromUtf8("label_44"));
+        label_44->setGeometry(QRect(410, 290, 261, 91));
+        label_44->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"font: 35pt \"Ubuntu\";\n"
+"background-color: rgba(191, 64, 64, 0);"));
+        pushButton_8 = new QPushButton(tab_6);
+        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
+        pushButton_8->setGeometry(QRect(730, 910, 331, 101));
+        pushButton_8->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/save-button 1.png);\n"
+"background-color: transparent;\n"
+"border:none;"));
         tabWidget_2->addTab(tab_6, QString());
         tab_8 = new QWidget();
         tab_8->setObjectName(QString::fromUtf8("tab_8"));
@@ -895,7 +939,7 @@ public:
         vit->setStyleSheet(QString::fromUtf8(""));
         pushButton_2 = new QPushButton(settingswindow);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(0, 350, 121, 111));
+        pushButton_2->setGeometry(QRect(0, 370, 121, 111));
         pushButton_2->setLayoutDirection(Qt::LeftToRight);
         pushButton_2->setStyleSheet(QString::fromUtf8("border:none;"));
         pushButton_5fp = new QPushButton(settingswindow);
@@ -917,7 +961,7 @@ public:
         pushButton_3->setStyleSheet(QString::fromUtf8("background-color: rgba(130, 52, 52, 0);border:none;"));
         label = new QLabel(settingswindow);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(-10, 110, 391, 951));
+        label->setGeometry(QRect(-30, 110, 391, 951));
         label->setStyleSheet(QString::fromUtf8("background-color: rgb(53, 63, 99);\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius: 20px;\n"
@@ -937,6 +981,14 @@ public:
         label_22->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/doc 1.png);\n"
 "background-color: transparent;\n"
 "color: rgba(68, 44, 44, 198);border:none;"));
+        label_41 = new QLabel(settingswindow);
+        label_41->setObjectName(QString::fromUtf8("label_41"));
+        label_41->setGeometry(QRect(-40, 300, 151, 81));
+        label_41->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/ledsw.png);"));
+        pushButton = new QPushButton(settingswindow);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(-20, 300, 131, 81));
+        pushButton->setStyleSheet(QString::fromUtf8("background-color: rgba(130, 52, 52, 0);border:none;"));
         label_19->raise();
         label_32->raise();
         label->raise();
@@ -959,10 +1011,12 @@ public:
         label_18->raise();
         pushButton_12->raise();
         label_22->raise();
+        label_41->raise();
+        pushButton->raise();
 
         retranslateUi(settingswindow);
 
-        tabWidget_2->setCurrentIndex(4);
+        tabWidget_2->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(settingswindow);
@@ -977,6 +1031,12 @@ public:
         label_15->setText(QString());
         label_25->setText(QString());
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_5), QCoreApplication::translate("settingswindow", "DIA", nullptr));
+        label_45->setText(QString());
+        lineEdit_9->setText(QString());
+        lineEdit_10->setText(QString());
+        label_42->setText(QCoreApplication::translate("settingswindow", "LED1", nullptr));
+        label_44->setText(QCoreApplication::translate("settingswindow", "LED2", nullptr));
+        pushButton_8->setText(QString());
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_6), QCoreApplication::translate("settingswindow", "Phaco", nullptr));
         pushButton_6->setText(QString());
         label_30->setText(QCoreApplication::translate("settingswindow", " Vaccum(mm/hg)", nullptr));
@@ -1089,6 +1149,8 @@ public:
         label_2->setText(QString());
         label_18->setText(QString());
         label_22->setText(QString());
+        label_41->setText(QString());
+        pushButton->setText(QString());
     } // retranslateUi
 
 };

@@ -730,8 +730,8 @@ public:
         label_48->raise();
         label_12->raise();
         label_22->raise();
-        pushButton_25->raise();
         comboBox_2->raise();
+        pushButton_25->raise();
 
         retranslateUi(MainWindow);
 

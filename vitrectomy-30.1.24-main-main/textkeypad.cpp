@@ -1,5 +1,6 @@
 #include "textkeypad.h"
 #include "ui_textkeypad.h"
+
 #include <QPushButton>
 
 textkeypad::textkeypad(QWidget *parent) :
@@ -18,7 +19,6 @@ for (int i = 2; i <= 41; ++i) {
     }
 }
 
-
     connect(ui->pushButton_11, &QPushButton::clicked, this, &textkeypad::enterback);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &textkeypad::enterenter);
     connect(ui->pushButton_42, &QPushButton::clicked, this, &textkeypad::spaceenter);
@@ -29,6 +29,7 @@ textkeypad::~textkeypad()
 {
     delete ui;
 }
+
 void textkeypad::entertext()
 {
     QPushButton* button = qobject_cast<QPushButton*>(sender());

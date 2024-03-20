@@ -21,25 +21,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_vaccum_t {
+struct qt_meta_stringdata_Vaccum_t {
     QByteArrayData data[1];
     char stringdata0[7];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_vaccum_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Vaccum_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_vaccum_t qt_meta_stringdata_vaccum = {
+static const qt_meta_stringdata_Vaccum_t qt_meta_stringdata_Vaccum = {
     {
-QT_MOC_LITERAL(0, 0, 6) // "vaccum"
+QT_MOC_LITERAL(0, 0, 6) // "Vaccum"
 
     },
-    "vaccum"
+    "Vaccum"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_vaccum[] = {
+static const uint qt_meta_data_Vaccum[] = {
 
  // content:
        8,       // revision
@@ -55,7 +55,7 @@ static const uint qt_meta_data_vaccum[] = {
        0        // eod
 };
 
-void vaccum::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Vaccum::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     (void)_o;
     (void)_id;
@@ -63,30 +63,30 @@ void vaccum::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     (void)_a;
 }
 
-QT_INIT_METAOBJECT const QMetaObject vaccum::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject Vaccum::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_vaccum.data,
-    qt_meta_data_vaccum,
+    qt_meta_stringdata_Vaccum.data,
+    qt_meta_data_Vaccum,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *vaccum::metaObject() const
+const QMetaObject *Vaccum::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *vaccum::qt_metacast(const char *_clname)
+void *Vaccum::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_vaccum.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Vaccum.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int vaccum::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Vaccum::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     return _id;

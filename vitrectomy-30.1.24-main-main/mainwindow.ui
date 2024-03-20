@@ -1622,8 +1622,8 @@ font: 65pt &quot;Ubuntu&quot;;</string>
    <zorder>label_48</zorder>
    <zorder>label_12</zorder>
    <zorder>label_22</zorder>
-   <zorder>pushButton_25</zorder>
    <zorder>comboBox_2</zorder>
+   <zorder>pushButton_25</zorder>
   </widget>
  </widget>
  <resources/>

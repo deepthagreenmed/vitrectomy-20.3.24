@@ -1,6 +1,8 @@
 #include "keypad.h"
 #include "ui_keypad.h"
+
 #include <QDebug>
+
 keypad::keypad(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::keypad)

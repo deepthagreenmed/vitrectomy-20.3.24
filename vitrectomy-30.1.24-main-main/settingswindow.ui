@@ -25,8 +25,8 @@
   <widget class="QTabWidget" name="tabWidget_2">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>10</y>
+     <x>390</x>
+     <y>-10</y>
      <width>1121</width>
      <height>1071</height>
     </rect>
@@ -56,7 +56,7 @@ QTabWidget::tab-bar { alignment: center; }
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>2</number>
    </property>
    <property name="iconSize">
     <size>
@@ -189,6 +189,118 @@ background-color: rgb(53, 63, 99);</string>
     <attribute name="title">
      <string>Phaco</string>
     </attribute>
+    <widget class="QLabel" name="label_45">
+     <property name="geometry">
+      <rect>
+       <x>-30</x>
+       <y>80</y>
+       <width>1151</width>
+       <height>1191</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 30pt &quot;Ubuntu&quot;;border-radius: 20px;
+background-color: rgb(53, 63, 99);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_9">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>290</y>
+       <width>281</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
+background-color: rgb(255, 255, 255);border-radius: 20px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_10">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>140</y>
+       <width>281</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
+background-color: rgb(255, 255, 255);border-radius: 20px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_42">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>140</y>
+       <width>261</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 35pt &quot;Ubuntu&quot;;
+background-color: rgba(191, 64, 64, 0);</string>
+     </property>
+     <property name="text">
+      <string>LED1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_44">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>290</y>
+       <width>261</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 35pt &quot;Ubuntu&quot;;
+background-color: rgba(191, 64, 64, 0);</string>
+     </property>
+     <property name="text">
+      <string>LED2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_8">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>910</y>
+       <width>331</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: url(:/new/prefix1/img/save-button 1.png);
+background-color: transparent;
+border:none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_8">
     <attribute name="title">
@@ -2018,7 +2130,7 @@ border-radius: 20px;font: 45pt &quot;Ubuntu&quot;;</string>
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>350</y>
+     <y>370</y>
      <width>121</width>
      <height>111</height>
     </rect>
@@ -2101,7 +2213,7 @@ border:none;</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>-10</x>
+     <x>-30</x>
      <y>110</y>
      <width>391</width>
      <height>951</height>
@@ -2168,6 +2280,38 @@ color: rgba(68, 44, 44, 198);border:none;</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label_41">
+   <property name="geometry">
+    <rect>
+     <x>-40</x>
+     <y>300</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/new/prefix1/img/ledsw.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>-20</x>
+     <y>300</y>
+     <width>131</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(130, 52, 52, 0);border:none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>label_19</zorder>
   <zorder>label_32</zorder>
   <zorder>label</zorder>
@@ -2190,6 +2334,8 @@ color: rgba(68, 44, 44, 198);border:none;</string>
   <zorder>label_18</zorder>
   <zorder>pushButton_12</zorder>
   <zorder>label_22</zorder>
+  <zorder>label_41</zorder>
+  <zorder>pushButton</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -1,9 +1,6 @@
 #ifndef FOOTPEDAL_H
 #define FOOTPEDAL_H
 
-#include <QObject>
-#include <QTimer>
-
 #include <stdint.h>
 #include <cstdio>
 #include <fcntl.h>
@@ -11,6 +8,9 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
+
+#include <QObject>
+#include <QTimer>
 
 class footpedal : public QObject
 {

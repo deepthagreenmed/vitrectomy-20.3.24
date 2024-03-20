@@ -1,14 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include<QSqlQuery>
-#include<QSqlDatabase>
-#include<QSqlRecord>
-#include<QLabel>
-#include<QtDebug>
+
+#include <QSqlQuery>
+#include <QSqlDatabase>
+#include <QSqlRecord>
+#include <QLabel>
+#include <QtDebug>
 #include <QObject>
 #include <QTimer>
 #include <QFile>
-#include<QStyleFactory>
+#include <QStyleFactory>
+#include <QPropertyAnimation>
+#include <QDateTime>
+#include <QRegExp>
+#include <QRegExpValidator>
+
 #include <stdint.h>
 #include <cstdio>
 #include <fcntl.h>
@@ -16,13 +22,9 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
-#include<QPropertyAnimation>
-#include<QDateTime>
-
 
 #define PATH "/home/main.db"
-//#define PATH "/home/amt-04/QtWorkspace/vitrectomy-24.1.24-main/database/main.db"
-//home/amt-05/vitrectomy-30.1.24-main-main/database/main.db
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -32,22 +34,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     fp = new footpedal;
     hhandler = new hwHandler;
-    vac=new vaccum;
+    vac = new Vaccum;
 
     connect(ui->comboBox_2, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
      timerforondscreen = new QTimer;
      timerforondscreen->start(7000);
-//     ui->label_39->setText("")
      connect(timerforondscreen, &QTimer::timeout, this, &MainWindow::timerCompleted);
-//     if(timerforondscreen->)
-//     if(ui->comboBox_2->)
-//     {
-//         qDebug()<<"yes";
-//     }
 
-//     QObject::connect(win2, &QPushButton::clicked, this, &MainWindow::onSecondWindowButtonClicked);
-//code to load database in the starting
+    //code to load database
     QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
     mydb1.setDatabaseName(PATH);
 
@@ -92,21 +87,16 @@ MainWindow::MainWindow(QWidget *parent)
 
           }
                itemname36 = query.value(35).toString();
-              // qDebug()<<itemname36;
                ui->label_3->setText(itemname36);
         itemname43 = query.value(42).toString();
 
           itemname44= query.value(43).toString();
-        //  qDebug()<<itemname44;
           fp0=itemname44.toDouble()*40.95;
           itemname45 = query.value(44).toString();
-         // qDebug()<<itemname45;
           fp1=itemname45.toDouble()*40.95;
           itemname46 = query.value(45).toString();
-         // qDebug()<<itemname46;
           fp2=itemname46.toDouble()*40.95;
           itemname47 = query.value(46).toString();
-          //qDebug()<<itemname47;
           fp3=itemname47.toDouble()*40.95;
           itemname48 = query.value(47).toString();
 
@@ -117,9 +107,6 @@ MainWindow::MainWindow(QWidget *parent)
 mydb1.close();
 comboboxload();
 ui->comboBox_2->setCurrentIndex(surgeonind);
-//ui->comboBox->a
-
-//connect(ui->comboBox_2, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
     win2=new settingswindow(this);
 
@@ -127,14 +114,14 @@ ui->comboBox_2->setCurrentIndex(surgeonind);
 
   QObject::connect(win2, &settingswindow::stringPassed, this, &MainWindow::receiveString);
 
-
-
     hhandler->vit_off();
    \
-    avg=fp->convert(0x97);
+    avg=fp->convert(CHANNEL_0);
 
     ui->label_4->setText(QString::number(vit_value));
-    //qDebug() << vit_value;
+
+    timer48.start(100);
+    connect(&timer48,&QTimer::timeout, this, &MainWindow::label48);
 
     QTimer *timer = new QTimer(this);
     QTimer *timerfortd = new QTimer(this);
@@ -145,33 +132,402 @@ ui->comboBox_2->setCurrentIndex(surgeonind);
     frequency = 1000 * vit_value/60;
     dutycycle = frequency - 40;
 
+    hhandler->ai_off();
+    hhandler->ai_preset_count(0);
+    hhandler->ai_actual_count(0);
+
+    led1 = new LED(PORT1);
+    led2 = new LED(PORT2);
 
     timerfortd->start(1000);
     timer->start(30);
 
-   // connections();
-
-// code for animations
+    // code for animations
     animation = new QPropertyAnimation(ui->label_31, "pos");
     animation1 = new QPropertyAnimation(ui->label_33, "pos");
     animation2 = new QPropertyAnimation(ui->label_32, "pos");
     animation3 = new QPropertyAnimation(ui->label_30, "pos");
     animation4 = new QPropertyAnimation(ui->label_29, "pos");
-     animation5 = new QPropertyAnimation(ui->label_42, "pos");
+    animation5 = new QPropertyAnimation(ui->label_42, "pos");
 
     ui->dial->setStyleSheet("");
     ui->dial->setStyle(QStyleFactory::create("Fusion"));
     ui->dial->setStyleSheet("background-color: rgb(26, 95, 180);");
     ui->dial->setRange(0, 4096);
 
+    ui->dial->setValue(avg);
+
+    connect(win2, &settingswindow::led1str, this, &MainWindow::led1val);
+    connect(win2, &settingswindow::led2str, this, &MainWindow::led2val);
+
+    connect(&timeai3, &QTimer::timeout, this, &MainWindow::aibackground);
+    timeai3.start(10);
+
+    key = new keypad;
+    connect(key, &keypad::textsignal, this, &MainWindow::on_clicked);
+    connect(key, &keypad::backsignal, this, &MainWindow::on_clickedbackspace);
+    connect(key, &keypad::entersignal, this, &MainWindow::on_clickedenter);
 
 
-   ui->dial->setValue(avg);
+    ui->label_5->installEventFilter(this);
+    ui->label_4->installEventFilter(this);
+    ui->label_8->installEventFilter(this);
+    ui->label_3->installEventFilter(this);
+    ui->label_6->installEventFilter(this);
+    ui->label_37->installEventFilter(this);
+    ui->label_9->installEventFilter(this);
+
+    ui->label_4->clearFocus();
+    ui->label_8->clearFocus();
+    ui->label_3->clearFocus();
+    ui->label_6->clearFocus();
+    ui->label_37->clearFocus();
+    ui->label_5->clearFocus();
+    ui->label_9->clearFocus();
+
+
+    QTimer *timermain = new QTimer(this);
+    timermain->setSingleShot(true);
+    timermain->start(3000); // 3 seconds
+    connect(timermain, &QTimer::timeout, this, &MainWindow::transitionToNewScreen);
+
 
 
 }
 
+void MainWindow::transitionToNewScreen() {
+    ui->label_22->hide();
+    ui->label_12->hide();
+    ui->comboBox_2->move(30,34);
+    ui->pushButton_25->hide();
+}
 
+
+void MainWindow::updateLabelValue(QLabel* label, int value, int maxValue) {
+    if (value > maxValue) {
+        label->setText(QString::number(maxValue));
+    } else {
+        label->setText(QString::number(value));
+    }
+}
+
+// keypad showing code
+bool MainWindow::eventFilter(QObject* object, QEvent* event)
+{
+  if(object == ui->label_5 && event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent *k = static_cast<QMouseEvent *> (event);
+    if( k->button() == Qt::LeftButton ) {
+        key->resize(491,271);
+        key->move(180,400);
+        key->show();
+        ui->label_5->setFocus();
+        ui->label_4->clearFocus();
+        ui->label_8->clearFocus();
+        ui->label_3->clearFocus();
+        ui->label_6->clearFocus();
+        ui->label_37->clearFocus();
+        ui->label_9->clearFocus();
+
+    } else if ( k->button() == Qt::RightButton ) {
+    }
+  }
+  if(object == ui->label_4 && event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent *k = static_cast<QMouseEvent *> (event);
+    if( k->button() == Qt::LeftButton ) {
+         key->resize(491,271);
+        key->move(110,500);
+        key->show();
+        ui->label_4->setFocus();
+        ui->label_5->clearFocus();
+        ui->label_8->clearFocus();
+        ui->label_3->clearFocus();
+        ui->label_6->clearFocus();
+        ui->label_37->clearFocus();
+        ui->label_9->clearFocus();
+
+    } else if ( k->button() == Qt::RightButton ) {
+
+    }
+  }
+  if(object == ui->label_8 && event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent *k = static_cast<QMouseEvent *> (event);
+    if( k->button() == Qt::LeftButton ) {
+    key->resize(491, 271);
+    key->move(850,450);
+    key->show();
+    ui->label_8->setFocus();
+    ui->label_4->clearFocus();
+    ui->label_5->clearFocus();
+    ui->label_3->clearFocus();
+    ui->label_6->clearFocus();
+    ui->label_37->clearFocus();
+    ui->label_9->clearFocus();
+
+    } else if ( k->button() == Qt::RightButton ) {
+
+    }
+  }
+  if(object == ui->label_3 && event->type() == QEvent::MouseButtonPress) {
+      QMouseEvent *k = static_cast<QMouseEvent *> (event);
+      if( k->button() == Qt::LeftButton ) {
+           key->resize(491,271);
+          key->move(1400,390);
+          key->show();
+          ui->label_3->setFocus();
+          ui->label_4->clearFocus();
+          ui->label_8->clearFocus();
+          ui->label_5->clearFocus();
+          ui->label_6->clearFocus();
+          ui->label_37->clearFocus();
+          ui->label_9->clearFocus();
+
+      } else if ( k->button() == Qt::RightButton ) {
+
+      }
+    }
+  if(object == ui->label_6 && event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent *k = static_cast<QMouseEvent *> (event);
+    if( k->button() == Qt::LeftButton ) {
+         key->resize(491,271);
+        key->move(1400,450);
+        key->show();
+        ui->label_6->setFocus();
+        ui->label_4->clearFocus();
+        ui->label_8->clearFocus();
+        ui->label_3->clearFocus();
+        ui->label_5->clearFocus();
+        ui->label_37->clearFocus();
+        ui->label_9->clearFocus();
+
+    } else if ( k->button() == Qt::RightButton ) {
+
+    }
+  }
+  if(object == ui->label_37 && event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent *k = static_cast<QMouseEvent *> (event);
+    if( k->button() == Qt::LeftButton ) {
+         key->resize(491,271);
+        key->move(550,400);
+        key->show();
+        ui->label_37->setFocus();
+        ui->label_4->clearFocus();
+        ui->label_8->clearFocus();
+        ui->label_3->clearFocus();
+        ui->label_6->clearFocus();
+        ui->label_5->clearFocus();
+        ui->label_9->clearFocus();
+
+    } else if ( k->button() == Qt::RightButton ) {
+
+    }
+  }
+  if(object == ui->label_9 && event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent *k = static_cast<QMouseEvent *> (event);
+    if( k->button() == Qt::LeftButton ) {
+         key->resize(491,271);
+        key->move(500,400);
+        key->show();
+        ui->label_9->setFocus();
+        ui->label_4->clearFocus();
+        ui->label_8->clearFocus();
+        ui->label_3->clearFocus();
+        ui->label_6->clearFocus();
+        ui->label_37->clearFocus();
+        ui->label_5->clearFocus();
+
+    } else if ( k->button() == Qt::RightButton ) {
+
+    }
+  }
+  return false;
+}
+
+//settings focus and insert digit
+void MainWindow::on_clicked(const QString& digit)
+{
+
+  if(ui->label_5->focusWidget()) {
+      ui->label_4->clearFocus();
+      ui->label_8->clearFocus();
+      ui->label_3->clearFocus();
+      ui->label_6->clearFocus();
+      ui->label_37->clearFocus();
+      ui->label_9->clearFocus();
+      if(!flag)
+      {
+      ui->label_5->setFocus();
+      ui->label_5->setText(ui->label_5->text()+digit);
+      updateLabelValue(ui->label_5, ui->label_5->text().toInt(), 500);
+
+   }
+  }
+  if(ui->label_4->focusWidget()) {
+      ui->label_5->clearFocus();
+      ui->label_8->clearFocus();
+      ui->label_3->clearFocus();
+      ui->label_6->clearFocus();
+      ui->label_37->clearFocus();
+      ui->label_9->clearFocus();
+      if(!flag)
+      {
+      ui->label_4->setFocus();
+      ui->label_4->setText(ui->label_4->text()+digit);
+      updateLabelValue(ui->label_4, ui->label_4->text().toInt(), 9600);
+
+   }
+  }
+if(ui->label_8->focusWidget()) {
+    ui->label_4->clearFocus();
+    ui->label_5->clearFocus();
+    ui->label_3->clearFocus();
+    ui->label_6->clearFocus();
+    ui->label_37->clearFocus();
+    ui->label_9->clearFocus();
+    if(!flag)
+    {
+    ui->label_8->setFocus();
+    ui->label_8->setText(ui->label_8->text()+digit);
+    updateLabelValue(ui->label_8, ui->label_8->text().toInt(), 100);
+
+
+ }
+}
+if(ui->label_3->focusWidget()) {
+    ui->label_4->clearFocus();
+    ui->label_8->clearFocus();
+    ui->label_5->clearFocus();
+    ui->label_6->clearFocus();
+    ui->label_37->clearFocus();
+    ui->label_9->clearFocus();
+    if(!flag)
+    {
+    ui->label_3->setFocus();
+    ui->label_3->setText(ui->label_3->text()+digit);
+    updateLabelValue(ui->label_3, ui->label_3->text().toInt(), 100);
+
+ }
+}
+if(ui->label_6->focusWidget()) {
+    ui->label_4->clearFocus();
+    ui->label_8->clearFocus();
+    ui->label_3->clearFocus();
+    ui->label_5->clearFocus();
+    ui->label_37->clearFocus();
+    ui->label_9->clearFocus();
+    if(!flag)
+    {
+    ui->label_6->setFocus();
+    ui->label_6->setText(ui->label_6->text()+digit);
+     updateLabelValue(ui->label_6, ui->label_6->text().toInt(), 100);
+
+ }
+}
+if(ui->label_37->focusWidget()) {
+    ui->label_4->clearFocus();
+    ui->label_8->clearFocus();
+    ui->label_3->clearFocus();
+    ui->label_6->clearFocus();
+    ui->label_5->clearFocus();
+    ui->label_9->clearFocus();
+    if(!flag)
+    {
+    ui->label_37->setFocus();
+    ui->label_37->setText(ui->label_37->text()+digit);
+    updateLabelValue(ui->label_37, ui->label_37->text().toInt(), 100);
+
+ }
+}
+if(ui->label_9->focusWidget()) {
+    ui->label_4->clearFocus();
+    ui->label_8->clearFocus();
+    ui->label_3->clearFocus();
+    ui->label_6->clearFocus();
+    ui->label_37->clearFocus();
+    ui->label_5->clearFocus();
+    if(!flag)
+    {
+    ui->label_9->setFocus();
+    ui->label_9->setText(ui->label_9->text()+digit);
+     updateLabelValue(ui->label_9, ui->label_9->text().toInt(), 100);
+
+ }
+}
+
+
+}
+
+void MainWindow::on_clickedbackspace()
+{
+    if (ui->label_5->focusWidget())
+    {
+
+        QString data = ui->label_5->text();
+        data.chop(3);
+        ui->label_5->setText(data);
+
+    }
+
+    if (ui->label_4->focusWidget())
+    {
+
+        QString data = ui->label_4->text();
+        data.chop(3);
+        ui->label_4->setText(data);
+
+    }
+
+    if (ui->label_8>focusWidget())
+    {
+
+        QString data = ui->label_8->text();
+        data.chop(3);
+        ui->label_8->setText(data);
+
+    }
+
+    if (ui->label_3->focusWidget())
+    {
+
+        QString data = ui->label_3->text();
+        data.chop(3);
+        ui->label_3->setText(data);
+
+    }
+
+    if (ui->label_6->focusWidget())
+    {
+
+        QString data = ui->label_6->text();
+        data.chop(3);
+        ui->label_6->setText(data);
+
+    }
+
+    if (ui->label_37->focusWidget())
+    {
+
+        QString data = ui->label_37->text();
+        data.chop(3);
+        ui->label_37->setText(data);
+
+    }
+
+    if (ui->label_9->focusWidget())
+    {
+
+        QString data = ui->label_9->text();
+        data.chop(3);
+        ui->label_9->setText(data);
+
+    }
+}
+
+void MainWindow::on_clickedenter()
+{
+    key->hide();
+    led1->processUserInput(round(30-(ui->label_9->text().toInt()*27/100)));
+    led2->processUserInput(round(30-(ui->label_37->text().toInt()*27/100)));
+}
 
 
 MainWindow::~MainWindow()
@@ -180,6 +536,19 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::aibackground()
+{
+    if(aiflag)
+    {
+        airinjector();
+        //qDebug()<<"On";
+    }
+    if(!aiflag)
+    {
+        airinjector2();
+        //qDebug()<<"Off";
+    }
+}
 
 //settings window showing
 
@@ -190,11 +559,6 @@ void MainWindow::on_pushButton_6_clicked()
 }
 
 
-
-void MainWindow::on_pushButton_14_clicked()
-{
-
-}
 // on off buttons
 void MainWindow::on_pushButton_2_clicked()
 {  if(sp==0)
@@ -205,14 +569,15 @@ void MainWindow::on_pushButton_2_clicked()
         ui->pushButton_19->raise();
         ui->label_8->raise();
 
-            animation->setStartValue(QPoint(930,160));
-            animation->setEndValue(QPoint(980, 160));
-            animation->setDuration(250);
-            animation->start();
-            ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-            connect(ui->pushButton_19, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
-            connect(ui->pushButton_18, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
-    sp=1;
+        animation->setStartValue(QPoint(930,160));
+        animation->setEndValue(QPoint(980, 160));
+        animation->setDuration(250);
+        animation->start();
+
+        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+        connect(ui->pushButton_19, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
+        connect(ui->pushButton_18, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+        sp=1;
 
         }
         else
@@ -222,22 +587,19 @@ void MainWindow::on_pushButton_2_clicked()
         ui->pushButton_18->lower();
         ui->pushButton_19->lower();
         ui->label_8->lower();
-            animation->setStartValue(QPoint(980,160));
-            animation->setEndValue(QPoint(930, 160));
-            animation->setDuration(250);
-            animation->start();
-            ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-            disconnect(ui->pushButton_19, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
-            disconnect(ui->pushButton_18, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
-           sp=0;
+
+        animation->setStartValue(QPoint(980,160));
+        animation->setEndValue(QPoint(930, 160));
+        animation->setDuration(250);
+        animation->start();
+
+        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        disconnect(ui->pushButton_19, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
+        disconnect(ui->pushButton_18, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+        sp=0;
         }
 
 }
-
-
-
-
-
 
 
 void MainWindow::on_pushButton_20_clicked()
@@ -257,9 +619,6 @@ void MainWindow::on_pushButton_20_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-
-
-
         if(lp==0)
         {
             ui->label_27->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
@@ -269,6 +628,10 @@ void MainWindow::on_pushButton_3_clicked()
             animation3->setDuration(250);
             animation3->start();
             ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+
+            led1->processUserInput(1);
+
+
             connect(ui->pushButton_17, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
             connect(ui->pushButton_16, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
 
@@ -283,6 +646,9 @@ void MainWindow::on_pushButton_3_clicked()
             animation3->setDuration(250);
             animation3->start();
             ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+
+            led1->processUserInput(2);
+
             disconnect(ui->pushButton_17, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
             disconnect(ui->pushButton_16, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
            lp=0;
@@ -291,7 +657,6 @@ void MainWindow::on_pushButton_3_clicked()
 }
 void MainWindow::on_pushButton_23_clicked()
 {
-
     if(lp2==0)
     {
         ui->label_41->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
@@ -300,20 +665,26 @@ void MainWindow::on_pushButton_23_clicked()
         animation5->setDuration(250);
         animation5->start();
         ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+
+        led2->processUserInput(1);
+
         connect(ui->pushButton_21, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
         connect(ui->pushButton_22, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
 
 
-lp2=1;
+        lp2=1;
 
     }
     else
-    {    ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+    {   ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
         animation5->setStartValue(QPoint(1110,640));
         animation5->setEndValue(QPoint(1060,640));
         animation5->setDuration(250);
         animation5->start();
         ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+
+        led2->processUserInput(2);
+
         disconnect(ui->pushButton_21, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
         disconnect(ui->pushButton_22, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
        lp2=0;
@@ -322,9 +693,6 @@ lp2=1;
 
 void MainWindow::on_pushButton_5_clicked()
 {
-
-
-
         if(dp==0)
         {
             ui->label_14->setStyleSheet("background-color: rgb(116, 184, 222);");
@@ -337,10 +705,14 @@ void MainWindow::on_pushButton_5_clicked()
             animation2->setDuration(250);
             animation2->start();
             ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+
+            timedia.start(1000);
+            connect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
+
+
             connect(ui->pushButton_10, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             connect(ui->pushButton_14, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
-
-    dp=1;
+            dp=1;
 
         }
         else
@@ -355,6 +727,12 @@ void MainWindow::on_pushButton_5_clicked()
             animation2->setDuration(250);
             animation2->start();
             ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+
+            hhandler->dia_off();
+
+            timedia.stop();
+            disconnect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
+
             disconnect(ui->pushButton_10, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             disconnect(ui->pushButton_14, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
            dp=0;
@@ -363,13 +741,8 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_7_clicked()
 {
-
-
-
         if(ap==0)
         {
-
-
             ui->label_13->setStyleSheet("background-color: rgb(116, 184, 222);");
             ui->label_23->setStyleSheet("font: 40pt;color: rgb(0, 0, 0);");
             ui->pushButton_13->raise();
@@ -382,6 +755,14 @@ void MainWindow::on_pushButton_7_clicked()
             animation4->setDuration(250);
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+
+            timeai.start(100);
+            connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjector);
+
+            timeai2.stop();
+            disconnect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjector2);
+
+
             connect(ui->pushButton_9, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_13, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
 
@@ -401,9 +782,15 @@ void MainWindow::on_pushButton_7_clicked()
             animation4->setDuration(250);
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+
+            timeai2.start(100);
+            connect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjector2);
+
+            timeai.stop();
+            disconnect(&timeai, &QTimer::timeout, this, &MainWindow::airinjector);
+
             disconnect(ui->pushButton_9, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             disconnect(ui->pushButton_13, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
-
 
             ap=0;
         }
@@ -411,11 +798,9 @@ void MainWindow::on_pushButton_7_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-
-
-
         if(vip==0)
-        {    ui->label_38->setStyleSheet("background-color: rgb(116, 184, 222);");
+        {
+            ui->label_38->setStyleSheet("background-color: rgb(116, 184, 222);");
 
             ui->label_24->setStyleSheet("font: 40pt ;color: rgb(0, 0, 0);");
             ui->pushButton_11->raise();
@@ -431,6 +816,7 @@ void MainWindow::on_pushButton_4_clicked()
             vip=1;
 
             if(avg>= (fp1+fp2+fp0)){hhandler->vit_on(1000/(vit_value/60));}
+
             connect(ui->pushButton_11, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
             connect(ui->pushButton_15, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
@@ -453,7 +839,7 @@ void MainWindow::on_pushButton_4_clicked()
                 animation1->start();
                 vip=0;
 
-                   if(avg<= (fp1+fp2+fp0)){hhandler->vit_off();}
+                if(avg<= (fp1+fp2+fp0)){hhandler->vit_off();}
 
 
             disconnect(ui->pushButton_11, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
@@ -470,7 +856,7 @@ void MainWindow::updateLabel()
     // FOOTPEDAL
 
 // setting value for dial
-    avg = fp->convert(0x97);
+    avg = fp->convert(CHANNEL_0);
 
 
   if(vp==0)
@@ -478,11 +864,11 @@ void MainWindow::updateLabel()
 
       ui->dial->setValue(avg);
 
-
       if(avg >= 0 && avg <= fp0)
       {
           ui->label_36->setText("0");
-           int avg1=vac->stabilizeoff();
+          hhandler->vso_off();
+           int avg1=vac->stabilize();
            ui->label_2->setText(QString::number(avg1));
          if(vip==1){hhandler->vit_off();}
          if(vip==0){hhandler->vit_off();}
@@ -495,7 +881,8 @@ void MainWindow::updateLabel()
       {
         //irrigation
           ui->label_36->setText("1");
-          int avg1=vac->stabilizeoff();
+          hhandler->vso_off();
+          int avg1=vac->stabilize();
           ui->label_2->setText(QString::number(avg1));
           if(vip==1){hhandler->vit_off();}
           if(vip==0){hhandler->vit_off();}
@@ -528,10 +915,6 @@ void MainWindow::updateLabel()
               }
           }
 
-
-
-
-     // double step = fp2/lineCount;
         std::string line;
         idx = ((avg-fp0-fp1)/fp2)*lineCount;
         std::ifstream file2(PATH2);
@@ -553,10 +936,10 @@ void MainWindow::updateLabel()
 
         hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
         hhandler->vso_period(((1 / freq) / resolution));
-        int avg1=vac->stabilizeon();
+        int avg1=vac->stabilize();
         ui->label_2->setText(QString::number(avg1));
 
-          file.close();
+        file.close();
         file2.close();
 
           if(vip==1){hhandler->vit_off();}
@@ -571,16 +954,22 @@ void MainWindow::updateLabel()
                   //swap
                ui->label_36->setText("2");
 
-               int avg1=vac->stabilizeoff();
+               hhandler->vso_off();
+               int avg1=vac->stabilize();
                ui->label_2->setText(QString::number(avg1));
 
-               if(vip==1){hhandler->vit_on(1000/(vit_value/60));}
-               else {hhandler->vit_off();}
+               if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
+               if(vip==1 && vitp==0)
+               {
+                   linearcall();
+               }
+               if(vip==0) {hhandler->vit_off();ui->label_48->setText("0");}
 
               }
           }
 
       }
+      //vitrectomy
       if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
       {
        ui->label_36->setText("3");
@@ -603,6 +992,7 @@ void MainWindow::updateLabel()
            }
        }
 
+
        std::ifstream file2(PATH2);
        std::string line;
        for (int i = 1; i <= lineCount; i++) {
@@ -621,15 +1011,21 @@ void MainWindow::updateLabel()
 
        hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
        hhandler->vso_period(((1 / freq) / resolution));
-       int avg1=vac->stabilizeon();
+       int avg1=vac->stabilize();
        ui->label_2->setText(QString::number(avg1));
 
        file.close();
         file2.close();
 
 
-       if(vip==1){hhandler->vit_on(1000/(vit_value/60));}
-       else {hhandler->vit_off();}
+       if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
+       else if(vip==1 && vitp==0)
+       {
+           hhandler->vit_on(1000/(vit_value/60));
+           ui->label_48->setText(QString::number(vit_value));
+
+       }
+       if(vip==0) {hhandler->vit_off();ui->label_48->setText("0");}
 
      }
   }
@@ -643,18 +1039,20 @@ void MainWindow::updateLabel()
         ui->label_36->setText("0");
         if(vip==1){hhandler->vit_off();}
         if(vip==0){hhandler->vit_off();}
-        int avg1=vac->stabilizeoff();
+        hhandler->vso_off();
+        int avg1=vac->stabilize();
         ui->label_2->setText(QString::number(avg1));
 
     }
     if((avg > fp0&& avg <= (fp1+fp0)))
     {
-
         ui->dial->setValue((fp1+fp0));
         ui->label_36->setText("1");
         if(vip==1){hhandler->vit_off();}
        if(vip==0){hhandler->vit_off();}
-       int avg1=vac->stabilizeoff();
+
+       hhandler->vso_off();
+       int avg1=vac->stabilize();
        ui->label_2->setText(QString::number(avg1));
 
     }
@@ -694,7 +1092,6 @@ void MainWindow::updateLabel()
             std::getline(file2, line);
         }
 
-
         std::istringstream iss(line);
         std::string column1, column2;
         iss >> column1 >> column2;
@@ -706,7 +1103,7 @@ void MainWindow::updateLabel()
 
         hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
         hhandler->vso_period(((1 / freq) / resolution));
-        int avg1=vac->stabilizeon();
+        int avg1=vac->stabilize();
         ui->label_2->setText(QString::number(avg1));
 
         file.close();
@@ -720,22 +1117,33 @@ void MainWindow::updateLabel()
             ui->dial->setValue(fp1+fp2+fp0);
             ui->label_36->setText("2");
 
-           if(vip==1){hhandler->vit_on(1000/(vit_value/60));}
-           else if(vip==0){hhandler->vit_off();}
+           if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
+           if(vip==1 && vitp==0)
+           {
+               linearcall();
+           }
+           if(vip==0){hhandler->vit_off();ui->label_48->setText("0");}
 
-           int avg1=vac->stabilizeoff();
+           hhandler->vso_off();
+           int avg1=vac->stabilize();
            ui->label_2->setText(QString::number(avg1));
         }
     }
 
-
+    //vitrectomy
     if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
     {
          ui->dial->setValue(fp1+fp2+fp3+fp0);
          ui->label_36->setText("3");
 
-        if(vip==1){hhandler->vit_on(1000/(vit_value/60));}
-        else if(vip==0){hhandler->vit_off();}
+        if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
+        if(vip==1 && vitp==0)
+        {
+            hhandler->vit_on(1000/(vit_value/60));
+            ui->label_48->setText(QString::number(vit_value));
+
+        }
+        if(vip==0){hhandler->vit_off();ui->label_48->setText("0");}
 
 
         float freq = 12000;
@@ -762,7 +1170,6 @@ void MainWindow::updateLabel()
             std::getline(file2, line);
         }
 
-
         std::istringstream iss(line);
         std::string column1, column2;
         iss >> column1 >> column2;
@@ -774,49 +1181,14 @@ void MainWindow::updateLabel()
 
         hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
         hhandler->vso_period(((1 / freq) / resolution));
-        int avg1=vac->stabilizeon();
+        int avg1=vac->stabilize();
         ui->label_2->setText(QString::number(avg1));
 
         file.close();
-         file2.close();
+        file2.close();
 
-    //}
     }
   }
-}
-
-
-
-    //AIR INJECTOR
-
-//    ui->label_10->setText(QString::number(avg));
-
-
-void MainWindow::connections()
-{
-    //VACCUM
-   // connect(ui->pushButton_8, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
-  //  connect(ui->pushButton_12, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
-
-    //DIATHERMY
-   // connect(ui->pushButton_10, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
-   // connect(ui->pushButton_14, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
-
-    //VITRECTOMY
-    //connect(ui->pushButton_11, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
-   // connect(ui->pushButton_15, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
-
-    // AIR INJECTOR
-//    connect(ui->pushButton_9, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
-//    connect(ui->pushButton_13, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
-
-    // LED
-//    connect(ui->pushButton_17, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
-//    connect(ui->pushButton_16, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
-
-    //SILICON
-//    connect(ui->pushButton_19, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
-//    connect(ui->pushButton_18, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
 }
 
 // inc / dec values in label
@@ -843,8 +1215,6 @@ void MainWindow::increaseVitrectomyValue()
     {
         vit_value=8000;
     }
-    //hhandler->vit_on(1000/(vit_value/60));
-   // qDebug() << vit_value;
     ui->label_4->setText(QString::number(vit_value));
 }
 
@@ -856,8 +1226,6 @@ void MainWindow::decreaseVitrectomyValue()
     {
         vit_value=60;
     }
-   // hhandler->vit_on(1000/(vit_value/60));
-   // qDebug() << vit_value;
     ui->label_4->setText(QString::number(vit_value));
 }
 
@@ -887,6 +1255,10 @@ void MainWindow::increaseAirInjectorValue()
 {
     int currentValue = ui->label_3->text().toInt();
     int newValue = currentValue + 1;
+    if(newValue>100)
+    {
+        newValue=100;
+    }
     ui->label_3->setText(QString::number(newValue));
     ui->progressBar->setValue(newValue);
 }
@@ -895,6 +1267,10 @@ void MainWindow::decreaseAirInjectorValue()
 {
     int currentValue = ui->label_3->text().toInt();
     int newValue = currentValue - 1;
+    if(newValue<0)
+    {
+        newValue=0;
+    }
     ui->label_3->setText(QString::number(newValue));
     ui->progressBar->setValue(newValue);
 }
@@ -903,19 +1279,39 @@ void MainWindow::increaseledvalue()
 {
     int currentValue = ui->label_9->text().toInt();
     int newValue = currentValue + 5;
+    if(newValue>100)
+    {
+        newValue=100;
+    }
+    double choice = newValue;
+    led1->processUserInput(round(30-(choice*27/100)));
     ui->label_9->setText(QString::number(newValue));
+
 }
 
 void MainWindow::decreaseledvalue()
 {
     int currentValue = ui->label_9->text().toInt();
     int newValue = currentValue - 5;
+    if(newValue<0)
+    {
+        newValue=0;
+    }
+    double choice = newValue;
+    led1->processUserInput(round(30-(choice*27/100)));
     ui->label_9->setText(QString::number(newValue));
 }
+
 void MainWindow::increaseledvalue2()
 {
     int currentValue = ui->label_37->text().toInt();
     int newValue = currentValue + 5;
+    if(newValue>100)
+    {
+        newValue=100;
+    }
+    double choice = newValue;
+    led2->processUserInput(round(30-(choice*27/100)));
     ui->label_37->setText(QString::number(newValue));
 }
 
@@ -923,6 +1319,12 @@ void MainWindow::decreaseledvalue2()
 {
     int currentValue = ui->label_37->text().toInt();
     int newValue = currentValue - 5;
+    if(newValue<0)
+    {
+        newValue=0;
+    }
+    double choice = newValue;
+    led2->processUserInput(round(30-(choice*27/100)));
     ui->label_37->setText(QString::number(newValue));
 }
 
@@ -944,28 +1346,17 @@ void MainWindow::receiveString(const QString& str)
 {
     ui->label_11->setText(str);
 }
-void MainWindow::receiveString0(const QString& str)
+
+void MainWindow::led1val(QString str)
 {
-   //fp0=str.toInt()*40.95;
-   //qDebug()<<fp1;
-}
-void MainWindow::receiveString1(const QString& str)
-{
-   //fp1=str.toInt()*40.95;
-   //qDebug()<<fp1;
+    ui->label_9->setText(str);
+    led1->processUserInput(round(30-(ui->label_9->text().toInt()*27/100)));
 }
 
-void MainWindow::receiveString2(const QString& str)
+void MainWindow::led2val(QString str)
 {
-    //fp2=str.toInt()*40.95;
-   // qDebug()<<fp2;
-
-}
-void MainWindow::receiveString3(const QString& str)
-{
-   //fp3=str.toInt()*40.95;
-  //  qDebug()<<fp3;
-
+    ui->label_37->setText(str);
+    led2->processUserInput(round(30-(ui->label_37->text().toInt()*27/100)));
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -976,17 +1367,8 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
+// code for continuous press
 
-
-
-
-
-void MainWindow::on_dial_valueChanged(int value)
-{
-
-}
-
-// code for continuos press
 //inc vaccum
 void MainWindow::on_pushButton_8_pressed()
 {
@@ -1002,6 +1384,7 @@ void MainWindow::on_pushButton_8_released()
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseVaccumValue);
 
 }
+
 //dec vaccum
 void MainWindow::on_pushButton_12_pressed()
 {
@@ -1032,8 +1415,8 @@ void MainWindow::on_pushButton_11_released()
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseVitrectomyValue);
 }
 }
-//dec vit
 
+//dec vit
 void MainWindow::on_pushButton_15_pressed()
 {
     if(vip==1)
@@ -1049,6 +1432,7 @@ void MainWindow::on_pushButton_15_released()
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseVitrectomyValue);
 }
 }
+
 // inc sil
 void MainWindow::on_pushButton_19_pressed()
 {if(sp==1)
@@ -1063,6 +1447,7 @@ void MainWindow::on_pushButton_19_released()
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoil);
 }}
+
 //dec sil
 void MainWindow::on_pushButton_18_pressed()
 {if(sp==1)
@@ -1077,6 +1462,7 @@ void MainWindow::on_pushButton_18_released()
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoil);
 }}
+
 //inc led1
 void MainWindow::on_pushButton_17_pressed()
 {if(lp==1)
@@ -1092,8 +1478,8 @@ void MainWindow::on_pushButton_17_released()
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue);
 }}
-//dec led1
 
+//dec led1
 void MainWindow::on_pushButton_16_pressed()
 {if(lp==1)
     {
@@ -1191,84 +1577,12 @@ void MainWindow::on_pushButton_14_released()
 }
 }
 
-void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
-{
-//    ui->label_22->lower();
-//    ui->label_12->lower();
-//    ui->comboBox_2->move(30,34);
-//    QString surgeonid;
-//    surgeonid=ui->comboBox_2->currentText();
-//    //qDebug() << surgeonid;
-//   // emit stringPassed(surgeonid);
-
-
-
-//    QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
-//    mydb1.setDatabaseName(PATH);
-//    mydb1.open();
-//    QSqlQuery query;
-
-//    //ui->label_11->setText(ui->comboBox->currentText());
-//   query.exec("select * from maindb where surgeon='"+surgeonid+"'");
-//   if(query.next()){
-//       QString itemname1;
-//       QString itemname34;
-//       QString itemname35;
-//       QString itemname36;
-//       QString itemname44;
-//       QString itemname45;
-//       QString itemname46;
-//       QString itemname47;
-
-
-//       itemname1 = query.value(0).toString();
-//         ui->label_6->setText(itemname1);
-//       itemname34 = query.value(33).toString();
-//       ui->label_4->setText(itemname34);
-
-//       itemname35 = query.value(34).toString();
-//       if(itemname35=="Linear")
-//       {
-//            ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
-
-
-//       }
-//       else
-//       {
-
-//           ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
-
-//       }
-//            itemname36 = query.value(35).toString();
-//            ui->label_3->setText(itemname36);
-//            itemname44= query.value(43).toString();
-//           fp0=itemname44.toDouble()*40.95;
-//          // fp0=str.toInt()*40.95;
-//            itemname45 = query.value(44).toString();
-//           fp1=itemname45.toDouble()*40.95;
-//            itemname46 = query.value(45).toString();
-//           fp2=itemname46.toDouble()*40.95;
-//            itemname47 = query.value(46).toString();
-//           fp3=itemname47.toDouble()*40.95;
-
-//       }
-// qDebug()<<fp0;
-// qDebug()<<fp1;
-// qDebug()<<fp2;
-// qDebug()<<fp3;
-//mydb1.close();
-
-
-}
-
 
 void MainWindow::on_pushButton_24_clicked()
 {
 
     if(vitp==0)
     {
-        time2.stop();
-        disconnect(&time2, &QTimer::timeout, this, &MainWindow::updateLabel2);
 
        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
        vitp=1;
@@ -1278,8 +1592,6 @@ void MainWindow::on_pushButton_24_clicked()
     }
     else
     {
-       connect(&time2, &QTimer::timeout, this, &MainWindow::updateLabel2);
-        time2.start(30);
 
         ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
         vitp=0;
@@ -1299,6 +1611,7 @@ void MainWindow::updatetimedate()
     ui->label_46->setText(dateString);
      ui->label_47->setText(timeString);
 }
+
 //code to load combobox from db
 void MainWindow::comboboxload()
 {
@@ -1332,87 +1645,6 @@ void MainWindow::comboboxload()
 }
 
 
-
-
-// combo box code
-void MainWindow::on_comboBox_2_currentTextChanged(const QString &arg1)
-{
-////    ui->label_22->lower();
-////    ui->label_12->lower();
-////    ui->comboBox_2->move(30,34);
-//    if((ui->comboBox_2->currentIndex())==0)
-//    {     // ui->label_22->lower();
-//          // ui->label_12->lower();
-//          // ui->comboBox_2->move(30,34);
-//            QString surgeonid;
-//            surgeonid=ui->comboBox_2->currentText();
-//            //qDebug() << surgeonid;
-//           // emit stringPassed(surgeonid);
-
-
-
-//            QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
-//            mydb1.setDatabaseName(PATH);
-//            mydb1.open();
-//            QSqlQuery query;
-
-//            //ui->label_11->setText(ui->comboBox->currentText());
-//           query.exec("select * from maindb where surgeon='"+surgeonid+"'");
-//           if(query.next()){
-//               QString itemname1;
-//               QString itemname34;
-//               QString itemname35;
-//               QString itemname36;
-//               QString itemname44;
-//               QString itemname45;
-//               QString itemname46;
-//               QString itemname47;
-
-
-//               itemname1 = query.value(0).toString();
-//                 ui->label_6->setText(itemname1);
-//               itemname34 = query.value(33).toString();
-//               ui->label_4->setText(itemname34);
-
-//               itemname35 = query.value(34).toString();
-//               if(itemname35=="Linear")
-//               {
-//                    ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
-
-
-//               }
-//               else
-//               {
-
-//                   ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
-
-//               }
-//                    itemname36 = query.value(35).toString();
-//                    ui->label_3->setText(itemname36);
-//                    itemname44= query.value(43).toString();
-//                   fp0=itemname44.toDouble()*40.95;
-//                  // fp0=str.toInt()*40.95;
-//                    itemname45 = query.value(44).toString();
-//                   fp1=itemname45.toDouble()*40.95;
-//                    itemname46 = query.value(45).toString();
-//                   fp2=itemname46.toDouble()*40.95;
-//                    itemname47 = query.value(46).toString();
-//                   fp3=itemname47.toDouble()*40.95;
-//                   qDebug()<<itemname44;
-//                   qDebug()<<itemname45;
-//                   qDebug()<<itemname46;
-//                   qDebug()<<itemname47;
-//               }
-
-//         qDebug()<<fp0;
-//         qDebug()<<fp1;
-//         qDebug()<<fp2;
-//         qDebug()<<fp3;
-//        mydb1.close();
-
-    //    }
-}
-
 void MainWindow::timerCompleted()
 {
     ui->label_22->lower();
@@ -1421,6 +1653,8 @@ void MainWindow::timerCompleted()
     ui->pushButton_25->lower();
 
 }
+
+//combo box code
 void MainWindow::onComboBoxClicked()
 {timerforondscreen->stop();
 if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
@@ -1468,7 +1702,6 @@ if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
            {
                 ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
 
-
            }
            else
            {
@@ -1480,7 +1713,6 @@ if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
                 ui->label_3->setText(itemname36);
                 itemname44= query.value(43).toString();
                fp0=itemname44.toDouble()*40.95;
-              // fp0=str.toInt()*40.95;
                 itemname45 = query.value(44).toString();
                fp1=itemname45.toDouble()*40.95;
                 itemname46 = query.value(45).toString();
@@ -1500,15 +1732,8 @@ if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
     mydb1.close();
 
 }
-//    ui->label_22->lower();
-//    ui->label_12->lower();
-//    ui->comboBox_2->move(30,34);
+
 }
-//void MainWindow::onSecondWindowButtonClicked()
-//{
-//    // Call the function or perform the action you want when the second window button is clicked
-//    qDebug() << "Button in second window clicked!";
-//}
 
 void MainWindow::on_pushButton_25_clicked()
 {
@@ -1534,86 +1759,78 @@ void MainWindow::on_pushButton_26_clicked()
     }
 }
 
-void MainWindow::updateLabel2()
+void MainWindow::linearcall()
 {
-    int avg=fp->convert(0x97);
+    int avg = fp->convert(CHANNEL_0);
 
-    int val, val2;
-
-    if(flag2==0)
+    if(avg<=(fp0+fp1))
     {
-        if(avg>=(fp0+fp1+fp2))
-        {
-            val = ((avg-fp0-fp1-fp2)/fp3)*vit_value;
-            int q = std::round(val/60)+1;
-            val2 = q*60;
-            hhandler->vit_on(1000/(val2/60));
-//            if(q==0)
-//            {
-//                hhandler->vit_off();
-//                val2=0;
-//            }
-//            else
-//            {
-//                val2 = q*60;
-//                hhandler->vit_on(1000/(val2/60));
-//            }
-            ui->label_48->setText(QString::number(val2));
-        }
-        else
-        {
-           hhandler->vit_off();
-           val2=0;
-           ui->label_48->setText(QString::number(val2));
-        }
-
+        ui->label_48->setText("0");
     }
-    else if(flag2==1)
+
+    int val = ((avg-fp0-fp1)/fp2)*vit_value;
+    int q = val/60;
+    int val2=q*60;
+    if(val2>=60)
     {
-        if(avg>=(fp0+fp1) && avg<(fp0+fp1+fp2))
+        if(avg>=4000)
         {
-            val = ((avg-fp0-fp1)/fp2)*vit_value;
-            int q = std::round(val/60)+1;
-            val2 = q*60;
-            hhandler->vit_on(1000/(val2/60));
-//            if(q==0)
-//            {
-//                hhandler->vit_off();
-//                val2=0;
-//            }
-//            else
-//            {
-//                val2 = q*60;
-//                hhandler->vit_on(1000/(val2/60));
-//            }
-            ui->label_48->setText(QString::number(val2));
-        }
-        else if(avg>=(fp0+fp1+fp2))
-        {
-            val = ((avg-fp0-fp1-fp2)/fp3)*vit_value;
-            int q = std::round(val/60)+1;
-            val2 = q*60;
-            hhandler->vit_on(1000/(val2/60));
-//            if(q==0)
-//            {
-//                hhandler->vit_off();
-//                val2=0;
-//            }
-//            else
-//            {
-//                val2 = q*60;
-//                hhandler->vit_on(1000/(val2/60));
-//            }
-            ui->label_48->setText(QString::number(val2));
+            hhandler->vit_on(1000/(vit_value/60));
+            ui->label_48->setText(QString::number(vit_value));
         }
         else
         {
-            hhandler->vit_off();
-            val2=0;
+            hhandler->vit_on(1000/(val2/60));
             ui->label_48->setText(QString::number(val2));
-        }
+       }
+    }
+    else
+    {
+        hhandler->vit_off();
+    }
+
+}
+
+void MainWindow::diathermy()
+{
+    hhandler->dia_on();
+    hhandler->dia_count(ui->label_6->text().toInt()*256/100);
+}
+
+void MainWindow::airinjector()
+{
+    if(ui->label_3->text().toInt()==0)
+    {
+        airinjector2();
+    }
+    else
+    {
+        aiflag=1;
+        hhandler->ai_on();
+        hhandler->ai_preset_count(ui->label_3->text().toInt()*256/100);
+        //hhandler->ai_actual_count(100);
+        int value = (int)(vac->convert(CHANNEL_2)*0.17);
+        ui->label_10->setText(QString::number(value));
+        hhandler->ai_actual_count(value);
     }
 }
 
+void MainWindow::airinjector2()
+{
+    aiflag=0;
+    hhandler->ai_off();
+    hhandler->ai_preset_count(0);
+    ui->label_10->setText(QString::number(0));
+    hhandler->ai_actual_count(0);
 
+}
 
+void MainWindow::label48()
+{
+    int avg = fp->convert(CHANNEL_0);
+
+    if(avg<=(fp0+fp1))
+    {
+        ui->label_48->setText("0");
+    }
+}

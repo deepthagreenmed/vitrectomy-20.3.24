@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    led.cpp \
     main.cpp \
     mainwindow.cpp \
     settingswindow.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
     footpedal.h \
     hwhandler.h \
+    led.h \
     mainwindow.h \
     settingswindow.h \
     keypad.h \
@@ -77,3 +79,16 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/vaccum.lib
 else:unix: PRE_TARGETDEPS += $$PWD/./libvaccum.a
 #zynq
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/./release/ -lhwhandler
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/./debug/ -lhwhandler
+else:unix: LIBS += -L$$PWD/./ -lhwhandler
+
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/libhwhandler.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/libhwhandler.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/hwhandler.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/hwhandler.lib
+else:unix: PRE_TARGETDEPS += $$PWD/./libhwhandler.a
