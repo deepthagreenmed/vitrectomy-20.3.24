@@ -20,12 +20,12 @@ public:
 
 signals:
     void textsignal(const QString& digit);
-    void backsignal();
+    //void backsignal();
     void entersignal();
 
 private slots:
     void entertext();
-    void enterback();
+    //void enterback();
     void enterenter();
 
 

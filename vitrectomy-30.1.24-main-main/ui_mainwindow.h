@@ -31,8 +31,6 @@ public:
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_6;
-    QPushButton *pushButton_12;
-    QPushButton *pushButton_8;
     QPushButton *pushButton_2;
     QLabel *label_8;
     QLabel *label_9;
@@ -102,6 +100,8 @@ public:
     QLabel *label_39;
     QPushButton *pushButton_26;
     QLabel *label_48;
+    QPushButton *pushButton_12;
+    QPushButton *pushButton_27;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -161,30 +161,6 @@ public:
         label_6->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/textbox2.png);\n"
 "font: 65pt \"Ubuntu\";"));
         label_6->setAlignment(Qt::AlignCenter);
-        pushButton_12 = new QPushButton(centralwidget);
-        pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
-        pushButton_12->setGeometry(QRect(500, 260, 81, 91));
-        pushButton_12->setStyleSheet(QString::fromUtf8("QPushButton{background-image: url(:/new/prefix1/img/down1.png);\n"
-"background-color: rgba(242, 179, 179, 0);}\n"
-"\n"
-"\n"
-"QPushButton::hover{background-color: #0085ff;\n"
-"border-radius: 20px;\n"
-"color:white;;}"));
-        pushButton_8 = new QPushButton(centralwidget);
-        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
-        pushButton_8->setGeometry(QRect(90, 260, 81, 91));
-        pushButton_8->setStyleSheet(QString::fromUtf8("\n"
-"QPushButton{\n"
-"	background-image: url(:/new/prefix1/img/up1.png);\n"
-"background-color: rgba(242, 179, 179, 0);\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"QPushButton::hover{background-color: #0085ff;\n"
-"border-radius: 20px;\n"
-"color:white;;}"));
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setGeometry(QRect(930, 160, 101, 51));
@@ -654,6 +630,30 @@ public:
         label_48->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/textbox2.png);\n"
 "font: 65pt \"Ubuntu\";"));
         label_48->setAlignment(Qt::AlignCenter);
+        pushButton_12 = new QPushButton(centralwidget);
+        pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
+        pushButton_12->setGeometry(QRect(90, 260, 81, 91));
+        pushButton_12->setStyleSheet(QString::fromUtf8("\n"
+"QPushButton{\n"
+"	background-image: url(:/new/prefix1/img/up1.png);\n"
+"background-color: rgba(242, 179, 179, 0);\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton::hover{background-color: #0085ff;\n"
+"border-radius: 20px;\n"
+"color:white;;}"));
+        pushButton_27 = new QPushButton(centralwidget);
+        pushButton_27->setObjectName(QString::fromUtf8("pushButton_27"));
+        pushButton_27->setGeometry(QRect(490, 260, 81, 91));
+        pushButton_27->setStyleSheet(QString::fromUtf8("QPushButton{background-image: url(:/new/prefix1/img/down1.png);\n"
+"background-color: rgba(242, 179, 179, 0);}\n"
+"\n"
+"\n"
+"QPushButton::hover{background-color: #0085ff;\n"
+"border-radius: 20px;\n"
+"color:white;;}"));
         MainWindow->setCentralWidget(centralwidget);
         label_39->raise();
         label_20->raise();
@@ -665,8 +665,6 @@ public:
         label_5->raise();
         label_2->raise();
         label_6->raise();
-        pushButton_12->raise();
-        pushButton_8->raise();
         pushButton_14->raise();
         pushButton_10->raise();
         label_21->raise();
@@ -728,10 +726,12 @@ public:
         label_47->raise();
         pushButton_26->raise();
         label_48->raise();
+        pushButton_12->raise();
+        pushButton_27->raise();
         label_12->raise();
         label_22->raise();
-        comboBox_2->raise();
         pushButton_25->raise();
+        comboBox_2->raise();
 
         retranslateUi(MainWindow);
 
@@ -747,8 +747,6 @@ public:
         label_3->setText(QString());
         label_4->setText(QCoreApplication::translate("MainWindow", "60", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "40", nullptr));
-        pushButton_12->setText(QString());
-        pushButton_8->setText(QString());
         pushButton_2->setText(QString());
         label_8->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
@@ -815,6 +813,8 @@ public:
         label_39->setText(QString());
         pushButton_26->setText(QCoreApplication::translate("MainWindow", "SWAP OFF", nullptr));
         label_48->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        pushButton_12->setText(QString());
+        pushButton_27->setText(QString());
     } // retranslateUi
 
 };

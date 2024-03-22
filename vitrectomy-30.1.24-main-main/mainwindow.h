@@ -44,7 +44,11 @@ public:
     LED *led1;
     LED *led2;
     bool eventFilter(QObject* object, QEvent* event);
-    void updateLabelValue(QLabel* label, int value, int maxValue);
+    void updateLabelValue(QLabel* label, int prevValue, int value, int maxValue);
+    void switchled(LED *led, int choice);
+
+
+
 public slots:
     void receiveString(const QString& str);
     void led1val(QString str);
@@ -52,7 +56,7 @@ public slots:
     void aibackground();
     void on_clicked(const QString& digit);
 
-     void on_clickedbackspace();
+     //void on_clickedbackspace();
 
      void on_clickedenter();
 
@@ -62,15 +66,15 @@ private slots:
 
      void transitionToNewScreen();
 
-        void label48();
+        void setZero();
 
          void updateLabel();
 
         void diathermy();
 
-        void airinjector();
+        void airinjectoron();
 
-        void airinjector2();
+        void airinjectoroff();
 
          void updatetimedate();
 
@@ -103,98 +107,98 @@ private slots:
         void decreasesiliconoil();
 
         //settings window
-        void on_pushButton_6_clicked();
+        void show_settings_window();
 
         //silicon oil
-        void on_pushButton_2_clicked();
+        void sil_oil_onoff();
 
         //vaccum linear/nonlinear
-        void on_pushButton_20_clicked();
+        void vac_linear_nonlinear();
 
         //led1
-        void on_pushButton_3_clicked();
+        void led1_onoff();
 
         //diathermy
-        void on_pushButton_5_clicked();
+        void dia_onoff();
 
         //air injector
-        void on_pushButton_7_clicked();
+        void ai_onoff();
 
         //vitrectomy
-        void on_pushButton_4_clicked();
+        void vit_onoff();
 
         //surgeon
-        void on_pushButton_clicked();
+        void set_surgeon();
 
         //continous press
         //vaccum
-        void on_pushButton_8_pressed();
+        void on_increase_vac_pressed();
 
-        void on_pushButton_8_released();
+        void on_increase_vac_released();
 
-        void on_pushButton_12_pressed();
+        void on_decrease_vac_pressed();
 
-        void on_pushButton_12_released();
+        void on_decrease_vac_released();
 
         //vitrectomy
-        void on_pushButton_11_pressed();
+        void on_increase_vit_pressed();
 
-        void on_pushButton_11_released();
+        void on_increase_vit_released();
 
-        void on_pushButton_15_pressed();
+        void on_decrease_vit_pressed();
 
-        void on_pushButton_15_released();
+        void on_decrease_vit_released();
 
         //silicon oil
-        void on_pushButton_19_pressed();
+        void on_increase_sil_oil_pressed();
 
-        void on_pushButton_19_released();
+        void on_increase_sil_oil_released();
 
-        void on_pushButton_18_pressed();
+        void on_decrease_sil_oil_pressed();
 
-        void on_pushButton_18_released();
+        void on_decrease_sil_oil_released();
 
         //led1
-        void on_pushButton_17_pressed();
+        void on_increase_led1_pressed();
 
-        void on_pushButton_17_released();
+        void on_increase_led1_released();
 
-        void on_pushButton_16_pressed();
+        void on_decrease_led1_pressed();
 
-        void on_pushButton_16_released();
+        void on_decrease_led1_released();
 
         //air injector
-        void on_pushButton_9_pressed();
+        void on_increase_ai_pressed();
 
-        void on_pushButton_9_released();
+        void on_increase_ai_released();
 
-        void on_pushButton_13_pressed();
+        void on_decrease_ai_pressed();
 
-        void on_pushButton_13_released();
+        void on_decrease_ai_released();
 
         //diathermy
-        void on_pushButton_10_pressed();
+        void on_increase_dia_pressed();
 
-        void on_pushButton_10_released();
+        void on_increase_dia_released();
 
-        void on_pushButton_14_pressed();
+        void on_decrease_dia_pressed();
 
-        void on_pushButton_14_released();
+        void on_decrease_dia_released();
 
         //led2
-        void on_pushButton_21_pressed();
+        void on_increase_led2_pressed();
 
-        void on_pushButton_21_released();
+        void on_increase_led2_released();
 
-        void on_pushButton_22_pressed();
+        void on_decrease_led2_pressed();
 
-        void on_pushButton_22_released();
+        void on_decrease_led2_released();
 
         //vitrectomy linear/nonlinear
-        void on_pushButton_24_clicked();
+        void vit_linear_nonlinear();
 
         //led2
-        void on_pushButton_23_clicked();
+        void led2_onoff();
 
         void comboboxload();
 
@@ -202,11 +206,11 @@ private slots:
 
         void timerCompleted();
 
-        //start screen
-        void on_pushButton_25_clicked();
+        //setup screen
+        void show_setup_screen();
 
         //swap on/off
-        void on_pushButton_26_clicked();
+        void swap_onoff();
 
 private:
     Ui::MainWindow *ui;

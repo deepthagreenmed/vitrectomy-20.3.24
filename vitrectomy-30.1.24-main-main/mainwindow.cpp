@@ -31,10 +31,63 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(ui->pushButton_12, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
+    connect(ui->pushButton_27, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
+
+//    (ui->pushButton_12, &QPushButton::pressed, this, &MainWindow::on_increase_vac_pressed);
+//    (ui->pushButton_12, &QPushButton::released, this, &MainWindow::on_increase_vac_released);
+//    (ui->pushButton_27, &QPushButton::pressed, this, &MainWindow::on_decrease_vac_pressed);
+//    (ui->pushButton_27, &QPushButton::released, this, &MainWindow::on_decrease_vac_released);
+
+    (ui->pushButton_11, &QPushButton::pressed, this, &MainWindow::on_increase_vit_pressed);
+    (ui->pushButton_11, &QPushButton::released, this, &MainWindow::on_increase_vit_released);
+    (ui->pushButton_15, &QPushButton::pressed, this, &MainWindow::on_decrease_vit_pressed);
+    (ui->pushButton_15, &QPushButton::released, this, &MainWindow::on_decrease_vit_released);
+
+    (ui->pushButton_19, &QPushButton::pressed, this, &MainWindow::on_increase_sil_oil_pressed);
+    (ui->pushButton_19, &QPushButton::released, this, &MainWindow::on_increase_sil_oil_released);
+    (ui->pushButton_18, &QPushButton::pressed, this, &MainWindow::on_decrease_sil_oil_pressed);
+    (ui->pushButton_18, &QPushButton::released, this, &MainWindow::on_decrease_sil_oil_released);
+
+    (ui->pushButton_17, &QPushButton::pressed, this, &MainWindow::on_increase_led1_pressed);
+    (ui->pushButton_17, &QPushButton::released, this, &MainWindow::on_increase_led1_released);
+    (ui->pushButton_16, &QPushButton::pressed, this, &MainWindow::on_decrease_led1_pressed);
+    (ui->pushButton_16, &QPushButton::released, this, &MainWindow::on_decrease_led1_released);
+
+    (ui->pushButton_9, &QPushButton::pressed, this, &MainWindow::on_increase_ai_pressed);
+    (ui->pushButton_9, &QPushButton::released, this, &MainWindow::on_increase_ai_released);
+    (ui->pushButton_13, &QPushButton::pressed, this, &MainWindow::on_decrease_ai_pressed);
+    (ui->pushButton_13, &QPushButton::released, this, &MainWindow::on_decrease_ai_released);
+
+    (ui->pushButton_10, &QPushButton::pressed, this, &MainWindow::on_increase_dia_pressed);
+    (ui->pushButton_10, &QPushButton::released, this, &MainWindow::on_increase_dia_released);
+    (ui->pushButton_14, &QPushButton::pressed, this, &MainWindow::on_decrease_dia_pressed);
+    (ui->pushButton_14, &QPushButton::released, this, &MainWindow::on_decrease_dia_released);
+
+    (ui->pushButton_21, &QPushButton::pressed, this, &MainWindow::on_increase_led2_pressed);
+    (ui->pushButton_21, &QPushButton::released, this, &MainWindow::on_increase_led2_released);
+    (ui->pushButton_22, &QPushButton::pressed, this, &MainWindow::on_decrease_led2_pressed);
+    (ui->pushButton_22, &QPushButton::released, this, &MainWindow::on_decrease_led2_released);
+
+
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::show_settings_window);
+    connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::sil_oil_onoff);
+    connect(ui->pushButton_20, &QPushButton::clicked, this, &MainWindow::vac_linear_nonlinear);
+    connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::led1_onoff);
+    connect(ui->pushButton_5, &QPushButton::clicked, this, &MainWindow::dia_onoff);
+    connect(ui->pushButton_7, &QPushButton::clicked, this, &MainWindow::ai_onoff);
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::vit_onoff);
+    connect(ui->pushButton_23, &QPushButton::clicked, this, &MainWindow::led2_onoff);
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::set_surgeon);
+    connect(ui->pushButton_24, &QPushButton::clicked, this, &MainWindow::vit_linear_nonlinear);
+    connect(ui->pushButton_25, &QPushButton::clicked, this, &MainWindow::show_setup_screen);
+    connect(ui->pushButton_26, &QPushButton::clicked, this, &MainWindow::swap_onoff);
+
 
     fp = new footpedal;
     hhandler = new hwHandler;
     vac = new Vaccum;
+
 
     connect(ui->comboBox_2, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
@@ -121,7 +174,7 @@ ui->comboBox_2->setCurrentIndex(surgeonind);
     ui->label_4->setText(QString::number(vit_value));
 
     timer48.start(100);
-    connect(&timer48,&QTimer::timeout, this, &MainWindow::label48);
+    connect(&timer48,&QTimer::timeout, this, &MainWindow::setZero);
 
     QTimer *timer = new QTimer(this);
     QTimer *timerfortd = new QTimer(this);
@@ -165,7 +218,7 @@ ui->comboBox_2->setCurrentIndex(surgeonind);
 
     key = new keypad;
     connect(key, &keypad::textsignal, this, &MainWindow::on_clicked);
-    connect(key, &keypad::backsignal, this, &MainWindow::on_clickedbackspace);
+    //connect(key, &keypad::backsignal, this, &MainWindow::on_clickedbackspace);
     connect(key, &keypad::entersignal, this, &MainWindow::on_clickedenter);
 
 
@@ -190,9 +243,6 @@ ui->comboBox_2->setCurrentIndex(surgeonind);
     timermain->setSingleShot(true);
     timermain->start(3000); // 3 seconds
     connect(timermain, &QTimer::timeout, this, &MainWindow::transitionToNewScreen);
-
-
-
 }
 
 void MainWindow::transitionToNewScreen() {
@@ -203,9 +253,9 @@ void MainWindow::transitionToNewScreen() {
 }
 
 
-void MainWindow::updateLabelValue(QLabel* label, int value, int maxValue) {
+void MainWindow::updateLabelValue(QLabel* label, int prevValue, int value, int maxValue) {
     if (value > maxValue) {
-        label->setText(QString::number(maxValue));
+        label->setText(QString::number(prevValue));
     } else {
         label->setText(QString::number(value));
     }
@@ -227,6 +277,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_6->clearFocus();
         ui->label_37->clearFocus();
         ui->label_9->clearFocus();
+        ui->label_5->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
     }
@@ -244,6 +295,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_6->clearFocus();
         ui->label_37->clearFocus();
         ui->label_9->clearFocus();
+        ui->label_4->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -262,6 +314,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     ui->label_6->clearFocus();
     ui->label_37->clearFocus();
     ui->label_9->clearFocus();
+    ui->label_8->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -280,6 +333,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
           ui->label_6->clearFocus();
           ui->label_37->clearFocus();
           ui->label_9->clearFocus();
+          ui->label_3->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
@@ -298,6 +352,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_5->clearFocus();
         ui->label_37->clearFocus();
         ui->label_9->clearFocus();
+        ui->label_6->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -316,6 +371,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_6->clearFocus();
         ui->label_5->clearFocus();
         ui->label_9->clearFocus();
+        ui->label_37->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -334,6 +390,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_6->clearFocus();
         ui->label_37->clearFocus();
         ui->label_5->clearFocus();
+        ui->label_9->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -356,8 +413,9 @@ void MainWindow::on_clicked(const QString& digit)
       if(!flag)
       {
       ui->label_5->setFocus();
-      ui->label_5->setText(ui->label_5->text()+digit);
-      updateLabelValue(ui->label_5, ui->label_5->text().toInt(), 500);
+      int prevValue = ui->label_5->text().toInt();
+      int value = (ui->label_5->text()+digit).toInt();
+      updateLabelValue(ui->label_5, prevValue, value, 500);
 
    }
   }
@@ -371,9 +429,9 @@ void MainWindow::on_clicked(const QString& digit)
       if(!flag)
       {
       ui->label_4->setFocus();
-      ui->label_4->setText(ui->label_4->text()+digit);
-      updateLabelValue(ui->label_4, ui->label_4->text().toInt(), 9600);
-
+      int prevValue = ui->label_4->text().toInt();
+       int value = (ui->label_4->text()+digit).toInt();
+      updateLabelValue(ui->label_4, prevValue, value, 9600);
    }
   }
 if(ui->label_8->focusWidget()) {
@@ -386,9 +444,9 @@ if(ui->label_8->focusWidget()) {
     if(!flag)
     {
     ui->label_8->setFocus();
-    ui->label_8->setText(ui->label_8->text()+digit);
-    updateLabelValue(ui->label_8, ui->label_8->text().toInt(), 100);
-
+    int prevValue = ui->label_8->text().toInt();
+     int value = (ui->label_8->text()+digit).toInt();
+    updateLabelValue(ui->label_8, prevValue, value, 100);
 
  }
 }
@@ -402,8 +460,9 @@ if(ui->label_3->focusWidget()) {
     if(!flag)
     {
     ui->label_3->setFocus();
-    ui->label_3->setText(ui->label_3->text()+digit);
-    updateLabelValue(ui->label_3, ui->label_3->text().toInt(), 100);
+    int prevValue = ui->label_3->text().toInt();
+    int value = (ui->label_3->text()+digit).toInt();
+    updateLabelValue(ui->label_3, prevValue, value, 100);
 
  }
 }
@@ -417,8 +476,9 @@ if(ui->label_6->focusWidget()) {
     if(!flag)
     {
     ui->label_6->setFocus();
-    ui->label_6->setText(ui->label_6->text()+digit);
-     updateLabelValue(ui->label_6, ui->label_6->text().toInt(), 100);
+    int prevValue = ui->label_6->text().toInt();
+    int value = (ui->label_6->text()+digit).toInt();
+    updateLabelValue(ui->label_6, prevValue, value, 100);
 
  }
 }
@@ -432,8 +492,10 @@ if(ui->label_37->focusWidget()) {
     if(!flag)
     {
     ui->label_37->setFocus();
-    ui->label_37->setText(ui->label_37->text()+digit);
-    updateLabelValue(ui->label_37, ui->label_37->text().toInt(), 100);
+    int prevValue = ui->label_37->text().toInt();
+    int value = (ui->label_37->text()+digit).toInt();
+    updateLabelValue(ui->label_37, prevValue, value, 100);
+    //switchled(led2, ui->label_37->text().toInt());
 
  }
 }
@@ -447,8 +509,11 @@ if(ui->label_9->focusWidget()) {
     if(!flag)
     {
     ui->label_9->setFocus();
-    ui->label_9->setText(ui->label_9->text()+digit);
-     updateLabelValue(ui->label_9, ui->label_9->text().toInt(), 100);
+    int prevValue = ui->label_9->text().toInt();
+    int value = (ui->label_9->text()+digit).toInt();
+    updateLabelValue(ui->label_9, prevValue, value, 100);
+        //switchled(led1, ui->label_9->text().toInt());
+
 
  }
 }
@@ -456,77 +521,84 @@ if(ui->label_9->focusWidget()) {
 
 }
 
-void MainWindow::on_clickedbackspace()
-{
-    if (ui->label_5->focusWidget())
-    {
+//void MainWindow::on_clickedbackspace()
+//{
+//    if (ui->label_5->focusWidget())
+//    {
 
-        QString data = ui->label_5->text();
-        data.chop(3);
-        ui->label_5->setText(data);
+//        QString data = ui->label_5->text();
+//        data.chop(3);
+//        ui->label_5->setText(data);
 
-    }
+//    }
 
-    if (ui->label_4->focusWidget())
-    {
+//    if (ui->label_4->focusWidget())
+//    {
 
-        QString data = ui->label_4->text();
-        data.chop(3);
-        ui->label_4->setText(data);
+//        QString data = ui->label_4->text();
+//        data.chop(3);
+//        ui->label_4->setText(data);
 
-    }
+//    }
 
-    if (ui->label_8>focusWidget())
-    {
+//    if (ui->label_8>focusWidget())
+//    {
 
-        QString data = ui->label_8->text();
-        data.chop(3);
-        ui->label_8->setText(data);
+//        QString data = ui->label_8->text();
+//        data.chop(3);
+//        ui->label_8->setText(data);
 
-    }
+//    }
 
-    if (ui->label_3->focusWidget())
-    {
+//    if (ui->label_3->focusWidget())
+//    {
 
-        QString data = ui->label_3->text();
-        data.chop(3);
-        ui->label_3->setText(data);
+//        QString data = ui->label_3->text();
+//        data.chop(3);
+//        ui->label_3->setText(data);
 
-    }
+//    }
 
-    if (ui->label_6->focusWidget())
-    {
+//    if (ui->label_6->focusWidget())
+//    {
 
-        QString data = ui->label_6->text();
-        data.chop(3);
-        ui->label_6->setText(data);
+//        QString data = ui->label_6->text();
+//        data.chop(3);
+//        ui->label_6->setText(data);
 
-    }
+//    }
 
-    if (ui->label_37->focusWidget())
-    {
+//    if (ui->label_37->focusWidget())
+//    {
 
-        QString data = ui->label_37->text();
-        data.chop(3);
-        ui->label_37->setText(data);
+//        QString data = ui->label_37->text();
+//        data.chop(3);
+//        ui->label_37->setText(data);
 
-    }
+//    }
 
-    if (ui->label_9->focusWidget())
-    {
+//    if (ui->label_9->focusWidget())
+//    {
 
-        QString data = ui->label_9->text();
-        data.chop(3);
-        ui->label_9->setText(data);
+//        QString data = ui->label_9->text();
+//        data.chop(3);
+//        ui->label_9->setText(data);
 
-    }
-}
+//    }
+//}
 
 void MainWindow::on_clickedenter()
 {
     key->hide();
-    led1->processUserInput(round(30-(ui->label_9->text().toInt()*27/100)));
-    led2->processUserInput(round(30-(ui->label_37->text().toInt()*27/100)));
+    if(lp == 1)
+    {
+         switchled(led1, ui->label_9->text().toInt());
+    }
+    if(lp2 == 1)
+    {
+        switchled(led2, ui->label_37->text().toInt());
+    }
+
 }
 
 
@@ -540,19 +612,19 @@ void MainWindow::aibackground()
 {
     if(aiflag)
     {
-        airinjector();
+        airinjectoron();
         //qDebug()<<"On";
     }
     if(!aiflag)
     {
-        airinjector2();
+        airinjectoroff();
         //qDebug()<<"Off";
     }
 }
 
 //settings window showing
 
-void MainWindow::on_pushButton_6_clicked()
+void MainWindow::show_settings_window()
 {
 
     win2->show();
@@ -560,7 +632,7 @@ void MainWindow::on_pushButton_6_clicked()
 
 
 // on off buttons
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::sil_oil_onoff()
 {  if(sp==0)
     {
         ui->label_19->setStyleSheet("background-color: rgb(116, 184, 222);");
@@ -602,7 +674,7 @@ void MainWindow::on_pushButton_2_clicked()
 }
 
 
-void MainWindow::on_pushButton_20_clicked()
+void MainWindow::vac_linear_nonlinear()
 {
     if(vp==0)
     {
@@ -617,7 +689,7 @@ void MainWindow::on_pushButton_20_clicked()
     }
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::led1_onoff()
 {
         if(lp==0)
         {
@@ -629,8 +701,11 @@ void MainWindow::on_pushButton_3_clicked()
             animation3->start();
             ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            led1->processUserInput(1);
 
+            if(ui->label_9->text().toInt() != 0)
+            {
+                led1->processUserInput(1);
+            }
 
             connect(ui->pushButton_17, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
             connect(ui->pushButton_16, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
@@ -655,7 +730,7 @@ void MainWindow::on_pushButton_3_clicked()
         }
 
 }
-void MainWindow::on_pushButton_23_clicked()
+void MainWindow::led2_onoff()
 {
     if(lp2==0)
     {
@@ -666,7 +741,10 @@ void MainWindow::on_pushButton_23_clicked()
         animation5->start();
         ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-        led2->processUserInput(1);
+        if(ui->label_37->text().toInt() != 0)
+        {
+            led2->processUserInput(1);
+        }
 
         connect(ui->pushButton_21, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
         connect(ui->pushButton_22, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
@@ -691,7 +769,7 @@ void MainWindow::on_pushButton_23_clicked()
     }
 }
 
-void MainWindow::on_pushButton_5_clicked()
+void MainWindow::dia_onoff()
 {
         if(dp==0)
         {
@@ -739,7 +817,7 @@ void MainWindow::on_pushButton_5_clicked()
         }
 }
 
-void MainWindow::on_pushButton_7_clicked()
+void MainWindow::ai_onoff()
 {
         if(ap==0)
         {
@@ -756,11 +834,11 @@ void MainWindow::on_pushButton_7_clicked()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            timeai.start(100);
-            connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjector);
+            timeai.start(5);
+            connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
             timeai2.stop();
-            disconnect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjector2);
+            disconnect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
 
 
             connect(ui->pushButton_9, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
@@ -783,11 +861,11 @@ void MainWindow::on_pushButton_7_clicked()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
-            timeai2.start(100);
-            connect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjector2);
+            timeai2.start(5);
+            connect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
 
             timeai.stop();
-            disconnect(&timeai, &QTimer::timeout, this, &MainWindow::airinjector);
+            disconnect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
             disconnect(ui->pushButton_9, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             disconnect(ui->pushButton_13, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -796,7 +874,7 @@ void MainWindow::on_pushButton_7_clicked()
         }
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::vit_onoff()
 {
         if(vip==0)
         {
@@ -1284,7 +1362,7 @@ void MainWindow::increaseledvalue()
         newValue=100;
     }
     double choice = newValue;
-    led1->processUserInput(round(30-(choice*27/100)));
+    switchled(led1, choice);
     ui->label_9->setText(QString::number(newValue));
 
 }
@@ -1298,7 +1376,7 @@ void MainWindow::decreaseledvalue()
         newValue=0;
     }
     double choice = newValue;
-    led1->processUserInput(round(30-(choice*27/100)));
+    switchled(led1, choice);
     ui->label_9->setText(QString::number(newValue));
 }
 
@@ -1311,7 +1389,7 @@ void MainWindow::increaseledvalue2()
         newValue=100;
     }
     double choice = newValue;
-    led2->processUserInput(round(30-(choice*27/100)));
+    switchled(led2, choice);
     ui->label_37->setText(QString::number(newValue));
 }
 
@@ -1324,7 +1402,7 @@ void MainWindow::decreaseledvalue2()
         newValue=0;
     }
     double choice = newValue;
-    led2->processUserInput(round(30-(choice*27/100)));
+    switchled(led2, choice);
     ui->label_37->setText(QString::number(newValue));
 }
 
@@ -1350,16 +1428,14 @@ void MainWindow::receiveString(const QString& str)
 void MainWindow::led1val(QString str)
 {
     ui->label_9->setText(str);
-    led1->processUserInput(round(30-(ui->label_9->text().toInt()*27/100)));
 }
 
 void MainWindow::led2val(QString str)
 {
     ui->label_37->setText(str);
-    led2->processUserInput(round(30-(ui->label_37->text().toInt()*27/100)));
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::set_surgeon()
 {
 
    QString surgeon;
@@ -1370,7 +1446,7 @@ void MainWindow::on_pushButton_clicked()
 // code for continuous press
 
 //inc vaccum
-void MainWindow::on_pushButton_8_pressed()
+void MainWindow::on_increase_vac_pressed()
 {
 
     time.start(300);
@@ -1378,7 +1454,7 @@ void MainWindow::on_pushButton_8_pressed()
 
 }
 
-void MainWindow::on_pushButton_8_released()
+void MainWindow::on_increase_vac_released()
 {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseVaccumValue);
@@ -1386,21 +1462,21 @@ void MainWindow::on_pushButton_8_released()
 }
 
 //dec vaccum
-void MainWindow::on_pushButton_12_pressed()
+void MainWindow::on_decrease_vac_pressed()
 {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseVaccumValue);
 }
 
 
-void MainWindow::on_pushButton_12_released()
+void MainWindow::on_decrease_vac_released()
 {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseVaccumValue);
 }
 
 //inc vit
-void MainWindow::on_pushButton_11_pressed()
+void MainWindow::on_increase_vit_pressed()
 {if(vip==1)
     {
     time.start(300);
@@ -1408,7 +1484,7 @@ void MainWindow::on_pushButton_11_pressed()
 }
 }
 
-void MainWindow::on_pushButton_11_released()
+void MainWindow::on_increase_vit_released()
 {if(vip==1)
     {
     time.stop();
@@ -1417,7 +1493,7 @@ void MainWindow::on_pushButton_11_released()
 }
 
 //dec vit
-void MainWindow::on_pushButton_15_pressed()
+void MainWindow::on_decrease_vit_pressed()
 {
     if(vip==1)
         {
@@ -1425,7 +1501,7 @@ void MainWindow::on_pushButton_15_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseVitrectomyValue);
 }}
 
-void MainWindow::on_pushButton_15_released()
+void MainWindow::on_decrease_vit_released()
 {if(vip==1)
     {
     time.stop();
@@ -1434,14 +1510,14 @@ void MainWindow::on_pushButton_15_released()
 }
 
 // inc sil
-void MainWindow::on_pushButton_19_pressed()
+void MainWindow::on_increase_sil_oil_pressed()
 {if(sp==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoil);
 }}
 
-void MainWindow::on_pushButton_19_released()
+void MainWindow::on_increase_sil_oil_released()
 {if(sp==1)
     {
     time.stop();
@@ -1449,14 +1525,14 @@ void MainWindow::on_pushButton_19_released()
 }}
 
 //dec sil
-void MainWindow::on_pushButton_18_pressed()
+void MainWindow::on_decrease_sil_oil_pressed()
 {if(sp==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoil);
 }}
 
-void MainWindow::on_pushButton_18_released()
+void MainWindow::on_decrease_sil_oil_released()
 {if(sp==1)
     {
     time.stop();
@@ -1464,7 +1540,7 @@ void MainWindow::on_pushButton_18_released()
 }}
 
 //inc led1
-void MainWindow::on_pushButton_17_pressed()
+void MainWindow::on_increase_led1_pressed()
 {if(lp==1)
     {
     time.start(300);
@@ -1472,7 +1548,7 @@ void MainWindow::on_pushButton_17_pressed()
 }
 }
 
-void MainWindow::on_pushButton_17_released()
+void MainWindow::on_increase_led1_released()
 {if(lp==1)
     {
     time.stop();
@@ -1480,38 +1556,38 @@ void MainWindow::on_pushButton_17_released()
 }}
 
 //dec led1
-void MainWindow::on_pushButton_16_pressed()
+void MainWindow::on_decrease_led1_pressed()
 {if(lp==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue);
 }}
-void MainWindow::on_pushButton_16_released()
+void MainWindow::on_decrease_led1_released()
 {if(lp==1)
     {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue);
 }}
 //inc led2
-void MainWindow::on_pushButton_21_pressed()
+void MainWindow::on_increase_led2_pressed()
 {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue2);
 }
 
-void MainWindow::on_pushButton_21_released()
+void MainWindow::on_increase_led2_released()
 {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue2);
 }
 //dec led2
-void MainWindow::on_pushButton_22_pressed()
+void MainWindow::on_decrease_led2_pressed()
 {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue2);
 }
 
-void MainWindow::on_pushButton_22_released()
+void MainWindow::on_decrease_led2_released()
 {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue2);
@@ -1519,42 +1595,42 @@ void MainWindow::on_pushButton_22_released()
 
 
 //inc air
-void MainWindow::on_pushButton_9_pressed()
+void MainWindow::on_increase_ai_pressed()
 {if(ap==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::increaseAirInjectorValue);
 }
 }
-void MainWindow::on_pushButton_9_released()
+void MainWindow::on_increase_ai_released()
 {if(ap==1)
     {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseAirInjectorValue);
 }}
 //dec air
-void MainWindow::on_pushButton_13_pressed()
+void MainWindow::on_decrease_ai_pressed()
 {if(ap==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseAirInjectorValue);
 }}
 
-void MainWindow::on_pushButton_13_released()
+void MainWindow::on_decrease_ai_released()
 {if(ap==1)
     {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseAirInjectorValue);
 }}
 //inc dia
-void MainWindow::on_pushButton_10_pressed()
+void MainWindow::on_increase_dia_pressed()
 {if(dp==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::increaseDiathermyValue);
 }}
 
-void MainWindow::on_pushButton_10_released()
+void MainWindow::on_increase_dia_released()
 {if(dp==1)
     {
     time.stop();
@@ -1562,14 +1638,14 @@ void MainWindow::on_pushButton_10_released()
 }}
 //dec dia
 
-void MainWindow::on_pushButton_14_pressed()
+void MainWindow::on_decrease_dia_pressed()
 {if(dp==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseDiathermyValue);
 }}
 
-void MainWindow::on_pushButton_14_released()
+void MainWindow::on_decrease_dia_released()
 {if(dp==1)
     {
     time.stop();
@@ -1578,7 +1654,7 @@ void MainWindow::on_pushButton_14_released()
 }
 
 
-void MainWindow::on_pushButton_24_clicked()
+void MainWindow::vit_linear_nonlinear()
 {
 
     if(vitp==0)
@@ -1735,7 +1811,7 @@ if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
 
 }
 
-void MainWindow::on_pushButton_25_clicked()
+void MainWindow::show_setup_screen()
 {
         ui->label_22->lower();
         ui->label_12->lower();
@@ -1743,7 +1819,7 @@ void MainWindow::on_pushButton_25_clicked()
         ui->pushButton_25->lower();
 }
 
-void MainWindow::on_pushButton_26_clicked()
+void MainWindow::swap_onoff()
 {
     QString swap = ui->pushButton_26->text();
 
@@ -1797,25 +1873,25 @@ void MainWindow::diathermy()
     hhandler->dia_count(ui->label_6->text().toInt()*256/100);
 }
 
-void MainWindow::airinjector()
+void MainWindow::airinjectoron()
 {
     if(ui->label_3->text().toInt()==0)
     {
-        airinjector2();
+        airinjectoroff();
     }
     else
     {
         aiflag=1;
         hhandler->ai_on();
-        hhandler->ai_preset_count(ui->label_3->text().toInt()*256/100);
+        hhandler->ai_preset_count(ui->label_3->text().toInt());
         //hhandler->ai_actual_count(100);
-        int value = (int)(vac->convert(CHANNEL_2)*0.17);
+        int value = (int)(vac->convert(CHANNEL_1)*0.17);
         ui->label_10->setText(QString::number(value));
         hhandler->ai_actual_count(value);
     }
 }
 
-void MainWindow::airinjector2()
+void MainWindow::airinjectoroff()
 {
     aiflag=0;
     hhandler->ai_off();
@@ -1825,7 +1901,7 @@ void MainWindow::airinjector2()
 
 }
 
-void MainWindow::label48()
+void MainWindow::setZero()
 {
     int avg = fp->convert(CHANNEL_0);
 
@@ -1834,3 +1910,154 @@ void MainWindow::label48()
         ui->label_48->setText("0");
     }
 }
+
+void MainWindow::switchled(LED *led, int choice)
+{
+    if(led == led1)
+    {
+        led1->processUserInput(1);
+
+        switch(choice)
+        {
+            case(100):
+                led1->processUserInput(3);
+                break;
+            case(95):
+                led1->processUserInput(4);
+                break;
+            case(90):
+                led1->processUserInput(5);
+                break;
+            case(85):
+                led1->processUserInput(7);
+                break;
+            case(80):
+                led1->processUserInput(8);
+                break;
+            case(75):
+                led1->processUserInput(9);
+                break;
+            case(70):
+                led1->processUserInput(11);
+                break;
+            case(65):
+                led1->processUserInput(12);
+                break;
+            case(60):
+                led1->processUserInput(14);
+                break;
+            case(55):
+                led1->processUserInput(15);
+                break;
+            case(50):
+                led1->processUserInput(17);
+                break;
+            case(45):
+                led1->processUserInput(18);
+                break;
+            case(40):
+                led1->processUserInput(20);
+                break;
+            case(35):
+                led1->processUserInput(21);
+                break;
+            case(30):
+                led1->processUserInput(23);
+                break;
+            case(25):
+                led1->processUserInput(24);
+                break;
+            case(20):
+                led1->processUserInput(25);
+                break;
+            case(15):
+                led1->processUserInput(27);
+                break;
+            case(10):
+                led1->processUserInput(28);
+                break;
+            case(5):
+                led1->processUserInput(29);
+                break;
+            case(0):
+                led1->processUserInput(2);
+                break;
+
+        }
+
+        if(led == led2)
+        {
+            led2->processUserInput(1);
+
+            switch(choice)
+            {
+                case(100):
+                    led2->processUserInput(3);
+                    break;
+                case(95):
+                    led2->processUserInput(4);
+                    break;
+                case(90):
+                    led2->processUserInput(5);
+                    break;
+                case(85):
+                    led2->processUserInput(7);
+                    break;
+                case(80):
+                    led2->processUserInput(8);
+                    break;
+                case(75):
+                    led2->processUserInput(9);
+                    break;
+                case(70):
+                    led2->processUserInput(11);
+                    break;
+                case(65):
+                    led2->processUserInput(12);
+                    break;
+                case(60):
+                    led2->processUserInput(14);
+                    break;
+                case(55):
+                    led2->processUserInput(15);
+                    break;
+                case(50):
+                    led2->processUserInput(17);
+                    break;
+                case(45):
+                    led2->processUserInput(18);
+                    break;
+                case(40):
+                    led2->processUserInput(20);
+                    break;
+                case(35):
+                    led2->processUserInput(21);
+                    break;
+                case(30):
+                    led2->processUserInput(23);
+                    break;
+                case(25):
+                    led2->processUserInput(24);
+                    break;
+                case(20):
+                    led2->processUserInput(25);
+                    break;
+                case(15):
+                    led2->processUserInput(27);
+                    break;
+                case(10):
+                    led2->processUserInput(28);
+                    break;
+                case(5):
+                    led2->processUserInput(29);
+                    break;
+                case(0):
+                    led2->processUserInput(2);
+                    break;
+
+            }
+        }
+    }
+
+}
+

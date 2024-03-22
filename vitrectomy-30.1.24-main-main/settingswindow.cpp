@@ -20,8 +20,30 @@ settingswindow::settingswindow(QWidget *parent) :
     ui(new Ui::settingswindow)
 {
     ui->setupUi(this);
-connect(ui->pushButton_12, &QPushButton::clicked, this, &settingswindow::on_pushButton_12_clicked);
-//code to load database in the starting
+
+
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &settingswindow::on_diapm_clicked);
+   // connect(ui->pushButton_5, &QPushButton::clicked, this, &settingswindow::on_pe_clicked);
+    connect(ui->pushButton_8, &QPushButton::clicked, this, &settingswindow::on_led_clicked);
+    //connect(ui->pushButton_9, &QPushButton::clicked, this, &settingswindow::on_pc_clicked);
+    //connect(ui->pushButton_10, &QPushButton::clicked, this, &settingswindow::on_ps_clicked);
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &settingswindow::on_vv_clicked);
+    connect(ui->pushButton_7, &QPushButton::clicked, this, &settingswindow::on_vc_clicked);
+    connect(ui->pushButton_12, &QPushButton::clicked, this, &settingswindow::show_surgery_screen);
+
+    connect(ui->listWidget, &QListWidget::currentTextChanged, this, &settingswindow::loadDatabaseFromList);
+    connect(ui->pushButton_13, &QPushButton::clicked, this, &settingswindow::on_fp_settings_clicked);
+    connect(ui->pushButton_2, &QPushButton::clicked, this, &settingswindow::on_tab_dia_clicked);
+    connect(ui->pushButton, &QPushButton::clicked, this, &settingswindow::on_tab_led_clicked);
+    connect(ui->pushButton_3, &QPushButton::clicked, this, &settingswindow::on_tab_ia_clicked);
+    connect(ui->pushButton_8vit, &QPushButton::clicked, this, &settingswindow::on_tab_vit_clicked);
+    connect(ui->pushButton_5fp, &QPushButton::clicked, this, &settingswindow::on_tab_fp_clicked);
+    connect(ui->pushButton_fps, &QPushButton::clicked, this, &settingswindow::on_tab_fppreset_clicked);
+
+
+
+
+    //code to load database in the starting
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
 
@@ -185,7 +207,7 @@ flag = false;
 
 key = new keypad;
 connect(key, &keypad::textsignal, this, &settingswindow::on_clicked);
-connect(key, &keypad::backsignal, this, &settingswindow::on_clickedbackspace);
+//connect(key, &keypad::backsignal, this, &settingswindow::on_clickedbackspace);
 connect(key, &keypad::entersignal, this, &settingswindow::on_clickedenter);
 
 text=new textkeypad;
@@ -214,6 +236,7 @@ connect(ui->pushButton_31, &QPushButton::clicked, this, &settingswindow::twodec)
 // for 3
 connect(ui->pushButton_32, &QPushButton::clicked, this, &settingswindow::threeinc);
 connect(ui->pushButton_33, &QPushButton::clicked, this, &settingswindow::threedec);
+
 int s0,s1,s2,s3;
     s0=ui->lineEdit_21->text().toInt();
     s1=ui->lineEdit_2->text().toInt();
@@ -244,6 +267,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
         key->resize(491,271);
         key->move(980,280);
         key->show();
+        ui->lineEdit->setText("");
       //qDebug() << "Left click";
     } else if ( k->button() == Qt::RightButton ) {
       //qDebug() << "Right click";
@@ -255,6 +279,8 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,290);
         key->show();
+        ui->lineEdit_8->setText("");
+
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -276,6 +302,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
            key->resize(491,271);
           key->move(980,290);
           key->show();
+          ui->lineEdit_3->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
@@ -287,6 +314,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,290);
         key->show();
+        ui->lineEdit_10->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -299,6 +327,8 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,380);
         key->show();
+        ui->lineEdit_9->setText("");
+
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -377,49 +407,49 @@ if(ui->lineEdit_9->focusWidget())
 
 }
 
-void settingswindow::on_clickedbackspace()
-{
-    if (ui->lineEdit_8->focusWidget())
-    {
+//void settingswindow::on_clickedbackspace()
+//{
+//    if (ui->lineEdit_8->focusWidget())
+//    {
 
-        QString data = ui->lineEdit_8->text();
-        data.chop(3);
-        ui->lineEdit_8->setText(data);
+//        QString data = ui->lineEdit_8->text();
+//        data.chop(3);
+//        ui->lineEdit_8->setText(data);
 
-    }
+//    }
 
-    if(ui->lineEdit->focusWidget())
-    {
-        QString data = ui->lineEdit->text();
-        data.chop(3);
-        ui->lineEdit->setText(data);
+//    if(ui->lineEdit->focusWidget())
+//    {
+//        QString data = ui->lineEdit->text();
+//        data.chop(3);
+//        ui->lineEdit->setText(data);
 
-    }
-    if(ui->lineEdit_3->focusWidget())
-    {
-        QString data = ui->lineEdit_3->text();
-        data.chop(3);
-        ui->lineEdit_3->setText(data);
-    }
+//    }
+//    if(ui->lineEdit_3->focusWidget())
+//    {
+//        QString data = ui->lineEdit_3->text();
+//        data.chop(3);
+//        ui->lineEdit_3->setText(data);
+//    }
 
-    if(ui->lineEdit_10->focusWidget())
-    {
-        QString data = ui->lineEdit_10->text();
-        data.chop(3);
-        ui->lineEdit_10->setText(data);
-    }
+//    if(ui->lineEdit_10->focusWidget())
+//    {
+//        QString data = ui->lineEdit_10->text();
+//        data.chop(3);
+//        ui->lineEdit_10->setText(data);
+//    }
 
-    if(ui->lineEdit_9->focusWidget())
-    {
-        QString data = ui->lineEdit_9->text();
-        data.chop(3);
-        ui->lineEdit_9->setText(data);
-
-
-    }
+//    if(ui->lineEdit_9->focusWidget())
+//    {
+//        QString data = ui->lineEdit_9->text();
+//        data.chop(3);
+//        ui->lineEdit_9->setText(data);
 
 
-}
+//    }
+
+
+//}
 
 void settingswindow::on_clickedenter()
 {
@@ -433,7 +463,7 @@ settingswindow::~settingswindow()
 }
 // save buttons code
 
-void settingswindow::on_pushButton_4_clicked()
+void settingswindow::on_diapm_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -453,7 +483,7 @@ void settingswindow::on_pushButton_4_clicked()
 
 }
 
-void settingswindow::on_pushButton_5_clicked()
+void settingswindow::on_pe_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -477,7 +507,7 @@ void settingswindow::on_pushButton_5_clicked()
 
 
 
-void settingswindow::on_pushButton_8_clicked()
+void settingswindow::on_led_clicked()
 {
 //    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
 //    mydb.setDatabaseName(PATH);
@@ -517,7 +547,7 @@ void settingswindow::on_pushButton_8_clicked()
 
 }
 
-void settingswindow::on_pushButton_9_clicked()
+void settingswindow::on_pc_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -538,7 +568,7 @@ void settingswindow::on_pushButton_9_clicked()
     mydb.close();
 }
 
-void settingswindow::on_pushButton_10_clicked()
+void settingswindow::on_ps_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -559,7 +589,7 @@ void settingswindow::on_pushButton_10_clicked()
     mydb.close();
 }
 
-void settingswindow::on_pushButton_6_clicked()
+void settingswindow::on_vv_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -579,7 +609,7 @@ void settingswindow::on_pushButton_6_clicked()
      mydb.close();
 }
 
-void settingswindow::on_pushButton_7_clicked()
+void settingswindow::on_vc_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -603,7 +633,7 @@ void settingswindow::on_pushButton_7_clicked()
 }
 
 // going back to home screen
-void settingswindow::on_pushButton_12_clicked()
+void settingswindow::show_surgery_screen()
 {
     ui->lineEdit->clearFocus();
     ui->lineEdit_8->clearFocus();
@@ -618,7 +648,7 @@ void settingswindow::on_pushButton_12_clicked()
 
 
 
-void settingswindow::on_pushButton_15_clicked()
+void settingswindow::on_dimensions_clicked()
 {
 
     db1 = QSqlDatabase::addDatabase("QSQLITE");
@@ -647,7 +677,7 @@ db1.close();
 QSqlDatabase::removeDatabase("QSQLITE");
 }
 
-void settingswindow::on_pushButton_23_clicked()
+void settingswindow::on_dimensions_with_surgeon_clicked()
 {
     db1 = QSqlDatabase::addDatabase("QSQLITE");
         db1.setDatabaseName(PATH);
@@ -679,7 +709,7 @@ QSqlDatabase::removeDatabase("QSQLITE");
 
 
 // loading database from list
-void settingswindow::on_listWidget_currentTextChanged(const QString &currentText)
+void settingswindow::loadDatabaseFromList(const QString &currentText)
 {
     key->hide();
     ui->lineEdit->clearFocus();
@@ -1006,7 +1036,7 @@ void settingswindow::threedec()
 
 
 
-void settingswindow::on_pushButton_13_clicked()
+void settingswindow::on_fp_settings_clicked()
 {
     QSqlDatabase db1 = QSqlDatabase::addDatabase("QSQLITE");
     db1.setDatabaseName(PATH);
@@ -1058,7 +1088,7 @@ QSqlDatabase::removeDatabase("QSQLITE");
 
 // ring of tabs code
 
-void settingswindow::on_pushButton_2_clicked()
+void settingswindow::on_tab_dia_clicked()
 {
 key->hide();
 ui->lineEdit->clearFocus();
@@ -1073,7 +1103,7 @@ ui->lineEdit_9->clearFocus();
 
 }
 
-void settingswindow::on_pushButton_clicked()
+void settingswindow::on_tab_led_clicked()
 {
     key->hide();
     ui->lineEdit->clearFocus();
@@ -1086,15 +1116,15 @@ void settingswindow::on_pushButton_clicked()
     ui->label_27->hide();
     ui->vit->setStyleSheet("image: url(:/new/prefix1/img/ledsw.png);");
 
-    // Create a message box with a message
-    QMessageBox msgBox;
-    msgBox.setText("LED1 value and LED2 value are saved");
-    msgBox.exec();
+//    // Create a message box with a message
+//    QMessageBox msgBox;
+//    msgBox.setText("LED1 value and LED2 value are saved");
+//    msgBox.exec();
 
 }
 
 
-void settingswindow::on_pushButton_3_clicked()
+void settingswindow::on_tab_ia_clicked()
 {key->hide();
     ui->lineEdit->clearFocus();
     ui->lineEdit_8->clearFocus();
@@ -1108,7 +1138,7 @@ void settingswindow::on_pushButton_3_clicked()
 
 }
 
-void settingswindow::on_pushButton_8vit_clicked()
+void settingswindow::on_tab_vit_clicked()
 {key->hide();
     ui->lineEdit->clearFocus();
     ui->lineEdit_8->clearFocus();
@@ -1122,7 +1152,7 @@ void settingswindow::on_pushButton_8vit_clicked()
 
 }
 
-void settingswindow::on_pushButton_5fp_clicked()
+void settingswindow::on_tab_fp_clicked()
 {key->hide();
     ui->lineEdit->clearFocus();
     ui->lineEdit_8->clearFocus();
@@ -1137,7 +1167,7 @@ void settingswindow::on_pushButton_5fp_clicked()
 
 }
 
-void settingswindow::on_pushButton_fps_clicked()
+void settingswindow::on_tab_fppreset_clicked()
 {
 
     ui->lineEdit->clearFocus();

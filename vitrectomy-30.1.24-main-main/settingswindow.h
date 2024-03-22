@@ -43,7 +43,7 @@ public slots:
 
     void on_clicked(const QString& digit);
 
-     void on_clickedbackspace();
+    // void on_clickedbackspace();
 
      void on_clickedenter();
 
@@ -72,62 +72,54 @@ public slots:
      void on_clickedentertext();
 
     //diapm
-    void on_pushButton_4_clicked();
+    void on_diapm_clicked();
 
     //pe
-    void on_pushButton_5_clicked();
+    void on_pe_clicked();
 
     //led
-    void on_pushButton_8_clicked();
+    void on_led_clicked();
 
     //pc
-    void on_pushButton_9_clicked();
+    void on_pc_clicked();
 
     //ps
-    void on_pushButton_10_clicked();
+    void on_ps_clicked();
 
     //vv
-    void on_pushButton_6_clicked();
+    void on_vv_clicked();
 
     //vc
-    void on_pushButton_7_clicked();
+    void on_vc_clicked();
 
     //home screen
-    void on_pushButton_12_clicked();
+    void show_surgery_screen();
 
     //dimensions
-    void on_pushButton_15_clicked();
+    void on_dimensions_clicked();
 
     //dimensions with surgeon
-    void on_pushButton_23_clicked();
+    void on_dimensions_with_surgeon_clicked();
 
 
 private slots:
-    void on_listWidget_currentTextChanged(const QString &currentText);
+    void loadDatabaseFromList(const QString &currentText);
 
     //footpedal settings
-    void on_pushButton_13_clicked();
+    void on_fp_settings_clicked();
 
-    //tab0
-    void on_pushButton_2_clicked();
+    //tabs
+    void on_tab_dia_clicked();
 
-    //tab1
-    void on_pushButton_clicked();
+    void on_tab_led_clicked();
 
-    //tab2
-    void on_pushButton_3_clicked();
+    void on_tab_ia_clicked();
 
-    //tab3
-    void on_pushButton_8vit_clicked();
+    void on_tab_vit_clicked();
 
-    //tab4
-    void on_pushButton_5fp_clicked();
+    void on_tab_fp_clicked();
 
-    //tab5
-    void on_pushButton_fps_clicked();
-
-
-
+    void on_tab_fppreset_clicked();
 
 
 private:

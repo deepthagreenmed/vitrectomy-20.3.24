@@ -157,54 +157,6 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_12">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>260</y>
-      <width>81</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{background-image: url(:/new/prefix1/img/down1.png);
-background-color: rgba(242, 179, 179, 0);}
-
-
-QPushButton::hover{background-color: #0085ff;
-border-radius: 20px;
-color:white;;}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_8">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>260</y>
-      <width>81</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-QPushButton{
-	background-image: url(:/new/prefix1/img/up1.png);
-background-color: rgba(242, 179, 179, 0);
-
-}
-
-
-QPushButton::hover{background-color: #0085ff;
-border-radius: 20px;
-color:white;;}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
@@ -1547,6 +1499,54 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_12">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>260</y>
+      <width>81</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+QPushButton{
+	background-image: url(:/new/prefix1/img/up1.png);
+background-color: rgba(242, 179, 179, 0);
+
+}
+
+
+QPushButton::hover{background-color: #0085ff;
+border-radius: 20px;
+color:white;;}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_27">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>260</y>
+      <width>81</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{background-image: url(:/new/prefix1/img/down1.png);
+background-color: rgba(242, 179, 179, 0);}
+
+
+QPushButton::hover{background-color: #0085ff;
+border-radius: 20px;
+color:white;;}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>label_39</zorder>
    <zorder>label_20</zorder>
    <zorder>label_16</zorder>
@@ -1557,8 +1557,6 @@ font: 65pt &quot;Ubuntu&quot;;</string>
    <zorder>label_5</zorder>
    <zorder>label_2</zorder>
    <zorder>label_6</zorder>
-   <zorder>pushButton_12</zorder>
-   <zorder>pushButton_8</zorder>
    <zorder>pushButton_14</zorder>
    <zorder>pushButton_10</zorder>
    <zorder>label_21</zorder>
@@ -1620,10 +1618,12 @@ font: 65pt &quot;Ubuntu&quot;;</string>
    <zorder>label_47</zorder>
    <zorder>pushButton_26</zorder>
    <zorder>label_48</zorder>
+   <zorder>pushButton_12</zorder>
+   <zorder>pushButton_27</zorder>
    <zorder>label_12</zorder>
    <zorder>label_22</zorder>
-   <zorder>comboBox_2</zorder>
    <zorder>pushButton_25</zorder>
+   <zorder>comboBox_2</zorder>
   </widget>
  </widget>
  <resources/>
