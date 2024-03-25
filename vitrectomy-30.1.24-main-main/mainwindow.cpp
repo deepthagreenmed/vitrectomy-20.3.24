@@ -1915,68 +1915,86 @@ void MainWindow::switchled(LED *led, int choice)
 {
     if(led == led1)
     {
-        led1->processUserInput(1);
 
         switch(choice)
         {
             case(100):
+                led1->processUserInput(1);
                 led1->processUserInput(3);
                 break;
             case(95):
+                led1->processUserInput(1);
                 led1->processUserInput(4);
                 break;
             case(90):
+                led1->processUserInput(1);
                 led1->processUserInput(5);
                 break;
             case(85):
+                led1->processUserInput(1);
                 led1->processUserInput(7);
                 break;
             case(80):
+                led1->processUserInput(1);
                 led1->processUserInput(8);
                 break;
             case(75):
+                led1->processUserInput(1);
                 led1->processUserInput(9);
                 break;
             case(70):
+                led1->processUserInput(1);
                 led1->processUserInput(11);
                 break;
             case(65):
+                led1->processUserInput(1);
                 led1->processUserInput(12);
                 break;
             case(60):
+                led1->processUserInput(1);
                 led1->processUserInput(14);
                 break;
             case(55):
+                led1->processUserInput(1);
                 led1->processUserInput(15);
                 break;
             case(50):
+                led1->processUserInput(1);
                 led1->processUserInput(17);
                 break;
             case(45):
                 led1->processUserInput(18);
                 break;
             case(40):
+                led1->processUserInput(1);
                 led1->processUserInput(20);
                 break;
             case(35):
+                led1->processUserInput(1);
                 led1->processUserInput(21);
                 break;
             case(30):
+                led1->processUserInput(1);
                 led1->processUserInput(23);
                 break;
             case(25):
+                led1->processUserInput(1);
                 led1->processUserInput(24);
                 break;
             case(20):
+                led1->processUserInput(1);
                 led1->processUserInput(25);
                 break;
             case(15):
+                led1->processUserInput(1);
                 led1->processUserInput(27);
                 break;
             case(10):
+                led1->processUserInput(1);
                 led1->processUserInput(28);
                 break;
             case(5):
+                led1->processUserInput(1);
                 led1->processUserInput(29);
                 break;
             case(0):
@@ -1984,80 +2002,97 @@ void MainWindow::switchled(LED *led, int choice)
                 break;
 
         }
-
-        if(led == led2)
-        {
-            led2->processUserInput(1);
-
-            switch(choice)
-            {
-                case(100):
-                    led2->processUserInput(3);
-                    break;
-                case(95):
-                    led2->processUserInput(4);
-                    break;
-                case(90):
-                    led2->processUserInput(5);
-                    break;
-                case(85):
-                    led2->processUserInput(7);
-                    break;
-                case(80):
-                    led2->processUserInput(8);
-                    break;
-                case(75):
-                    led2->processUserInput(9);
-                    break;
-                case(70):
-                    led2->processUserInput(11);
-                    break;
-                case(65):
-                    led2->processUserInput(12);
-                    break;
-                case(60):
-                    led2->processUserInput(14);
-                    break;
-                case(55):
-                    led2->processUserInput(15);
-                    break;
-                case(50):
-                    led2->processUserInput(17);
-                    break;
-                case(45):
-                    led2->processUserInput(18);
-                    break;
-                case(40):
-                    led2->processUserInput(20);
-                    break;
-                case(35):
-                    led2->processUserInput(21);
-                    break;
-                case(30):
-                    led2->processUserInput(23);
-                    break;
-                case(25):
-                    led2->processUserInput(24);
-                    break;
-                case(20):
-                    led2->processUserInput(25);
-                    break;
-                case(15):
-                    led2->processUserInput(27);
-                    break;
-                case(10):
-                    led2->processUserInput(28);
-                    break;
-                case(5):
-                    led2->processUserInput(29);
-                    break;
-                case(0):
-                    led2->processUserInput(2);
-                    break;
-
-            }
-        }
     }
 
+    if(led == led2)
+    {
+
+        switch(choice)
+        {
+            case(100):
+                led2->processUserInput(1);
+                led2->processUserInput(3);
+                break;
+            case(95):
+                led2->processUserInput(1);
+                led2->processUserInput(4);
+                break;
+            case(90):
+                led2->processUserInput(1);
+                led2->processUserInput(5);
+                break;
+            case(85):
+                led2->processUserInput(1);
+                led2->processUserInput(7);
+                break;
+            case(80):
+                led2->processUserInput(1);
+                led2->processUserInput(8);
+                break;
+            case(75):
+                led2->processUserInput(1);
+                led2->processUserInput(9);
+                break;
+            case(70):
+                led2->processUserInput(1);
+                led2->processUserInput(11);
+                break;
+            case(65):
+                led2->processUserInput(1);
+                led2->processUserInput(12);
+                break;
+            case(60):
+                led2->processUserInput(1);
+                led2->processUserInput(14);
+                break;
+            case(55):
+                led2->processUserInput(1);
+                led2->processUserInput(15);
+                break;
+            case(50):
+                led2->processUserInput(1);
+                led2->processUserInput(17);
+                break;
+            case(45):
+                led2->processUserInput(18);
+                break;
+            case(40):
+                led2->processUserInput(1);
+                led2->processUserInput(20);
+                break;
+            case(35):
+                led2->processUserInput(1);
+                led2->processUserInput(21);
+                break;
+            case(30):
+                led2->processUserInput(1);
+                led2->processUserInput(23);
+                break;
+            case(25):
+                led2->processUserInput(1);
+                led2->processUserInput(24);
+                break;
+            case(20):
+                led2->processUserInput(1);
+                led2->processUserInput(25);
+                break;
+            case(15):
+                led2->processUserInput(1);
+                led2->processUserInput(27);
+                break;
+            case(10):
+                led2->processUserInput(1);
+                led2->processUserInput(28);
+                break;
+            case(5):
+                led2->processUserInput(1);
+                led2->processUserInput(29);
+                break;
+            case(0):
+                led2->processUserInput(2);
+                break;
+
+        }
+    }
 }
 
