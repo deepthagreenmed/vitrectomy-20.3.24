@@ -157,9 +157,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-mydb1.close();
-comboboxload();
-ui->comboBox_2->setCurrentIndex(surgeonind);
+    mydb1.close();
+    comboboxload();
+    ui->comboBox_2->setCurrentIndex(surgeonind);
 
     win2=new settingswindow(this);
 
