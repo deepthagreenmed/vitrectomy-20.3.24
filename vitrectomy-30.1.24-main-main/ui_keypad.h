@@ -33,7 +33,7 @@ public:
     QPushButton *pushButton_12;
     QPushButton *pushButton_13;
     QLabel *label;
-    QPushButton *pushButton_11;
+    QLabel *label_2;
 
     void setupUi(QWidget *keypad)
     {
@@ -105,7 +105,7 @@ public:
 "border:none;"));
         pushButton_12 = new QPushButton(keypad);
         pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
-        pushButton_12->setGeometry(QRect(380, 170, 101, 91));
+        pushButton_12->setGeometry(QRect(380, 60, 101, 111));
         QFont font1;
         font1.setPointSize(17);
         pushButton_12->setFont(font1);
@@ -123,13 +123,10 @@ public:
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(0, 0, 491, 271));
         label->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/keypadbg3 1.png);"));
-        pushButton_11 = new QPushButton(keypad);
-        pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
-        pushButton_11->setGeometry(QRect(380, 70, 101, 91));
-        pushButton_11->setFont(font1);
-        pushButton_11->setStyleSheet(QString::fromUtf8("background-color: transparent;\n"
-"color: rgb(255, 255, 255);\n"
-"border:none;"));
+        label_2 = new QLabel(keypad);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(360, 170, 121, 101));
+        label_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
         label->raise();
         pushButton_3->raise();
         pushButton_2->raise();
@@ -141,9 +138,9 @@ public:
         pushButton_5->raise();
         pushButton->raise();
         pushButton_10->raise();
-        pushButton_12->raise();
         pushButton_13->raise();
-        pushButton_11->raise();
+        pushButton_12->raise();
+        label_2->raise();
 
         retranslateUi(keypad);
 
@@ -166,7 +163,7 @@ public:
         pushButton_12->setText(QCoreApplication::translate("keypad", "Enter", nullptr));
         pushButton_13->setText(QCoreApplication::translate("keypad", ".", nullptr));
         label->setText(QString());
-        pushButton_11->setText(QCoreApplication::translate("keypad", "CLR", nullptr));
+        label_2->setText(QString());
     } // retranslateUi
 
 };

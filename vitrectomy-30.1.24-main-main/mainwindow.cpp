@@ -243,6 +243,14 @@ MainWindow::MainWindow(QWidget *parent)
     timermain->setSingleShot(true);
     timermain->start(3000); // 3 seconds
     connect(timermain, &QTimer::timeout, this, &MainWindow::transitionToNewScreen);
+
+    msg = new QMessageBox(this);
+    timermsg = new QTimer(this);
+    connect(timermsg, &QTimer::timeout, [=]()
+    {
+        msg->close();
+        timermsg->stop();
+    });
 }
 
 void MainWindow::transitionToNewScreen() {
@@ -256,6 +264,10 @@ void MainWindow::transitionToNewScreen() {
 void MainWindow::updateLabelValue(QLabel* label, int prevValue, int value, int maxValue) {
     if (value > maxValue) {
         label->setText(QString::number(prevValue));
+        msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
+        msg->show();
+        timermsg->start(3000);
+
     } else {
         label->setText(QString::number(value));
     }
@@ -957,7 +969,7 @@ void MainWindow::updateLabel()
       }
       if(avg > fp0&& avg <= (fp1+fp0))
       {
-        //irrigation
+        //irrigation/aspiration
           ui->label_36->setText("1");
           hhandler->vso_off();
           int avg1=vac->stabilize();

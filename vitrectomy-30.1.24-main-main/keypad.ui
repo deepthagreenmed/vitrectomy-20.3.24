@@ -240,9 +240,9 @@ border:none;</string>
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>170</y>
+     <y>60</y>
      <width>101</width>
-     <height>91</height>
+     <height>111</height>
     </rect>
    </property>
    <property name="font">
@@ -298,27 +298,20 @@ border:none;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_11">
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>70</y>
-     <width>101</width>
-     <height>91</height>
+     <x>360</x>
+     <y>170</y>
+     <width>121</width>
+     <height>101</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>17</pointsize>
-    </font>
-   </property>
    <property name="styleSheet">
-    <string notr="true">background-color: transparent;
-color: rgb(255, 255, 255);
-border:none;</string>
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>CLR</string>
+    <string/>
    </property>
   </widget>
   <zorder>label</zorder>
@@ -332,9 +325,9 @@ border:none;</string>
   <zorder>pushButton_5</zorder>
   <zorder>pushButton</zorder>
   <zorder>pushButton_10</zorder>
-  <zorder>pushButton_12</zorder>
   <zorder>pushButton_13</zorder>
-  <zorder>pushButton_11</zorder>
+  <zorder>pushButton_12</zorder>
+  <zorder>label_2</zorder>
  </widget>
  <resources/>
  <connections/>

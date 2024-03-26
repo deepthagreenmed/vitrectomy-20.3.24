@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QLabel>
 
 #include "vaccum.h"
 #include "keypad.h"
@@ -16,10 +15,13 @@
 #include <sstream>
 #include <cmath>
 
+#include <QLabel>
 #include <QSqlDatabase>
 #include <QTimer>
 #include <QMouseEvent>
 #include <QPropertyAnimation>
+#include <QMessageBox>
+#include <QString>
 
 #define PATH "/home/main.db"
 #define PATH2 "/home/vsodata9new.txt"
@@ -257,7 +259,8 @@ private:
     QTimer timeai3;
     int aiflag=0;
     keypad *key;
-
+    QMessageBox *msg;
+    QTimer *timermsg;
 
 };
 #endif // MAINWINDOW_H

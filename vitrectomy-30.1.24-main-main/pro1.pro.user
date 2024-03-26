@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2024-03-25T18:14:13. -->
+<!-- Written by QtCreator 4.11.1, 2024-03-26T13:42:16. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -69,7 +69,7 @@
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/amt-05/Qtworkspace/vitrectomy-20.3.24/vitrectomy-30.1.24-main-main</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/amt-05/Qtworkspace/vitrectomy-25.3.24/vitrectomy-30.1.24-main-main</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -319,9 +319,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">pro1 (on zynq)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/amt-05/Qtworkspace/vitrectomy-21.3.24/vitrectomy-30.1.24-main-main/pro1.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/amt-05/Qtworkspace/vitrectomy-21.3.24/vitrectomy-30.1.24-main-main/pro1.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">pro1 (on zynq)2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/amt-05/Qtworkspace/vitrectomy-25.3.24/vitrectomy-30.1.24-main-main/pro1.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/amt-05/Qtworkspace/vitrectomy-25.3.24/vitrectomy-30.1.24-main-main/pro1.pro</value>
     <value type="int" key="RemoteLinux.EnvironmentAspect.Version">1</value>
     <value type="QString" key="RemoteLinux.RunConfig.AlternateRemoteExecutable"></value>
     <value type="bool" key="RemoteLinux.RunConfig.UseAlternateRemoteExecutable">false</value>
