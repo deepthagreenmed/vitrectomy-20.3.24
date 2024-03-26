@@ -527,75 +527,7 @@ if(ui->label_9->focusWidget()) {
 
  }
 }
-
-
 }
-
-//void MainWindow::on_clickedbackspace()
-//{
-//    if (ui->label_5->focusWidget())
-//    {
-
-//        QString data = ui->label_5->text();
-//        data.chop(3);
-//        ui->label_5->setText(data);
-
-//    }
-
-//    if (ui->label_4->focusWidget())
-//    {
-
-//        QString data = ui->label_4->text();
-//        data.chop(3);
-//        ui->label_4->setText(data);
-
-//    }
-
-//    if (ui->label_8>focusWidget())
-//    {
-
-//        QString data = ui->label_8->text();
-//        data.chop(3);
-//        ui->label_8->setText(data);
-
-//    }
-
-//    if (ui->label_3->focusWidget())
-//    {
-
-//        QString data = ui->label_3->text();
-//        data.chop(3);
-//        ui->label_3->setText(data);
-
-//    }
-
-//    if (ui->label_6->focusWidget())
-//    {
-
-//        QString data = ui->label_6->text();
-//        data.chop(3);
-//        ui->label_6->setText(data);
-
-//    }
-
-//    if (ui->label_37->focusWidget())
-//    {
-
-//        QString data = ui->label_37->text();
-//        data.chop(3);
-//        ui->label_37->setText(data);
-
-//    }
-
-//    if (ui->label_9->focusWidget())
-//    {
-
-//        QString data = ui->label_9->text();
-//        data.chop(3);
-//        ui->label_9->setText(data);
-
-//    }
-//}
 
 void MainWindow::on_clickedenter()
 {
@@ -1973,6 +1905,7 @@ void MainWindow::switchled(LED *led, int choice)
                 led1->processUserInput(17);
                 break;
             case(45):
+                led1->processUserInput(1);
                 led1->processUserInput(18);
                 break;
             case(40):
@@ -2064,6 +1997,7 @@ void MainWindow::switchled(LED *led, int choice)
                 led2->processUserInput(17);
                 break;
             case(45):
+                led2->processUserInput(1);
                 led2->processUserInput(18);
                 break;
             case(40):

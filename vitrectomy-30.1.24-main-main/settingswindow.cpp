@@ -22,13 +22,10 @@ settingswindow::settingswindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    connect(ui->pushButton_4, &QPushButton::clicked, this, &settingswindow::on_diapm_clicked);
-   // connect(ui->pushButton_5, &QPushButton::clicked, this, &settingswindow::on_pe_clicked);
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &settingswindow::on_dia_clicked);
     connect(ui->pushButton_8, &QPushButton::clicked, this, &settingswindow::on_led_clicked);
-    //connect(ui->pushButton_9, &QPushButton::clicked, this, &settingswindow::on_pc_clicked);
-    //connect(ui->pushButton_10, &QPushButton::clicked, this, &settingswindow::on_ps_clicked);
-    connect(ui->pushButton_6, &QPushButton::clicked, this, &settingswindow::on_vv_clicked);
-    connect(ui->pushButton_7, &QPushButton::clicked, this, &settingswindow::on_vc_clicked);
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &settingswindow::on_vac_clicked);
+    connect(ui->pushButton_7, &QPushButton::clicked, this, &settingswindow::on_vit_clicked);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &settingswindow::show_surgery_screen);
 
     connect(ui->listWidget, &QListWidget::currentTextChanged, this, &settingswindow::loadDatabaseFromList);
@@ -42,219 +39,211 @@ settingswindow::settingswindow(QWidget *parent) :
 
 
 
-
     //code to load database in the starting
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
 
      mydb.open();
 
-         QScrollBar *verticalScrollBar = ui->listWidget->verticalScrollBar();
+     QScrollBar *verticalScrollBar = ui->listWidget->verticalScrollBar();
 
-         // Set the width of the vertical scrollbar
-         verticalScrollBar->setStyleSheet("QScrollBar:vertical { width: 45px; }");
-         QSqlQuery query;
-         query.exec("SELECT surgeon FROM maindb");
+     // Set the width of the vertical scrollbar
+     verticalScrollBar->setStyleSheet("QScrollBar:vertical { width: 45px; }");
+     QSqlQuery query;
+     query.exec("SELECT surgeon FROM maindb");
 
- while (query.next()) {
-     QString itemName = query.value(0).toString();
-
-
-     ui->listWidget->addItem(itemName);
-
-
-}
+     while (query.next()) {
+         QString itemName = query.value(0).toString();
+         ui->listWidget->addItem(itemName);
+     }
 
 
 
-//ui->tabWidget_2->removeTab(1);
-ui->tabWidget_2->setCurrentIndex(0);
-ui->vit->setStyleSheet("image: url(:/new/prefix1/img/diaicon2.png);");
+    //ui->tabWidget_2->removeTab(1);
+    ui->tabWidget_2->setCurrentIndex(0);
+    ui->vit->setStyleSheet("image: url(:/new/prefix1/img/diaicon2.png);");
 
 
-ui->lineEdit->installEventFilter(this);
-ui->lineEdit_8->installEventFilter(this);
+    ui->lineEdit->installEventFilter(this);
+    ui->lineEdit_8->installEventFilter(this);
 
 
-ui->lineEdit_3->installEventFilter(this);
-ui->lineEdit_5->installEventFilter(this);
+    ui->lineEdit_3->installEventFilter(this);
+    ui->lineEdit_5->installEventFilter(this);
 
-ui->lineEdit_10->installEventFilter(this);
-ui->lineEdit_9->installEventFilter(this);
-
-
-query.exec("select * from maindb where surgeon='Surgeon 2'");
-if(query.next()){
-QString itemname1 = query.value(0).toString();
-QString itemname2 = query.value(1).toString();
-QString itemname3 = query.value(2).toString();
-QString itemname4 = query.value(3).toString();
-QString itemname5 = query.value(4).toString();
-QString itemname6 = query.value(5).toString();
-QString itemname7 = query.value(6).toString();
-QString itemname8 = query.value(7).toString();
-QString itemname9 = query.value(8).toString();
-QString itemname10 = query.value(9).toString();
-QString itemname11 = query.value(10).toString();
-QString itemname12 = query.value(11).toString();
-QString itemname13 = query.value(12).toString();
-QString itemname14 = query.value(13).toString();
-QString itemname15 = query.value(14).toString();
-QString itemname16 = query.value(15).toString();
-QString itemname17 = query.value(16).toString();
-QString itemname18 = query.value(17).toString();
-QString itemname19 = query.value(18).toString();
-QString itemname20 = query.value(19).toString();
-QString itemname21 = query.value(20).toString();
-QString itemname22 = query.value(21).toString();
-QString itemname23 = query.value(22).toString();
-QString itemname24 = query.value(23).toString();
-QString itemname25 = query.value(24).toString();
-QString itemname26 = query.value(25).toString();
-QString itemname27 = query.value(26).toString();
-QString itemname28 = query.value(27).toString();
-QString itemname29 = query.value(28).toString();
-QString itemname30 = query.value(29).toString();
-QString itemname31 = query.value(30).toString();
-QString itemname32 = query.value(31).toString();
-QString itemname33 = query.value(32).toString();
-QString itemname34 = query.value(33).toString();
-QString itemname35 = query.value(34).toString();
-QString itemname36 = query.value(35).toString();
-QString itemname37 = query.value(36).toString();
-QString itemname38 = query.value(37).toString();
-QString itemname39 = query.value(38).toString();
-QString itemname40 = query.value(39).toString();
-QString itemname41 = query.value(40).toString();
-QString itemname42 = query.value(41).toString();
-QString itemname43 = query.value(42).toString();
-QString itemname44 = query.value(43).toString();
-QString itemname45 = query.value(44).toString();
-QString itemname46 = query.value(45).toString();
-QString itemname47 = query.value(46).toString();
-QString itemname48 = query.value(48).toString();
-QString itemname49 = query.value(49).toString();
-QString itemname50 = query.value(50).toString();
+    ui->lineEdit_10->installEventFilter(this);
+    ui->lineEdit_9->installEventFilter(this);
 
 
-QRegExp regex("^[0-8]{0,1}[0-9]{0,3}$");
-QRegExpValidator* validator = new QRegExpValidator(regex, ui->lineEdit);
-ui->lineEdit->setValidator(validator);
-ui->lineEdit->setMaxLength(4);
+    query.exec("select * from maindb where surgeon='Surgeon 2'");
+    if(query.next()){
+    QString itemname1 = query.value(0).toString();
+    QString itemname2 = query.value(1).toString();
+    QString itemname3 = query.value(2).toString();
+    QString itemname4 = query.value(3).toString();
+    QString itemname5 = query.value(4).toString();
+    QString itemname6 = query.value(5).toString();
+    QString itemname7 = query.value(6).toString();
+    QString itemname8 = query.value(7).toString();
+    QString itemname9 = query.value(8).toString();
+    QString itemname10 = query.value(9).toString();
+    QString itemname11 = query.value(10).toString();
+    QString itemname12 = query.value(11).toString();
+    QString itemname13 = query.value(12).toString();
+    QString itemname14 = query.value(13).toString();
+    QString itemname15 = query.value(14).toString();
+    QString itemname16 = query.value(15).toString();
+    QString itemname17 = query.value(16).toString();
+    QString itemname18 = query.value(17).toString();
+    QString itemname19 = query.value(18).toString();
+    QString itemname20 = query.value(19).toString();
+    QString itemname21 = query.value(20).toString();
+    QString itemname22 = query.value(21).toString();
+    QString itemname23 = query.value(22).toString();
+    QString itemname24 = query.value(23).toString();
+    QString itemname25 = query.value(24).toString();
+    QString itemname26 = query.value(25).toString();
+    QString itemname27 = query.value(26).toString();
+    QString itemname28 = query.value(27).toString();
+    QString itemname29 = query.value(28).toString();
+    QString itemname30 = query.value(29).toString();
+    QString itemname31 = query.value(30).toString();
+    QString itemname32 = query.value(31).toString();
+    QString itemname33 = query.value(32).toString();
+    QString itemname34 = query.value(33).toString();
+    QString itemname35 = query.value(34).toString();
+    QString itemname36 = query.value(35).toString();
+    QString itemname37 = query.value(36).toString();
+    QString itemname38 = query.value(37).toString();
+    QString itemname39 = query.value(38).toString();
+    QString itemname40 = query.value(39).toString();
+    QString itemname41 = query.value(40).toString();
+    QString itemname42 = query.value(41).toString();
+    QString itemname43 = query.value(42).toString();
+    QString itemname44 = query.value(43).toString();
+    QString itemname45 = query.value(44).toString();
+    QString itemname46 = query.value(45).toString();
+    QString itemname47 = query.value(46).toString();
+    QString itemname48 = query.value(48).toString();
+    QString itemname49 = query.value(49).toString();
+    QString itemname50 = query.value(50).toString();
 
-QRegExp regex2("^(?:[0-4]?\\d{1,2}|500)$");
-QRegExpValidator* validator2 = new QRegExpValidator(regex2, ui->lineEdit_3);
-ui->lineEdit_3->setValidator(validator2);
-ui->lineEdit_3->setMaxLength(3);
 
-QRegExp regex3("^(?:100|[1-9]\\d?|0)$");
-QRegExpValidator* validator3 = new QRegExpValidator(regex3, ui->lineEdit_8);
-ui->lineEdit_8->setValidator(validator3);
-ui->lineEdit_8->setMaxLength(3);
+    QRegExp regex("^[0-8]{0,1}[0-9]{0,3}$");
+    QRegExpValidator* validator = new QRegExpValidator(regex, ui->lineEdit);
+    ui->lineEdit->setValidator(validator);
+    ui->lineEdit->setMaxLength(4);
 
-QRegExp regex4("^(?:100|[1-9]\\d?|0)$");
-QRegExpValidator* validator4 = new QRegExpValidator(regex4, ui->lineEdit_10);
-ui->lineEdit_10->setValidator(validator4);
-ui->lineEdit_10->setMaxLength(3);
+    QRegExp regex2("^(?:[0-4]?\\d{1,2}|500)$");
+    QRegExpValidator* validator2 = new QRegExpValidator(regex2, ui->lineEdit_3);
+    ui->lineEdit_3->setValidator(validator2);
+    ui->lineEdit_3->setMaxLength(3);
 
-QRegExp regex5("^(?:100|[1-9]\\d?|0)$");
-QRegExpValidator* validator5 = new QRegExpValidator(regex5, ui->lineEdit_9);
-ui->lineEdit_9->setValidator(validator5);
-ui->lineEdit_9->setMaxLength(3);
+    QRegExp regex3("^(?:100|[1-9]\\d?|0)$");
+    QRegExpValidator* validator3 = new QRegExpValidator(regex3, ui->lineEdit_8);
+    ui->lineEdit_8->setValidator(validator3);
+    ui->lineEdit_8->setMaxLength(3);
+
+    QRegExp regex4("^(?:100|[1-9]\\d?|0)$");
+    QRegExpValidator* validator4 = new QRegExpValidator(regex4, ui->lineEdit_10);
+    ui->lineEdit_10->setValidator(validator4);
+    ui->lineEdit_10->setMaxLength(3);
+
+    QRegExp regex5("^(?:100|[1-9]\\d?|0)$");
+    QRegExpValidator* validator5 = new QRegExpValidator(regex5, ui->lineEdit_9);
+    ui->lineEdit_9->setValidator(validator5);
+    ui->lineEdit_9->setMaxLength(3);
 
 
 
 
-ui->lineEdit_8->setText(itemname1);
-ui->lineEdit_10->setText(itemname49);
-ui->lineEdit_9->setText(itemname50);
+    ui->lineEdit_8->setText(itemname1);
+    ui->lineEdit_10->setText(itemname49);
+    ui->lineEdit_9->setText(itemname50);
 
-ui->lineEdit->setText(itemname34);
-ui->comboBox_10->setCurrentText(itemname35);
-ui->comboBox->setCurrentText(itemname48);
-ui->lineEdit_3->setText(itemname36);
-ui->comboBox_11->setCurrentText(itemname37);
+    ui->lineEdit->setText(itemname34);
+    ui->comboBox_10->setCurrentText(itemname35);
+    ui->comboBox->setCurrentText(itemname48);
+    ui->lineEdit_3->setText(itemname36);
+    ui->comboBox_11->setCurrentText(itemname37);
 
-ui->comboBox_20->setCurrentText(itemname39);
-ui->comboBox_23->setCurrentText(itemname40);
-ui->comboBox_21->setCurrentText(itemname41);
-ui->comboBox_24->setCurrentText(itemname42);
-ui->lineEdit_5->setText(itemname43);
-
-
-
-ui->lineEdit_21->setText(itemname44);
-ui->progressBar_4->setValue(ui->lineEdit_21->text().toInt());
-
-ui->lineEdit_2->setText(itemname45);
-ui->progressBar->setValue(ui->lineEdit_2->text().toInt());
-
-ui->lineEdit_4->setText(itemname46);
-ui->progressBar_2->setValue(ui->lineEdit_4->text().toInt());
-
-ui->lineEdit_7->setText(itemname47);
-ui->progressBar_3->setValue(ui->lineEdit_7->text().toInt());
-
-
-}
+    ui->comboBox_20->setCurrentText(itemname39);
+    ui->comboBox_23->setCurrentText(itemname40);
+    ui->comboBox_21->setCurrentText(itemname41);
+    ui->comboBox_24->setCurrentText(itemname42);
+    ui->lineEdit_5->setText(itemname43);
 
 
 
-mydb.close();
+    ui->lineEdit_21->setText(itemname44);
+    ui->progressBar_4->setValue(ui->lineEdit_21->text().toInt());
+
+    ui->lineEdit_2->setText(itemname45);
+    ui->progressBar->setValue(ui->lineEdit_2->text().toInt());
+
+    ui->lineEdit_4->setText(itemname46);
+    ui->progressBar_2->setValue(ui->lineEdit_4->text().toInt());
+
+    ui->lineEdit_7->setText(itemname47);
+    ui->progressBar_3->setValue(ui->lineEdit_7->text().toInt());
 
 
-flag = false;
+    }
 
-key = new keypad;
-connect(key, &keypad::textsignal, this, &settingswindow::on_clicked);
-//connect(key, &keypad::backsignal, this, &settingswindow::on_clickedbackspace);
-connect(key, &keypad::entersignal, this, &settingswindow::on_clickedenter);
-
-text=new textkeypad;
-
-connect(text, &textkeypad::textsignal, this, &settingswindow::on_clickedtext);
-connect(text, &textkeypad::backsignal, this, &settingswindow::on_clickedbackspacetext);
-connect(text, &textkeypad::entersignal, this, &settingswindow::on_clickedentertext);
-connect(text, &textkeypad::spacesignal, this, &settingswindow::on_clickedspace);
-
-ui->lineEdit_8->clearFocus();
-ui->lineEdit->clearFocus();
-ui->lineEdit_3->clearFocus();
-ui->lineEdit_10->clearFocus();
-ui->lineEdit_9->clearFocus();
+    mydb.close();
 
 
-// for 0
-connect(ui->pushButton_35, &QPushButton::clicked, this, &settingswindow::zeroinc);
-connect(ui->pushButton_34, &QPushButton::clicked, this, &settingswindow::zerodec);
-// for 1
-connect(ui->pushButton_28, &QPushButton::clicked, this, &settingswindow::oneinc);
-connect(ui->pushButton_29, &QPushButton::clicked, this, &settingswindow::onedec);
-// for 2
-connect(ui->pushButton_30, &QPushButton::clicked, this, &settingswindow::twoinc);
-connect(ui->pushButton_31, &QPushButton::clicked, this, &settingswindow::twodec);
-// for 3
-connect(ui->pushButton_32, &QPushButton::clicked, this, &settingswindow::threeinc);
-connect(ui->pushButton_33, &QPushButton::clicked, this, &settingswindow::threedec);
+    flag = false;
 
-int s0,s1,s2,s3;
-    s0=ui->lineEdit_21->text().toInt();
-    s1=ui->lineEdit_2->text().toInt();
-    s2=ui->lineEdit_4->text().toInt();
-    s3=ui->lineEdit_7->text().toInt();
-    ui->label_110->setText(QString::number(s0+s1+s2+s3));
+    key = new keypad;
+    connect(key, &keypad::textsignal, this, &settingswindow::on_clicked);
+    connect(key, &keypad::entersignal, this, &settingswindow::on_clickedenter);
 
-int sum=s0+s1+s2+s3;
-if(sum==100)
-{
-    ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
-}
-else
-{
-    ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
-}
+    text=new textkeypad;
 
-ui->listWidget->setCurrentRow(currentindex);
+    connect(text, &textkeypad::textsignal, this, &settingswindow::on_clickedtext);
+    connect(text, &textkeypad::backsignal, this, &settingswindow::on_clickedbackspacetext);
+    connect(text, &textkeypad::entersignal, this, &settingswindow::on_clickedentertext);
+    connect(text, &textkeypad::spacesignal, this, &settingswindow::on_clickedspace);
+
+    ui->lineEdit_8->clearFocus();
+    ui->lineEdit->clearFocus();
+    ui->lineEdit_3->clearFocus();
+    ui->lineEdit_10->clearFocus();
+    ui->lineEdit_9->clearFocus();
+
+
+    // for 0
+    connect(ui->pushButton_35, &QPushButton::clicked, this, &settingswindow::zeroinc);
+    connect(ui->pushButton_34, &QPushButton::clicked, this, &settingswindow::zerodec);
+    // for 1
+    connect(ui->pushButton_28, &QPushButton::clicked, this, &settingswindow::oneinc);
+    connect(ui->pushButton_29, &QPushButton::clicked, this, &settingswindow::onedec);
+    // for 2
+    connect(ui->pushButton_30, &QPushButton::clicked, this, &settingswindow::twoinc);
+    connect(ui->pushButton_31, &QPushButton::clicked, this, &settingswindow::twodec);
+    // for 3
+    connect(ui->pushButton_32, &QPushButton::clicked, this, &settingswindow::threeinc);
+    connect(ui->pushButton_33, &QPushButton::clicked, this, &settingswindow::threedec);
+
+    int s0,s1,s2,s3;
+        s0=ui->lineEdit_21->text().toInt();
+        s1=ui->lineEdit_2->text().toInt();
+        s2=ui->lineEdit_4->text().toInt();
+        s3=ui->lineEdit_7->text().toInt();
+        ui->label_110->setText(QString::number(s0+s1+s2+s3));
+
+    int sum=s0+s1+s2+s3;
+    if(sum==100)
+    {
+        ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+    }
+    else
+    {
+        ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+    }
+
+    ui->listWidget->setCurrentRow(currentindex);
 
 }
 
@@ -407,50 +396,6 @@ if(ui->lineEdit_9->focusWidget())
 
 }
 
-//void settingswindow::on_clickedbackspace()
-//{
-//    if (ui->lineEdit_8->focusWidget())
-//    {
-
-//        QString data = ui->lineEdit_8->text();
-//        data.chop(3);
-//        ui->lineEdit_8->setText(data);
-
-//    }
-
-//    if(ui->lineEdit->focusWidget())
-//    {
-//        QString data = ui->lineEdit->text();
-//        data.chop(3);
-//        ui->lineEdit->setText(data);
-
-//    }
-//    if(ui->lineEdit_3->focusWidget())
-//    {
-//        QString data = ui->lineEdit_3->text();
-//        data.chop(3);
-//        ui->lineEdit_3->setText(data);
-//    }
-
-//    if(ui->lineEdit_10->focusWidget())
-//    {
-//        QString data = ui->lineEdit_10->text();
-//        data.chop(3);
-//        ui->lineEdit_10->setText(data);
-//    }
-
-//    if(ui->lineEdit_9->focusWidget())
-//    {
-//        QString data = ui->lineEdit_9->text();
-//        data.chop(3);
-//        ui->lineEdit_9->setText(data);
-
-
-//    }
-
-
-//}
-
 void settingswindow::on_clickedenter()
 {
     key->hide();
@@ -463,7 +408,7 @@ settingswindow::~settingswindow()
 }
 // save buttons code
 
-void settingswindow::on_diapm_clicked()
+void settingswindow::on_dia_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -483,49 +428,10 @@ void settingswindow::on_diapm_clicked()
 
 }
 
-void settingswindow::on_pe_clicked()
-{
-    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName(PATH);
-    mydb.open();
-     QSqlQuery query;
-     QString peaspmax,pevacmax,pepowmax,pevacmode,pevpowmode1,pevpowmode2;
-
-     surgeonid=ui->lineEdit_5->text();
-
-     query.prepare("update maindb set peaspmax='"+peaspmax+"',pevacmax='"+pevacmax+"',pepowmax='"+pepowmax+"',pevacmode='"+pevacmode+"',pevpowmode1='"+pevpowmode1+"',pevpowmode2='"+pevpowmode2+"'where surgeon='"+surgeonid+"'");
-    query.exec();
-    query.bindValue(peaspmax,"peaspmax");
-    query.bindValue(pevacmax,"pevacmax");
-    query.bindValue(pepowmax,"pepowmax");
-    query.bindValue(pevacmode,"pevacmode");
-    query.bindValue(pevpowmode1,"pevpowmode1");
-    query.bindValue(pevpowmode2,"pevpowmode2");
-    mydb.close();
-
-}
-
 
 
 void settingswindow::on_led_clicked()
 {
-//    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-//    mydb.setDatabaseName(PATH);
-//    mydb.open();
-//     QSqlQuery query;
-//     QString pqaspmax,pqvacmax,pqpowmax,pqvacmode,pqpowmode1,pqpowmode2;
-
-//     surgeonid=ui->lineEdit_5->text();
-//
-//     query.prepare("update maindb set pqaspmax='"+pqaspmax+"',pqvacmax='"+pqvacmax+"',pqpowmax='"+pqpowmax+"',pqvacmode='"+pqvacmode+"',pqpowmode1='"+pqpowmode1+"',pqpowmode2='"+pqpowmode2+"'where surgeon='"+surgeonid+"'");
-//    query.exec();
-//    query.bindValue(pqaspmax,"pqaspmax");
-//    query.bindValue(pqvacmax,"pqvacmax");
-//    query.bindValue(pqpowmax,"pqpowmax");
-//    query.bindValue(pqvacmode,"pqvacmode");
-//    query.bindValue(pqpowmode1,"pqvpowmode1");
-//    query.bindValue(pqpowmode2,"pqvpowmode2");
-//    mydb.close();
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -547,49 +453,8 @@ void settingswindow::on_led_clicked()
 
 }
 
-void settingswindow::on_pc_clicked()
-{
-    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName(PATH);
-    mydb.open();
-     QSqlQuery query;
-     QString pqaspmax,pqvacmax,pqpowmax,pqvacmode,pqpowmode1,pqpowmode2;
 
-     surgeonid=ui->lineEdit_5->text();
-
-     query.prepare("update maindb set pcaspmax='"+pqaspmax+"',pcvacmax='"+pqvacmax+"',pcpowmax='"+pqpowmax+"',pcvacmode='"+pqvacmode+"',pcpowmode1='"+pqpowmode1+"',pcpowmode2='"+pqpowmode2+"'where surgeon='"+surgeonid+"'");
-    query.exec();
-    query.bindValue(pqaspmax,"pcaspmax");
-    query.bindValue(pqvacmax,"pcvacmax");
-    query.bindValue(pqpowmax,"pcpowmax");
-    query.bindValue(pqvacmode,"pcvacmode");
-    query.bindValue(pqpowmode1,"pcvpowmode1");
-    query.bindValue(pqpowmode2,"pcvpowmode2");
-    mydb.close();
-}
-
-void settingswindow::on_ps_clicked()
-{
-    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName(PATH);
-    mydb.open();
-     QSqlQuery query;
-     QString pqaspmax,pqvacmax,pqpowmax,pqvacmode,pqpowmode1,pqpowmode2;
-
-     surgeonid=ui->lineEdit_5->text();
-
-     query.prepare("update maindb set psaspmax='"+pqaspmax+"',psvacmax='"+pqvacmax+"',pspowmax='"+pqpowmax+"',psvacmode='"+pqvacmode+"',pspowmode1='"+pqpowmode1+"',pspowmode2='"+pqpowmode2+"'where surgeon='"+surgeonid+"'");
-    query.exec();
-    query.bindValue(pqaspmax,"psaspmax");
-    query.bindValue(pqvacmax,"psvacmax");
-    query.bindValue(pqpowmax,"pspowmax");
-    query.bindValue(pqvacmode,"psvacmode");
-    query.bindValue(pqpowmode1,"psvpowmode1");
-    query.bindValue(pqpowmode2,"psvpowmode2");
-    mydb.close();
-}
-
-void settingswindow::on_vv_clicked()
+void settingswindow::on_vac_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
@@ -609,7 +474,7 @@ void settingswindow::on_vv_clicked()
      mydb.close();
 }
 
-void settingswindow::on_vc_clicked()
+void settingswindow::on_vit_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);

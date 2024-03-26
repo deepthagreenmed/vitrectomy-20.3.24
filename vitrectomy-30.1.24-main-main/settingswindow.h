@@ -72,25 +72,25 @@ public slots:
      void on_clickedentertext();
 
     //diapm
-    void on_diapm_clicked();
+    void on_dia_clicked();
 
-    //pe
-    void on_pe_clicked();
+//    //pe
+//    void on_pe_clicked();
 
     //led
     void on_led_clicked();
 
-    //pc
-    void on_pc_clicked();
+//    //pc
+//    void on_pc_clicked();
 
-    //ps
-    void on_ps_clicked();
+//    //ps
+//    void on_ps_clicked();
 
-    //vv
-    void on_vv_clicked();
+    //vac
+    void on_vac_clicked();
 
-    //vc
-    void on_vc_clicked();
+    //vit
+    void on_vit_clicked();
 
     //home screen
     void show_surgery_screen();

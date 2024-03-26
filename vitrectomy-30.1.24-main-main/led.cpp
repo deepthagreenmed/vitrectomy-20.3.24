@@ -2,7 +2,7 @@
 
 LED::LED(const std::string& port) {
     portName = port;
-    file.open("data.txt");
+    file.open("/home/data.txt");
     if (!file.is_open()) {
         throw std::runtime_error("Error: Unable to open data file");
     }
