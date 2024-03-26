@@ -23,8 +23,6 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-#define PATH "/home/main.db"
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
