@@ -71,20 +71,11 @@ public slots:
 
      void on_clickedentertext();
 
-    //diapm
+    //dia
     void on_dia_clicked();
-
-//    //pe
-//    void on_pe_clicked();
 
     //led
     void on_led_clicked();
-
-//    //pc
-//    void on_pc_clicked();
-
-//    //ps
-//    void on_ps_clicked();
 
     //vac
     void on_vac_clicked();
