@@ -86,10 +86,10 @@ public slots:
     //home screen
     void show_surgery_screen();
 
-    //dimensions
+    //save for all surgeons
     void on_saveforall_clicked();
 
-    //dimensions with surgeon
+    //save for current surgeon
     void on_save_clicked();
 
 
