@@ -87,10 +87,10 @@ public slots:
     void show_surgery_screen();
 
     //dimensions
-    void on_dimensions_clicked();
+    void on_saveforall_clicked();
 
     //dimensions with surgeon
-    void on_dimensions_with_surgeon_clicked();
+    void on_save_clicked();
 
 
 private slots:
