@@ -515,7 +515,7 @@ void settingswindow::show_surgery_screen()
 
 
 
-void settingswindow::on_save_clicked()
+void settingswindow::on_saveforall_clicked()
 {
 
     db1 = QSqlDatabase::addDatabase("QSQLITE");
@@ -544,7 +544,7 @@ db1.close();
 QSqlDatabase::removeDatabase("QSQLITE");
 }
 
-void settingswindow::on_saveforall_clicked()
+void settingswindow::on_save_clicked()
 {
     db1 = QSqlDatabase::addDatabase("QSQLITE");
         db1.setDatabaseName(PATH);
