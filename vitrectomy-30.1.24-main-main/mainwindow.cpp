@@ -893,9 +893,9 @@ void MainWindow::updateLabel()
          if(vip==1){hhandler->vit_off();}
          if(vip==0){hhandler->vit_off();}
 
-         b1=0;
-         b2=0;
-         b3=0;
+         beep_0to1=0;
+         beep_1to2=0;
+         beep_2to3=0;
 
 
 
@@ -904,20 +904,20 @@ void MainWindow::updateLabel()
       if(avg > fp0&& avg <= (fp1+fp0))
       {
 
-          b1++;
-          if(b1==1)
+          beep_0to1++;
+          if(beep_0to1==1)
           {
                footpedalbeep();
           }
-          else if(b2>1)
+          else if(beep_1to2>1)
           {
-              b2=0;
+              beep_1to2=0;
 
           }
-          else if(b2>1 && b3>1)
+          else if(beep_1to2>1 && beep_2to3>1)
           {
-              b2=0;
-              b3=0;
+              beep_1to2=0;
+              beep_2to3=0;
           }
 
         //irrigation/aspiration
@@ -933,14 +933,14 @@ void MainWindow::updateLabel()
       if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
       {
 
-          b2++;
-          if(b2==1)
+          beep_1to2++;
+          if(beep_1to2==1)
           {
                footpedalbeep();
           }
-          else if(b3>1)
+          else if(beep_2to3>1)
           {
-              b3=0;
+              beep_2to3=0;
           }
 
           if(flag2==0)
@@ -1023,8 +1023,8 @@ void MainWindow::updateLabel()
       if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
       {
 
-          b3++;
-          if(b3==1)
+          beep_2to3++;
+          if(beep_2to3==1)
           {
                footpedalbeep();
           }
@@ -1092,9 +1092,9 @@ void MainWindow::updateLabel()
 
     if(avg >= 0 && avg <= fp0)
     {
-        b1=0;
-        b2=0;
-        b3=0;
+        beep_0to1=0;
+        beep_1to2=0;
+        beep_2to3=0;
 
         ui->dial->setValue(0);
         ui->label_36->setText("0");
@@ -1108,22 +1108,21 @@ void MainWindow::updateLabel()
     if((avg > fp0&& avg <= (fp1+fp0)))
     {
 
-        b1++;
-        if(b1==1)
+        beep_0to1++;
+        if(beep_0to1==1)
         {
              footpedalbeep();
         }
-        else if(b2>1)
+        else if(beep_1to2>1)
         {
-            b2=0;
+            beep_1to2=0;
 
         }
-        else if(b2>1 && b3>1)
+        else if(beep_1to2>1 && beep_2to3>1)
         {
-            b2=0;
-            b3=0;
+            beep_1to2=0;
+            beep_2to3=0;
         }
-
 
         ui->dial->setValue((fp1+fp0));
         ui->label_36->setText("1");
@@ -1138,16 +1137,15 @@ void MainWindow::updateLabel()
     if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
     {
 
-
-    b2++;
-    if(b2==1)
-    {
-         footpedalbeep();
-    }
-    else if(b3>1)
-    {
-        b3=0;
-    }
+        beep_1to2++;
+        if(beep_1to2==1)
+        {
+             footpedalbeep();
+        }
+        else if(beep_2to3>1)
+        {
+            beep_2to3=0;
+        }
 
         if(flag2==0)
         {
@@ -1227,8 +1225,8 @@ void MainWindow::updateLabel()
     if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
     {
 
-        b3++;
-        if(b3==1)
+        beep_2to3++;
+        if(beep_2to3==1)
         {
              footpedalbeep();
         }

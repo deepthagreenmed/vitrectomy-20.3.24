@@ -50,12 +50,9 @@ public:
     void updateLabelValue(QLabel* label, int prevValue, int value, int maxValue);
     void switchled(LED *led, int choice);
     void footpedalbeep();
-    int b1=0;
-    int b2=0;
-    int b3=0;
-    int b4=0;
-    int b5=0;
-    int b6=0;
+    int beep_0to1=0;
+    int beep_1to2=0;
+    int beep_2to3=0;
 
 
 public slots:
