@@ -60,9 +60,8 @@ public slots:
     void led1val(QString str);
     void led2val(QString str);
     void aibackground();
-    void on_clicked(const QString& digit);
 
-     //void on_clickedbackspace();
+    void on_clicked(const QString& digit);
 
      void on_clickedenter();
 
