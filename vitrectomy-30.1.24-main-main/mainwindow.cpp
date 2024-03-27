@@ -893,12 +893,24 @@ void MainWindow::updateLabel()
          if(vip==1){hhandler->vit_off();}
          if(vip==0){hhandler->vit_off();}
 
+         b1=0;
+         b2=0;
+         b3=0;
+         b4=0;
+         b5=0;
+         b6=0;
+
 
 
 
       }
       if(avg > fp0&& avg <= (fp1+fp0))
       {
+          b1++;
+          if(b1==1)
+          {
+               footpedalbeep();
+          }
         //irrigation/aspiration
           ui->label_36->setText("1");
           hhandler->vso_off();
@@ -908,10 +920,15 @@ void MainWindow::updateLabel()
           if(vip==0){hhandler->vit_off();}
 
 
-
       }
       if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
       {
+          b2++;
+          if(b2==1)
+          {
+               footpedalbeep();
+          }
+
           if(flag2==0)
           {
           //vaccum
@@ -987,11 +1004,15 @@ void MainWindow::updateLabel()
 
               }
           }
-
       }
       //vitrectomy
       if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
       {
+          b3++;
+          if(b3==1)
+          {
+               footpedalbeep();
+          }
        ui->label_36->setText("3");
 
        float freq = 12000;
@@ -1055,6 +1076,13 @@ void MainWindow::updateLabel()
 
     if(avg >= 0 && avg <= fp0)
     {
+        b1=0;
+        b2=0;
+        b3=0;
+        b4=0;
+        b5=0;
+        b6=0;
+
         ui->dial->setValue(0);
         ui->label_36->setText("0");
         if(vip==1){hhandler->vit_off();}
@@ -1066,6 +1094,12 @@ void MainWindow::updateLabel()
     }
     if((avg > fp0&& avg <= (fp1+fp0)))
     {
+        b4++;
+        if(b4==1)
+        {
+             footpedalbeep();
+        }
+
         ui->dial->setValue((fp1+fp0));
         ui->label_36->setText("1");
         if(vip==1){hhandler->vit_off();}
@@ -1078,10 +1112,18 @@ void MainWindow::updateLabel()
     }
     if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
     {
+
         if(flag2==0)
         {
             //vaccum
             //normal
+
+        b5++;
+        if(b5==1)
+        {
+             footpedalbeep();
+        }
+
         ui->dial->setValue(fp1+fp2+fp0);
         ui->label_36->setText("2");
 
@@ -1153,6 +1195,12 @@ void MainWindow::updateLabel()
     //vitrectomy
     if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
     {
+        b6++;
+        if(b6==1)
+        {
+             footpedalbeep();
+        }
+
          ui->dial->setValue(fp1+fp2+fp3+fp0);
          ui->label_36->setText("3");
 
@@ -2038,5 +2086,15 @@ void MainWindow::switchled(LED *led, int choice)
 
         }
     }
+}
+
+void MainWindow::footpedalbeep()
+{
+    QProcess p;
+    QString path = "/usr/bin/beep";
+
+    p.setProgram(path);
+    p.start();
+    p.waitForFinished();
 }
 

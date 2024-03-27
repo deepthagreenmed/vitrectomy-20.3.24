@@ -22,6 +22,7 @@
 #include <QPropertyAnimation>
 #include <QMessageBox>
 #include <QString>
+#include <QProcess>
 
 #define PATH "/home/main.db"
 #define PATH2 "/home/vsodata9new.txt"
@@ -48,7 +49,13 @@ public:
     bool eventFilter(QObject* object, QEvent* event);
     void updateLabelValue(QLabel* label, int prevValue, int value, int maxValue);
     void switchled(LED *led, int choice);
-
+    void footpedalbeep();
+    int b1=0;
+    int b2=0;
+    int b3=0;
+    int b4=0;
+    int b5=0;
+    int b6=0;
 
 
 public slots:
