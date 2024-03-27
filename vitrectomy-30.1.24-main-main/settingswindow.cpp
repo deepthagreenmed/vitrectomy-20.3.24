@@ -27,6 +27,8 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->pushButton_6, &QPushButton::clicked, this, &settingswindow::on_vac_clicked);
     connect(ui->pushButton_7, &QPushButton::clicked, this, &settingswindow::on_vit_clicked);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &settingswindow::show_surgery_screen);
+    connect(ui->pushButton_15, &QPushButton::clicked, this, &settingswindow::on_dimensions_clicked);
+    connect(ui->pushButton_23, &QPushButton::clicked, this, &settingswindow::on_dimensions_with_surgeon_clicked);
 
     connect(ui->listWidget, &QListWidget::currentTextChanged, this, &settingswindow::loadDatabaseFromList);
     connect(ui->pushButton_13, &QPushButton::clicked, this, &settingswindow::on_fp_settings_clicked);
