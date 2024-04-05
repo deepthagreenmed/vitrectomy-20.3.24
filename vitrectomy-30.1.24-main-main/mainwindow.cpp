@@ -165,9 +165,13 @@ MainWindow::MainWindow(QWidget *parent)
 
   QObject::connect(win2, &settingswindow::stringPassed, this, &MainWindow::receiveString);
 
-    hhandler->vit_off();
-   \
+
+
     avg=fp->convert(CHANNEL_0);
+
+    hhandler->vso_off();
+    hhandler->vit_off();
+
 
     ui->label_4->setText(QString::number(vit_value));
 
@@ -216,7 +220,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     key = new keypad;
     connect(key, &keypad::textsignal, this, &MainWindow::on_clicked);
-    //connect(key, &keypad::backsignal, this, &MainWindow::on_clickedbackspace);
     connect(key, &keypad::entersignal, this, &MainWindow::on_clickedenter);
 
 
@@ -425,7 +428,7 @@ void MainWindow::on_clicked(const QString& digit)
       ui->label_5->setFocus();
       int prevValue = ui->label_5->text().toInt();
       int value = (ui->label_5->text()+digit).toInt();
-      updateLabelValue(ui->label_5, prevValue, value, 500);
+      updateLabelValue(ui->label_5, prevValue, value, 650);
 
    }
   }
@@ -888,8 +891,8 @@ void MainWindow::updateLabel()
       {
           ui->label_36->setText("0");
           hhandler->vso_off();
-           int avg1=vac->stabilize();
-           ui->label_2->setText(QString::number(avg1));
+          int avg1=vac->stabilize();
+          ui->label_2->setText(QString::number(avg1));
          if(vip==1){hhandler->vit_off();}
          if(vip==0){hhandler->vit_off();}
 
@@ -951,47 +954,52 @@ void MainWindow::updateLabel()
           float freq = 12000;
           float timeon;
 
-          std::string col1, col2;
-          std::ifstream file(PATH2);
-            int lineCount=0;
-          while(file >> col1 >> col2)
-          {
-              if(std::stoi(col2) <= (ui->label_5->text().toInt()))
-              {
-                  lineCount++;
-              }
-              else
-              {
-                  lineCount = lineCount;
-              }
-          }
-
-        std::string line;
-        idx = ((avg-fp0-fp1)/fp2)*lineCount;
-        std::ifstream file2(PATH2);
-
-        for (double i = 1; i <= idx; i++)
-        {
-            std::getline(file2, line);
-        }
+//          std::string col1, col2;
+//          std::ifstream file(PATH2);
+//            int lineCount=0;
+//          while(file >> col1 >> col2)
+//          {
+//              if(std::stoi(col2) <= ui->label_5->text().toInt())
+//              {
+//                  lineCount++;
+//              }
+//              else
+//              {
+//                  lineCount = lineCount;
+//              }
+//          }
 
 
-        std::istringstream iss(line);
-        std::string column1, column2;
-        iss >> column1 >> column2;
+//        std::string line;
+//        idx = ((avg-fp0-fp1)/fp2)*lineCount;
+//        std::ifstream file2(PATH2);
 
-        std::stringstream ss(column1);
-        ss >> timeon;
+//        for (double i = 1; i <= idx; i++)
+//        {
+//            std::getline(file2, line);
+//        }
 
-        qDebug()<<timeon;
+
+//        std::istringstream iss(line);
+//        std::string column1, column2;
+//        iss >> column1 >> column2;
+
+//        std::stringstream ss(column1);
+//        ss >> timeon;
+
+          timeon = ui->label_5->text().toInt()*100/650;
+
+
 
         hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
         hhandler->vso_period(((1 / freq) / resolution));
         int avg1=vac->stabilize();
         ui->label_2->setText(QString::number(avg1));
 
-        file.close();
-        file2.close();
+        qDebug()<<timeon<<avg1;
+
+//        file.close();
+//        file2.close();
 
           if(vip==1){hhandler->vit_off();}
 
@@ -1034,45 +1042,49 @@ void MainWindow::updateLabel()
        float freq = 12000;
        float timeon;
 
-       std::string col1, col2;
-       std::ifstream file(PATH2);
-         int lineCount=0;
-       while(file >> col1 >> col2)
-       {
-           if(std::stoi(col2) <= ui->label_5->text().toInt())
-           {
-               lineCount++;
-           }
-           else
-           {
-               lineCount = lineCount;
-           }
-       }
+//       std::string col1, col2;
+//       std::ifstream file(PATH2);
+//         int lineCount=0;
+//       while(file >> col1 >> col2)
+//       {
+//           if(std::stoi(col2) <= ui->label_5->text().toInt())
+//           {
+//               lineCount++;
+//           }
+//           else
+//           {
+//               lineCount = lineCount;
+//           }
+//       }
 
 
-       std::ifstream file2(PATH2);
-       std::string line;
-       for (int i = 1; i <= lineCount; i++) {
-           std::getline(file2, line);
-       }
+//       std::ifstream file2(PATH2);
+//       std::string line;
+//       for (int i = 1; i <= lineCount; i++) {
+//           std::getline(file2, line);
+//       }
 
 
-       std::istringstream iss(line);
-       std::string column1, column2;
-       iss >> column1 >> column2;
+//       std::istringstream iss(line);
+//       std::string column1, column2;
+//       iss >> column1 >> column2;
 
-       std::stringstream ss(column1);
-       ss >> timeon;
+//       std::stringstream ss(column1);
+//       ss >> timeon;
 
-       qDebug()<<timeon;
+        timeon = ui->label_5->text().toInt()*100/650;
+
+
 
        hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
        hhandler->vso_period(((1 / freq) / resolution));
        int avg1=vac->stabilize();
        ui->label_2->setText(QString::number(avg1));
 
-       file.close();
-        file2.close();
+       qDebug()<<timeon<<avg1;
+
+//       file.close();
+//        file2.close();
 
 
        if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
@@ -1151,8 +1163,6 @@ void MainWindow::updateLabel()
         {
             //vaccum
             //normal
-
-
         ui->dial->setValue(fp1+fp2+fp0);
         ui->label_36->setText("2");
 
@@ -1162,43 +1172,47 @@ void MainWindow::updateLabel()
         float freq = 12000;
         float timeon;
 
-        std::string col1, col2;
-        std::ifstream file(PATH2);
-          int lineCount=0;
-        while(file >> col1 >> col2)
-        {
-            if(std::stoi(col2) <= ui->label_5->text().toInt())
-            {
-                lineCount++;
-            }
-            else
-            {
-                lineCount = lineCount;
-            }
-        }
+        //        std::string col1, col2;
+        //        std::ifstream file(PATH2);
+        //          int lineCount=0;
+        //        while(file >> col1 >> col2)
+        //        {
+        //            if(std::stoi(col2) <= ui->label_5->text().toInt())
+        //            {
+        //                lineCount++;
+        //            }
+        //            else
+        //            {
+        //                lineCount = lineCount;
+        //            }
+        //        }
 
-        std::ifstream file2(PATH2);
-        std::string line;
-        for (int i = 1; i <= lineCount; i++) {
-            std::getline(file2, line);
-        }
+        //        std::ifstream file2(PATH2);
+        //        std::string line;
+        //        for (int i = 1; i <= lineCount; i++) {
+        //            std::getline(file2, line);
+        //        }
 
-        std::istringstream iss(line);
-        std::string column1, column2;
-        iss >> column1 >> column2;
+        //        std::istringstream iss(line);
+        //        std::string column1, column2;
+        //        iss >> column1 >> column2;
 
-        std::stringstream ss(column1);
-        ss >> timeon;
+        //        std::stringstream ss(column1);
+        //        ss >> timeon;
 
-        qDebug()<<timeon;
+        timeon = ui->label_5->text().toInt()*100/650;
+
+
 
         hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
         hhandler->vso_period(((1 / freq) / resolution));
         int avg1=vac->stabilize();
         ui->label_2->setText(QString::number(avg1));
 
-        file.close();
-         file2.close();
+        qDebug()<<timeon<<avg1;
+
+//        file.close();
+//         file2.close();
     }
 }
     else {
@@ -1247,43 +1261,47 @@ void MainWindow::updateLabel()
         float freq = 12000;
         float timeon;
 
-        std::string col1, col2;
-        std::ifstream file(PATH2);
-          int lineCount=0;
-        while(file >> col1 >> col2)
-        {
-            if(std::stoi(col2) <= ui->label_5->text().toInt())
-            {
-                lineCount++;
-            }
-            else
-            {
-                lineCount = lineCount;
-            }
-        }
+//        std::string col1, col2;
+//        std::ifstream file(PATH2);
+//          int lineCount=0;
+//        while(file >> col1 >> col2)
+//        {
+//            if(std::stoi(col2) <= ui->label_5->text().toInt())
+//            {
+//                lineCount++;
+//            }
+//            else
+//            {
+//                lineCount = lineCount;
+//            }
+//        }
 
-        std::ifstream file2(PATH2);
-        std::string line;
-        for (int i = 1; i <= lineCount; i++) {
-            std::getline(file2, line);
-        }
+//        std::ifstream file2(PATH2);
+//        std::string line;
+//        for (int i = 1; i <= lineCount; i++) {
+//            std::getline(file2, line);
+//        }
 
-        std::istringstream iss(line);
-        std::string column1, column2;
-        iss >> column1 >> column2;
+//        std::istringstream iss(line);
+//        std::string column1, column2;
+//        iss >> column1 >> column2;
 
-        std::stringstream ss(column1);
-        ss >> timeon;
+//        std::stringstream ss(column1);
+//        ss >> timeon;
 
-        qDebug()<<timeon;
+        timeon = ui->label_5->text().toInt()*100/650;
+
+
 
         hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
         hhandler->vso_period(((1 / freq) / resolution));
         int avg1=vac->stabilize();
         ui->label_2->setText(QString::number(avg1));
 
-        file.close();
-        file2.close();
+        qDebug()<<timeon<<avg1;
+
+//        file.close();
+//        file2.close();
 
     }
   }
@@ -1294,6 +1312,10 @@ void MainWindow::increaseVaccumValue()
 {
     int currentValue = ui->label_5->text().toInt();
     int newValue = currentValue + 5;
+    if(newValue > 650)
+    {
+        newValue = 650;
+    }
     ui->label_5->setText(QString::number(newValue));
 }
 
@@ -1301,6 +1323,10 @@ void MainWindow::decreaseVaccumValue()
 {
     int currentValue = ui->label_5->text().toInt();
     int newValue = currentValue - 5;
+    if(newValue < 0)
+    {
+        newValue = 0;
+    }
     ui->label_5->setText(QString::number(newValue));
 }
 
@@ -1309,9 +1335,9 @@ void MainWindow::increaseVitrectomyValue()
 
     ui->label_4->setText(QString::number(vit_value));
     vit_value = vit_value + 60;
-    if(vit_value>8000)
+    if(vit_value>9600)
     {
-        vit_value=8000;
+        vit_value=9600;
     }
     ui->label_4->setText(QString::number(vit_value));
 }
@@ -1905,7 +1931,7 @@ void MainWindow::airinjectoron()
         hhandler->ai_on();
         hhandler->ai_preset_count(ui->label_3->text().toInt());
         //hhandler->ai_actual_count(100);
-        int value = (int)(vac->convert(CHANNEL_1)*0.17);
+        int value = (int)(vac->convert(CHANNEL_2)*0.17);
         ui->label_10->setText(QString::number(value));
         hhandler->ai_actual_count(value);
     }
@@ -1928,6 +1954,9 @@ void MainWindow::setZero()
     if(avg<=(fp0+fp1))
     {
         ui->label_48->setText("0");
+        hhandler->vso_off();
+        int avg1 = vac->stabilize();
+        ui->label_2->setText(QString::number(avg1));
     }
 }
 

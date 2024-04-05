@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_settingswindow_t {
     QByteArrayData data[41];
-    char stringdata0[585];
+    char stringdata0[566];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -62,17 +62,17 @@ QT_MOC_LITERAL(26, 290, 14), // "on_led_clicked"
 QT_MOC_LITERAL(27, 305, 14), // "on_vac_clicked"
 QT_MOC_LITERAL(28, 320, 14), // "on_vit_clicked"
 QT_MOC_LITERAL(29, 335, 19), // "show_surgery_screen"
-QT_MOC_LITERAL(30, 355, 21), // "on_dimensions_clicked"
-QT_MOC_LITERAL(31, 377, 34), // "on_dimensions_with_surgeon_cl..."
-QT_MOC_LITERAL(32, 412, 20), // "loadDatabaseFromList"
-QT_MOC_LITERAL(33, 433, 11), // "currentText"
-QT_MOC_LITERAL(34, 445, 22), // "on_fp_settings_clicked"
-QT_MOC_LITERAL(35, 468, 18), // "on_tab_dia_clicked"
-QT_MOC_LITERAL(36, 487, 18), // "on_tab_led_clicked"
-QT_MOC_LITERAL(37, 506, 17), // "on_tab_ia_clicked"
-QT_MOC_LITERAL(38, 524, 18), // "on_tab_vit_clicked"
-QT_MOC_LITERAL(39, 543, 17), // "on_tab_fp_clicked"
-QT_MOC_LITERAL(40, 561, 23) // "on_tab_fppreset_clicked"
+QT_MOC_LITERAL(30, 355, 21), // "on_saveforall_clicked"
+QT_MOC_LITERAL(31, 377, 15), // "on_save_clicked"
+QT_MOC_LITERAL(32, 393, 20), // "loadDatabaseFromList"
+QT_MOC_LITERAL(33, 414, 11), // "currentText"
+QT_MOC_LITERAL(34, 426, 22), // "on_fp_settings_clicked"
+QT_MOC_LITERAL(35, 449, 18), // "on_tab_dia_clicked"
+QT_MOC_LITERAL(36, 468, 18), // "on_tab_led_clicked"
+QT_MOC_LITERAL(37, 487, 17), // "on_tab_ia_clicked"
+QT_MOC_LITERAL(38, 505, 18), // "on_tab_vit_clicked"
+QT_MOC_LITERAL(39, 524, 17), // "on_tab_fp_clicked"
+QT_MOC_LITERAL(40, 542, 23) // "on_tab_fppreset_clicked"
 
     },
     "settingswindow\0stringPassed\0\0str\0"
@@ -84,13 +84,12 @@ QT_MOC_LITERAL(40, 561, 23) // "on_tab_fppreset_clicked"
     "on_clickedspace\0on_clickedentertext\0"
     "on_dia_clicked\0on_led_clicked\0"
     "on_vac_clicked\0on_vit_clicked\0"
-    "show_surgery_screen\0on_dimensions_clicked\0"
-    "on_dimensions_with_surgeon_clicked\0"
-    "loadDatabaseFromList\0currentText\0"
-    "on_fp_settings_clicked\0on_tab_dia_clicked\0"
-    "on_tab_led_clicked\0on_tab_ia_clicked\0"
-    "on_tab_vit_clicked\0on_tab_fp_clicked\0"
-    "on_tab_fppreset_clicked"
+    "show_surgery_screen\0on_saveforall_clicked\0"
+    "on_save_clicked\0loadDatabaseFromList\0"
+    "currentText\0on_fp_settings_clicked\0"
+    "on_tab_dia_clicked\0on_tab_led_clicked\0"
+    "on_tab_ia_clicked\0on_tab_vit_clicked\0"
+    "on_tab_fp_clicked\0on_tab_fppreset_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -222,8 +221,8 @@ void settingswindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 23: _t->on_vac_clicked(); break;
         case 24: _t->on_vit_clicked(); break;
         case 25: _t->show_surgery_screen(); break;
-        case 26: _t->on_dimensions_clicked(); break;
-        case 27: _t->on_dimensions_with_surgeon_clicked(); break;
+        case 26: _t->on_saveforall_clicked(); break;
+        case 27: _t->on_save_clicked(); break;
         case 28: _t->loadDatabaseFromList((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 29: _t->on_fp_settings_clicked(); break;
         case 30: _t->on_tab_dia_clicked(); break;

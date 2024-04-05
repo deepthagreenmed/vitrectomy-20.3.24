@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
 #include "vaccum.h"
 #include "keypad.h"
 #include "settingswindow.h"
@@ -25,7 +24,7 @@
 #include <QProcess>
 
 #define PATH "/home/main.db"
-#define PATH2 "/home/vsodata9new.txt"
+#define PATH2 "/home/vsodata10.txt"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
