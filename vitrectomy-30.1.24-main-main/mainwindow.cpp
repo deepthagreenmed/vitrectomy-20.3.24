@@ -216,7 +216,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(win2, &settingswindow::led2str, this, &MainWindow::led2val);
 
     connect(&timeai3, &QTimer::timeout, this, &MainWindow::aibackground);
-    timeai3.start(10);
+    timeai3.start(1);
 
     key = new keypad;
     connect(key, &keypad::textsignal, this, &MainWindow::on_clicked);
@@ -779,7 +779,7 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            timeai.start(5);
+            timeai.start(1);
             connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
             timeai2.stop();
@@ -806,7 +806,7 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
-            timeai2.start(5);
+            timeai2.start(1);
             connect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
 
             timeai.stop();
@@ -1931,7 +1931,8 @@ void MainWindow::airinjectoron()
         hhandler->ai_on();
         hhandler->ai_preset_count(ui->label_3->text().toInt());
         //hhandler->ai_actual_count(100);
-        int value = (int)(vac->convert(CHANNEL_2)*0.17);
+        int value = (int)(vac->convert(CHANNEL_1)*0.17);
+        qDebug()<<value;
         ui->label_10->setText(QString::number(value));
         hhandler->ai_actual_count(value);
     }
