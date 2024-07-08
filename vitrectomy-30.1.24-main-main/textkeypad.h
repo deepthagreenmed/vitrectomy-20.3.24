@@ -22,11 +22,13 @@ signals:
    void backsignal();
    void spacesignal();
    void entersignal();
+
 private slots:
     void entertext();
     void enterback();
     void spaceenter();
     void enterenter();
+
 private:
     Ui::textkeypad *ui;
 };
