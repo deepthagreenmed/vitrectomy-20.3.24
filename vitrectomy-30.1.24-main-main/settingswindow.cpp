@@ -202,6 +202,7 @@ settingswindow::settingswindow(QWidget *parent) :
     key = new keypad;
     connect(key, &keypad::textsignal, this, &settingswindow::on_clicked);
     connect(key, &keypad::entersignal, this, &settingswindow::on_clickedenter);
+    connect(key, &keypad::backsignal, this, &settingswindow::on_clickedbackspace);
 
     text=new textkeypad;
 
@@ -260,7 +261,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
         key->resize(491,271);
         key->move(980,280);
         key->show();
-        ui->lineEdit_cutrate->setText("");
+        //ui->lineEdit_cutrate->setText("");
       //qDebug() << "Left click";
     } else if ( k->button() == Qt::RightButton ) {
       //qDebug() << "Right click";
@@ -272,7 +273,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,290);
         key->show();
-        ui->lineEdit_powmax->setText("");
+        //ui->lineEdit_powmax->setText("");
 
 
     } else if ( k->button() == Qt::RightButton ) {
@@ -295,7 +296,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
            key->resize(491,271);
           key->move(980,290);
           key->show();
-          ui->lineEdit_vac->setText("");
+          //ui->lineEdit_vac->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
@@ -307,7 +308,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,290);
         key->show();
-        ui->lineEdit_led1->setText("");
+        //ui->lineEdit_led1->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -320,7 +321,7 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,380);
         key->show();
-        ui->lineEdit_led2->setText("");
+        //ui->lineEdit_led2->setText("");
 
 
     } else if ( k->button() == Qt::RightButton ) {
@@ -1149,4 +1150,36 @@ void settingswindow::on_clickedentertext()
     db1.close();
 
     text->hide();
+}
+
+void settingswindow::on_clickedbackspace()
+{
+    if(ui->lineEdit_powmax->focusWidget()) {
+        QString data = ui->lineEdit_powmax->text();
+        data.chop(1);
+        ui->lineEdit_powmax->setText(data);
+    }
+    if(ui->lineEdit_cutrate->focusWidget()) {
+        QString data = ui->lineEdit_cutrate->text();
+        data.chop(1);
+        ui->lineEdit_cutrate->setText(data);
+    }
+  if(ui->lineEdit_vac->focusWidget())
+    {
+      QString data = ui->lineEdit_vac->text();
+      data.chop(1);
+      ui->lineEdit_vac->setText(data);
+  }
+  if(ui->lineEdit_led1->focusWidget())
+    {
+      QString data = ui->lineEdit_led1->text();
+      data.chop(1);
+      ui->lineEdit_led1->setText(data);
+  }
+  if(ui->lineEdit_led2->focusWidget())
+    {
+      QString data = ui->lineEdit_led2->text();
+      data.chop(1);
+      ui->lineEdit_led2->setText(data);
+  }
 }
