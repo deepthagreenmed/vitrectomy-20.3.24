@@ -1,6 +1,7 @@
 #ifndef HWHANDLER_H
 #define HWHANDLER_H
 
+#include <QThread>
 #include <stdint.h>
 #include <unistd.h>
 #include <iostream>
@@ -14,8 +15,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <sys/mman.h>
-
-#include <QThread>
 #include <QDebug>
 #include <QFile>
 #include <QCoreApplication>
@@ -43,10 +42,15 @@
 #define AI_PRESET_REG               48
 #define AI_COUNT_REG                50
 
+#define SIL_OIL_REG                 28
+
 #define CHANNEL_0                   0x97
 #define CHANNEL_1                   0xD7
 #define CHANNEL_2                   0xA7
 #define CHANNEL_3                   0xE7
+
+#define REG1 32
+#define REG2 36
 
 class hwHandler: public QThread
 {
@@ -70,6 +74,9 @@ public:
     static void ai_off();
     static void ai_preset_count(int count);
     static void ai_actual_count(int count);
+
+    void sil_oil_on();
+    void sil_oil_off();
 
 
 signals:

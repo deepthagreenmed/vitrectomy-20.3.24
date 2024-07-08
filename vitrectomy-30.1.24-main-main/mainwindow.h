@@ -102,7 +102,8 @@ public slots:
 
 private slots:
         void nonlinearcall3();
-     void transitionToNewScreen();
+
+        void transitionToNewScreen();
 
         void setZero();
 
@@ -111,8 +112,6 @@ private slots:
          void updateLabel2();
 
         void diathermy();
-
-
 
         void airinjectoroff();
 

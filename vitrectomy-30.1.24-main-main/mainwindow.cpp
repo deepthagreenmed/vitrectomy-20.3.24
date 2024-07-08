@@ -119,7 +119,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString itemname48;
     if(query.next()){
         itemname48=query.value(0).toString();
-        qDebug()<<itemname48;
+        //qDebug()<<itemname48;
         surgeonind=itemname48.toInt();
     }
      query.exec("select * from maindb where surgeon='"+surgeon+"'");
@@ -627,6 +627,9 @@ void MainWindow::sil_oil_onoff()
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
         connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
         connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+
+        hhandler->sil_oil_on();
+
         sp=1;
 
         }
@@ -646,6 +649,9 @@ void MainWindow::sil_oil_onoff()
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
         disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
         disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+
+        hhandler->sil_oil_off();
+
         sp=0;
         }
 
@@ -1693,7 +1699,7 @@ void MainWindow::vitlnl(QString str)
 void MainWindow::typevit(QString str)
 {
     madtype = str;
-    qDebug()<<madtype;
+    //qDebug()<<madtype;
 }
 
 // Slot function to set value of diathermy
@@ -2023,7 +2029,7 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
 
         surgeonid=ui->comboBox_surgeonname->currentText();
         surgeonind=ui->comboBox_surgeonname->currentIndex();
-        qDebug() << surgeonind;
+        //qDebug() << surgeonind;
 
 
 
@@ -2080,16 +2086,16 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
                fp2=itemname46.toDouble()*40.95;
                 itemname47 = query.value(46).toString();
                fp3=itemname47.toDouble()*40.95;
-               qDebug()<<itemname44;
-               qDebug()<<itemname45;
-               qDebug()<<itemname46;
-               qDebug()<<itemname47;
+               //qDebug()<<itemname44;
+               //qDebug()<<itemname45;
+               //qDebug()<<itemname46;
+               //qDebug()<<itemname47;
            }
 
-     qDebug()<<fp0;
-     qDebug()<<fp1;
-     qDebug()<<fp2;
-     qDebug()<<fp3;
+     //qDebug()<<fp0;
+     //qDebug()<<fp1;
+     //qDebug()<<fp2;
+     //qDebug()<<fp3;
     mydb1.close();
 
 }
@@ -2458,7 +2464,7 @@ void MainWindow::linearcall23()
 // Vitrectomy linear (3)
 void MainWindow::linearcall3()
 {
-    qDebug()<<"Linear3"<<madtype;
+    //qDebug()<<"Linear3"<<madtype;
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
@@ -2846,7 +2852,7 @@ void MainWindow::updateLabel()
 
 // setting value for dial
     avg = fp->convert(CHANNEL_0);
-    qDebug()<<fp0<<fp1<<fp2<<fp3;
+    //qDebug()<<fp0<<fp1<<fp2<<fp3;
 
 
   if(vp==0)
@@ -2951,7 +2957,7 @@ void MainWindow::updateLabel()
 
         std::stringstream ss(column1);
         ss >> dacval;
-        qDebug()<<dacval;
+        //qDebug()<<dacval;
         l->writeDAC(dacval);
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
@@ -3023,7 +3029,7 @@ void MainWindow::updateLabel()
 
            std::stringstream ss(column1);
            ss >> dacval;
-           qDebug()<<dacval;
+           //qDebug()<<dacval;
 
            l->writeDAC(dacval);
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
@@ -3043,7 +3049,7 @@ void MainWindow::updateLabel()
 
            std::stringstream ss(column1);
            ss >> dacval;
-           qDebug()<<dacval;
+           //qDebug()<<dacval;
 
            l->writeDAC(dacval);
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
@@ -3160,7 +3166,7 @@ void MainWindow::updateLabel()
 
         std::stringstream ss(column1);
         ss >> dacval;
-        qDebug()<<dacval;
+        //qDebug()<<dacval;
         l->writeDAC(dacval);
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
@@ -3226,7 +3232,7 @@ void MainWindow::updateLabel()
 
         std::stringstream ss(column1);
         ss >> dacval;
-        qDebug()<<dacval;
+        //qDebug()<<dacval;
         l->writeDAC(dacval);
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
