@@ -288,10 +288,10 @@ void MainWindow::transitionToNewScreen() {
 // Set limits and input validation
 void MainWindow::updateLabelValue(QLabel* label, int prevValue, int value, int maxValue) {
     if (value > maxValue) {
-        label->setText("");
+        label->setText(QString::number(prevValue));
         msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
         msg->show();
-        timermsg->start(3000);
+        timermsg->start(1000);
 
     } else {
         label->setText(QString::number(value));
