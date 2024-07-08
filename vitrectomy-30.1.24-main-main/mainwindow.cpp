@@ -295,6 +295,8 @@ void MainWindow::updateLabelValue(QLabel* label, int prevValue, int value, int m
 
     } else {
         label->setText(QString::number(value));
+        msg->close();
+        timermsg->stop();
     }
 }
 
