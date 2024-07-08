@@ -19,8 +19,12 @@ keypad::keypad(QWidget *parent) :
     connect(ui->pushButton_8, &QPushButton::clicked, this, &keypad::entertext);
     connect(ui->pushButton_9, &QPushButton::clicked, this, &keypad::entertext);
     connect(ui->pushButton_10, &QPushButton::clicked, this, &keypad::entertext);
+    connect(ui->pushButton_11, &QPushButton::clicked, this, &keypad::enterback);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &keypad::enterenter);
-    connect(ui->pushButton_13, &QPushButton::clicked, this, &keypad::entertext);
+    //connect(ui->pushButton_13, &QPushButton::clicked, this, &keypad::entertext);
+
+
+
 
 }
 
@@ -35,8 +39,18 @@ void keypad::entertext()
      if (button)
      {
          digit = button->text();
-         emit textsignal(digit);
+
+
+             emit textsignal(digit);
+
+
      }
+}
+
+void keypad::enterback()
+{
+    back = true;
+    emit backsignal();
 }
 
 void keypad::enterenter()

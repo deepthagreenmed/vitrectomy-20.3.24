@@ -226,6 +226,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(key, &keypad::textsignal, this, &MainWindow::on_clicked);
     connect(key, &keypad::entersignal, this, &MainWindow::on_clickedenter);
+    connect(key, &keypad::backsignal, this, &MainWindow::on_clickedbackspace);
 
     connect(win2, &settingswindow::stringPassed0, this, &MainWindow::receiveString0);
     connect(win2, &settingswindow::stringPassed1, this, &MainWindow::receiveString1);
@@ -313,7 +314,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_led1->clearFocus();
-        ui->label_vacpreset->setText("");
+        //ui->label_vacpreset->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
     }
@@ -331,7 +332,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_led1->clearFocus();
-        ui->label_vitpreset->setText("");
+        //ui->label_vitpreset->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -350,7 +351,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     ui->label_dia->clearFocus();
     ui->label_led2->clearFocus();
     ui->label_led1->clearFocus();
-    ui->label_siloil->setText("");
+    //ui->label_siloil->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -369,7 +370,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
           ui->label_dia->clearFocus();
           ui->label_led2->clearFocus();
           ui->label_led1->clearFocus();
-          ui->label_aipreset->setText("");
+          //ui->label_aipreset->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
@@ -388,7 +389,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_vacpreset->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_led1->clearFocus();
-        ui->label_dia->setText("");
+        //ui->label_dia->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -407,7 +408,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_vacpreset->clearFocus();
         ui->label_led1->clearFocus();
-        ui->label_led2->setText("");
+        //ui->label_led2->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -417,7 +418,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
-        key->move(500,400);
+        key->move(300,400);
         key->show();
         ui->label_led1->setFocus();
         ui->label_vitpreset->clearFocus();
@@ -426,7 +427,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_vacpreset->clearFocus();
-        ui->label_led1->setText("");
+        //ui->label_led1->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -3325,4 +3326,43 @@ void MainWindow::receiveString2(QString val)
 void MainWindow::receiveString3(QString val)
 {
     fp3=val.toInt();
+}
+
+void MainWindow::on_clickedbackspace()
+{
+    if(ui->label_vacpreset->focusWidget()) {
+        QString data = ui->label_vacpreset->text();
+        data.chop(1);
+        ui->label_vacpreset->setText(data);
+    }
+    if(ui->label_vitpreset->focusWidget()) {
+        QString data = ui->label_vitpreset->text();
+        data.chop(1);
+        ui->label_vitpreset->setText(data);
+    }
+  if(ui->label_siloil->focusWidget()) {
+    QString data = ui->label_siloil->text();
+    data.chop(1);
+    ui->label_siloil->setText(data);
+  }
+  if(ui->label_aipreset->focusWidget()) {
+      QString data = ui->label_aipreset->text();
+      data.chop(1);
+      ui->label_aipreset->setText(data);
+  }
+  if(ui->label_dia->focusWidget()) {
+      QString data = ui->label_dia->text();
+      data.chop(1);
+      ui->label_dia->setText(data);
+  }
+  if(ui->label_led2->focusWidget()) {
+      QString data = ui->label_led2->text();
+      data.chop(1);
+      ui->label_led2->setText(data);
+  }
+  if(ui->label_led1->focusWidget()) {
+      QString data = ui->label_led1->text();
+      data.chop(1);
+      ui->label_led1->setText(data);
+  }
 }
