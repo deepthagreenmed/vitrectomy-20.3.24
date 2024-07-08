@@ -470,7 +470,7 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vitpreset->setFocus();
       int dig = digit.toInt();
-       int value = (ui->label_vitpreset->text()+digit).toInt();
+      int value = (ui->label_vitpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vitpreset, dig, value, 9600);
    }
   }
