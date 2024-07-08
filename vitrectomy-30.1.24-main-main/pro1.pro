@@ -31,6 +31,7 @@ HEADERS += \
     footpedal.h \
     hwhandler.h \
     led.h \
+    ltc2614.h \
     mainwindow.h \
     settingswindow.h \
     keypad.h \
@@ -92,3 +93,16 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/lib
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/hwhandler.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/hwhandler.lib
 else:unix: PRE_TARGETDEPS += $$PWD/./libhwhandler.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/./release/ -lltc2614
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/./debug/ -lltc2614
+else:unix: LIBS += -L$$PWD/./ -lltc2614
+
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/libltc2614.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/libltc2614.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/ltc2614.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/ltc2614.lib
+else:unix: PRE_TARGETDEPS += $$PWD/./libltc2614.a

@@ -1,7 +1,6 @@
 #include "led.h"
 
-LED::LED(const std::string& port) {
-    portName = port;
+LED::LED(const std::string& port) : portName(port) {
     file.open("/home/data.txt");
     if (!file.is_open()) {
         throw std::runtime_error("Error: Unable to open data file");
@@ -24,7 +23,7 @@ void LED::processUserInput(double choice) {
             (label == "OFF" && choice == 2) ||
             (label == "GAIN1" && choice == 3) ||
             (label == "GAIN2" && choice == 4) ||
-            (label == "GAIN3" && choice == 5) ||
+            (label == "GAIN3" && choice ==5) ||
             (label == "GAIN4" && choice == 6) ||
             (label == "GAIN5" && choice == 7) ||
             (label == "GAIN6" && choice == 8) ||
@@ -48,14 +47,14 @@ void LED::processUserInput(double choice) {
             (label == "GAIN24" && choice == 26) ||
             (label == "GAIN25" && choice == 27) ||
             (label == "GAIN26" && choice == 28) ||
-            (label == "GAIN27" && choice == 29)) {
-            data = hexStringToBytes(hexData);
-            std::string res = bytesToHexString(data);
-            std::cout << "Data for choice " << choice << ": " << res << std::endl;
-            writeToSerialPort(data);
-            //break; // Break from inner loop once data is processed
+            (label == "GAIN27" && choice == 29) ) {
+                    data = hexStringToBytes(hexData);
+                    std::string res = bytesToHexString(data);
+                    std::cout << "Data for choice " << choice << ": " << res << std::endl;
+                    writeToSerialPort(data);
         }
     }
+
     file.clear(); // Clear any error flags
     file.seekg(0, std::ios::beg); // Reset file pointer to the beginning
 }

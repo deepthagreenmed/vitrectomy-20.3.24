@@ -56,7 +56,7 @@ QTabWidget::tab-bar { alignment: center; }
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>3</number>
    </property>
    <property name="iconSize">
     <size>
@@ -83,7 +83,7 @@ QTabWidget::tab-bar { alignment: center; }
     <attribute name="title">
      <string>DIA</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_4">
+    <widget class="QPushButton" name="pushButton_save">
      <property name="geometry">
       <rect>
        <x>760</x>
@@ -101,7 +101,7 @@ border:none;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_8">
+    <widget class="QLineEdit" name="lineEdit_powmax">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -179,8 +179,8 @@ background-color: rgb(53, 63, 99);</string>
     <zorder>label_15</zorder>
     <zorder>label_25</zorder>
     <zorder>label_9</zorder>
-    <zorder>lineEdit_8</zorder>
-    <zorder>pushButton_4</zorder>
+    <zorder>lineEdit_powmax</zorder>
+    <zorder>pushButton_save</zorder>
    </widget>
    <widget class="QWidget" name="tab_6">
     <property name="enabled">
@@ -207,7 +207,7 @@ background-color: rgb(53, 63, 99);</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_9">
+    <widget class="QLineEdit" name="lineEdit_led2">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -227,7 +227,7 @@ background-color: rgb(255, 255, 255);border-radius: 20px;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_10">
+    <widget class="QLineEdit" name="lineEdit_led1">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -283,7 +283,7 @@ background-color: rgba(191, 64, 64, 0);</string>
       <string>LED2</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_8">
+    <widget class="QPushButton" name="pushButton_save_2">
      <property name="geometry">
       <rect>
        <x>730</x>
@@ -306,7 +306,7 @@ border:none;</string>
     <attribute name="title">
      <string>I/A</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_6">
+    <widget class="QPushButton" name="pushButton_save_3">
      <property name="geometry">
       <rect>
        <x>760</x>
@@ -342,7 +342,7 @@ background-color: rgba(191, 64, 64, 0);</string>
       <string> Vaccum(mm/hg)</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_11">
+    <widget class="QComboBox" name="comboBox_mode">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -374,7 +374,7 @@ background-color: rgba(191, 64, 64, 0);</string>
       </property>
      </item>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
+    <widget class="QLineEdit" name="lineEdit_vac">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -450,9 +450,9 @@ background-color: rgb(53, 63, 99);</string>
     <zorder>label_33</zorder>
     <zorder>label_30</zorder>
     <zorder>label_26</zorder>
-    <zorder>lineEdit_3</zorder>
-    <zorder>comboBox_11</zorder>
-    <zorder>pushButton_6</zorder>
+    <zorder>lineEdit_vac</zorder>
+    <zorder>comboBox_mode</zorder>
+    <zorder>pushButton_save_3</zorder>
    </widget>
    <widget class="QWidget" name="tab_7">
     <attribute name="title">
@@ -476,7 +476,7 @@ background-color: rgba(191, 64, 64, 0);</string>
       <string> Cutrate(cuts/min)</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_7">
+    <widget class="QPushButton" name="pushButton_save_4">
      <property name="geometry">
       <rect>
        <x>760</x>
@@ -494,7 +494,7 @@ border:none;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="lineEdit_cutrate">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -514,7 +514,7 @@ background-color: rgb(255, 255, 255);border-radius: 20px;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_10">
+    <widget class="QComboBox" name="comboBox_cuttermode">
      <property name="geometry">
       <rect>
        <x>630</x>
@@ -577,7 +577,7 @@ background-color: rgba(191, 64, 64, 0);</string>
     <widget class="QLabel" name="label_34">
      <property name="geometry">
       <rect>
-       <x>-4</x>
+       <x>-10</x>
        <y>96</y>
        <width>1121</width>
        <height>951</height>
@@ -610,7 +610,7 @@ background-color: rgba(191, 64, 64, 0);</string>
       <string>Cutter Type</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="comboBox_cuttertype">
      <property name="geometry">
       <rect>
        <x>630</x>
@@ -629,7 +629,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      </item>
      <item>
       <property name="text">
-       <string>Active</string>
+       <string>Aktive</string>
       </property>
      </item>
      <item>
@@ -638,21 +638,64 @@ background-color: rgba(191, 64, 64, 0);</string>
       </property>
      </item>
     </widget>
+    <widget class="QLineEdit" name="lineEdit_maxcutrate">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>560</y>
+       <width>281</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
+background-color: rgb(255, 255, 255);border-radius: 20px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_46">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>560</y>
+       <width>501</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 35pt &quot;Ubuntu&quot;;
+background-color: rgba(191, 64, 64, 0);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="text">
+      <string>Max Cutrate</string>
+     </property>
+    </widget>
     <zorder>label_13</zorder>
     <zorder>label_34</zorder>
     <zorder>label_24</zorder>
     <zorder>label_28</zorder>
-    <zorder>comboBox_10</zorder>
-    <zorder>pushButton_7</zorder>
-    <zorder>lineEdit</zorder>
+    <zorder>comboBox_cuttermode</zorder>
+    <zorder>pushButton_save_4</zorder>
+    <zorder>lineEdit_cutrate</zorder>
     <zorder>label_43</zorder>
-    <zorder>comboBox</zorder>
+    <zorder>comboBox_cuttertype</zorder>
+    <zorder>lineEdit_maxcutrate</zorder>
+    <zorder>label_46</zorder>
    </widget>
    <widget class="QWidget" name="tab_9">
     <attribute name="title">
      <string>Foot Pedal</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_15">
+    <widget class="QPushButton" name="pushButton_saveforall">
      <property name="geometry">
       <rect>
        <x>780</x>
@@ -670,7 +713,7 @@ border:none;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_23">
+    <widget class="QPushButton" name="pushButton_save_5">
      <property name="geometry">
       <rect>
        <x>760</x>
@@ -1002,8 +1045,8 @@ background-color: rgb(53, 63, 99);</string>
     </widget>
     <zorder>label_11</zorder>
     <zorder>label_35</zorder>
-    <zorder>pushButton_15</zorder>
-    <zorder>pushButton_23</zorder>
+    <zorder>pushButton_saveforall</zorder>
+    <zorder>pushButton_save_5</zorder>
     <zorder>comboBox_24</zorder>
     <zorder>comboBox_23</zorder>
     <zorder>comboBox_21</zorder>
@@ -1018,7 +1061,7 @@ background-color: rgb(53, 63, 99);</string>
     <attribute name="title">
      <string>Foot Pedal Preset</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_28">
+    <widget class="QPushButton" name="pushButton_oneinc">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -1044,7 +1087,7 @@ color:white;;}</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_29">
+    <widget class="QPushButton" name="pushButton_onedec">
      <property name="geometry">
       <rect>
        <x>290</x>
@@ -1066,7 +1109,7 @@ color:white;;}</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_30">
+    <widget class="QPushButton" name="pushButton_twoinc">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -1092,7 +1135,7 @@ color:white;;}</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_31">
+    <widget class="QPushButton" name="pushButton_twodec">
      <property name="geometry">
       <rect>
        <x>290</x>
@@ -1114,7 +1157,7 @@ color:white;;}</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_32">
+    <widget class="QPushButton" name="pushButton_threeinc">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -1140,7 +1183,7 @@ color:white;;}</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_33">
+    <widget class="QPushButton" name="pushButton_threedec">
      <property name="geometry">
       <rect>
        <x>290</x>
@@ -1196,7 +1239,7 @@ border-radius: 20px;font: 30pt &quot;Ubuntu&quot;;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_13">
+    <widget class="QPushButton" name="pushButton_save_6">
      <property name="geometry">
       <rect>
        <x>720</x>
@@ -1214,7 +1257,7 @@ border:none;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="lineEdit_one">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -1236,7 +1279,7 @@ border:none;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_4">
+    <widget class="QLineEdit" name="lineEdit_two">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -1258,7 +1301,7 @@ border:none;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_7">
+    <widget class="QLineEdit" name="lineEdit_three">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -1298,7 +1341,7 @@ border-radius: 20px;font: 35pt &quot;Ubuntu&quot;;</string>
       <string> Total is :</string>
      </property>
     </widget>
-    <widget class="QProgressBar" name="progressBar">
+    <widget class="QProgressBar" name="progressBar_one">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1333,7 +1376,7 @@ background-color: rgb(255, 255, 255);}
       <enum>QProgressBar::TopToBottom</enum>
      </property>
     </widget>
-    <widget class="QProgressBar" name="progressBar_2">
+    <widget class="QProgressBar" name="progressBar_two">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1368,7 +1411,7 @@ background-color: rgb(255, 255, 255);}
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QProgressBar" name="progressBar_3">
+    <widget class="QProgressBar" name="progressBar_three">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1400,7 +1443,7 @@ background-color: rgb(255, 255, 255);}
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QProgressBar" name="progressBar_4">
+    <widget class="QProgressBar" name="progressBar_zero">
      <property name="geometry">
       <rect>
        <x>400</x>
@@ -1435,7 +1478,7 @@ background-color: rgb(255, 255, 255);}
       <enum>QProgressBar::TopToBottom</enum>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_34">
+    <widget class="QPushButton" name="pushButton_zerodec">
      <property name="geometry">
       <rect>
        <x>290</x>
@@ -1457,7 +1500,7 @@ color:white;;}</string>
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_35">
+    <widget class="QPushButton" name="pushButton_zeroinc">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -1483,7 +1526,7 @@ color:white;;}</string>
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_21">
+    <widget class="QLineEdit" name="lineEdit_zero">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -1829,21 +1872,21 @@ background-color: rgb(53, 63, 99);</string>
     <zorder>label_27</zorder>
     <zorder>label_16</zorder>
     <zorder>label_36</zorder>
-    <zorder>pushButton_13</zorder>
+    <zorder>pushButton_save_6</zorder>
     <zorder>label_4</zorder>
     <zorder>label_8</zorder>
-    <zorder>progressBar_2</zorder>
-    <zorder>progressBar_3</zorder>
-    <zorder>progressBar</zorder>
-    <zorder>progressBar_4</zorder>
-    <zorder>pushButton_34</zorder>
-    <zorder>pushButton_29</zorder>
-    <zorder>pushButton_31</zorder>
-    <zorder>pushButton_33</zorder>
-    <zorder>pushButton_32</zorder>
-    <zorder>pushButton_30</zorder>
-    <zorder>pushButton_35</zorder>
-    <zorder>pushButton_28</zorder>
+    <zorder>progressBar_two</zorder>
+    <zorder>progressBar_three</zorder>
+    <zorder>progressBar_one</zorder>
+    <zorder>progressBar_zero</zorder>
+    <zorder>pushButton_zerodec</zorder>
+    <zorder>pushButton_onedec</zorder>
+    <zorder>pushButton_twodec</zorder>
+    <zorder>pushButton_threedec</zorder>
+    <zorder>pushButton_threeinc</zorder>
+    <zorder>pushButton_twoinc</zorder>
+    <zorder>pushButton_zeroinc</zorder>
+    <zorder>pushButton_oneinc</zorder>
     <zorder>label_10</zorder>
     <zorder>label_106</zorder>
     <zorder>label_110</zorder>
@@ -1851,10 +1894,10 @@ background-color: rgb(53, 63, 99);</string>
     <zorder>label_5</zorder>
     <zorder>label_6</zorder>
     <zorder>label_7</zorder>
-    <zorder>lineEdit_2</zorder>
-    <zorder>lineEdit_21</zorder>
-    <zorder>lineEdit_4</zorder>
-    <zorder>lineEdit_7</zorder>
+    <zorder>lineEdit_one</zorder>
+    <zorder>lineEdit_zero</zorder>
+    <zorder>lineEdit_two</zorder>
+    <zorder>lineEdit_three</zorder>
     <zorder>label_105</zorder>
     <zorder>label_107</zorder>
     <zorder>label_108</zorder>
@@ -1937,7 +1980,7 @@ color: rgb(255, 255, 255);
     <enum>QAbstractItemView::ScrollPerItem</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_12">
+  <widget class="QPushButton" name="pushButton_goback">
    <property name="geometry">
     <rect>
      <x>1635</x>
@@ -1996,7 +2039,7 @@ color: rgba(68, 44, 44, 198);border:none;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_21">
+  <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -2126,7 +2169,7 @@ border-radius: 20px;font: 45pt &quot;Ubuntu&quot;;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="pushButton_dia">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -2145,7 +2188,7 @@ border-radius: 20px;font: 45pt &quot;Ubuntu&quot;;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5fp">
+  <widget class="QPushButton" name="pushButton_fp">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -2177,7 +2220,7 @@ border-radius: 20px;font: 45pt &quot;Ubuntu&quot;;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_8vit">
+  <widget class="QPushButton" name="pushButton_vit">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -2194,7 +2237,7 @@ border:none;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="pushButton_ia">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -2296,7 +2339,7 @@ color: rgba(68, 44, 44, 198);border:none;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButton_led">
    <property name="geometry">
     <rect>
      <x>-20</x>
@@ -2322,20 +2365,20 @@ color: rgba(68, 44, 44, 198);border:none;</string>
   <zorder>label_23</zorder>
   <zorder>label_31</zorder>
   <zorder>vit</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_5fp</zorder>
+  <zorder>pushButton_dia</zorder>
+  <zorder>pushButton_fp</zorder>
   <zorder>pushButton_fps</zorder>
-  <zorder>pushButton_8vit</zorder>
-  <zorder>pushButton_3</zorder>
+  <zorder>pushButton_vit</zorder>
+  <zorder>pushButton_ia</zorder>
   <zorder>label_29</zorder>
-  <zorder>label_21</zorder>
+  <zorder>label_title</zorder>
   <zorder>lineEdit_5</zorder>
   <zorder>label_2</zorder>
   <zorder>label_18</zorder>
-  <zorder>pushButton_12</zorder>
+  <zorder>pushButton_goback</zorder>
   <zorder>label_22</zorder>
   <zorder>label_41</zorder>
-  <zorder>pushButton</zorder>
+  <zorder>pushButton_led</zorder>
  </widget>
  <resources/>
  <connections/>

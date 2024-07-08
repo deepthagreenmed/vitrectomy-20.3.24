@@ -22,21 +22,21 @@ settingswindow::settingswindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    connect(ui->pushButton_4, &QPushButton::clicked, this, &settingswindow::on_dia_clicked);
-    connect(ui->pushButton_8, &QPushButton::clicked, this, &settingswindow::on_led_clicked);
-    connect(ui->pushButton_6, &QPushButton::clicked, this, &settingswindow::on_vac_clicked);
-    connect(ui->pushButton_7, &QPushButton::clicked, this, &settingswindow::on_vit_clicked);
-    connect(ui->pushButton_12, &QPushButton::clicked, this, &settingswindow::show_surgery_screen);
-    connect(ui->pushButton_23, &QPushButton::clicked, this, &settingswindow::on_save_clicked);
-    connect(ui->pushButton_15, &QPushButton::clicked, this, &settingswindow::on_saveforall_clicked);
+    connect(ui->pushButton_save, &QPushButton::clicked, this, &settingswindow::on_dia_clicked);
+    connect(ui->pushButton_save_2, &QPushButton::clicked, this, &settingswindow::on_led_clicked);
+    connect(ui->pushButton_save_3, &QPushButton::clicked, this, &settingswindow::on_vac_clicked);
+    connect(ui->pushButton_save_4, &QPushButton::clicked, this, &settingswindow::on_vit_clicked);
+    connect(ui->pushButton_goback, &QPushButton::clicked, this, &settingswindow::show_surgery_screen);
+    connect(ui->pushButton_save_5, &QPushButton::clicked, this, &settingswindow::on_save_clicked);
+    connect(ui->pushButton_saveforall, &QPushButton::clicked, this, &settingswindow::on_saveforall_clicked);
 
     connect(ui->listWidget, &QListWidget::currentTextChanged, this, &settingswindow::loadDatabaseFromList);
-    connect(ui->pushButton_13, &QPushButton::clicked, this, &settingswindow::on_fp_settings_clicked);
-    connect(ui->pushButton_2, &QPushButton::clicked, this, &settingswindow::on_tab_dia_clicked);
-    connect(ui->pushButton, &QPushButton::clicked, this, &settingswindow::on_tab_led_clicked);
-    connect(ui->pushButton_3, &QPushButton::clicked, this, &settingswindow::on_tab_ia_clicked);
-    connect(ui->pushButton_8vit, &QPushButton::clicked, this, &settingswindow::on_tab_vit_clicked);
-    connect(ui->pushButton_5fp, &QPushButton::clicked, this, &settingswindow::on_tab_fp_clicked);
+    connect(ui->pushButton_save_6, &QPushButton::clicked, this, &settingswindow::on_fp_settings_clicked);
+    connect(ui->pushButton_dia, &QPushButton::clicked, this, &settingswindow::on_tab_dia_clicked);
+    connect(ui->pushButton_led, &QPushButton::clicked, this, &settingswindow::on_tab_led_clicked);
+    connect(ui->pushButton_ia, &QPushButton::clicked, this, &settingswindow::on_tab_ia_clicked);
+    connect(ui->pushButton_vit, &QPushButton::clicked, this, &settingswindow::on_tab_vit_clicked);
+    connect(ui->pushButton_fp, &QPushButton::clicked, this, &settingswindow::on_tab_fp_clicked);
     connect(ui->pushButton_fps, &QPushButton::clicked, this, &settingswindow::on_tab_fppreset_clicked);
 
 
@@ -66,18 +66,20 @@ settingswindow::settingswindow(QWidget *parent) :
     ui->vit->setStyleSheet("image: url(:/new/prefix1/img/diaicon2.png);");
 
 
-    ui->lineEdit->installEventFilter(this);
-    ui->lineEdit_8->installEventFilter(this);
+    ui->lineEdit_cutrate->installEventFilter(this);
+    ui->lineEdit_powmax->installEventFilter(this);
 
 
-    ui->lineEdit_3->installEventFilter(this);
+    ui->lineEdit_vac->installEventFilter(this);
     ui->lineEdit_5->installEventFilter(this);
 
-    ui->lineEdit_10->installEventFilter(this);
-    ui->lineEdit_9->installEventFilter(this);
+    ui->lineEdit_led1->installEventFilter(this);
+    ui->lineEdit_led2->installEventFilter(this);
+
+    surgeonid=ui->lineEdit_5->text();
 
 
-    query.exec("select * from maindb where surgeon='Surgeon 2'");
+    query.exec("select * from maindb where surgeon='"+surgeonid+"'");
     if(query.next()){
     QString itemname1 = query.value(0).toString();
     QString itemname2 = query.value(1).toString();
@@ -131,43 +133,43 @@ settingswindow::settingswindow(QWidget *parent) :
     QString itemname50 = query.value(50).toString();
 
 
-    QRegExp regex("^[0-8]{0,1}[0-9]{0,3}$");
-    QRegExpValidator* validator = new QRegExpValidator(regex, ui->lineEdit);
-    ui->lineEdit->setValidator(validator);
-    ui->lineEdit->setMaxLength(4);
+    QRegExp regex("^(60|120|180|240|300|360|420|480|540|600|660|720|780|840|900|960|1020|1080|1140|1200|1260|1320|1380|1440|1500|1560|1620|1680|1740|1800|1860|1920|1980|2040|2100|2160|2220|2280|2340|2400|2460|2520|2580|2640|2700|2760|2820|2880|2940|3000|3060|3120|3180|3240|3300|3360|3420|3480|3540|3600|3660|3720|3780|3840|3900|3960|4020|4080|4140|4200|4260|4320|4380|4440|4500|4560|4620|4680|4740|4800|4860|4920|4980|5040|5100|5160|5220|5280|5340|5400|5460|5520|5580|5640|5700|5760|5820|5880|5940|6000|6060|6120|6180|6240|6300|6360|6420|6480|6540|6600|6660|6720|6780|6840|6900|6960|7020|7080|7140|7200|7260|7320|7380|7440|7500|7560|7620|7680|7740|7800|7860|7920|7980|8040|8100|8160|8220|8280|8340|8400|8460|8520|8580|8640|8700|8760|8820|8880|8940|9000|9060|9120|9180|9240|9300|9360|9420|9480|9540|9600)$");
+    QRegExpValidator* validator = new QRegExpValidator(regex, ui->lineEdit_cutrate);
+    ui->lineEdit_cutrate->setValidator(validator);
+    ui->lineEdit_cutrate->setMaxLength(4);
 
     QRegExp regex2("^(?:[0-4]?\\d{1,2}|500)$");
-    QRegExpValidator* validator2 = new QRegExpValidator(regex2, ui->lineEdit_3);
-    ui->lineEdit_3->setValidator(validator2);
-    ui->lineEdit_3->setMaxLength(3);
+    QRegExpValidator* validator2 = new QRegExpValidator(regex2, ui->lineEdit_vac);
+    ui->lineEdit_vac->setValidator(validator2);
+    ui->lineEdit_vac->setMaxLength(3);
 
     QRegExp regex3("^(?:100|[1-9]\\d?|0)$");
-    QRegExpValidator* validator3 = new QRegExpValidator(regex3, ui->lineEdit_8);
-    ui->lineEdit_8->setValidator(validator3);
-    ui->lineEdit_8->setMaxLength(3);
+    QRegExpValidator* validator3 = new QRegExpValidator(regex3, ui->lineEdit_powmax);
+    ui->lineEdit_powmax->setValidator(validator3);
+    ui->lineEdit_powmax->setMaxLength(3);
 
     QRegExp regex4("^(?:100|[1-9]\\d?|0)$");
-    QRegExpValidator* validator4 = new QRegExpValidator(regex4, ui->lineEdit_10);
-    ui->lineEdit_10->setValidator(validator4);
-    ui->lineEdit_10->setMaxLength(3);
+    QRegExpValidator* validator4 = new QRegExpValidator(regex4, ui->lineEdit_led1);
+    ui->lineEdit_led1->setValidator(validator4);
+    ui->lineEdit_led1->setMaxLength(3);
 
     QRegExp regex5("^(?:100|[1-9]\\d?|0)$");
-    QRegExpValidator* validator5 = new QRegExpValidator(regex5, ui->lineEdit_9);
-    ui->lineEdit_9->setValidator(validator5);
-    ui->lineEdit_9->setMaxLength(3);
+    QRegExpValidator* validator5 = new QRegExpValidator(regex5, ui->lineEdit_led2);
+    ui->lineEdit_led2->setValidator(validator5);
+    ui->lineEdit_led2->setMaxLength(3);
 
 
 
 
-    ui->lineEdit_8->setText(itemname1);
-    ui->lineEdit_10->setText(itemname49);
-    ui->lineEdit_9->setText(itemname50);
+    ui->lineEdit_powmax->setText(itemname1);
+    ui->lineEdit_led1->setText(itemname49);
+    ui->lineEdit_led2->setText(itemname50);
 
-    ui->lineEdit->setText(itemname34);
-    ui->comboBox_10->setCurrentText(itemname35);
-    ui->comboBox->setCurrentText(itemname48);
-    ui->lineEdit_3->setText(itemname36);
-    ui->comboBox_11->setCurrentText(itemname37);
+    ui->lineEdit_cutrate->setText(itemname34);
+    ui->comboBox_cuttermode->setCurrentText(itemname35);
+    ui->comboBox_cuttertype->setCurrentText(itemname48);
+    ui->lineEdit_vac->setText(itemname36);
+    ui->comboBox_mode->setCurrentText(itemname37);
 
     ui->comboBox_20->setCurrentText(itemname39);
     ui->comboBox_23->setCurrentText(itemname40);
@@ -177,17 +179,17 @@ settingswindow::settingswindow(QWidget *parent) :
 
 
 
-    ui->lineEdit_21->setText(itemname44);
-    ui->progressBar_4->setValue(ui->lineEdit_21->text().toInt());
+    ui->lineEdit_zero->setText(itemname44);
+    ui->progressBar_zero->setValue(ui->lineEdit_zero->text().toInt());
 
-    ui->lineEdit_2->setText(itemname45);
-    ui->progressBar->setValue(ui->lineEdit_2->text().toInt());
+    ui->lineEdit_one->setText(itemname45);
+    ui->progressBar_one->setValue(ui->lineEdit_one->text().toInt());
 
-    ui->lineEdit_4->setText(itemname46);
-    ui->progressBar_2->setValue(ui->lineEdit_4->text().toInt());
+    ui->lineEdit_two->setText(itemname46);
+    ui->progressBar_two->setValue(ui->lineEdit_two->text().toInt());
 
-    ui->lineEdit_7->setText(itemname47);
-    ui->progressBar_3->setValue(ui->lineEdit_7->text().toInt());
+    ui->lineEdit_three->setText(itemname47);
+    ui->progressBar_three->setValue(ui->lineEdit_three->text().toInt());
 
 
     }
@@ -208,69 +210,69 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(text, &textkeypad::entersignal, this, &settingswindow::on_clickedentertext);
     connect(text, &textkeypad::spacesignal, this, &settingswindow::on_clickedspace);
 
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
 
 
     // for 0
-    connect(ui->pushButton_35, &QPushButton::clicked, this, &settingswindow::zeroinc);
-    connect(ui->pushButton_34, &QPushButton::clicked, this, &settingswindow::zerodec);
+    connect(ui->pushButton_zeroinc, &QPushButton::clicked, this, &settingswindow::zeroinc);
+    connect(ui->pushButton_zerodec, &QPushButton::clicked, this, &settingswindow::zerodec);
     // for 1
-    connect(ui->pushButton_28, &QPushButton::clicked, this, &settingswindow::oneinc);
-    connect(ui->pushButton_29, &QPushButton::clicked, this, &settingswindow::onedec);
+    connect(ui->pushButton_oneinc, &QPushButton::clicked, this, &settingswindow::oneinc);
+    connect(ui->pushButton_onedec, &QPushButton::clicked, this, &settingswindow::onedec);
     // for 2
-    connect(ui->pushButton_30, &QPushButton::clicked, this, &settingswindow::twoinc);
-    connect(ui->pushButton_31, &QPushButton::clicked, this, &settingswindow::twodec);
+    connect(ui->pushButton_twoinc, &QPushButton::clicked, this, &settingswindow::twoinc);
+    connect(ui->pushButton_twodec, &QPushButton::clicked, this, &settingswindow::twodec);
     // for 3
-    connect(ui->pushButton_32, &QPushButton::clicked, this, &settingswindow::threeinc);
-    connect(ui->pushButton_33, &QPushButton::clicked, this, &settingswindow::threedec);
+    connect(ui->pushButton_threeinc, &QPushButton::clicked, this, &settingswindow::threeinc);
+    connect(ui->pushButton_threedec, &QPushButton::clicked, this, &settingswindow::threedec);
 
     int s0,s1,s2,s3;
-        s0=ui->lineEdit_21->text().toInt();
-        s1=ui->lineEdit_2->text().toInt();
-        s2=ui->lineEdit_4->text().toInt();
-        s3=ui->lineEdit_7->text().toInt();
+        s0=ui->lineEdit_zero->text().toInt();
+        s1=ui->lineEdit_one->text().toInt();
+        s2=ui->lineEdit_two->text().toInt();
+        s3=ui->lineEdit_three->text().toInt();
         ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
     int sum=s0+s1+s2+s3;
     if(sum==100)
     {
-        ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+        ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
     }
     else
     {
-        ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+        ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
     }
 
     ui->listWidget->setCurrentRow(currentindex);
 
 }
 
-// keypad showing code
+// Show keypad
 bool settingswindow::eventFilter(QObject* object, QEvent* event)
 {
-  if(object == ui->lineEdit && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->lineEdit_cutrate && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
         key->resize(491,271);
         key->move(980,280);
         key->show();
-        ui->lineEdit->setText("");
+        ui->lineEdit_cutrate->setText("");
       //qDebug() << "Left click";
     } else if ( k->button() == Qt::RightButton ) {
       //qDebug() << "Right click";
     }
   }
-  if(object == ui->lineEdit_8 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->lineEdit_powmax && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
         key->move(980,290);
         key->show();
-        ui->lineEdit_8->setText("");
+        ui->lineEdit_powmax->setText("");
 
 
     } else if ( k->button() == Qt::RightButton ) {
@@ -287,38 +289,38 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
 
     }
   }
-  if(object == ui->lineEdit_3 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->lineEdit_vac && event->type() == QEvent::MouseButtonPress) {
       QMouseEvent *k = static_cast<QMouseEvent *> (event);
       if( k->button() == Qt::LeftButton ) {
            key->resize(491,271);
           key->move(980,290);
           key->show();
-          ui->lineEdit_3->setText("");
+          ui->lineEdit_vac->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
       }
     }
-  if(object == ui->lineEdit_10 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->lineEdit_led1 && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
         key->move(980,290);
         key->show();
-        ui->lineEdit_10->setText("");
+        ui->lineEdit_led1->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
     }
   }
-  if(object == ui->lineEdit_9 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->lineEdit_led2 && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
-        ui->lineEdit_10->clearFocus();
+        ui->lineEdit_led1->clearFocus();
          key->resize(491,271);
         key->move(980,380);
         key->show();
-        ui->lineEdit_9->setText("");
+        ui->lineEdit_led2->setText("");
 
 
     } else if ( k->button() == Qt::RightButton ) {
@@ -327,70 +329,70 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
   }
   return false;
 }
-//settings focus and insert digit
+// Insert digit from keypad
 void settingswindow::on_clicked(const QString& digit)
 {
 
-  if(ui->lineEdit_8->focusWidget()) {
-      ui->lineEdit->clearFocus();
-      ui->lineEdit_3->clearFocus();
-      ui->lineEdit_10->clearFocus();
-      ui->lineEdit_9->clearFocus();
+  if(ui->lineEdit_powmax->focusWidget()) {
+      ui->lineEdit_cutrate->clearFocus();
+      ui->lineEdit_vac->clearFocus();
+      ui->lineEdit_led1->clearFocus();
+      ui->lineEdit_led2->clearFocus();
       if(!flag)
       {
-      ui->lineEdit_8->setFocus();
-      ui->lineEdit_8->insert(digit);
+      ui->lineEdit_powmax->setFocus();
+      ui->lineEdit_powmax->insert(digit);
 
    }
   }
-  if(ui->lineEdit->focusWidget()) {
-      ui->lineEdit_8->clearFocus();
-      ui->lineEdit_3->clearFocus();
-      ui->lineEdit_10->clearFocus();
-      ui->lineEdit_9->clearFocus();
+  if(ui->lineEdit_cutrate->focusWidget()) {
+      ui->lineEdit_powmax->clearFocus();
+      ui->lineEdit_vac->clearFocus();
+      ui->lineEdit_led1->clearFocus();
+      ui->lineEdit_led2->clearFocus();
       if(!flag)
       {
-      ui->lineEdit->setFocus();
-      ui->lineEdit->insert(digit);
+      ui->lineEdit_cutrate->setFocus();
+      ui->lineEdit_cutrate->insert(digit);
 
    }
   }
-if(ui->lineEdit_3->focusWidget())
+if(ui->lineEdit_vac->focusWidget())
   {
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     flag = false;
     if(!flag) {
-    ui->lineEdit_3->setFocus();
-      ui->lineEdit_3->insert(digit);
+    ui->lineEdit_vac->setFocus();
+      ui->lineEdit_vac->insert(digit);
 
  }
 }
-if(ui->lineEdit_10->focusWidget())
+if(ui->lineEdit_led1->focusWidget())
   {
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_9->clearFocus();
-    ui->lineEdit_3->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_led2->clearFocus();
+    ui->lineEdit_vac->clearFocus();
     flag = false;
     if(!flag) {
-    ui->lineEdit_10->setFocus();
-      ui->lineEdit_10->insert(digit);
+    ui->lineEdit_led1->setFocus();
+      ui->lineEdit_led1->insert(digit);
 
  }
 }
-if(ui->lineEdit_9->focusWidget())
+if(ui->lineEdit_led2->focusWidget())
   {
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_3->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_vac->clearFocus();
     flag = false;
     if(!flag) {
-    ui->lineEdit_9->setFocus();
-      ui->lineEdit_9->insert(digit);
+    ui->lineEdit_led2->setFocus();
+      ui->lineEdit_led2->insert(digit);
 
  }
 }
@@ -398,6 +400,7 @@ if(ui->lineEdit_9->focusWidget())
 
 }
 
+// Hide keypad
 void settingswindow::on_clickedenter()
 {
     key->hide();
@@ -408,19 +411,24 @@ settingswindow::~settingswindow()
     delete ui;
 
 }
-// save buttons code
 
+// Diathermy power maximum
 void settingswindow::on_dia_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
+
+
     mydb.open();
 
     QSqlQuery query;
     QString diapm;
 
     surgeonid=ui->lineEdit_5->text();
-    diapm=ui->lineEdit_8->text();
+    diapm=ui->lineEdit_powmax->text();
+
+    emit diastr(diapm);
+
     query.prepare("update maindb set diapm='"+diapm+"'where surgeon='"+surgeonid+"'");
     query.exec();
 
@@ -430,8 +438,7 @@ void settingswindow::on_dia_clicked()
 
 }
 
-
-
+// LED1 and LED2
 void settingswindow::on_led_clicked()
 {
 
@@ -442,8 +449,8 @@ void settingswindow::on_led_clicked()
     QString led1, led2;
 
     surgeonid = ui->lineEdit_5->text();
-    led1 = ui->lineEdit_10->text();
-    led2 = ui->lineEdit_9->text();
+    led1 = ui->lineEdit_led1->text();
+    led2 = ui->lineEdit_led2->text();
     emit led1str(led1);
     emit led2str(led2);
 
@@ -455,7 +462,7 @@ void settingswindow::on_led_clicked()
 
 }
 
-
+// Vaccum (mm/hg) and mode
 void settingswindow::on_vac_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
@@ -465,8 +472,11 @@ void settingswindow::on_vac_clicked()
     QString vvmax,vvmin,vaspmax;
 
      surgeonid=ui->lineEdit_5->text();
-     vvmax=ui->lineEdit_3->text();
-     vvmin=ui->comboBox_11->currentText();
+     vvmax=ui->lineEdit_vac->text();
+     vvmin=ui->comboBox_mode->currentText();
+
+     emit vacstr(vvmax);
+     emit vacmode(vvmin);
 
      query.prepare("update maindb set vvmax='"+vvmax+"',vvmin='"+vvmin+"'where surgeon='"+surgeonid+"'");
      query.exec();
@@ -476,6 +486,7 @@ void settingswindow::on_vac_clicked()
      mydb.close();
 }
 
+// Cutrate (cuts/min), mode, cutter type
 void settingswindow::on_vit_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
@@ -485,9 +496,22 @@ void settingswindow::on_vit_clicked()
      QString surgeon,vcmax,vcmin,vvmax,vvmin,vaspmax,type;
 
      surgeonid=ui->lineEdit_5->text();
-     vcmax=ui->lineEdit->text();
-     vcmin=ui->comboBox_10->currentText();
-     type=ui->comboBox->currentText();
+     vcmax=ui->lineEdit_cutrate->text();
+     vcmin=ui->comboBox_cuttermode->currentText();
+     type=ui->comboBox_cuttertype->currentText();
+
+     if(type == "Midlabs")
+     {
+         ui->lineEdit_maxcutrate->setText("8000");
+     }
+     else if(type == "Aktive")
+     {
+          ui->lineEdit_maxcutrate->setText("7500");
+     }
+     else if(type == "Dorc")
+     {
+          ui->lineEdit_maxcutrate->setText("8000");
+     }
 
      query.prepare("update maindb set vcmax='"+vcmax+"',vcmin='"+vcmin+"',type='"+type+"'where surgeon='"+surgeonid+"'");
      query.exec();
@@ -495,26 +519,29 @@ void settingswindow::on_vit_clicked()
      query.bindValue(vcmin,"vcmin");
      query.bindValue(type, "type");
 
+     emit vitstr(vcmax);
+     emit vitmode(vcmin);
+     emit vittype(type);
+
      mydb.close();
 
 }
 
-// going back to home screen
+// Go to surgery screen
 void settingswindow::show_surgery_screen()
 {
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     key->hide();
     text->hide();
     this->close();
     parentWidget()->show();
 }
 
-
-
+// Save footpedal settings for all surgeons
 void settingswindow::on_saveforall_clicked()
 {
 
@@ -544,6 +571,7 @@ db1.close();
 QSqlDatabase::removeDatabase("QSQLITE");
 }
 
+// Save footpedal settings for current surgeon
 void settingswindow::on_save_clicked()
 {
     db1 = QSqlDatabase::addDatabase("QSQLITE");
@@ -575,15 +603,15 @@ QSqlDatabase::removeDatabase("QSQLITE");
 
 
 
-// loading database from list
+// Load database from list
 void settingswindow::loadDatabaseFromList(const QString &currentText)
 {
     key->hide();
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     ui->lineEdit_5->setText(currentText);
     surgeonid=ui->lineEdit_5->text();
 
@@ -653,49 +681,49 @@ void settingswindow::loadDatabaseFromList(const QString &currentText)
 
 
 
-ui->lineEdit_8->setText(itemname1);
-ui->lineEdit_10->setText(itemname49);
-ui->lineEdit_9->setText(itemname50);
+ui->lineEdit_powmax->setText(itemname1);
+ui->lineEdit_led1->setText(itemname49);
+ui->lineEdit_led2->setText(itemname50);
 
 
-ui->lineEdit->setText(itemname34);
-ui->comboBox_10->setCurrentText(itemname35);
-ui->comboBox->setCurrentText(itemname48);
-ui->lineEdit_3->setText(itemname36);
-ui->comboBox_11->setCurrentText(itemname37);
+ui->lineEdit_cutrate->setText(itemname34);
+ui->comboBox_cuttermode->setCurrentText(itemname35);
+ui->comboBox_cuttertype->setCurrentText(itemname48);
+ui->lineEdit_vac->setText(itemname36);
+ui->comboBox_mode->setCurrentText(itemname37);
 ui->comboBox_20->setCurrentText(itemname39);
 ui->comboBox_23->setCurrentText(itemname40);
 ui->comboBox_21->setCurrentText(itemname41);
 ui->comboBox_24->setCurrentText(itemname42);
 ui->lineEdit_5->setText(itemname43);
 
- ui->lineEdit_21->setText(itemname44);
- ui->progressBar_4->setValue(ui->lineEdit_21->text().toInt());
+ ui->lineEdit_zero->setText(itemname44);
+ ui->progressBar_zero->setValue(ui->lineEdit_zero->text().toInt());
 
- ui->lineEdit_2->setText(itemname45);
- ui->progressBar->setValue(ui->lineEdit_2->text().toInt());
+ ui->lineEdit_one->setText(itemname45);
+ ui->progressBar_one->setValue(ui->lineEdit_one->text().toInt());
 
- ui->lineEdit_4->setText(itemname46);
- ui->progressBar_2->setValue(ui->lineEdit_4->text().toInt());
+ ui->lineEdit_two->setText(itemname46);
+ ui->progressBar_two->setValue(ui->lineEdit_two->text().toInt());
 
- ui->lineEdit_7->setText(itemname47);
- ui->progressBar_3->setValue(ui->lineEdit_7->text().toInt());
+ ui->lineEdit_three->setText(itemname47);
+ ui->progressBar_three->setValue(ui->lineEdit_three->text().toInt());
 
 int s0,s1,s2,s3;
-    s0=ui->lineEdit_21->text().toInt();
-    s1=ui->lineEdit_2->text().toInt();
-    s2=ui->lineEdit_4->text().toInt();
-    s3=ui->lineEdit_7->text().toInt();
+    s0=ui->lineEdit_zero->text().toInt();
+    s1=ui->lineEdit_one->text().toInt();
+    s2=ui->lineEdit_two->text().toInt();
+    s3=ui->lineEdit_three->text().toInt();
     ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
 int sum=s0+s1+s2+s3;
 if(sum==100)
 {
-    ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+    ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
 }
 else
 {
-    ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+    ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
 }
 //qDebug()<<s1+s2+s3;
 
@@ -707,202 +735,208 @@ else
 
 mydb.close();
 }
-// code to inc / dec in footpedal preset
+
+// Footpedal 0 (increase)
 void settingswindow::zeroinc()
 {
-    int value=ui->lineEdit_21->text().toInt();
+    int value=ui->lineEdit_zero->text().toInt();
     int newvalue=value+1;
-   ui->lineEdit_21->setText(QString::number(newvalue));
-   ui->progressBar_4->setValue(newvalue);
+   ui->lineEdit_zero->setText(QString::number(newvalue));
+   ui->progressBar_zero->setValue(newvalue);
    int s0,s1,s2,s3;
-       s0=ui->lineEdit_21->text().toInt();
-       s1=ui->lineEdit_2->text().toInt();
-       s2=ui->lineEdit_4->text().toInt();
-       s3=ui->lineEdit_7->text().toInt();
+       s0=ui->lineEdit_zero->text().toInt();
+       s1=ui->lineEdit_one->text().toInt();
+       s2=ui->lineEdit_two->text().toInt();
+       s3=ui->lineEdit_three->text().toInt();
        ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
    int sum=s0+s1+s2+s3;
    if(sum==100)
    {
-       ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+       ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
    }
    else
    {
-       ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+       ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
    }
-
-
-
-
 }
+
+//  Footpedal 0 (decrease)
 void settingswindow::zerodec()
 {
-    int value=ui->lineEdit_21->text().toInt();
+    int value=ui->lineEdit_zero->text().toInt();
     int newvalue=value-1;
-      ui->lineEdit_21->setText(QString::number(newvalue));
-      ui->progressBar_4->setValue(newvalue);
+      ui->lineEdit_zero->setText(QString::number(newvalue));
+      ui->progressBar_zero->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_21->text().toInt();
-          s1=ui->lineEdit_2->text().toInt();
-          s2=ui->lineEdit_4->text().toInt();
-          s3=ui->lineEdit_7->text().toInt();
+          s0=ui->lineEdit_zero->text().toInt();
+          s1=ui->lineEdit_one->text().toInt();
+          s2=ui->lineEdit_two->text().toInt();
+          s3=ui->lineEdit_three->text().toInt();
           ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
       }
       else
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
-
-
-
-
 }
+
+// Footpedal 1 (increase)
 void settingswindow::oneinc()
 {
-    int value=ui->lineEdit_2->text().toInt();
+    int value=ui->lineEdit_one->text().toInt();
     int newvalue=value+1;
-   ui->lineEdit_2->setText(QString::number(newvalue));
-   ui->progressBar->setValue(newvalue);
+   ui->lineEdit_one->setText(QString::number(newvalue));
+   ui->progressBar_one->setValue(newvalue);
    int s0,s1,s2,s3;
-       s0=ui->lineEdit_21->text().toInt();
-       s1=ui->lineEdit_2->text().toInt();
-       s2=ui->lineEdit_4->text().toInt();
-       s3=ui->lineEdit_7->text().toInt();
+       s0=ui->lineEdit_zero->text().toInt();
+       s1=ui->lineEdit_one->text().toInt();
+       s2=ui->lineEdit_two->text().toInt();
+       s3=ui->lineEdit_three->text().toInt();
        ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
    int sum=s0+s1+s2+s3;
    if(sum==100)
    {
-       ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+       ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
    }
    else
    {
-       ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+       ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
    }
 }
+
+// Footpedal 2 (increase)
 void settingswindow::twoinc()
 {
-    int value=ui->lineEdit_4->text().toInt();
+    int value=ui->lineEdit_two->text().toInt();
     int newvalue=value+1;
-      ui->lineEdit_4->setText(QString::number(newvalue));
-      ui->progressBar_2->setValue(newvalue);
+      ui->lineEdit_two->setText(QString::number(newvalue));
+      ui->progressBar_two->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_21->text().toInt();
-          s1=ui->lineEdit_2->text().toInt();
-          s2=ui->lineEdit_4->text().toInt();
-          s3=ui->lineEdit_7->text().toInt();
+          s0=ui->lineEdit_zero->text().toInt();
+          s1=ui->lineEdit_one->text().toInt();
+          s2=ui->lineEdit_two->text().toInt();
+          s3=ui->lineEdit_three->text().toInt();
           ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
       }
       else
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
 }
+
+// Footpedal 3 (increase)
 void settingswindow::threeinc()
 {
-    int value=ui->lineEdit_7->text().toInt();
+    int value=ui->lineEdit_three->text().toInt();
     int newvalue=value+1;
-      ui->lineEdit_7->setText(QString::number(newvalue));
-      ui->progressBar_3->setValue(newvalue);
+      ui->lineEdit_three->setText(QString::number(newvalue));
+      ui->progressBar_three->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_21->text().toInt();
-          s1=ui->lineEdit_2->text().toInt();
-          s2=ui->lineEdit_4->text().toInt();
-          s3=ui->lineEdit_7->text().toInt();
+          s0=ui->lineEdit_zero->text().toInt();
+          s1=ui->lineEdit_one->text().toInt();
+          s2=ui->lineEdit_two->text().toInt();
+          s3=ui->lineEdit_three->text().toInt();
           ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
       }
       else
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
 }
+
+// Footpedal 1 (decrease)
 void settingswindow::onedec()
 {
-    int value=ui->lineEdit_2->text().toInt();
+    int value=ui->lineEdit_one->text().toInt();
     int newvalue=value-1;
-      ui->lineEdit_2->setText(QString::number(newvalue));
-      ui->progressBar->setValue(newvalue);
+      ui->lineEdit_one->setText(QString::number(newvalue));
+      ui->progressBar_one->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_21->text().toInt();
-          s1=ui->lineEdit_2->text().toInt();
-          s2=ui->lineEdit_4->text().toInt();
-          s3=ui->lineEdit_7->text().toInt();
+          s0=ui->lineEdit_zero->text().toInt();
+          s1=ui->lineEdit_one->text().toInt();
+          s2=ui->lineEdit_two->text().toInt();
+          s3=ui->lineEdit_three->text().toInt();
           ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
       }
       else
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
 }
+
+// Footpedal 2 (decrease)
 void settingswindow::twodec()
 {
-    int value=ui->lineEdit_4->text().toInt();
+    int value=ui->lineEdit_two->text().toInt();
     int newvalue=value-1;
-     ui->lineEdit_4->setText(QString::number(newvalue));
-     ui->progressBar_2->setValue(newvalue);
+     ui->lineEdit_two->setText(QString::number(newvalue));
+     ui->progressBar_two->setValue(newvalue);
      int s0,s1,s2,s3;
-         s0=ui->lineEdit_21->text().toInt();
-         s1=ui->lineEdit_2->text().toInt();
-         s2=ui->lineEdit_4->text().toInt();
-         s3=ui->lineEdit_7->text().toInt();
+         s0=ui->lineEdit_zero->text().toInt();
+         s1=ui->lineEdit_one->text().toInt();
+         s2=ui->lineEdit_two->text().toInt();
+         s3=ui->lineEdit_three->text().toInt();
          ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
      int sum=s0+s1+s2+s3;
      if(sum==100)
      {
-         ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+         ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
      }
      else
      {
-         ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+         ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
      }
 }
+
+// Footpedal 3 (decrease)
 void settingswindow::threedec()
 {
-    int value=ui->lineEdit_7->text().toInt();;
+    int value=ui->lineEdit_three->text().toInt();;
     int newvalue=value-1;
-      ui->lineEdit_7->setText(QString::number(newvalue));
-      ui->progressBar_3->setValue(newvalue);
+      ui->lineEdit_three->setText(QString::number(newvalue));
+      ui->progressBar_three->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_21->text().toInt();
-          s1=ui->lineEdit_2->text().toInt();
-          s2=ui->lineEdit_4->text().toInt();
-          s3=ui->lineEdit_7->text().toInt();
+          s0=ui->lineEdit_zero->text().toInt();
+          s1=ui->lineEdit_one->text().toInt();
+          s2=ui->lineEdit_two->text().toInt();
+          s3=ui->lineEdit_three->text().toInt();
           ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/save-button 1.png);background-color: transparent; border:none;");
       }
       else
       {
-          ui->pushButton_13->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
+          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
 }
 
-
-
+// Footpedal settings
 void settingswindow::on_fp_settings_clicked()
 {
     QSqlDatabase db1 = QSqlDatabase::addDatabase("QSQLITE");
@@ -914,16 +948,16 @@ void settingswindow::on_fp_settings_clicked()
      int Fp0,Fp1,Fp2,Fp3;
 
      surgeonid=ui->lineEdit_5->text();
-     fp0=ui->lineEdit_21->text();
+     fp0=ui->lineEdit_zero->text();
      Fp0=fp0.toInt();
 
-     fp1=ui->lineEdit_2->text();
+     fp1=ui->lineEdit_one->text();
      Fp1=fp1.toInt();
 
-     fp2=ui->lineEdit_4->text();
+     fp2=ui->lineEdit_two->text();
      Fp2=fp2.toInt();
 
-     fp3=ui->lineEdit_7->text();
+     fp3=ui->lineEdit_three->text();
      Fp3=fp3.toInt();
 
 
@@ -953,102 +987,102 @@ void settingswindow::on_fp_settings_clicked()
 QSqlDatabase::removeDatabase("QSQLITE");
 }
 
-// ring of tabs code
-
+// Diathermy tab
 void settingswindow::on_tab_dia_clicked()
 {
 key->hide();
-ui->lineEdit->clearFocus();
-ui->lineEdit_8->clearFocus();
-ui->lineEdit_3->clearFocus();
-ui->lineEdit_10->clearFocus();
-ui->lineEdit_9->clearFocus();
+ui->lineEdit_cutrate->clearFocus();
+ui->lineEdit_powmax->clearFocus();
+ui->lineEdit_vac->clearFocus();
+ui->lineEdit_led1->clearFocus();
+ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(0);
-    ui->label_21->setText("Diathermy");
+    ui->label_title->setText("Diathermy");
     ui->label_27->show();
     ui->vit->setStyleSheet("image: url(:/new/prefix1/img/diaicon2.png);");
 
 }
 
+// LED tab
 void settingswindow::on_tab_led_clicked()
 {
     key->hide();
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(1);
-    ui->label_21->setText("LED");
+    ui->label_title->setText("LED");
     ui->label_27->hide();
     ui->vit->setStyleSheet("image: url(:/new/prefix1/img/ledsw.png);");
 
-//    // Create a message box with a message
-//    QMessageBox msgBox;
-//    msgBox.setText("LED1 value and LED2 value are saved");
-//    msgBox.exec();
-
 }
 
-
+// Irrigation/aspiration tab
 void settingswindow::on_tab_ia_clicked()
 {key->hide();
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(2);
-    ui->label_21->setText("I/A");
+    ui->label_title->setText("I/A");
         ui->vit->setStyleSheet("image: url(:/new/prefix1/img/iaicon3.png);");
         ui->label_27->hide();
 
 }
 
+// Vitrectomy tab
 void settingswindow::on_tab_vit_clicked()
 {key->hide();
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(3);
-    ui->label_21->setText("Vitrectomy");
+    ui->label_title->setText("Vitrectomy");
         ui->vit->setStyleSheet("image: url(:/new/prefix1/img/viticon1.png);");
             ui->label_27->hide();
 
 }
 
+// Footpedal tab
 void settingswindow::on_tab_fp_clicked()
 {key->hide();
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(4);
 
-    ui->label_21->setText("FS buttons");
+    ui->label_title->setText("FS buttons");
         ui->vit->setStyleSheet("image: url(:/new/prefix1/img/fpicon.png);");
             ui->label_27->hide();
 
 }
 
+// Footpedal preset tab
 void settingswindow::on_tab_fppreset_clicked()
 {
 
-    ui->lineEdit->clearFocus();
-    ui->lineEdit_8->clearFocus();
-    ui->lineEdit_3->clearFocus();
-    ui->lineEdit_10->clearFocus();
-    ui->lineEdit_9->clearFocus();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     key->hide();
     ui->tabWidget_2->setCurrentIndex(5);
-    ui->label_21->setText("FS preset");
+    ui->label_title->setText("FS preset");
         ui->vit->setStyleSheet("image: url(:/new/prefix1/img/fpsicon1.png);");
             ui->label_27->hide();
 
 }
+
+// Update surgeon name (insert)
 void settingswindow::on_clickedtext(const QString& digit)
 {
 
@@ -1059,8 +1093,7 @@ void settingswindow::on_clickedtext(const QString& digit)
    }
  }
 
-
-
+// Update surgeon name (backspace)
 void settingswindow::on_clickedbackspacetext()
 {
   QString text= ui->lineEdit_5->text();
@@ -1073,6 +1106,7 @@ void settingswindow::on_clickedbackspacetext()
     }
 }
 
+// Update surgeon name (space bar)
 void settingswindow::on_clickedspace()
 {
 
@@ -1085,6 +1119,7 @@ void settingswindow::on_clickedspace()
     ui->lineEdit_5->setText(text);
 }
 
+// Update surgeon name (load in database)
 void settingswindow::on_clickedentertext()
 {
     QString docnamenew = ui->lineEdit_5->text();

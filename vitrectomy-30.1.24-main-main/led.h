@@ -21,13 +21,13 @@ public:
     LED(const std::string& port);
     ~LED();
     void processUserInput(double choice);
+    void writeToSerialPort(const std::vector<uint8_t>& data);
+    std::vector<uint8_t> hexStringToBytes(const std::string& hex);
+    std::string bytesToHexString(const std::vector<uint8_t>& bytes);
 
 private:
     std::string portName;
     std::ifstream file;
-    void writeToSerialPort(const std::vector<uint8_t>& data);
-    std::vector<uint8_t> hexStringToBytes(const std::string& hex);
-    std::string bytesToHexString(const std::vector<uint8_t>& bytes);
 
 };
 

@@ -7,6 +7,7 @@
 #include "footpedal.h"
 #include "hwhandler.h"
 #include "led.h"
+#include "ltc2614.h"
 
 #include <iostream>
 #include <fstream>
@@ -24,7 +25,11 @@
 #include <QProcess>
 
 #define PATH "/home/main.db"
-#define PATH2 "/home/vsodata10.txt"
+//#define PATH2 "/home/vsodata10.txt"
+#define PATH3 "/home/midlabs.txt"
+#define PATH4 "/home/aktive.txt"
+//#define PATH5 "/home/dorc.txt"
+#define PATH6 "/home/data_casete3.txt"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,7 +47,11 @@ public:
    int surgeonind;
     int vit_value=60; //period
     float resolution = 0.000000005; //5ns
-    void linearcall();
+    void nonlinearcall2();
+
+    void linearcall2();
+    void linearcall3();
+    void linearcall23();
     LED *led1;
     LED *led2;
     bool eventFilter(QObject* object, QEvent* event);
@@ -52,31 +61,58 @@ public:
     int beep_0to1=0;
     int beep_1to2=0;
     int beep_2to3=0;
+    QString madtype;
+    QString surgeon;
+
+
+signals:
+    void airinjectoronFinished();
 
 
 public slots:
+
     void receiveString(const QString& str);
+
+    void receiveString0(QString val);
+    void receiveString1(QString val);
+    void receiveString2(QString val);
+    void receiveString3(QString val);
+
     void led1val(QString str);
     void led2val(QString str);
+    void vacval(QString str);
+    void vaclnl(QString str);
+    void vitval(QString str);
+    void vitlnl(QString str);
+    void typevit(QString str);
+    void diaval(QString val);
+
     void aibackground();
 
     void on_clicked(const QString& digit);
 
      void on_clickedenter();
 
+     void airinjectoron();
+
+     void vitvalset();
+
+
 
 
 private slots:
-
+        void nonlinearcall3();
      void transitionToNewScreen();
 
         void setZero();
 
          void updateLabel();
 
+         void updateLabel2();
+
         void diathermy();
 
-        void airinjectoron();
+
 
         void airinjectoroff();
 
@@ -111,7 +147,7 @@ private slots:
         void decreasesiliconoil();
 
         //settings window
-        void show_settings_window();
+        void showsettingswindow();
 
         //silicon oil
         void sil_oil_onoff();
@@ -132,7 +168,7 @@ private slots:
         void vit_onoff();
 
         //surgeon
-        void set_surgeon();
+        void setsurgeon();
 
         //continous press
         //vaccum
@@ -211,10 +247,13 @@ private slots:
         void timerCompleted();
 
         //setup screen
-        void show_setup_screen();
+        void showsetupscreen();
 
         //swap on/off
         void swap_onoff();
+
+        //drain on/off
+        void drain_onoff();
 
 private:
     Ui::MainWindow *ui;
@@ -254,15 +293,17 @@ private:
     double idx;
      bool flag = false;
     int flag2=0;
+    int flag3=0;
     QTimer timedia;
     QTimer timeai;
-    QTimer timer48;
+    QTimer timerzero;
     QTimer timeai2;
     QTimer timeai3;
-    int aiflag=0;
+    bool aiflag=0;
     keypad *key;
     QMessageBox *msg;
     QTimer *timermsg;
+    ltc2614 *l;
 
 };
 #endif // MAINWINDOW_H

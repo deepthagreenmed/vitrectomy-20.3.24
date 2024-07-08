@@ -12,12 +12,12 @@ textkeypad::textkeypad(QWidget *parent) :
     connect(ui->pushButton, &QPushButton::clicked, this, &textkeypad::entertext);
 
 
-for (int i = 2; i <= 41; ++i) {
-    QPushButton *button = findChild<QPushButton *>(QString("pushButton_%1").arg(i));
-    if (button) {
-        connect(button, &QPushButton::clicked, this, &textkeypad::entertext);
+    for (int i = 2; i <= 41; ++i) {
+        QPushButton *button = findChild<QPushButton *>(QString("pushButton_%1").arg(i));
+        if (button) {
+            connect(button, &QPushButton::clicked, this, &textkeypad::entertext);
+        }
     }
-}
 
     connect(ui->pushButton_11, &QPushButton::clicked, this, &textkeypad::enterback);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &textkeypad::enterenter);
@@ -36,28 +36,20 @@ void textkeypad::entertext()
      if (button)
      {
          digit = button->text();
-
-
-             emit textsignal(digit);
-
-
+         emit textsignal(digit);
      }
 }
 
 void textkeypad::enterback()
 {
-
     emit backsignal();
 }
 void textkeypad::spaceenter()
 {
-
     emit spacesignal();
 }
 
 void textkeypad::enterenter()
 {
     emit entersignal();
-
-
 }

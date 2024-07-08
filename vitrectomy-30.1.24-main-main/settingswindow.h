@@ -38,6 +38,12 @@ signals:
     void stringPassed3(const QString& str);
     void led1str(QString str);
     void led2str(QString str);
+    void vacstr(QString str);
+    void vacmode(QString str);
+    void vitstr(QString str);
+    void vitmode(QString str);
+    void vittype(QString str);
+    void diastr(QString str);
 
 public slots:
 

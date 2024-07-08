@@ -14,6 +14,7 @@
 #include <QDateTime>
 #include <QRegExp>
 #include <QRegExpValidator>
+#include <QThread>
 
 #include <stdint.h>
 #include <cstdio>
@@ -23,71 +24,75 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    connect(ui->pushButton_12, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
-    connect(ui->pushButton_27, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
+    connect(ui->pushButton_vacinc, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
+    connect(ui->pushButton_vacdec, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
 
-//    (ui->pushButton_12, &QPushButton::pressed, this, &MainWindow::on_increase_vac_pressed);
-//    (ui->pushButton_12, &QPushButton::released, this, &MainWindow::on_increase_vac_released);
-//    (ui->pushButton_27, &QPushButton::pressed, this, &MainWindow::on_decrease_vac_pressed);
-//    (ui->pushButton_27, &QPushButton::released, this, &MainWindow::on_decrease_vac_released);
+//    (ui->pushButton_vacinc, &QPushButton::pressed, this, &MainWindow::on_increase_vac_pressed);
+//    (ui->pushButton_vacinc, &QPushButton::released, this, &MainWindow::on_increase_vac_released);
+//    (ui->pushButton_vacdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vac_pressed);
+//    (ui->pushButton_vacdec, &QPushButton::released, this, &MainWindow::on_decrease_vac_released);
 
-    (ui->pushButton_11, &QPushButton::pressed, this, &MainWindow::on_increase_vit_pressed);
-    (ui->pushButton_11, &QPushButton::released, this, &MainWindow::on_increase_vit_released);
-    (ui->pushButton_15, &QPushButton::pressed, this, &MainWindow::on_decrease_vit_pressed);
-    (ui->pushButton_15, &QPushButton::released, this, &MainWindow::on_decrease_vit_released);
+    (ui->pushButton_vitinc, &QPushButton::pressed, this, &MainWindow::on_increase_vit_pressed);
+    (ui->pushButton_vitinc, &QPushButton::released, this, &MainWindow::on_increase_vit_released);
+    (ui->pushButton_vitdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vit_pressed);
+    (ui->pushButton_vitdec, &QPushButton::released, this, &MainWindow::on_decrease_vit_released);
 
-    (ui->pushButton_19, &QPushButton::pressed, this, &MainWindow::on_increase_sil_oil_pressed);
-    (ui->pushButton_19, &QPushButton::released, this, &MainWindow::on_increase_sil_oil_released);
-    (ui->pushButton_18, &QPushButton::pressed, this, &MainWindow::on_decrease_sil_oil_pressed);
-    (ui->pushButton_18, &QPushButton::released, this, &MainWindow::on_decrease_sil_oil_released);
+    (ui->pushButton_siloilinc, &QPushButton::pressed, this, &MainWindow::on_increase_sil_oil_pressed);
+    (ui->pushButton_siloilinc, &QPushButton::released, this, &MainWindow::on_increase_sil_oil_released);
+    (ui->pushButton_siloildec, &QPushButton::pressed, this, &MainWindow::on_decrease_sil_oil_pressed);
+    (ui->pushButton_siloildec, &QPushButton::released, this, &MainWindow::on_decrease_sil_oil_released);
 
-    (ui->pushButton_17, &QPushButton::pressed, this, &MainWindow::on_increase_led1_pressed);
-    (ui->pushButton_17, &QPushButton::released, this, &MainWindow::on_increase_led1_released);
-    (ui->pushButton_16, &QPushButton::pressed, this, &MainWindow::on_decrease_led1_pressed);
-    (ui->pushButton_16, &QPushButton::released, this, &MainWindow::on_decrease_led1_released);
+    (ui->pushButton_led1inc, &QPushButton::pressed, this, &MainWindow::on_increase_led1_pressed);
+    (ui->pushButton_led1inc, &QPushButton::released, this, &MainWindow::on_increase_led1_released);
+    (ui->pushButton_led1dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led1_pressed);
+    (ui->pushButton_led1dec, &QPushButton::released, this, &MainWindow::on_decrease_led1_released);
 
-    (ui->pushButton_9, &QPushButton::pressed, this, &MainWindow::on_increase_ai_pressed);
-    (ui->pushButton_9, &QPushButton::released, this, &MainWindow::on_increase_ai_released);
-    (ui->pushButton_13, &QPushButton::pressed, this, &MainWindow::on_decrease_ai_pressed);
-    (ui->pushButton_13, &QPushButton::released, this, &MainWindow::on_decrease_ai_released);
+    (ui->pushButton_aiinc, &QPushButton::pressed, this, &MainWindow::on_increase_ai_pressed);
+    (ui->pushButton_aiinc, &QPushButton::released, this, &MainWindow::on_increase_ai_released);
+    (ui->pushButton_aidec, &QPushButton::pressed, this, &MainWindow::on_decrease_ai_pressed);
+    (ui->pushButton_aidec, &QPushButton::released, this, &MainWindow::on_decrease_ai_released);
 
-    (ui->pushButton_10, &QPushButton::pressed, this, &MainWindow::on_increase_dia_pressed);
-    (ui->pushButton_10, &QPushButton::released, this, &MainWindow::on_increase_dia_released);
-    (ui->pushButton_14, &QPushButton::pressed, this, &MainWindow::on_decrease_dia_pressed);
-    (ui->pushButton_14, &QPushButton::released, this, &MainWindow::on_decrease_dia_released);
+    (ui->pushButton_diainc, &QPushButton::pressed, this, &MainWindow::on_increase_dia_pressed);
+    (ui->pushButton_diainc, &QPushButton::released, this, &MainWindow::on_increase_dia_released);
+    (ui->pushButton_diadec, &QPushButton::pressed, this, &MainWindow::on_decrease_dia_pressed);
+    (ui->pushButton_diadec, &QPushButton::released, this, &MainWindow::on_decrease_dia_released);
 
-    (ui->pushButton_21, &QPushButton::pressed, this, &MainWindow::on_increase_led2_pressed);
-    (ui->pushButton_21, &QPushButton::released, this, &MainWindow::on_increase_led2_released);
-    (ui->pushButton_22, &QPushButton::pressed, this, &MainWindow::on_decrease_led2_pressed);
-    (ui->pushButton_22, &QPushButton::released, this, &MainWindow::on_decrease_led2_released);
+    (ui->pushButton_led2inc, &QPushButton::pressed, this, &MainWindow::on_increase_led2_pressed);
+    (ui->pushButton_led2inc, &QPushButton::released, this, &MainWindow::on_increase_led2_released);
+    (ui->pushButton_led2dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led2_pressed);
+    (ui->pushButton_led2dec, &QPushButton::released, this, &MainWindow::on_decrease_led2_released);
 
 
-    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::show_settings_window);
-    connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::sil_oil_onoff);
-    connect(ui->pushButton_20, &QPushButton::clicked, this, &MainWindow::vac_linear_nonlinear);
-    connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::led1_onoff);
-    connect(ui->pushButton_5, &QPushButton::clicked, this, &MainWindow::dia_onoff);
-    connect(ui->pushButton_7, &QPushButton::clicked, this, &MainWindow::ai_onoff);
-    connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::vit_onoff);
-    connect(ui->pushButton_23, &QPushButton::clicked, this, &MainWindow::led2_onoff);
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::set_surgeon);
-    connect(ui->pushButton_24, &QPushButton::clicked, this, &MainWindow::vit_linear_nonlinear);
-    connect(ui->pushButton_25, &QPushButton::clicked, this, &MainWindow::show_setup_screen);
-    connect(ui->pushButton_26, &QPushButton::clicked, this, &MainWindow::swap_onoff);
+    connect(ui->pushButton_settingswindow, &QPushButton::clicked, this, &MainWindow::showsettingswindow);
+    connect(ui->pushButton_siloilonoff, &QPushButton::clicked, this, &MainWindow::sil_oil_onoff);
+    connect(ui->pushButton_vaclinearnonlinear, &QPushButton::clicked, this, &MainWindow::vac_linear_nonlinear);
+    connect(ui->pushButton_led1onoff, &QPushButton::clicked, this, &MainWindow::led1_onoff);
+    connect(ui->pushButton_diaonoff, &QPushButton::clicked, this, &MainWindow::dia_onoff);
+    connect(ui->pushButton_aionoff, &QPushButton::clicked, this, &MainWindow::ai_onoff);
+    connect(ui->pushButton_vitonoff, &QPushButton::clicked, this, &MainWindow::vit_onoff);
+    connect(ui->pushButton_led2onoff, &QPushButton::clicked, this, &MainWindow::led2_onoff);
+    connect(ui->pushButton_endcase, &QPushButton::clicked, this, &MainWindow::setsurgeon);
+    connect(ui->pushButton_vitlinearnonlinear, &QPushButton::clicked, this, &MainWindow::vit_linear_nonlinear);
+    connect(ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::showsetupscreen);
+    connect(ui->pushButton_swap, &QPushButton::clicked, this, &MainWindow::swap_onoff);
+    connect(ui->pushButton_drain, &QPushButton::clicked, this, &MainWindow::drain_onoff);
 
 
     fp = new footpedal;
     hhandler = new hwHandler;
     vac = new Vaccum;
+    l = new ltc2614;
+    key = new keypad;
 
 
-    connect(ui->comboBox_2, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
+    connect(ui->comboBox_surgeonname, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
      timerforondscreen = new QTimer;
      timerforondscreen->start(7000);
@@ -100,7 +105,7 @@ MainWindow::MainWindow(QWidget *parent)
      mydb1.open();
 
 
-    QSqlQuery  query;
+    QSqlQuery query;
     QString itemname1;
     QString itemname34;
     QString itemname35;
@@ -117,28 +122,26 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug()<<itemname48;
         surgeonind=itemname48.toInt();
     }
-     query.exec("select * from maindb where surgeon='DEFAULT SURGEON'");
+     query.exec("select * from maindb where surgeon='"+surgeon+"'");
      if(query.next()){
         itemname1 = query.value(0).toString();
-          ui->label_6->setText(itemname1);
+          ui->label_dia->setText(itemname1);
           itemname34 = query.value(33).toString();
-          ui->label_4->setText(itemname34);
+          ui->label_vitpreset->setText(itemname34);
 
           itemname35 = query.value(34).toString();
+
           if(itemname35=="Linear")
           {
                 ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
-
-
           }
           else
           {
-
                ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
-
           }
+
                itemname36 = query.value(35).toString();
-               ui->label_3->setText(itemname36);
+               ui->label_aipreset->setText(itemname36);
         itemname43 = query.value(42).toString();
 
           itemname44= query.value(43).toString();
@@ -153,35 +156,29 @@ MainWindow::MainWindow(QWidget *parent)
 
      }
 
-
-
     mydb1.close();
     comboboxload();
-    ui->comboBox_2->setCurrentIndex(surgeonind);
+    ui->comboBox_surgeonname->setCurrentIndex(surgeonind);
 
     win2=new settingswindow(this);
 
-
-
   QObject::connect(win2, &settingswindow::stringPassed, this, &MainWindow::receiveString);
-
-
 
     avg=fp->convert(CHANNEL_0);
 
-    hhandler->vso_off();
     hhandler->vit_off();
 
 
-    ui->label_4->setText(QString::number(vit_value));
+    ui->label_vitpreset->setText(QString::number(vit_value));
 
-    timer48.start(100);
-    connect(&timer48,&QTimer::timeout, this, &MainWindow::setZero);
+    timerzero.start(100);
+    connect(&timerzero,&QTimer::timeout, this, &MainWindow::setZero);
 
     QTimer *timer = new QTimer(this);
     QTimer *timerfortd = new QTimer(this);
 
     connect(timer, &QTimer::timeout, this, &MainWindow::updateLabel);
+    connect(timer, &QTimer::timeout, this, &MainWindow::updateLabel2);
     connect(timerfortd, &QTimer::timeout, this, &MainWindow::updatetimedate);
 
     frequency = 1000 * vit_value/60;
@@ -195,7 +192,7 @@ MainWindow::MainWindow(QWidget *parent)
     led2 = new LED(PORT2);
 
     timerfortd->start(1000);
-    timer->start(30);
+    timer->start(1);
 
     // code for animations
     animation = new QPropertyAnimation(ui->label_31, "pos");
@@ -215,29 +212,43 @@ MainWindow::MainWindow(QWidget *parent)
     connect(win2, &settingswindow::led1str, this, &MainWindow::led1val);
     connect(win2, &settingswindow::led2str, this, &MainWindow::led2val);
 
-    connect(&timeai3, &QTimer::timeout, this, &MainWindow::aibackground);
-    timeai3.start(1);
+    connect(win2, &settingswindow::vacstr, this, &MainWindow::vacval);
+    connect(win2, &settingswindow::vacmode, this, &MainWindow::vaclnl);
 
-    key = new keypad;
+    connect(win2, &settingswindow::vitstr, this, &MainWindow::vitval);
+    connect(win2, &settingswindow::vitmode, this, &MainWindow::vitlnl);
+    connect(win2, &settingswindow::vittype, this, &MainWindow::typevit);
+
+    connect(win2, &settingswindow::diastr, this, &MainWindow::diaval);
+
+    timeai3.start(1);
+    connect(&timeai3, &QTimer::timeout, this, &MainWindow::aibackground);
+
     connect(key, &keypad::textsignal, this, &MainWindow::on_clicked);
     connect(key, &keypad::entersignal, this, &MainWindow::on_clickedenter);
 
+    connect(win2, &settingswindow::stringPassed0, this, &MainWindow::receiveString0);
+    connect(win2, &settingswindow::stringPassed1, this, &MainWindow::receiveString1);
+    connect(win2, &settingswindow::stringPassed2, this, &MainWindow::receiveString2);
+    connect(win2, &settingswindow::stringPassed3, this, &MainWindow::receiveString3);
 
-    ui->label_5->installEventFilter(this);
-    ui->label_4->installEventFilter(this);
-    ui->label_8->installEventFilter(this);
-    ui->label_3->installEventFilter(this);
-    ui->label_6->installEventFilter(this);
-    ui->label_37->installEventFilter(this);
-    ui->label_9->installEventFilter(this);
 
-    ui->label_4->clearFocus();
-    ui->label_8->clearFocus();
-    ui->label_3->clearFocus();
-    ui->label_6->clearFocus();
-    ui->label_37->clearFocus();
-    ui->label_5->clearFocus();
-    ui->label_9->clearFocus();
+
+    ui->label_vacpreset->installEventFilter(this);
+    ui->label_vitpreset->installEventFilter(this);
+    ui->label_siloil->installEventFilter(this);
+    ui->label_aipreset->installEventFilter(this);
+    ui->label_dia->installEventFilter(this);
+    ui->label_led2->installEventFilter(this);
+    ui->label_led1->installEventFilter(this);
+
+    ui->label_vitpreset->clearFocus();
+    ui->label_siloil->clearFocus();
+    ui->label_aipreset->clearFocus();
+    ui->label_dia->clearFocus();
+    ui->label_led2->clearFocus();
+    ui->label_vacpreset->clearFocus();
+    ui->label_led1->clearFocus();
 
 
     QTimer *timermain = new QTimer(this);
@@ -252,16 +263,28 @@ MainWindow::MainWindow(QWidget *parent)
         msg->close();
         timermsg->stop();
     });
+
+    ui->label_aipreset->setText("60");
+
+    QTimer *timervit = new QTimer;
+    connect(timervit, &QTimer::timeout, this, &MainWindow::vitvalset);
+    timervit->start(1);
+
+    QTimer *timernl3 = new QTimer;
+    connect(timernl3, &QTimer::timeout, this, &MainWindow::nonlinearcall3);
+    timernl3->start(1);
+
 }
 
+// Show setup screen after 3 seconds
 void MainWindow::transitionToNewScreen() {
     ui->label_22->hide();
     ui->label_12->hide();
-    ui->comboBox_2->move(30,34);
-    ui->pushButton_25->hide();
+    ui->comboBox_surgeonname->move(30,34);
+    ui->pushButton_start->hide();
 }
 
-
+// Set limits and input validation
 void MainWindow::updateLabelValue(QLabel* label, int prevValue, int value, int maxValue) {
     if (value > maxValue) {
         label->setText(QString::number(prevValue));
@@ -277,133 +300,133 @@ void MainWindow::updateLabelValue(QLabel* label, int prevValue, int value, int m
 // keypad showing code
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
-  if(object == ui->label_5 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->label_vacpreset && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
         key->resize(491,271);
         key->move(180,400);
         key->show();
-        ui->label_5->setFocus();
-        ui->label_4->clearFocus();
-        ui->label_8->clearFocus();
-        ui->label_3->clearFocus();
-        ui->label_6->clearFocus();
-        ui->label_37->clearFocus();
-        ui->label_9->clearFocus();
-        ui->label_5->setText("");
+        ui->label_vacpreset->setFocus();
+        ui->label_vitpreset->clearFocus();
+        ui->label_siloil->clearFocus();
+        ui->label_aipreset->clearFocus();
+        ui->label_dia->clearFocus();
+        ui->label_led2->clearFocus();
+        ui->label_led1->clearFocus();
+        ui->label_vacpreset->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
     }
   }
-  if(object == ui->label_4 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->label_vitpreset && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
         key->move(110,500);
         key->show();
-        ui->label_4->setFocus();
-        ui->label_5->clearFocus();
-        ui->label_8->clearFocus();
-        ui->label_3->clearFocus();
-        ui->label_6->clearFocus();
-        ui->label_37->clearFocus();
-        ui->label_9->clearFocus();
-        ui->label_4->setText("");
+        ui->label_vitpreset->setFocus();
+        ui->label_vacpreset->clearFocus();
+        ui->label_siloil->clearFocus();
+        ui->label_aipreset->clearFocus();
+        ui->label_dia->clearFocus();
+        ui->label_led2->clearFocus();
+        ui->label_led1->clearFocus();
+        ui->label_vitpreset->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
     }
   }
-  if(object == ui->label_8 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->label_siloil && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
     key->resize(491, 271);
     key->move(850,450);
     key->show();
-    ui->label_8->setFocus();
-    ui->label_4->clearFocus();
-    ui->label_5->clearFocus();
-    ui->label_3->clearFocus();
-    ui->label_6->clearFocus();
-    ui->label_37->clearFocus();
-    ui->label_9->clearFocus();
-    ui->label_8->setText("");
+    ui->label_siloil->setFocus();
+    ui->label_vitpreset->clearFocus();
+    ui->label_vacpreset->clearFocus();
+    ui->label_aipreset->clearFocus();
+    ui->label_dia->clearFocus();
+    ui->label_led2->clearFocus();
+    ui->label_led1->clearFocus();
+    ui->label_siloil->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
     }
   }
-  if(object == ui->label_3 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->label_aipreset && event->type() == QEvent::MouseButtonPress) {
       QMouseEvent *k = static_cast<QMouseEvent *> (event);
       if( k->button() == Qt::LeftButton ) {
            key->resize(491,271);
           key->move(1400,390);
           key->show();
-          ui->label_3->setFocus();
-          ui->label_4->clearFocus();
-          ui->label_8->clearFocus();
-          ui->label_5->clearFocus();
-          ui->label_6->clearFocus();
-          ui->label_37->clearFocus();
-          ui->label_9->clearFocus();
-          ui->label_3->setText("");
+          ui->label_aipreset->setFocus();
+          ui->label_vitpreset->clearFocus();
+          ui->label_siloil->clearFocus();
+          ui->label_vacpreset->clearFocus();
+          ui->label_dia->clearFocus();
+          ui->label_led2->clearFocus();
+          ui->label_led1->clearFocus();
+          ui->label_aipreset->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
       }
     }
-  if(object == ui->label_6 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->label_dia && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
         key->move(1400,450);
         key->show();
-        ui->label_6->setFocus();
-        ui->label_4->clearFocus();
-        ui->label_8->clearFocus();
-        ui->label_3->clearFocus();
-        ui->label_5->clearFocus();
-        ui->label_37->clearFocus();
-        ui->label_9->clearFocus();
-        ui->label_6->setText("");
+        ui->label_dia->setFocus();
+        ui->label_vitpreset->clearFocus();
+        ui->label_siloil->clearFocus();
+        ui->label_aipreset->clearFocus();
+        ui->label_vacpreset->clearFocus();
+        ui->label_led2->clearFocus();
+        ui->label_led1->clearFocus();
+        ui->label_dia->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
     }
   }
-  if(object == ui->label_37 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->label_led2 && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
         key->move(550,400);
         key->show();
-        ui->label_37->setFocus();
-        ui->label_4->clearFocus();
-        ui->label_8->clearFocus();
-        ui->label_3->clearFocus();
-        ui->label_6->clearFocus();
-        ui->label_5->clearFocus();
-        ui->label_9->clearFocus();
-        ui->label_37->setText("");
+        ui->label_led2->setFocus();
+        ui->label_vitpreset->clearFocus();
+        ui->label_siloil->clearFocus();
+        ui->label_aipreset->clearFocus();
+        ui->label_dia->clearFocus();
+        ui->label_vacpreset->clearFocus();
+        ui->label_led1->clearFocus();
+        ui->label_led2->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
     }
   }
-  if(object == ui->label_9 && event->type() == QEvent::MouseButtonPress) {
+  if(object == ui->label_led1 && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
         key->move(500,400);
         key->show();
-        ui->label_9->setFocus();
-        ui->label_4->clearFocus();
-        ui->label_8->clearFocus();
-        ui->label_3->clearFocus();
-        ui->label_6->clearFocus();
-        ui->label_37->clearFocus();
-        ui->label_5->clearFocus();
-        ui->label_9->setText("");
+        ui->label_led1->setFocus();
+        ui->label_vitpreset->clearFocus();
+        ui->label_siloil->clearFocus();
+        ui->label_aipreset->clearFocus();
+        ui->label_dia->clearFocus();
+        ui->label_led2->clearFocus();
+        ui->label_vacpreset->clearFocus();
+        ui->label_led1->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -416,134 +439,140 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
 void MainWindow::on_clicked(const QString& digit)
 {
 
-  if(ui->label_5->focusWidget()) {
-      ui->label_4->clearFocus();
-      ui->label_8->clearFocus();
-      ui->label_3->clearFocus();
-      ui->label_6->clearFocus();
-      ui->label_37->clearFocus();
-      ui->label_9->clearFocus();
+  if(ui->label_vacpreset->focusWidget()) {
+      ui->label_vitpreset->clearFocus();
+      ui->label_siloil->clearFocus();
+      ui->label_aipreset->clearFocus();
+      ui->label_dia->clearFocus();
+      ui->label_led2->clearFocus();
+      ui->label_led1->clearFocus();
       if(!flag)
       {
-      ui->label_5->setFocus();
-      int prevValue = ui->label_5->text().toInt();
-      int value = (ui->label_5->text()+digit).toInt();
-      updateLabelValue(ui->label_5, prevValue, value, 650);
+      ui->label_vacpreset->setFocus();
+      int prevValue = ui->label_vacpreset->text().toInt();
+      int value = (ui->label_vacpreset->text()+digit).toInt();
+      updateLabelValue(ui->label_vacpreset, prevValue, value, 650);
 
    }
   }
-  if(ui->label_4->focusWidget()) {
-      ui->label_5->clearFocus();
-      ui->label_8->clearFocus();
-      ui->label_3->clearFocus();
-      ui->label_6->clearFocus();
-      ui->label_37->clearFocus();
-      ui->label_9->clearFocus();
+  if(ui->label_vitpreset->focusWidget()) {
+      ui->label_vacpreset->clearFocus();
+      ui->label_siloil->clearFocus();
+      ui->label_aipreset->clearFocus();
+      ui->label_dia->clearFocus();
+      ui->label_led2->clearFocus();
+      ui->label_led1->clearFocus();
       if(!flag)
       {
-      ui->label_4->setFocus();
-      int prevValue = ui->label_4->text().toInt();
-       int value = (ui->label_4->text()+digit).toInt();
-      updateLabelValue(ui->label_4, prevValue, value, 9600);
+      ui->label_vitpreset->setFocus();
+      int prevValue = ui->label_vitpreset->text().toInt();
+       int value = (ui->label_vitpreset->text()+digit).toInt();
+      updateLabelValue(ui->label_vitpreset, prevValue, value, 9600);
    }
   }
-if(ui->label_8->focusWidget()) {
-    ui->label_4->clearFocus();
-    ui->label_5->clearFocus();
-    ui->label_3->clearFocus();
-    ui->label_6->clearFocus();
-    ui->label_37->clearFocus();
-    ui->label_9->clearFocus();
+if(ui->label_siloil->focusWidget()) {
+    ui->label_vitpreset->clearFocus();
+    ui->label_vacpreset->clearFocus();
+    ui->label_aipreset->clearFocus();
+    ui->label_dia->clearFocus();
+    ui->label_led2->clearFocus();
+    ui->label_led1->clearFocus();
     if(!flag)
     {
-    ui->label_8->setFocus();
-    int prevValue = ui->label_8->text().toInt();
-     int value = (ui->label_8->text()+digit).toInt();
-    updateLabelValue(ui->label_8, prevValue, value, 100);
+    ui->label_siloil->setFocus();
+    int prevValue = ui->label_siloil->text().toInt();
+     int value = (ui->label_siloil->text()+digit).toInt();
+    updateLabelValue(ui->label_siloil, prevValue, value, 100);
 
  }
 }
-if(ui->label_3->focusWidget()) {
-    ui->label_4->clearFocus();
-    ui->label_8->clearFocus();
-    ui->label_5->clearFocus();
-    ui->label_6->clearFocus();
-    ui->label_37->clearFocus();
-    ui->label_9->clearFocus();
+if(ui->label_aipreset->focusWidget()) {
+    ui->label_vitpreset->clearFocus();
+    ui->label_siloil->clearFocus();
+    ui->label_vacpreset->clearFocus();
+    ui->label_dia->clearFocus();
+    ui->label_led2->clearFocus();
+    ui->label_led1->clearFocus();
     if(!flag)
     {
-    ui->label_3->setFocus();
-    int prevValue = ui->label_3->text().toInt();
-    int value = (ui->label_3->text()+digit).toInt();
-    updateLabelValue(ui->label_3, prevValue, value, 100);
+    ui->label_aipreset->setFocus();
+    int prevValue = ui->label_aipreset->text().toInt();
+    int value = (ui->label_aipreset->text()+digit).toInt();
+    updateLabelValue(ui->label_aipreset, prevValue, value, 100);
 
  }
 }
-if(ui->label_6->focusWidget()) {
-    ui->label_4->clearFocus();
-    ui->label_8->clearFocus();
-    ui->label_3->clearFocus();
-    ui->label_5->clearFocus();
-    ui->label_37->clearFocus();
-    ui->label_9->clearFocus();
+if(ui->label_dia->focusWidget()) {
+    ui->label_vitpreset->clearFocus();
+    ui->label_siloil->clearFocus();
+    ui->label_aipreset->clearFocus();
+    ui->label_vacpreset->clearFocus();
+    ui->label_led2->clearFocus();
+    ui->label_led1->clearFocus();
     if(!flag)
     {
-    ui->label_6->setFocus();
-    int prevValue = ui->label_6->text().toInt();
-    int value = (ui->label_6->text()+digit).toInt();
-    updateLabelValue(ui->label_6, prevValue, value, 100);
+    ui->label_dia->setFocus();
+    int prevValue = ui->label_dia->text().toInt();
+    int value = (ui->label_dia->text()+digit).toInt();
+    updateLabelValue(ui->label_dia, prevValue, value, 100);
 
  }
 }
-if(ui->label_37->focusWidget()) {
-    ui->label_4->clearFocus();
-    ui->label_8->clearFocus();
-    ui->label_3->clearFocus();
-    ui->label_6->clearFocus();
-    ui->label_5->clearFocus();
-    ui->label_9->clearFocus();
+if(ui->label_led2->focusWidget()) {
+    ui->label_vitpreset->clearFocus();
+    ui->label_siloil->clearFocus();
+    ui->label_aipreset->clearFocus();
+    ui->label_dia->clearFocus();
+    ui->label_vacpreset->clearFocus();
+    ui->label_led1->clearFocus();
     if(!flag)
     {
-    ui->label_37->setFocus();
-    int prevValue = ui->label_37->text().toInt();
-    int value = (ui->label_37->text()+digit).toInt();
-    updateLabelValue(ui->label_37, prevValue, value, 100);
-    //switchled(led2, ui->label_37->text().toInt());
+    ui->label_led2->setFocus();
+    int prevValue = ui->label_led2->text().toInt();
+    int value = (ui->label_led2->text()+digit).toInt();
+    updateLabelValue(ui->label_led2, prevValue, value, 100);
 
  }
 }
-if(ui->label_9->focusWidget()) {
-    ui->label_4->clearFocus();
-    ui->label_8->clearFocus();
-    ui->label_3->clearFocus();
-    ui->label_6->clearFocus();
-    ui->label_37->clearFocus();
-    ui->label_5->clearFocus();
+if(ui->label_led1->focusWidget()) {
+    ui->label_vitpreset->clearFocus();
+    ui->label_siloil->clearFocus();
+    ui->label_aipreset->clearFocus();
+    ui->label_dia->clearFocus();
+    ui->label_led2->clearFocus();
+    ui->label_vacpreset->clearFocus();
     if(!flag)
     {
-    ui->label_9->setFocus();
-    int prevValue = ui->label_9->text().toInt();
-    int value = (ui->label_9->text()+digit).toInt();
-    updateLabelValue(ui->label_9, prevValue, value, 100);
-        //switchled(led1, ui->label_9->text().toInt());
-
+    ui->label_led1->setFocus();
+    int prevValue = ui->label_led1->text().toInt();
+    int value = (ui->label_led1->text()+digit).toInt();
+    updateLabelValue(ui->label_led1, prevValue, value, 100);
 
  }
 }
 }
 
+// Hide keypad, switch between LED1 and LED2, fix increments
 void MainWindow::on_clickedenter()
 {
     key->hide();
+
     if(lp == 1)
     {
-         switchled(led1, ui->label_9->text().toInt());
+         switchled(led1, ui->label_led1->text().toInt());
     }
     if(lp2 == 1)
     {
-        switchled(led2, ui->label_37->text().toInt());
+        switchled(led2, ui->label_led2->text().toInt());
     }
 
+    vit_value = static_cast<int>(std::round(vit_value/60))*60;
+    ui->label_vitpreset->setText(QString::number(vit_value));
+    ui->label_vacpreset->setText(QString::number(static_cast<int>(std::round(ui->label_vacpreset->text().toInt()/5))*5));
+    ui->label_siloil->setText(QString::number(static_cast<int>(std::round(ui->label_siloil->text().toInt()/5))*5));
+    ui->label_dia->setText(QString::number(static_cast<int>(std::round(ui->label_dia->text().toInt()/5))*5));
+    ui->label_led1->setText(QString::number(static_cast<int>(std::round(ui->label_led1->text().toInt()/5))*5));
+    ui->label_led2->setText(QString::number(static_cast<int>(std::round(ui->label_led2->text().toInt()/5))*5));
 }
 
 
@@ -553,38 +582,42 @@ MainWindow::~MainWindow()
 
 }
 
+// Create separate thread for air injector, turn on or off
 void MainWindow::aibackground()
 {
     if(aiflag)
     {
-        airinjectoron();
-        //qDebug()<<"On";
+        QThread *onThread = new QThread;
+        connect(onThread, &QThread::started, this, &MainWindow::airinjectoron);
+        connect(this, &MainWindow::airinjectoronFinished, onThread, &QThread::quit);
+        connect(onThread, &QThread::finished, onThread, &QThread::deleteLater);
+        onThread->start();
     }
+
     if(!aiflag)
     {
         airinjectoroff();
-        //qDebug()<<"Off";
     }
 }
 
 //settings window showing
-
-void MainWindow::show_settings_window()
+void MainWindow::showsettingswindow()
 {
 
     win2->show();
 }
 
 
-// on off buttons
+// Turn silicon oil on or off
 void MainWindow::sil_oil_onoff()
-{  if(sp==0)
+{
+    if(sp==0)
     {
         ui->label_19->setStyleSheet("background-color: rgb(116, 184, 222);");
         ui->label_26->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
-        ui->pushButton_18->raise();
-        ui->pushButton_19->raise();
-        ui->label_8->raise();
+        ui->pushButton_siloildec->raise();
+        ui->pushButton_siloilinc->raise();
+        ui->label_siloil->raise();
 
         animation->setStartValue(QPoint(930,160));
         animation->setEndValue(QPoint(980, 160));
@@ -592,8 +625,8 @@ void MainWindow::sil_oil_onoff()
         animation->start();
 
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-        connect(ui->pushButton_19, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
-        connect(ui->pushButton_18, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+        connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
+        connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
         sp=1;
 
         }
@@ -601,9 +634,9 @@ void MainWindow::sil_oil_onoff()
         {
         ui->label_19->setStyleSheet("");
         ui->label_26->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-        ui->pushButton_18->lower();
-        ui->pushButton_19->lower();
-        ui->label_8->lower();
+        ui->pushButton_siloildec->lower();
+        ui->pushButton_siloilinc->lower();
+        ui->label_siloil->lower();
 
         animation->setStartValue(QPoint(980,160));
         animation->setEndValue(QPoint(930, 160));
@@ -611,14 +644,14 @@ void MainWindow::sil_oil_onoff()
         animation->start();
 
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-        disconnect(ui->pushButton_19, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
-        disconnect(ui->pushButton_18, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+        disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
+        disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
         sp=0;
         }
 
 }
 
-
+// Turn vaccum linear or non-linear
 void MainWindow::vac_linear_nonlinear()
 {
     if(vp==0)
@@ -634,6 +667,7 @@ void MainWindow::vac_linear_nonlinear()
     }
 }
 
+// Turn LED1 on or off
 void MainWindow::led1_onoff()
 {
         if(lp==0)
@@ -647,20 +681,21 @@ void MainWindow::led1_onoff()
             ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
 
-            if(ui->label_9->text().toInt() != 0)
+            if(ui->label_led1->text().toInt() != 0)
             {
                 led1->processUserInput(1);
             }
 
-            connect(ui->pushButton_17, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
-            connect(ui->pushButton_16, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
+            connect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
+            connect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
 
 
     lp=1;
 
         }
         else
-        {    ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+        {
+            ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
             animation3->setStartValue(QPoint(850,640));
             animation3->setEndValue(QPoint(800,640));
             animation3->setDuration(250);
@@ -669,12 +704,14 @@ void MainWindow::led1_onoff()
 
             led1->processUserInput(2);
 
-            disconnect(ui->pushButton_17, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
-            disconnect(ui->pushButton_16, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
+            disconnect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
+            disconnect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
            lp=0;
         }
 
 }
+
+// Turn LED2 on or off
 void MainWindow::led2_onoff()
 {
     if(lp2==0)
@@ -686,13 +723,13 @@ void MainWindow::led2_onoff()
         animation5->start();
         ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-        if(ui->label_37->text().toInt() != 0)
+        if(ui->label_led2->text().toInt() != 0)
         {
             led2->processUserInput(1);
         }
 
-        connect(ui->pushButton_21, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
-        connect(ui->pushButton_22, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
+        connect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
+        connect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
 
 
         lp2=1;
@@ -708,21 +745,22 @@ void MainWindow::led2_onoff()
 
         led2->processUserInput(2);
 
-        disconnect(ui->pushButton_21, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
-        disconnect(ui->pushButton_22, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
+        disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
+        disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
        lp2=0;
     }
 }
 
+// Turn diathermy on or off
 void MainWindow::dia_onoff()
 {
         if(dp==0)
         {
             ui->label_14->setStyleSheet("background-color: rgb(116, 184, 222);");
             ui->label_25->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
-            ui->pushButton_10->raise();
-            ui->pushButton_14->raise();
-            ui->label_6->raise();
+            ui->pushButton_diainc->raise();
+            ui->pushButton_diadec->raise();
+            ui->label_dia->raise();
             animation2->setStartValue(QPoint(1440,620));
             animation2->setEndValue(QPoint(1490,620));
             animation2->setDuration(250);
@@ -733,8 +771,8 @@ void MainWindow::dia_onoff()
             connect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
 
 
-            connect(ui->pushButton_10, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
-            connect(ui->pushButton_14, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
+            connect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
+            connect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
             dp=1;
 
         }
@@ -742,9 +780,9 @@ void MainWindow::dia_onoff()
         {
             ui->label_14->setStyleSheet("");
             ui->label_25->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-            ui->pushButton_10->lower();
-            ui->pushButton_14->lower();
-            ui->label_6->lower();
+            ui->pushButton_diainc->lower();
+            ui->pushButton_diadec->lower();
+            ui->label_dia->lower();
             animation2->setStartValue(QPoint(1490,620));
             animation2->setEndValue(QPoint(1440,620));
             animation2->setDuration(250);
@@ -756,22 +794,23 @@ void MainWindow::dia_onoff()
             timedia.stop();
             disconnect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
 
-            disconnect(ui->pushButton_10, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
-            disconnect(ui->pushButton_14, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
+            disconnect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
+            disconnect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
            dp=0;
         }
 }
 
+// Turn air injector on or off
 void MainWindow::ai_onoff()
 {
         if(ap==0)
         {
             ui->label_13->setStyleSheet("background-color: rgb(116, 184, 222);");
             ui->label_23->setStyleSheet("font: 40pt;color: rgb(0, 0, 0);");
-            ui->pushButton_13->raise();
-            ui->pushButton_9->raise();
-            ui->label_3->raise();
-            ui->label_10->raise();
+            ui->pushButton_aidec->raise();
+            ui->pushButton_aiinc->raise();
+            ui->label_aipreset->raise();
+            ui->label_aiactual->raise();
 
             animation4->setStartValue(QPoint(1300,160));
             animation4->setEndValue(QPoint(1350,160));
@@ -785,9 +824,8 @@ void MainWindow::ai_onoff()
             timeai2.stop();
             disconnect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
 
-
-            connect(ui->pushButton_9, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
-            connect(ui->pushButton_13, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
+            connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
+            connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
 
             ap=1;
 
@@ -796,10 +834,10 @@ void MainWindow::ai_onoff()
         {
             ui->label_13->setStyleSheet("");
             ui->label_23->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
-            ui->pushButton_13->lower();
-            ui->pushButton_9->lower();
-            ui->label_10->lower();
-            ui->label_3->lower();
+            ui->pushButton_aidec->lower();
+            ui->pushButton_aiinc->lower();
+            ui->label_aiactual->lower();
+            ui->label_aipreset->lower();
             animation4->setStartValue(QPoint(1350,160));
             animation4->setEndValue(QPoint(1300,160));
             animation4->setDuration(250);
@@ -812,13 +850,14 @@ void MainWindow::ai_onoff()
             timeai.stop();
             disconnect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
-            disconnect(ui->pushButton_9, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
-            disconnect(ui->pushButton_13, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
+            disconnect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
+            disconnect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
 
             ap=0;
         }
 }
 
+// Turn vitrectomy on or off
 void MainWindow::vit_onoff()
 {
         if(vip==0)
@@ -826,10 +865,10 @@ void MainWindow::vit_onoff()
             ui->label_38->setStyleSheet("background-color: rgb(116, 184, 222);");
 
             ui->label_24->setStyleSheet("font: 40pt ;color: rgb(0, 0, 0);");
-            ui->pushButton_11->raise();
-            ui->pushButton_15->raise();
-            ui->label_4->raise();
-            ui->label_48->raise();
+            ui->pushButton_vitinc->raise();
+            ui->pushButton_vitdec->raise();
+            ui->label_vitpreset->raise();
+            ui->label_vitactual->raise();
 
             animation1->setStartValue(QPoint(380,640));
             animation1->setEndValue(QPoint(430,640));
@@ -838,10 +877,10 @@ void MainWindow::vit_onoff()
             ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
             vip=1;
 
-            if(avg>= (fp1+fp2+fp0)){hhandler->vit_on(1000/(vit_value/60));}
+            if(avg>= (fp1+fp2+fp0)){hhandler->vit_on(1000/(vit_value/60));hhandler->vit_ontime(500/(vit_value/60));}
 
-            connect(ui->pushButton_11, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
-            connect(ui->pushButton_15, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+            connect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+            connect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
 
 
@@ -850,10 +889,10 @@ void MainWindow::vit_onoff()
         else if(vip==1)
             {   ui->label_38->setStyleSheet("");
                 ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
-                ui->pushButton_11->lower();
-                ui->pushButton_15->lower();
-                ui->label_4->lower();
-                ui->label_48->lower();
+                ui->pushButton_vitinc->lower();
+                ui->pushButton_vitdec->lower();
+                ui->label_vitpreset->lower();
+                ui->label_vitactual->lower();
 
                 animation1->setStartValue(QPoint(430,640));
                 animation1->setEndValue(QPoint(380,640));
@@ -865,101 +904,102 @@ void MainWindow::vit_onoff()
                 if(avg<= (fp1+fp2+fp0)){hhandler->vit_off();}
 
 
-            disconnect(ui->pushButton_11, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
-            disconnect(ui->pushButton_15, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+            disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+            disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
 
 
         }
 }
-//update label from hardware values
-void MainWindow::updateLabel()
-{
 
-    // FOOTPEDAL
+// Interface with hardware based on footpedal reading
+//void MainWindow::updateLabel()
+//{
+
+//    // FOOTPEDAL
 
 // setting value for dial
-    avg = fp->convert(CHANNEL_0);
+//    avg = fp->convert(CHANNEL_0);
 
 
-  if(vp==0)
-  {//linear
+//  if(vp==0)
+//  {//linear
 
-      ui->dial->setValue(avg);
+//      ui->dial->setValue(avg);
 
-      if(avg >= 0 && avg <= fp0)
-      {
-          ui->label_36->setText("0");
-          hhandler->vso_off();
-          int avg1=vac->stabilize();
-          ui->label_2->setText(QString::number(avg1));
-         if(vip==1){hhandler->vit_off();}
-         if(vip==0){hhandler->vit_off();}
+//      if(avg >= 0 && avg <= fp0)
+//      {
+//          ui->label_dialvalue->setText("0");
+//          hhandler->vso_off();
+//          int avg1=vac->stabilize();
+//          ui->label_vacactual->setText(QString::number(avg1));
+//         if(vip==1){hhandler->vit_off();}
+//         if(vip==0){hhandler->vit_off();}
 
-         beep_0to1=0;
-         beep_1to2=0;
-         beep_2to3=0;
-
-
+//         beep_0to1=0;
+//         beep_1to2=0;
+//         beep_2to3=0;
 
 
-      }
-      if(avg > fp0&& avg <= (fp1+fp0))
-      {
-
-          beep_0to1++;
-          if(beep_0to1==1)
-          {
-               footpedalbeep();
-          }
-          else if(beep_1to2>1)
-          {
-              beep_1to2=0;
-
-          }
-          else if(beep_1to2>1 && beep_2to3>1)
-          {
-              beep_1to2=0;
-              beep_2to3=0;
-          }
-
-        //irrigation/aspiration
-          ui->label_36->setText("1");
-          hhandler->vso_off();
-          int avg1=vac->stabilize();
-          ui->label_2->setText(QString::number(avg1));
-          if(vip==1){hhandler->vit_off();}
-          if(vip==0){hhandler->vit_off();}
 
 
-      }
-      if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
-      {
+//      }
+//      if(avg > fp0&& avg <= (fp1+fp0))
+//      {
 
-          beep_1to2++;
-          if(beep_1to2==1)
-          {
-               footpedalbeep();
-          }
-          else if(beep_2to3>1)
-          {
-              beep_2to3=0;
-          }
+//          beep_0to1++;
+//          if(beep_0to1==1)
+//          {
+//               footpedalbeep();
+//          }
+//          else if(beep_1to2>1)
+//          {
+//              beep_1to2=0;
 
-          if(flag2==0)
-          {
-          //vaccum
-          ui->label_36->setText("2");
+//          }
+//          else if(beep_1to2>1 && beep_2to3>1)
+//          {
+//              beep_1to2=0;
+//              beep_2to3=0;
+//          }
 
-          float freq = 12000;
-          float timeon;
+//        //irrigation/aspiration
+//          ui->label_dialvalue->setText("1");
+//          hhandler->vso_off();
+//          int avg1=vac->stabilize();
+//          ui->label_vacactual->setText(QString::number(avg1));
+//          if(vip==1){hhandler->vit_off();}
+//          if(vip==0){hhandler->vit_off();}
+
+
+//      }
+//      if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
+//      {
+
+//          beep_1to2++;
+//          if(beep_1to2==1)
+//          {
+//               footpedalbeep();
+//          }
+//          else if(beep_2to3>1)
+//          {
+//              beep_2to3=0;
+//          }
+
+//          if(flag2==0)
+//          {
+//          //vaccum
+//          ui->label_dialvalue->setText("2");
+
+//          float freq = 12000;
+//          float timeon;
 
 //          std::string col1, col2;
 //          std::ifstream file(PATH2);
 //            int lineCount=0;
 //          while(file >> col1 >> col2)
 //          {
-//              if(std::stoi(col2) <= ui->label_5->text().toInt())
+//              if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
 //              {
 //                  lineCount++;
 //              }
@@ -987,67 +1027,93 @@ void MainWindow::updateLabel()
 //        std::stringstream ss(column1);
 //        ss >> timeon;
 
-          timeon = ui->label_5->text().toInt()*100/650;
+//        timeon = (timeon * 65/100) + 35;
 
 
+//         // timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
 
-        hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-        hhandler->vso_period(((1 / freq) / resolution));
-        int avg1=vac->stabilize();
-        ui->label_2->setText(QString::number(avg1));
 
-        qDebug()<<timeon<<avg1;
+//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//        {
+//            turnoffvso();
+//        }
+//else {
+
+//        if(timeon>=35) {
+//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
+//            hhandler->vso_period(((1 / freq) / resolution));
+//            int avg1=vac->stabilize();
+//            ui->label_vacactual->setText(QString::number(avg1));
+//            qDebug()<<timeon<<avg1;
+//          }
+//          else {
+//              hhandler->vso_off();
+//              int avg1=vac->stabilize();
+//              ui->label_vacactual->setText(QString::number(avg1));
+//              qDebug()<<timeon<<avg1;
+
+//        }
+//          }
+
+//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//        {
+//            turnoffvso();
+//        }
+
+
 
 //        file.close();
 //        file2.close();
 
-          if(vip==1){hhandler->vit_off();}
+//          if(vip==1){hhandler->vit_off();}
 
 
 
-          if(vip==0){hhandler->vit_off();}
-          }
-          else {
-              if(flag2==1)
-              {
-                  //swap
-               ui->label_36->setText("2");
+//          if(vip==0){hhandler->vit_off();}
+//          }
+//          else {
+//              if(flag2==1)
+//              {
+//                  //swap
+//               ui->label_dialvalue->setText("2");
 
-               hhandler->vso_off();
-               int avg1=vac->stabilize();
-               ui->label_2->setText(QString::number(avg1));
+//               hhandler->vso_off();
+//               int avg1=vac->stabilize();
+//               ui->label_vacactual->setText(QString::number(avg1));
 
-               if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
-               if(vip==1 && vitp==0)
-               {
-                   linearcall();
-               }
-               if(vip==0) {hhandler->vit_off();ui->label_48->setText("0");}
+//               if(vip==1 && vitp==1){
+//                    nonlinearcall();
+//               }
+//               if(vip==1 && vitp==0)
+//               {
+//                   linearcall2();
+//               }
+//               if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
 
-              }
-          }
-      }
-      //vitrectomy
-      if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
-      {
+//              }
+//          }
+//      }
+//      //vitrectomy
+//      if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
+//      {
 
-          beep_2to3++;
-          if(beep_2to3==1)
-          {
-               footpedalbeep();
-          }
+//          beep_2to3++;
+//          if(beep_2to3==1)
+//          {
+//               footpedalbeep();
+//          }
 
-       ui->label_36->setText("3");
+//       ui->label_dialvalue->setText("3");
 
-       float freq = 12000;
-       float timeon;
+//       float freq = 12000;
+//       float timeon;
 
 //       std::string col1, col2;
 //       std::ifstream file(PATH2);
 //         int lineCount=0;
 //       while(file >> col1 >> col2)
 //       {
-//           if(std::stoi(col2) <= ui->label_5->text().toInt())
+//           if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
 //           {
 //               lineCount++;
 //           }
@@ -1072,201 +1138,251 @@ void MainWindow::updateLabel()
 //       std::stringstream ss(column1);
 //       ss >> timeon;
 
-        timeon = ui->label_5->text().toInt()*100/650;
+//       timeon = (timeon * 65/100) + 35;
 
 
+//      //  timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
 
-       hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-       hhandler->vso_period(((1 / freq) / resolution));
-       int avg1=vac->stabilize();
-       ui->label_2->setText(QString::number(avg1));
 
-       qDebug()<<timeon<<avg1;
+//       if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//       {
+//           turnoffvso();
+//       }
+//else {
+
+//        if(timeon>=35) {
+//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
+//            hhandler->vso_period(((1 / freq) / resolution));
+//            int avg1=vac->stabilize();
+//            ui->label_vacactual->setText(QString::number(avg1));
+//            qDebug()<<timeon<<avg1;
+//          }
+//          else {
+//              hhandler->vso_off();
+//              int avg1=vac->stabilize();
+//              ui->label_vacactual->setText(QString::number(avg1));
+//              qDebug()<<timeon<<avg1;
+
+//          }
+
+//}
+
+//       if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//       {
+//           turnoffvso();
+//       }
 
 //       file.close();
 //        file2.close();
 
 
-       if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
-       else if(vip==1 && vitp==0)
-       {
-           hhandler->vit_on(1000/(vit_value/60));
-           ui->label_48->setText(QString::number(vit_value));
+//       if(vip==1 && vitp==1){
+//            nonlinearcall();
+//       }
+//       else if(vip==1 && vitp==0)
+//       {
+//            linearcall3();
 
-       }
-       if(vip==0) {hhandler->vit_off();ui->label_48->setText("0");}
+//       }
+//       if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
 
-     }
-  }
-  if(vp==1)
-  {//non-linear
-
-
-    if(avg >= 0 && avg <= fp0)
-    {
-        beep_0to1=0;
-        beep_1to2=0;
-        beep_2to3=0;
-
-        ui->dial->setValue(0);
-        ui->label_36->setText("0");
-        if(vip==1){hhandler->vit_off();}
-        if(vip==0){hhandler->vit_off();}
-        hhandler->vso_off();
-        int avg1=vac->stabilize();
-        ui->label_2->setText(QString::number(avg1));
-
-    }
-    if((avg > fp0&& avg <= (fp1+fp0)))
-    {
-
-        beep_0to1++;
-        if(beep_0to1==1)
-        {
-             footpedalbeep();
-        }
-        else if(beep_1to2>1)
-        {
-            beep_1to2=0;
-
-        }
-        else if(beep_1to2>1 && beep_2to3>1)
-        {
-            beep_1to2=0;
-            beep_2to3=0;
-        }
-
-        ui->dial->setValue((fp1+fp0));
-        ui->label_36->setText("1");
-        if(vip==1){hhandler->vit_off();}
-       if(vip==0){hhandler->vit_off();}
-
-       hhandler->vso_off();
-       int avg1=vac->stabilize();
-       ui->label_2->setText(QString::number(avg1));
-
-    }
-    if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
-    {
-
-        beep_1to2++;
-        if(beep_1to2==1)
-        {
-             footpedalbeep();
-        }
-        else if(beep_2to3>1)
-        {
-            beep_2to3=0;
-        }
-
-        if(flag2==0)
-        {
-            //vaccum
-            //normal
-        ui->dial->setValue(fp1+fp2+fp0);
-        ui->label_36->setText("2");
-
-        if(vip==1){hhandler->vit_off();}
-        if(vip==0){hhandler->vit_off();}
-
-        float freq = 12000;
-        float timeon;
-
-        //        std::string col1, col2;
-        //        std::ifstream file(PATH2);
-        //          int lineCount=0;
-        //        while(file >> col1 >> col2)
-        //        {
-        //            if(std::stoi(col2) <= ui->label_5->text().toInt())
-        //            {
-        //                lineCount++;
-        //            }
-        //            else
-        //            {
-        //                lineCount = lineCount;
-        //            }
-        //        }
-
-        //        std::ifstream file2(PATH2);
-        //        std::string line;
-        //        for (int i = 1; i <= lineCount; i++) {
-        //            std::getline(file2, line);
-        //        }
-
-        //        std::istringstream iss(line);
-        //        std::string column1, column2;
-        //        iss >> column1 >> column2;
-
-        //        std::stringstream ss(column1);
-        //        ss >> timeon;
-
-        timeon = ui->label_5->text().toInt()*100/650;
+//     }
+//  }
+//  if(vp==1)
+//  {//non-linear
 
 
+//    if(avg >= 0 && avg <= fp0)
+//    {
+//        beep_0to1=0;
+//        beep_1to2=0;
+//        beep_2to3=0;
 
-        hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-        hhandler->vso_period(((1 / freq) / resolution));
-        int avg1=vac->stabilize();
-        ui->label_2->setText(QString::number(avg1));
+//        ui->dial->setValue(0);
+//        ui->label_dialvalue->setText("0");
+//        if(vip==1){hhandler->vit_off();}
+//        if(vip==0){hhandler->vit_off();}
+//        hhandler->vso_off();
+//        int avg1=vac->stabilize();
+//        ui->label_vacactual->setText(QString::number(avg1));
 
-        qDebug()<<timeon<<avg1;
+//    }
+//    if((avg > fp0 && avg <= (fp1+fp0)))
+//    {
+
+//        beep_0to1++;
+//        if(beep_0to1==1)
+//        {
+//             footpedalbeep();
+//        }
+//        else if(beep_1to2>1)
+//        {
+//            beep_1to2=0;
+
+//        }
+//        else if(beep_1to2>1 && beep_2to3>1)
+//        {
+//            beep_1to2=0;
+//            beep_2to3=0;
+//        }
+
+//        ui->dial->setValue((fp1+fp0));
+//        ui->label_dialvalue->setText("1");
+//        if(vip==1){hhandler->vit_off();}
+//       if(vip==0){hhandler->vit_off();}
+
+//       hhandler->vso_off();
+//       int avg1=vac->stabilize();
+//       ui->label_vacactual->setText(QString::number(avg1));
+
+//    }
+//    if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0)) && fp2!=0)
+//    {
+
+//        beep_1to2++;
+//        if(beep_1to2==1)
+//        {
+//             footpedalbeep();
+//        }
+//        else if(beep_2to3>1)
+//        {
+//            beep_2to3=0;
+//        }
+
+//        if(flag2==0)
+//        {
+//            //vaccum
+//            //normal
+//        ui->dial->setValue(fp1+fp2+fp0);
+//        ui->label_dialvalue->setText("2");
+
+//        if(vip==1){hhandler->vit_off();}
+//        if(vip==0){hhandler->vit_off();}
+
+//        float freq = 12000;
+//        float timeon;
+
+//                std::string col1, col2;
+//                std::ifstream file(PATH2);
+//                  int lineCount=0;
+//                while(file >> col1 >> col2)
+//                {
+//                    if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+//                    {
+//                        lineCount++;
+//                    }
+//                    else
+//                    {
+//                        lineCount = lineCount;
+//                    }
+//                }
+
+//                std::ifstream file2(PATH2);
+//                std::string line;
+//                for (int i = 1; i <= lineCount; i++) {
+//                    std::getline(file2, line);
+//                }
+
+//                std::istringstream iss(line);
+//                std::string column1, column2;
+//                iss >> column1 >> column2;
+
+//                std::stringstream ss(column1);
+//                ss >> timeon;
+
+//                timeon = (timeon * 65/100) + 35;
+
+
+
+//        //timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
+
+//                if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//                {
+//                    turnoffvso();
+//                }
+//else {
+
+
+//        if(timeon>=35) {
+//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
+//            hhandler->vso_period(((1 / freq) / resolution));
+//            int avg1=vac->stabilize();
+//            ui->label_vacactual->setText(QString::number(avg1));
+//            qDebug()<<timeon<<avg1;
+//          }
+//          else {
+//              hhandler->vso_off();
+//              int avg1=vac->stabilize();
+//              ui->label_vacactual->setText(QString::number(avg1));
+//              qDebug()<<timeon<<avg1;
+
+//          }
+//          }
+
+//                if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//                {
+//                    turnoffvso();
+//                }
 
 //        file.close();
 //         file2.close();
-    }
-}
-    else {
-        if(flag2==1)
-        {
-            //swap
-            ui->dial->setValue(fp1+fp2+fp0);
-            ui->label_36->setText("2");
+//    }
+//}
+//    else {
+//        if(flag2==1)
+//        {
+//            //swap
+//            ui->dial->setValue(fp1+fp2+fp0);
+//            ui->label_dialvalue->setText("2");
 
-           if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
-           if(vip==1 && vitp==0)
-           {
-               linearcall();
-           }
-           if(vip==0){hhandler->vit_off();ui->label_48->setText("0");}
+//           if(vip==1 && vitp==1){
+//                nonlinearcall();
+//           }
+//           if(vip==1 && vitp==0)
+//           {
+//               linearcall2();
+//           }
+//           if(vip==0){hhandler->vit_off();ui->label_vitactual->setText("0");}
 
-           hhandler->vso_off();
-           int avg1=vac->stabilize();
-           ui->label_2->setText(QString::number(avg1));
-        }
-    }
+//           hhandler->vso_off();
+//           int avg1=vac->stabilize();
+//           ui->label_vacactual->setText(QString::number(avg1));
+//        }
+//    }
 
-    //vitrectomy
-    if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
-    {
+//    //vitrectomy
+//    if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
+//    {
 
-        beep_2to3++;
-        if(beep_2to3==1)
-        {
-             footpedalbeep();
-        }
+//        beep_2to3++;
+//        if(beep_2to3==1)
+//        {
+//             footpedalbeep();
+//        }
 
-         ui->dial->setValue(fp1+fp2+fp3+fp0);
-         ui->label_36->setText("3");
+//         ui->dial->setValue(fp1+fp2+fp3+fp0);
+//         ui->label_dialvalue->setText("3");
 
-        if(vip==1 && vitp==1){hhandler->vit_on(1000/(vit_value/60));ui->label_48->setText("0");}
-        if(vip==1 && vitp==0)
-        {
-            hhandler->vit_on(1000/(vit_value/60));
-            ui->label_48->setText(QString::number(vit_value));
+//        if(vip==1 && vitp==1){
+//            nonlinearcall();        }
+//        if(vip==1 && vitp==0)
+//        {
+//            linearcall3();
 
-        }
-        if(vip==0){hhandler->vit_off();ui->label_48->setText("0");}
+//        }
+//        if(vip==0){hhandler->vit_off();ui->label_vitactual->setText("0");}
 
 
-        float freq = 12000;
-        float timeon;
+
+//        float freq = 12000;
+//        float timeon;
 
 //        std::string col1, col2;
 //        std::ifstream file(PATH2);
 //          int lineCount=0;
 //        while(file >> col1 >> col2)
 //        {
-//            if(std::stoi(col2) <= ui->label_5->text().toInt())
+//            if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
 //            {
 //                lineCount++;
 //            }
@@ -1289,119 +1405,150 @@ void MainWindow::updateLabel()
 //        std::stringstream ss(column1);
 //        ss >> timeon;
 
-        timeon = ui->label_5->text().toInt()*100/650;
+//        timeon = (timeon * 65/100) + 35;
 
 
 
-        hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-        hhandler->vso_period(((1 / freq) / resolution));
-        int avg1=vac->stabilize();
-        ui->label_2->setText(QString::number(avg1));
+//    //     timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
 
-        qDebug()<<timeon<<avg1;
+//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//        {
+//            turnoffvso();
+//        }
+//else {
+
+//        if(timeon>=35) {
+//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
+//            hhandler->vso_period(((1 / freq) / resolution));
+//            int avg1=vac->stabilize();
+//            ui->label_vacactual->setText(QString::number(avg1));
+//            qDebug()<<timeon<<avg1;
+//          }
+//          else {
+//              hhandler->vso_off();
+//              int avg1=vac->stabilize();
+//              ui->label_vacactual->setText(QString::number(avg1));
+//              qDebug()<<timeon<<avg1;
+
+//          }
+//        }
+
+//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
+//        {
+//            turnoffvso();
+//        }
 
 //        file.close();
 //        file2.close();
 
-    }
-  }
-}
+//    }
+//  }
+//}
 
-// inc / dec values in label
+
+// Increase vaccum
 void MainWindow::increaseVaccumValue()
 {
-    int currentValue = ui->label_5->text().toInt();
+    int currentValue = ui->label_vacpreset->text().toInt();
     int newValue = currentValue + 5;
     if(newValue > 650)
     {
         newValue = 650;
     }
-    ui->label_5->setText(QString::number(newValue));
+    ui->label_vacpreset->setText(QString::number(newValue));
 }
 
+// Decrease vaccum
 void MainWindow::decreaseVaccumValue()
 {
-    int currentValue = ui->label_5->text().toInt();
+    int currentValue = ui->label_vacpreset->text().toInt();
     int newValue = currentValue - 5;
     if(newValue < 0)
     {
         newValue = 0;
     }
-    ui->label_5->setText(QString::number(newValue));
+    ui->label_vacpreset->setText(QString::number(newValue));
 }
 
+// Increase vitrectomy
 void MainWindow::increaseVitrectomyValue()
 {
 
-    ui->label_4->setText(QString::number(vit_value));
+    ui->label_vitpreset->setText(QString::number(vit_value));
     vit_value = vit_value + 60;
     if(vit_value>9600)
     {
         vit_value=9600;
     }
-    ui->label_4->setText(QString::number(vit_value));
+    ui->label_vitpreset->setText(QString::number(vit_value));
 }
 
+// Decrease vitrectomy
 void MainWindow::decreaseVitrectomyValue()
 {
-    ui->label_4->setText(QString::number(vit_value));
+    ui->label_vitpreset->setText(QString::number(vit_value));
     vit_value = vit_value - 60;
     if(vit_value<60)
     {
         vit_value=60;
     }
-    ui->label_4->setText(QString::number(vit_value));
+    ui->label_vitpreset->setText(QString::number(vit_value));
 }
 
+// Increase diathermy
 void MainWindow::increaseDiathermyValue()
 {
-    int currentValue = ui->label_6->text().toInt();
+    int currentValue = ui->label_dia->text().toInt();
     int newValue = currentValue + 5;
     if(newValue>100)
     {
         newValue=100;
     }
-    ui->label_6->setText(QString::number(newValue));
+    ui->label_dia->setText(QString::number(newValue));
 }
 
+// Decrease diathermy
 void MainWindow::decreaseDiathermyValue()
 {
-    int currentValue = ui->label_6->text().toInt();
+    int currentValue = ui->label_dia->text().toInt();
     int newValue = currentValue - 5;
     if(newValue<0)
     {
         newValue=0;
     }
-    ui->label_6->setText(QString::number(newValue));
+    ui->label_dia->setText(QString::number(newValue));
 }
 
+// Increase air injector
 void MainWindow::increaseAirInjectorValue()
 {
-    int currentValue = ui->label_3->text().toInt();
+    int currentValue = ui->label_aipreset->text().toInt();
     int newValue = currentValue + 1;
     if(newValue>100)
     {
         newValue=100;
     }
-    ui->label_3->setText(QString::number(newValue));
+    ui->label_aipreset->setText(QString::number(newValue));
     ui->progressBar->setValue(newValue);
 }
 
+// Decrease air injector
 void MainWindow::decreaseAirInjectorValue()
 {
-    int currentValue = ui->label_3->text().toInt();
+    int currentValue = ui->label_aipreset->text().toInt();
     int newValue = currentValue - 1;
     if(newValue<0)
     {
         newValue=0;
     }
-    ui->label_3->setText(QString::number(newValue));
+    ui->label_aipreset->setText(QString::number(newValue));
     ui->progressBar->setValue(newValue);
 }
 
+// Increase LED1
 void MainWindow::increaseledvalue()
 {
-    int currentValue = ui->label_9->text().toInt();
+    int currentValue = ui->label_led1->text().toInt();
     int newValue = currentValue + 5;
     if(newValue>100)
     {
@@ -1409,13 +1556,14 @@ void MainWindow::increaseledvalue()
     }
     double choice = newValue;
     switchled(led1, choice);
-    ui->label_9->setText(QString::number(newValue));
+    ui->label_led1->setText(QString::number(newValue));
 
 }
 
+// Decrease LED1
 void MainWindow::decreaseledvalue()
 {
-    int currentValue = ui->label_9->text().toInt();
+    int currentValue = ui->label_led1->text().toInt();
     int newValue = currentValue - 5;
     if(newValue<0)
     {
@@ -1423,12 +1571,13 @@ void MainWindow::decreaseledvalue()
     }
     double choice = newValue;
     switchled(led1, choice);
-    ui->label_9->setText(QString::number(newValue));
+    ui->label_led1->setText(QString::number(newValue));
 }
 
+// Increase LED2
 void MainWindow::increaseledvalue2()
 {
-    int currentValue = ui->label_37->text().toInt();
+    int currentValue = ui->label_led2->text().toInt();
     int newValue = currentValue + 5;
     if(newValue>100)
     {
@@ -1436,12 +1585,13 @@ void MainWindow::increaseledvalue2()
     }
     double choice = newValue;
     switchled(led2, choice);
-    ui->label_37->setText(QString::number(newValue));
+    ui->label_led2->setText(QString::number(newValue));
 }
 
+// Decrease LED2
 void MainWindow::decreaseledvalue2()
 {
-    int currentValue = ui->label_37->text().toInt();
+    int currentValue = ui->label_led2->text().toInt();
     int newValue = currentValue - 5;
     if(newValue<0)
     {
@@ -1449,49 +1599,121 @@ void MainWindow::decreaseledvalue2()
     }
     double choice = newValue;
     switchled(led2, choice);
-    ui->label_37->setText(QString::number(newValue));
+    ui->label_led2->setText(QString::number(newValue));
 }
 
+// Increase silicon oil
 void MainWindow::increasesiliconoil()
 {
-    int currentValue = ui->label_8->text().toInt();
+    int currentValue = ui->label_siloil->text().toInt();
     int newValue = currentValue + 5;
-    ui->label_8->setText(QString::number(newValue));
+    if(newValue>100)
+    {
+        newValue=100;
+    }
+    ui->label_siloil->setText(QString::number(newValue));
 }
 
+// Decrease silicon oil
 void MainWindow::decreasesiliconoil()
 {
-    int currentValue = ui->label_8->text().toInt();
+    int currentValue = ui->label_siloil->text().toInt();
     int newValue = currentValue - 5;
-    ui->label_8->setText(QString::number(newValue));
+    if(newValue<0)
+    {
+        newValue=0;
+    }
+    ui->label_siloil->setText(QString::number(newValue));
 }
 
+// Slot function to set name of surgeon
 void MainWindow::receiveString(const QString& str)
 {
-    ui->label_11->setText(str);
+    ui->label_surgeonname->setText(str);
 }
 
+// Slot function to set value of LED1
 void MainWindow::led1val(QString str)
 {
-    ui->label_9->setText(str);
+    ui->label_led1->setText(str);
 }
 
+// Slot function to set value of LED2
 void MainWindow::led2val(QString str)
 {
-    ui->label_37->setText(str);
+    ui->label_led2->setText(str);
 }
 
-void MainWindow::set_surgeon()
+// Slot function to set value of vaccum preset
+void MainWindow::vacval(QString str)
+{
+    ui->label_vacpreset->setText(str);
+}
+
+
+// Vaccum linear/non-linear
+void MainWindow::vaclnl(QString str)
+{
+    if(str == "NON-Linear")
+    {
+        ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/nonbg1.png);");
+        vp=1;
+    }
+    else if(str == "Linear")
+    {
+        ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/linbg3.png);");
+        vp=0;
+    }
+
+}
+
+// Slot function to set value of vitrectomy preset
+void MainWindow::vitval(QString str)
+{
+    ui->label_vitpreset->setText(str);
+}
+
+// Vitrectomy linear/non-linear
+void MainWindow::vitlnl(QString str)
 {
 
-   QString surgeon;
-   surgeon=ui->label_11->text();
+    if(str == "NON-Linear")
+    {
+        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
+        vitp=1;
+    }
+    else if(str == "Linear")
+    {
+        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
+        vitp=0;
+    }
+
+}
+
+void MainWindow::typevit(QString str)
+{
+    madtype = str;
+    qDebug()<<madtype;
+}
+
+// Slot function to set value of diathermy
+void MainWindow::diaval(QString str)
+{
+    ui->label_dia->setText(str);
+}
+
+// Get name of surgeon
+void MainWindow::setsurgeon()
+{
+
+   surgeon;
+   surgeon=ui->label_surgeonname->text();
 
 }
 
 // code for continuous press
 
-//inc vaccum
+//Increase vaccum (press)
 void MainWindow::on_increase_vac_pressed()
 {
 
@@ -1500,6 +1722,7 @@ void MainWindow::on_increase_vac_pressed()
 
 }
 
+// Increase vaccum (release)
 void MainWindow::on_increase_vac_released()
 {
     time.stop();
@@ -1507,21 +1730,21 @@ void MainWindow::on_increase_vac_released()
 
 }
 
-//dec vaccum
+//Decrease vaccum (press)
 void MainWindow::on_decrease_vac_pressed()
 {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseVaccumValue);
 }
 
-
+// Decrease vaccum (release)
 void MainWindow::on_decrease_vac_released()
 {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseVaccumValue);
 }
 
-//inc vit
+//Increase vitrectomy (press)
 void MainWindow::on_increase_vit_pressed()
 {if(vip==1)
     {
@@ -1530,6 +1753,7 @@ void MainWindow::on_increase_vit_pressed()
 }
 }
 
+// Increase vitrectomy (release)
 void MainWindow::on_increase_vit_released()
 {if(vip==1)
     {
@@ -1538,7 +1762,7 @@ void MainWindow::on_increase_vit_released()
 }
 }
 
-//dec vit
+//Decrease vitrectomy (press)
 void MainWindow::on_decrease_vit_pressed()
 {
     if(vip==1)
@@ -1547,6 +1771,7 @@ void MainWindow::on_decrease_vit_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseVitrectomyValue);
 }}
 
+// Decrease vitrectomy (release)
 void MainWindow::on_decrease_vit_released()
 {if(vip==1)
     {
@@ -1555,7 +1780,7 @@ void MainWindow::on_decrease_vit_released()
 }
 }
 
-// inc sil
+// Increase silicon oil (press)
 void MainWindow::on_increase_sil_oil_pressed()
 {if(sp==1)
     {
@@ -1563,6 +1788,7 @@ void MainWindow::on_increase_sil_oil_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoil);
 }}
 
+// Increase silicon oil (release)
 void MainWindow::on_increase_sil_oil_released()
 {if(sp==1)
     {
@@ -1570,7 +1796,7 @@ void MainWindow::on_increase_sil_oil_released()
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoil);
 }}
 
-//dec sil
+// Decrease silicon oil (press)
 void MainWindow::on_decrease_sil_oil_pressed()
 {if(sp==1)
     {
@@ -1578,6 +1804,7 @@ void MainWindow::on_decrease_sil_oil_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoil);
 }}
 
+// Decrease silicon oil (release)
 void MainWindow::on_decrease_sil_oil_released()
 {if(sp==1)
     {
@@ -1585,7 +1812,7 @@ void MainWindow::on_decrease_sil_oil_released()
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoil);
 }}
 
-//inc led1
+// Increase LED1 (press)
 void MainWindow::on_increase_led1_pressed()
 {if(lp==1)
     {
@@ -1594,6 +1821,7 @@ void MainWindow::on_increase_led1_pressed()
 }
 }
 
+// Increase LED1 (release)
 void MainWindow::on_increase_led1_released()
 {if(lp==1)
     {
@@ -1601,38 +1829,42 @@ void MainWindow::on_increase_led1_released()
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue);
 }}
 
-//dec led1
+// Decrease LED1 (press)
 void MainWindow::on_decrease_led1_pressed()
 {if(lp==1)
     {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue);
 }}
+
+// Decrease LED1 (release)
 void MainWindow::on_decrease_led1_released()
 {if(lp==1)
     {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue);
 }}
-//inc led2
+// Increase LED2 (press)
 void MainWindow::on_increase_led2_pressed()
 {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue2);
 }
 
+// Increase LED2 (release)
 void MainWindow::on_increase_led2_released()
 {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue2);
 }
-//dec led2
+// Decrease LED2 (press)
 void MainWindow::on_decrease_led2_pressed()
 {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue2);
 }
 
+// Decrease LED2 (release)
 void MainWindow::on_decrease_led2_released()
 {
     time.stop();
@@ -1640,7 +1872,7 @@ void MainWindow::on_decrease_led2_released()
 }
 
 
-//inc air
+// Increase air injector (press)
 void MainWindow::on_increase_ai_pressed()
 {if(ap==1)
     {
@@ -1648,13 +1880,16 @@ void MainWindow::on_increase_ai_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::increaseAirInjectorValue);
 }
 }
+
+// Increase air injector (release)
 void MainWindow::on_increase_ai_released()
 {if(ap==1)
     {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseAirInjectorValue);
 }}
-//dec air
+
+// Decrease air injector (press)
 void MainWindow::on_decrease_ai_pressed()
 {if(ap==1)
     {
@@ -1662,13 +1897,15 @@ void MainWindow::on_decrease_ai_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseAirInjectorValue);
 }}
 
+// Decrease air injector (release)
 void MainWindow::on_decrease_ai_released()
 {if(ap==1)
     {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseAirInjectorValue);
 }}
-//inc dia
+
+// Increase diathermy (press)
 void MainWindow::on_increase_dia_pressed()
 {if(dp==1)
     {
@@ -1676,14 +1913,15 @@ void MainWindow::on_increase_dia_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::increaseDiathermyValue);
 }}
 
+// Increase diathermy (release)
 void MainWindow::on_increase_dia_released()
 {if(dp==1)
     {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseDiathermyValue);
 }}
-//dec dia
 
+// Decrease diathermy (press)
 void MainWindow::on_decrease_dia_pressed()
 {if(dp==1)
     {
@@ -1691,6 +1929,7 @@ void MainWindow::on_decrease_dia_pressed()
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseDiathermyValue);
 }}
 
+// Decrease diathermy (release)
 void MainWindow::on_decrease_dia_released()
 {if(dp==1)
     {
@@ -1699,7 +1938,7 @@ void MainWindow::on_decrease_dia_released()
 }
 }
 
-
+// Turn vitrectomy linear or non-linear
 void MainWindow::vit_linear_nonlinear()
 {
 
@@ -1730,11 +1969,11 @@ void MainWindow::updatetimedate()
 
     QString timeString = currentDateTime.toString("hh:mm:ss");
 
-    ui->label_46->setText(dateString);
-     ui->label_47->setText(timeString);
+    ui->label_date->setText(dateString);
+     ui->label_time->setText(timeString);
 }
 
-//code to load combobox from db
+// Load combobox from database
 void MainWindow::comboboxload()
 {
     QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
@@ -1752,38 +1991,38 @@ void MainWindow::comboboxload()
         return;
     }
 
-    ui->comboBox_2->clear(); // Clear existing items before loading new ones
+    ui->comboBox_surgeonname->clear(); // Clear existing items before loading new ones
 
 
     while (query.next()) {
         QString itemName = query.value(0).toString();
 
 
-        ui->comboBox_2->addItem(itemName);
+        ui->comboBox_surgeonname->addItem(itemName);
 
 
    }
     mydb1.close();
 }
 
-
+// Change screens after 3 seconds
 void MainWindow::timerCompleted()
 {
     ui->label_22->lower();
     ui->label_12->lower();
-    ui->comboBox_2->move(30,34);
-    ui->pushButton_25->lower();
+    ui->comboBox_surgeonname->move(30,34);
+    ui->pushButton_start->lower();
 
 }
 
-//combo box code
+// Combo box
 void MainWindow::onComboBoxClicked()
 {timerforondscreen->stop();
-if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
+if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->currentIndex())<=19)
 {
 
-        surgeonid=ui->comboBox_2->currentText();
-        surgeonind=ui->comboBox_2->currentIndex();
+        surgeonid=ui->comboBox_surgeonname->currentText();
+        surgeonind=ui->comboBox_surgeonname->currentIndex();
         qDebug() << surgeonind;
 
 
@@ -1815,9 +2054,9 @@ if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
 
 
            itemname1 = query.value(0).toString();
-             ui->label_6->setText(itemname1);
+             ui->label_dia->setText(itemname1);
            itemname34 = query.value(33).toString();
-           ui->label_4->setText(itemname34);
+           ui->label_vitpreset->setText(itemname34);
 
            itemname35 = query.value(34).toString();
            if(itemname35=="Linear")
@@ -1832,7 +2071,7 @@ if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
 
            }
                 itemname36 = query.value(35).toString();
-                ui->label_3->setText(itemname36);
+                ui->label_aipreset->setText(itemname36);
                 itemname44= query.value(43).toString();
                fp0=itemname44.toDouble()*40.95;
                 itemname45 = query.value(44).toString();
@@ -1857,110 +2096,551 @@ if((ui->comboBox_2->currentIndex())>=1 && (ui->comboBox_2->currentIndex())<=19)
 
 }
 
-void MainWindow::show_setup_screen()
+// Show setup screen
+void MainWindow::showsetupscreen()
 {
         ui->label_22->lower();
         ui->label_12->lower();
-        ui->comboBox_2->move(30,34);
-        ui->pushButton_25->lower();
+        ui->comboBox_surgeonname->move(30,34);
+        ui->pushButton_start->lower();
 }
 
+// Turn swap on or off
 void MainWindow::swap_onoff()
 {
-    QString swap = ui->pushButton_26->text();
+    QString swap = ui->pushButton_swap->text();
 
     if(swap.compare("SWAP OFF") == 0)
     {
-        ui->pushButton_26->setText("SWAP ON");
+        ui->pushButton_swap->setText("SWAP ON");
         flag2=1;
     }
     else if(swap.compare("SWAP ON") == 0)
     {
-        ui->pushButton_26->setText("SWAP OFF");
+        ui->pushButton_swap->setText("SWAP OFF");
         flag2=0;
     }
 }
 
-void MainWindow::linearcall()
+void MainWindow::nonlinearcall3()
 {
-    int avg = fp->convert(CHANNEL_0);
+    if(vip==1&&vitp==1&&flag2==0) {
+    //qDebug()<<"Nonlinear3"<<madtype;
+    if(madtype=="Aktive") {
+        int vvalue;
+        double ot;
 
-    if(avg<=(fp0+fp1))
-    {
-        ui->label_48->setText("0");
-    }
+        int avg = fp->convert(CHANNEL_0);
 
-    int val = ((avg-fp0-fp1)/fp2)*vit_value;
-    int q = val/60;
-    int val2=q*60;
-    if(val2>=60)
-    {
-        if(avg>=4000)
+        if(avg<=(fp0+fp1+fp2))
         {
-            hhandler->vit_on(1000/(vit_value/60));
-            ui->label_48->setText(QString::number(vit_value));
+            hhandler->vit_off();
+            ui->label_vitactual->setText("0");
+        } else {
+
+        std::string col1, col2;
+        std::ifstream file(PATH4);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
         }
-        else
+
+        std::string line;
+        std::ifstream file2(PATH4);
+        for (double i = 1; i <= lineCount; i++)
         {
-            hhandler->vit_on(1000/(val2/60));
-            ui->label_48->setText(QString::number(val2));
-       }
+            std::getline(file2, line);
+        }
+
+
+        std::istringstream iss(line);
+        std::string column1, column2;
+        iss >> column1 >> column2;
+
+        std::stringstream ss(column1);
+        ss >> vvalue;
+        std::stringstream ss2(column2);
+        ss2 >> ot;
+
+        hhandler->vit_ontime(ot);
+        hhandler->vit_on(1000/(vvalue/60));
+        ui->label_vitactual->setText(QString::number(vvalue));
     }
-    else
-    {
-        hhandler->vit_off();
+    }
+    else if(madtype=="Midlabs") {
+        int vvalue;
+        double ot;
+
+        int avg = fp->convert(CHANNEL_0);
+
+        if(avg<=(fp0+fp1+fp2))
+        {
+            hhandler->vit_off();
+            ui->label_vitactual->setText("0");
+        } else {
+
+        std::string col1, col2;
+        std::ifstream file(PATH3);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::string line;
+        std::ifstream file2(PATH3);
+        for (double i = 1; i <= lineCount; i++)
+        {
+            std::getline(file2, line);
+        }
+
+
+        std::istringstream iss(line);
+        std::string column1, column2;
+        iss >> column1 >> column2;
+
+        std::stringstream ss(column1);
+        ss >> vvalue;
+        std::stringstream ss2(column2);
+        ss2 >> ot;
+
+        hhandler->vit_ontime(ot);
+        hhandler->vit_on(1000/(vvalue/60));
+        ui->label_vitactual->setText(QString::number(vvalue));
+    }
+    }
+}
+}
+
+void MainWindow::nonlinearcall2()
+{
+    //qDebug()<<"Nonlinear2"<<madtype;
+    if(madtype=="Aktive") {
+        int vvalue;
+        double ot;
+
+        int avg = fp->convert(CHANNEL_0);
+
+        if(avg<=(fp0+fp1))
+        {
+            hhandler->vit_off();
+            ui->label_vitactual->setText("0");
+        }
+        else {
+
+        std::string col1, col2;
+        std::ifstream file(PATH4);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::string line;
+        std::ifstream file2(PATH4);
+        for (double i = 1; i <= lineCount; i++)
+        {
+            std::getline(file2, line);
+        }
+
+
+        std::istringstream iss(line);
+        std::string column1, column2;
+        iss >> column1 >> column2;
+
+        std::stringstream ss(column1);
+        ss >> vvalue;
+        std::stringstream ss2(column2);
+        ss2 >> ot;
+
+        hhandler->vit_ontime(ot);
+        hhandler->vit_on(1000/(vvalue/60));
+        ui->label_vitactual->setText(QString::number(vvalue));
+        }
+    }
+    else if(madtype=="Midlabs") {
+        int vvalue;
+        double ot;
+
+        int avg = fp->convert(CHANNEL_0);
+
+        if(avg<=(fp0+fp1))
+        {
+            ui->label_vitactual->setText("0");
+            hhandler->vit_off();
+        } else {
+
+        std::string col1, col2;
+        std::ifstream file(PATH3);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::string line;
+        std::ifstream file2(PATH3);
+        for (double i = 1; i <= lineCount; i++)
+        {
+            std::getline(file2, line);
+        }
+
+
+        std::istringstream iss(line);
+        std::string column1, column2;
+        iss >> column1 >> column2;
+
+        std::stringstream ss(column1);
+        ss >> vvalue;
+        std::stringstream ss2(column2);
+        ss2 >> ot;
+
+        hhandler->vit_ontime(ot);
+        hhandler->vit_on(1000/(vvalue/60));
+        ui->label_vitactual->setText(QString::number(vvalue));
+    }
     }
 
 }
 
+
+// Vitrectomy linear (2 and 3)
+void MainWindow::linearcall23()
+{
+    //qDebug()<<"Linear23"<<madtype;
+    if(madtype=="Aktive") {
+        int vvalue;
+        double ot;
+        int idx1;
+
+        int avg = fp->convert(CHANNEL_0);
+
+        if(avg<=(fp0+fp1))
+        {
+            ui->label_vitactual->setText("0");
+            hhandler->vit_off();
+        }
+
+        std::string col1, col2;
+        std::ifstream file(PATH4);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) < ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::string line;
+        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
+        std::ifstream file2(PATH4);
+
+        if(idx1>=1) {
+            for (double i = 1; i <= idx1; i++)
+            {
+                std::getline(file2, line);
+            }
+
+
+            std::istringstream iss(line);
+            std::string column1, column2;
+            iss >> column1 >> column2;
+
+            std::stringstream ss(column1);
+            ss >> vvalue;
+            std::stringstream ss2(column2);
+            ss2 >> ot;
+            //qDebug()<<ot<<vvalue;
+            hhandler->vit_ontime(ot);
+            hhandler->vit_on(1000/(vvalue/60));
+            ui->label_vitactual->setText(QString::number(vvalue));
+        }
+        else {
+            hhandler->vit_off();
+        }
+    }
+
+    else if(madtype=="Midlabs") {
+        int vvalue;
+        double ot;
+        int idx1;
+
+        int avg = fp->convert(CHANNEL_0);
+
+        if(avg<=(fp0+fp1))
+        {
+            ui->label_vitactual->setText("0");
+            hhandler->vit_off();
+        }
+
+        std::string col1, col2;
+        std::ifstream file(PATH3);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) < ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::string line;
+        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
+        std::ifstream file2(PATH3);
+
+        if(idx1>=1) {
+            for (double i = 1; i <= idx1; i++)
+            {
+                std::getline(file2, line);
+            }
+
+
+            std::istringstream iss(line);
+            std::string column1, column2;
+            iss >> column1 >> column2;
+
+            std::stringstream ss(column1);
+            ss >> vvalue;
+            std::stringstream ss2(column2);
+            ss2 >> ot;
+            //qDebug()<<ot<<vvalue;
+
+            hhandler->vit_ontime(ot);
+            hhandler->vit_on(1000/(vvalue/60));
+            ui->label_vitactual->setText(QString::number(vvalue));
+        }
+        else {
+            hhandler->vit_off();
+        }
+    }
+
+}
+
+
+// Vitrectomy linear (3)
+void MainWindow::linearcall3()
+{
+    qDebug()<<"Linear3"<<madtype;
+    if(madtype=="Aktive") {
+        int vvalue;
+        double ot;
+        int idx1;
+
+        int avg = fp->convert(CHANNEL_0);
+
+        if(avg<=(fp0+fp1))
+        {
+            ui->label_vitactual->setText("0");
+        }
+
+        std::string col1, col2;
+        std::ifstream file(PATH4);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::string line;
+        idx1 = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
+        std::ifstream file2(PATH4);
+
+        if(idx1>=1) {
+            for (double i = 1; i <= idx1; i++)
+            {
+                std::getline(file2, line);
+            }
+
+
+            std::istringstream iss(line);
+            std::string column1, column2;
+            iss >> column1 >> column2;
+
+            std::stringstream ss(column1);
+            ss >> vvalue;
+            std::stringstream ss2(column2);
+            ss2 >> ot;
+            //qDebug()<<ot<<vvalue;
+            hhandler->vit_ontime(ot);
+            hhandler->vit_on(1000/(vvalue/60));
+            ui->label_vitactual->setText(QString::number(vvalue));
+        }
+        else {
+            hhandler->vit_off();
+        }
+    }
+    else if(madtype=="Midlabs") {
+        int vvalue;
+        double ot;
+        int idx1;
+
+        int avg = fp->convert(CHANNEL_0);
+
+        if(avg<=(fp0+fp1))
+        {
+            ui->label_vitactual->setText("0");
+        }
+
+        std::string col1, col2;
+        std::ifstream file(PATH3);
+        int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::string line;
+        idx1 = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
+        std::ifstream file2(PATH3);
+
+        if(idx1>=1) {
+            for (double i = 1; i <= idx1; i++)
+            {
+                std::getline(file2, line);
+            }
+
+
+            std::istringstream iss(line);
+            std::string column1, column2;
+            iss >> column1 >> column2;
+
+            std::stringstream ss(column1);
+            ss >> vvalue;
+            std::stringstream ss2(column2);
+            ss2 >> ot;
+            //qDebug()<<ot<<vvalue;
+
+            hhandler->vit_ontime(ot);
+            hhandler->vit_on(1000/(vvalue/60));
+            ui->label_vitactual->setText(QString::number(vvalue));
+        }
+        else {
+            hhandler->vit_off();
+        }
+    }
+
+}
+
+
+// Diathermy
 void MainWindow::diathermy()
 {
-    hhandler->dia_on();
-    hhandler->dia_count(ui->label_6->text().toInt()*256/100);
-}
-
-void MainWindow::airinjectoron()
-{
-    if(ui->label_3->text().toInt()==0)
+    if(avg>fp0 && avg<=(fp0+fp1))
     {
-        airinjectoroff();
+        hhandler->dia_on();
+        hhandler->dia_count(ui->label_dia->text().toInt()*256/100);
     }
     else
     {
-        aiflag=1;
-        hhandler->ai_on();
-        hhandler->ai_preset_count(ui->label_3->text().toInt());
-        //hhandler->ai_actual_count(100);
-        int value = (int)(vac->convert(CHANNEL_1)*0.17);
-        qDebug()<<value;
-        ui->label_10->setText(QString::number(value));
-        hhandler->ai_actual_count(value);
+        hhandler->dia_off();
     }
 }
 
+// Air injector on
+void MainWindow::airinjectoron()
+{
+    if(ui->label_aipreset->text().toInt() == 0)
+    {
+        airinjectoroff();
+        return;
+    }
+
+    aiflag=1;
+    hhandler->ai_on();
+    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+
+    int avg=0;
+    for(int i=0; i<100; i++)
+    {
+        avg += vac->convert(CHANNEL_2) * 0.1894;
+    }
+    avg = static_cast<int>(avg/100);
+
+    int value = avg;
+
+    ui->label_aiactual->setText(QString::number(value));
+    hhandler->ai_actual_count(value);
+    emit airinjectoronFinished();
+}
+
+// Air injector off
 void MainWindow::airinjectoroff()
 {
     aiflag=0;
     hhandler->ai_off();
     hhandler->ai_preset_count(0);
-    ui->label_10->setText(QString::number(0));
+    ui->label_aiactual->setText("0");
     hhandler->ai_actual_count(0);
 
 }
 
+// Footpedal reading is less than 2
 void MainWindow::setZero()
 {
     int avg = fp->convert(CHANNEL_0);
 
     if(avg<=(fp0+fp1))
     {
-        ui->label_48->setText("0");
-        hhandler->vso_off();
-        int avg1 = vac->stabilize();
-        ui->label_2->setText(QString::number(avg1));
+        ui->label_vitactual->setText("0");
+        l->writeDAC(0);
+        int avg1=vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
     }
 }
 
+// LED1 and LED2
 void MainWindow::switchled(LED *led, int choice)
 {
     if(led == led1)
@@ -1969,84 +2649,84 @@ void MainWindow::switchled(LED *led, int choice)
         switch(choice)
         {
             case(100):
-                led1->processUserInput(1);
                 led1->processUserInput(3);
+                led1->processUserInput(1);
                 break;
             case(95):
-                led1->processUserInput(1);
                 led1->processUserInput(4);
+                led1->processUserInput(1);
                 break;
             case(90):
-                led1->processUserInput(1);
                 led1->processUserInput(5);
+                led1->processUserInput(1);
                 break;
             case(85):
-                led1->processUserInput(1);
                 led1->processUserInput(7);
+                led1->processUserInput(1);
                 break;
             case(80):
-                led1->processUserInput(1);
                 led1->processUserInput(8);
+                led1->processUserInput(1);
                 break;
             case(75):
-                led1->processUserInput(1);
                 led1->processUserInput(9);
+                led1->processUserInput(1);
                 break;
             case(70):
-                led1->processUserInput(1);
                 led1->processUserInput(11);
+                led1->processUserInput(1);
                 break;
             case(65):
-                led1->processUserInput(1);
                 led1->processUserInput(12);
+                led1->processUserInput(1);
                 break;
             case(60):
-                led1->processUserInput(1);
                 led1->processUserInput(14);
+                led1->processUserInput(1);
                 break;
             case(55):
-                led1->processUserInput(1);
                 led1->processUserInput(15);
+                led1->processUserInput(1);
                 break;
             case(50):
-                led1->processUserInput(1);
                 led1->processUserInput(17);
+                led1->processUserInput(1);
                 break;
             case(45):
-                led1->processUserInput(1);
                 led1->processUserInput(18);
+                led1->processUserInput(1);
                 break;
             case(40):
-                led1->processUserInput(1);
                 led1->processUserInput(20);
+                led1->processUserInput(1);
                 break;
             case(35):
-                led1->processUserInput(1);
                 led1->processUserInput(21);
+                led1->processUserInput(1);
                 break;
             case(30):
-                led1->processUserInput(1);
                 led1->processUserInput(23);
+                led1->processUserInput(1);
                 break;
             case(25):
-                led1->processUserInput(1);
                 led1->processUserInput(24);
+                led1->processUserInput(1);
                 break;
             case(20):
-                led1->processUserInput(1);
                 led1->processUserInput(25);
+                led1->processUserInput(1);
                 break;
             case(15):
-                led1->processUserInput(1);
                 led1->processUserInput(27);
+                led1->processUserInput(1);
                 break;
             case(10):
-                led1->processUserInput(1);
                 led1->processUserInput(28);
+                led1->processUserInput(1);
                 break;
             case(5):
-                led1->processUserInput(1);
                 led1->processUserInput(29);
+                led1->processUserInput(1);
                 break;
             case(0):
                 led1->processUserInput(2);
@@ -2061,84 +2741,83 @@ void MainWindow::switchled(LED *led, int choice)
         switch(choice)
         {
             case(100):
-                led2->processUserInput(1);
                 led2->processUserInput(3);
+                led2->processUserInput(1);
                 break;
             case(95):
-                led2->processUserInput(1);
                 led2->processUserInput(4);
+                led2->processUserInput(1);
                 break;
             case(90):
-                led2->processUserInput(1);
                 led2->processUserInput(5);
+                led2->processUserInput(1);
                 break;
             case(85):
-                led2->processUserInput(1);
                 led2->processUserInput(7);
+                led2->processUserInput(1);
                 break;
             case(80):
-                led2->processUserInput(1);
                 led2->processUserInput(8);
+                led2->processUserInput(1);
                 break;
             case(75):
-                led2->processUserInput(1);
                 led2->processUserInput(9);
+                led2->processUserInput(1);
                 break;
             case(70):
-                led2->processUserInput(1);
                 led2->processUserInput(11);
+                led2->processUserInput(1);
                 break;
             case(65):
-                led2->processUserInput(1);
                 led2->processUserInput(12);
+                led2->processUserInput(1);
                 break;
             case(60):
-                led2->processUserInput(1);
                 led2->processUserInput(14);
+                led2->processUserInput(1);
                 break;
             case(55):
-                led2->processUserInput(1);
                 led2->processUserInput(15);
+                led2->processUserInput(1);
                 break;
             case(50):
-                led2->processUserInput(1);
                 led2->processUserInput(17);
-                break;
-            case(45):
                 led2->processUserInput(1);
+                break;            case(45):
                 led2->processUserInput(18);
+                led2->processUserInput(1);
                 break;
             case(40):
-                led2->processUserInput(1);
                 led2->processUserInput(20);
+                led2->processUserInput(1);
                 break;
             case(35):
-                led2->processUserInput(1);
                 led2->processUserInput(21);
+                led2->processUserInput(1);
                 break;
             case(30):
-                led2->processUserInput(1);
                 led2->processUserInput(23);
+                led2->processUserInput(1);
                 break;
             case(25):
-                led2->processUserInput(1);
                 led2->processUserInput(24);
+                led2->processUserInput(1);
                 break;
             case(20):
-                led2->processUserInput(1);
                 led2->processUserInput(25);
+                led2->processUserInput(1);
                 break;
             case(15):
-                led2->processUserInput(1);
                 led2->processUserInput(27);
+                led2->processUserInput(1);
                 break;
             case(10):
-                led2->processUserInput(1);
                 led2->processUserInput(28);
+                led2->processUserInput(1);
                 break;
             case(5):
-                led2->processUserInput(1);
                 led2->processUserInput(29);
+                led2->processUserInput(1);
                 break;
             case(0):
                 led2->processUserInput(2);
@@ -2148,6 +2827,7 @@ void MainWindow::switchled(LED *led, int choice)
     }
 }
 
+// Footpedal beep
 void MainWindow::footpedalbeep()
 {
     QProcess p;
@@ -2158,3 +2838,485 @@ void MainWindow::footpedalbeep()
     p.waitForFinished();
 }
 
+// Interface with vaccum based on footpedal reading
+void MainWindow::updateLabel()
+{
+
+    // FOOTPEDAL
+
+// setting value for dial
+    avg = fp->convert(CHANNEL_0);
+    qDebug()<<fp0<<fp1<<fp2<<fp3;
+
+
+  if(vp==0)
+  {//linear
+
+      ui->dial->setValue(avg);
+
+      if(avg >= 0 && avg <= fp0)
+      {
+          ui->label_dialvalue->setText("0");
+          l->writeDAC(0);
+          int avg1 = vac->convert(CHANNEL_1)*0.1894;
+          ui->label_vacactual->setText(QString::number(avg1));
+         if(vip==1){hhandler->vit_off();}
+         if(vip==0){hhandler->vit_off();}
+
+         beep_0to1=0;
+         beep_1to2=0;
+         beep_2to3=0;
+
+
+      }
+      if(avg > fp0&& avg <= (fp1+fp0))
+      {
+
+          beep_0to1++;
+          if(beep_0to1==1)
+          {
+               footpedalbeep();
+          }
+          else if(beep_1to2>1)
+          {
+              beep_1to2=0;
+
+          }
+          else if(beep_1to2>1 && beep_2to3>1)
+          {
+              beep_1to2=0;
+              beep_2to3=0;
+          }
+
+        //irrigation/aspiration
+          ui->label_dialvalue->setText("1");
+          //diathermy();
+          l->writeDAC(0);
+          int avg1 = vac->convert(CHANNEL_1)*0.1894;
+          ui->label_vacactual->setText(QString::number(avg1));
+          if(vip==1){hhandler->vit_off();}
+          if(vip==0){hhandler->vit_off();}
+
+
+      }
+      //vaccum
+      if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
+      {
+
+          beep_1to2++;
+          if(beep_1to2==1)
+          {
+               footpedalbeep();
+          }
+          else if(beep_2to3>1)
+          {
+              beep_2to3=0;
+          }
+
+          ui->label_dialvalue->setText("2");
+
+          if(flag2==0)
+          {
+          int dacval;
+
+          std::string col1, col2;
+          std::ifstream file(PATH6);
+            int lineCount=0;
+          while(file >> col1 >> col2)
+          {
+              if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+              {
+                  lineCount++;
+              }
+              else
+              {
+                  lineCount = lineCount;
+              }
+          }
+
+
+        std::string line;
+        idx = ((avg-fp0-fp1)/fp2)*lineCount;
+        std::ifstream file2(PATH6);
+
+        for (double i = 1; i <= idx; i++)
+        {
+            std::getline(file2, line);
+        }
+
+
+        std::istringstream iss(line);
+        std::string column1, column2;
+        iss >> column1 >> column2;
+
+        std::stringstream ss(column1);
+        ss >> dacval;
+        qDebug()<<dacval;
+        l->writeDAC(dacval);
+        int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
+
+
+
+        file.close();
+        file2.close();
+
+          if(vip==1){hhandler->vit_off();}
+
+          if(vip==0){hhandler->vit_off();}
+          }
+          else {
+              if(flag2==1)
+              {
+                  //swap
+               l->writeDAC(0);
+               int avg1 = vac->convert(CHANNEL_1)*0.1894;
+               ui->label_vacactual->setText(QString::number(avg1));
+              }
+          }
+
+
+          if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
+
+      }
+      //vitrectomy
+      if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
+      {
+
+          beep_2to3++;
+          if(beep_2to3==1)
+          {
+               footpedalbeep();
+          }
+
+       ui->label_dialvalue->setText("3");
+
+       int dacval;
+
+       std::string col1, col2;
+       std::ifstream file(PATH6);
+         int lineCount=0;
+       while(file >> col1 >> col2)
+       {
+           if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+           {
+               lineCount++;
+           }
+           else
+           {
+               lineCount = lineCount;
+           }
+       }
+
+
+       std::ifstream file2(PATH6);
+       std::string line;
+       if(flag2==0)
+       {
+           for (int i = 1; i <= lineCount; i++) {
+               std::getline(file2, line);
+           }
+
+           std::istringstream iss(line);
+           std::string column1, column2;
+           iss >> column1 >> column2;
+
+           std::stringstream ss(column1);
+           ss >> dacval;
+           qDebug()<<dacval;
+
+           l->writeDAC(dacval);
+           int avg1 = vac->convert(CHANNEL_1)*0.1894;
+           ui->label_vacactual->setText(QString::number(avg1));
+
+       }
+       else if(flag2==1)
+       {
+           idx = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
+           for (int i = 1; i <= idx; i++) {
+               std::getline(file2, line);
+           }
+
+           std::istringstream iss(line);
+           std::string column1, column2;
+           iss >> column1 >> column2;
+
+           std::stringstream ss(column1);
+           ss >> dacval;
+           qDebug()<<dacval;
+
+           l->writeDAC(dacval);
+           int avg1 = vac->convert(CHANNEL_1)*0.1894;
+           ui->label_vacactual->setText(QString::number(avg1));
+
+
+       }
+
+
+       file.close();
+        file2.close();
+
+
+       if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
+
+     }
+  }
+  if(vp==1)
+  {//non-linear
+
+
+    if(avg >= 0 && avg <= fp0)
+    {
+        beep_0to1=0;
+        beep_1to2=0;
+        beep_2to3=0;
+
+        ui->dial->setValue(0);
+        ui->label_dialvalue->setText("0");
+        if(vip==1){hhandler->vit_off();}
+        if(vip==0){hhandler->vit_off();}
+        l->writeDAC(0);
+        int avg1=vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
+
+    }
+    if((avg > fp0 && avg <= (fp1+fp0)))
+    {
+
+        beep_0to1++;
+        if(beep_0to1==1)
+        {
+             footpedalbeep();
+        }
+        else if(beep_1to2>1)
+        {
+            beep_1to2=0;
+
+        }
+        else if(beep_1to2>1 && beep_2to3>1)
+        {
+            beep_1to2=0;
+            beep_2to3=0;
+        }
+
+        ui->dial->setValue(fp1+fp0);
+        ui->label_dialvalue->setText("1");
+        if(vip==1){hhandler->vit_off();}
+        if(vip==0){hhandler->vit_off();}
+
+       l->writeDAC(0);
+       int avg1=vac->convert(CHANNEL_1)*0.1894;
+       ui->label_vacactual->setText(QString::number(avg1));
+
+    }
+    if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0)) && fp2!=0)
+    {
+
+        beep_1to2++;
+        if(beep_1to2==1)
+        {
+             footpedalbeep();
+        }
+        else if(beep_2to3>1)
+        {
+            beep_2to3=0;
+        }
+
+
+
+        if(flag2==0)
+        {
+            //vaccum
+            //normal
+        ui->dial->setValue(fp1+fp2+fp0);
+        ui->label_dialvalue->setText("2");
+
+        int dacval;
+
+        std::string col1, col2;
+        std::ifstream file(PATH6);
+          int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::ifstream file2(PATH6);
+        std::string line;
+        for (int i = 1; i <= lineCount; i++) {
+            std::getline(file2, line);
+        }
+
+        std::istringstream iss(line);
+        std::string column1, column2;
+        iss >> column1 >> column2;
+
+        std::stringstream ss(column1);
+        ss >> dacval;
+        qDebug()<<dacval;
+        l->writeDAC(dacval);
+        int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
+
+        file.close();
+         file2.close();
+    }
+    else {
+        if(flag2==1)
+        {
+            //swap
+            ui->dial->setValue(fp1+fp2+fp0);
+            ui->label_dialvalue->setText("2");
+
+            l->writeDAC(0);
+            int avg1=vac->convert(CHANNEL_1)*0.1894;
+            ui->label_vacactual->setText(QString::number(avg1));
+        }
+    }
+
+    }
+
+    //vitrectomy
+    if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
+    {
+
+        beep_2to3++;
+        if(beep_2to3==1)
+        {
+             footpedalbeep();
+        }
+
+         ui->dial->setValue(fp1+fp2+fp3+fp0);
+         ui->label_dialvalue->setText("3");
+
+
+        int dacval;
+
+        std::string col1, col2;
+        std::ifstream file(PATH6);
+          int lineCount=0;
+        while(file >> col1 >> col2)
+        {
+            if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+            {
+                lineCount++;
+            }
+            else
+            {
+                lineCount = lineCount;
+            }
+        }
+
+        std::ifstream file2(PATH6);
+        std::string line;
+        for (int i = 1; i <= lineCount; i++) {
+            std::getline(file2, line);
+        }
+
+        std::istringstream iss(line);
+        std::string column1, column2;
+        iss >> column1 >> column2;
+
+        std::stringstream ss(column1);
+        ss >> dacval;
+        qDebug()<<dacval;
+        l->writeDAC(dacval);
+        int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
+
+        file.close();
+        file2.close();
+
+    }
+  }
+}
+
+// Set vit preset value
+void MainWindow::vitvalset()
+{
+    vit_value = ui->label_vitpreset->text().toInt();
+}
+
+// Interface with vitrectomy based on footpedal reading
+void MainWindow::updateLabel2()
+{
+    //qDebug()<<vip<<vitp<<flag2;
+    if(vip==0)
+    {
+        hhandler->vit_off();
+        ui->label_vitactual->setText("0");
+    }
+    else if(vip==1)
+    {
+        if(vitp==1)
+        {
+            if(flag==0)
+            {
+               nonlinearcall2();
+            }
+            else if(flag2==1)
+            {
+                nonlinearcall3();
+            }
+        }
+        else if(vitp==0)
+        {
+            if(flag2==0)
+            {
+                linearcall3();
+            }
+            else if(flag2==1)
+            {
+                linearcall23();
+            }
+        }
+    }
+}
+
+// Turn drain on or off
+void MainWindow::drain_onoff()
+{
+    QString drain = ui->pushButton_drain->text();
+
+    if(drain.compare("DRAIN OFF") == 0)
+    {
+        ui->pushButton_drain->setText("DRAIN ON");
+        flag3=1;
+    }
+    else if(drain.compare("DRAIN ON") == 0)
+    {
+        ui->pushButton_drain->setText("DRAIN OFF");
+        flag3=0;
+    }
+}
+
+//fp0
+void MainWindow::receiveString0(QString val)
+{
+    fp0=val.toInt();
+}
+
+//fp1
+void MainWindow::receiveString1(QString val)
+{
+    fp1=val.toInt();
+}
+
+//fp2
+void MainWindow::receiveString2(QString val)
+{
+    fp2=val.toInt();
+}
+
+//fp3
+void MainWindow::receiveString3(QString val)
+{
+    fp3=val.toInt();
+}

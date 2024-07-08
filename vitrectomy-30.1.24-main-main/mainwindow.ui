@@ -32,7 +32,7 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="pushButton_settingswindow">
     <property name="geometry">
      <rect>
       <x>1810</x>
@@ -56,7 +56,7 @@ background-color: rgba(242, 179, 179, 0);
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="label_vacpreset">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -77,7 +77,7 @@ image: url(:/new/prefix1/img/textbox2.png);
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label_vacactual">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -97,7 +97,7 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="label_aipreset">
     <property name="geometry">
      <rect>
       <x>1470</x>
@@ -111,13 +111,13 @@ font: 65pt &quot;Ubuntu&quot;;</string>
 font: 65pt &quot;Ubuntu&quot;;</string>
     </property>
     <property name="text">
-     <string/>
+     <string>60</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="label_vitpreset">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -137,7 +137,7 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="label_dia">
     <property name="geometry">
      <rect>
       <x>1520</x>
@@ -157,7 +157,7 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_siloilonoff">
     <property name="geometry">
      <rect>
       <x>930</x>
@@ -174,7 +174,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="label_siloil">
     <property name="geometry">
      <rect>
       <x>830</x>
@@ -194,7 +194,7 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_9">
+   <widget class="QLabel" name="label_led1">
     <property name="geometry">
      <rect>
       <x>590</x>
@@ -214,7 +214,7 @@ font: 45pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_13">
+   <widget class="QPushButton" name="pushButton_aidec">
     <property name="geometry">
      <rect>
       <x>1760</x>
@@ -236,7 +236,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_14">
+   <widget class="QPushButton" name="pushButton_diadec">
     <property name="geometry">
      <rect>
       <x>1810</x>
@@ -258,7 +258,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_15">
+   <widget class="QPushButton" name="pushButton_vitdec">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -280,7 +280,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_16">
+   <widget class="QPushButton" name="pushButton_led1dec">
     <property name="geometry">
      <rect>
       <x>800</x>
@@ -302,7 +302,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_9">
+   <widget class="QPushButton" name="pushButton_aiinc">
     <property name="geometry">
      <rect>
       <x>1380</x>
@@ -328,7 +328,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_10">
+   <widget class="QPushButton" name="pushButton_diainc">
     <property name="geometry">
      <rect>
       <x>1430</x>
@@ -354,7 +354,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_11">
+   <widget class="QPushButton" name="pushButton_vitinc">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -380,7 +380,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_17">
+   <widget class="QPushButton" name="pushButton_led1inc">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -406,7 +406,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_19">
+   <widget class="QPushButton" name="pushButton_siloilinc">
     <property name="geometry">
      <rect>
       <x>740</x>
@@ -432,7 +432,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="pushButton_led1onoff">
     <property name="geometry">
      <rect>
       <x>800</x>
@@ -449,7 +449,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="pushButton_vitonoff">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -466,7 +466,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="pushButton_diaonoff">
     <property name="geometry">
      <rect>
       <x>1440</x>
@@ -483,7 +483,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_20">
+   <widget class="QPushButton" name="pushButton_vaclinearnonlinear">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -504,7 +504,7 @@ background-color: rgba(191, 64, 64, 0);
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_10">
+   <widget class="QLabel" name="label_aiactual">
     <property name="geometry">
      <rect>
       <x>1470</x>
@@ -533,7 +533,7 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_11">
+   <widget class="QLabel" name="label_surgeonname">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -562,7 +562,7 @@ font: 1pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_18">
+   <widget class="QPushButton" name="pushButton_siloildec">
     <property name="geometry">
      <rect>
       <x>1120</x>
@@ -761,7 +761,7 @@ color: rgb(0, 0, 0);</string>
      <string>LED-1</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pushButton_endcase">
     <property name="geometry">
      <rect>
       <x>1620</x>
@@ -886,7 +886,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_36">
+   <widget class="QLabel" name="label_dialvalue">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -1049,7 +1049,7 @@ color: rgb(165, 29, 45);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="pushButton_aionoff">
     <property name="geometry">
      <rect>
       <x>1300</x>
@@ -1066,7 +1066,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_37">
+   <widget class="QLabel" name="label_led2">
     <property name="geometry">
      <rect>
       <x>1160</x>
@@ -1086,7 +1086,7 @@ font: 45pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_21">
+   <widget class="QPushButton" name="pushButton_led2inc">
     <property name="geometry">
      <rect>
       <x>1100</x>
@@ -1112,7 +1112,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_22">
+   <widget class="QPushButton" name="pushButton_led2dec">
     <property name="geometry">
      <rect>
       <x>1350</x>
@@ -1134,7 +1134,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_23">
+   <widget class="QPushButton" name="pushButton_led2onoff">
     <property name="geometry">
      <rect>
       <x>1060</x>
@@ -1184,7 +1184,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string>LED-2</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_24">
+   <widget class="QPushButton" name="pushButton_vitlinearnonlinear">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1294,7 +1294,7 @@ background-color: rgba(191, 64, 64, 0);
      <enum>QProgressBar::BottomToTop</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_45">
+   <widget class="QLabel" name="label_testtube">
     <property name="geometry">
      <rect>
       <x>1288</x>
@@ -1342,7 +1342,7 @@ background-color: rgba(191, 64, 64, 0);
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_46">
+   <widget class="QLabel" name="label_date">
     <property name="geometry">
      <rect>
       <x>1250</x>
@@ -1358,7 +1358,7 @@ background-color: rgba(191, 64, 64, 0);
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_47">
+   <widget class="QLabel" name="label_time">
     <property name="geometry">
      <rect>
       <x>1480</x>
@@ -1374,7 +1374,7 @@ background-color: rgba(191, 64, 64, 0);
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="comboBox_surgeonname">
     <property name="geometry">
      <rect>
       <x>680</x>
@@ -1426,7 +1426,7 @@ QComboBox::item:selected {
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_25">
+   <widget class="QPushButton" name="pushButton_start">
     <property name="geometry">
      <rect>
       <x>870</x>
@@ -1462,7 +1462,7 @@ color: rgb(255, 255, 255);
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_26">
+   <widget class="QPushButton" name="pushButton_swap">
     <property name="geometry">
      <rect>
       <x>1200</x>
@@ -1479,7 +1479,7 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string>SWAP OFF</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_48">
+   <widget class="QLabel" name="label_vitactual">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -1499,7 +1499,7 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_12">
+   <widget class="QPushButton" name="pushButton_vacinc">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -1525,7 +1525,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_27">
+   <widget class="QPushButton" name="pushButton_vacdec">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -1547,83 +1547,102 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_drain">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>930</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
+color: rgb(255, 120, 0);
+background-color: rgba(191, 64, 64, 0);</string>
+    </property>
+    <property name="text">
+     <string>DRAIN OFF</string>
+    </property>
+   </widget>
    <zorder>label_39</zorder>
    <zorder>label_20</zorder>
    <zorder>label_16</zorder>
    <zorder>label_14</zorder>
    <zorder>label_13</zorder>
    <zorder>label</zorder>
-   <zorder>pushButton_6</zorder>
-   <zorder>label_5</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label_6</zorder>
-   <zorder>pushButton_14</zorder>
-   <zorder>pushButton_10</zorder>
+   <zorder>pushButton_settingswindow</zorder>
+   <zorder>label_vacpreset</zorder>
+   <zorder>label_vacactual</zorder>
+   <zorder>label_dia</zorder>
+   <zorder>pushButton_diadec</zorder>
+   <zorder>pushButton_diainc</zorder>
    <zorder>label_21</zorder>
    <zorder>label_25</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>pushButton_endcase</zorder>
    <zorder>label_32</zorder>
-   <zorder>pushButton_5</zorder>
+   <zorder>pushButton_diaonoff</zorder>
    <zorder>label_28</zorder>
-   <zorder>pushButton_20</zorder>
-   <zorder>label_11</zorder>
+   <zorder>pushButton_vaclinearnonlinear</zorder>
+   <zorder>label_surgeonname</zorder>
    <zorder>label_38</zorder>
    <zorder>label_23</zorder>
-   <zorder>pushButton_9</zorder>
-   <zorder>label_3</zorder>
-   <zorder>label_10</zorder>
-   <zorder>pushButton_13</zorder>
+   <zorder>pushButton_aiinc</zorder>
+   <zorder>label_aipreset</zorder>
+   <zorder>label_aiactual</zorder>
+   <zorder>pushButton_aidec</zorder>
    <zorder>label_29</zorder>
    <zorder>label_17</zorder>
-   <zorder>pushButton_7</zorder>
-   <zorder>label_37</zorder>
+   <zorder>pushButton_aionoff</zorder>
+   <zorder>label_led2</zorder>
    <zorder>label_41</zorder>
-   <zorder>pushButton_22</zorder>
+   <zorder>pushButton_led2dec</zorder>
    <zorder>label_44</zorder>
    <zorder>label_7</zorder>
    <zorder>label_18</zorder>
    <zorder>dial</zorder>
-   <zorder>label_36</zorder>
+   <zorder>label_dialvalue</zorder>
    <zorder>label_40</zorder>
    <zorder>label_34</zorder>
    <zorder>label_35</zorder>
-   <zorder>pushButton_17</zorder>
+   <zorder>pushButton_led1inc</zorder>
    <zorder>label_27</zorder>
-   <zorder>label_9</zorder>
+   <zorder>label_led1</zorder>
    <zorder>label_30</zorder>
-   <zorder>pushButton_3</zorder>
+   <zorder>pushButton_led1onoff</zorder>
    <zorder>label_42</zorder>
-   <zorder>pushButton_16</zorder>
-   <zorder>pushButton_21</zorder>
-   <zorder>pushButton_11</zorder>
-   <zorder>pushButton_24</zorder>
-   <zorder>label_4</zorder>
+   <zorder>pushButton_led1dec</zorder>
+   <zorder>pushButton_led2inc</zorder>
+   <zorder>pushButton_vitinc</zorder>
+   <zorder>pushButton_vitlinearnonlinear</zorder>
+   <zorder>label_vitpreset</zorder>
    <zorder>label_24</zorder>
-   <zorder>pushButton_15</zorder>
+   <zorder>pushButton_vitdec</zorder>
    <zorder>label_33</zorder>
    <zorder>label_19</zorder>
-   <zorder>label_8</zorder>
+   <zorder>label_siloil</zorder>
    <zorder>label_26</zorder>
-   <zorder>pushButton_19</zorder>
+   <zorder>pushButton_siloilinc</zorder>
    <zorder>label_31</zorder>
-   <zorder>pushButton_18</zorder>
+   <zorder>pushButton_siloildec</zorder>
    <zorder>progressBar</zorder>
-   <zorder>label_45</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_23</zorder>
+   <zorder>label_testtube</zorder>
+   <zorder>pushButton_vitonoff</zorder>
+   <zorder>pushButton_siloilonoff</zorder>
+   <zorder>pushButton_led2onoff</zorder>
    <zorder>label_15</zorder>
    <zorder>label_43</zorder>
-   <zorder>label_46</zorder>
-   <zorder>label_47</zorder>
-   <zorder>pushButton_26</zorder>
-   <zorder>label_48</zorder>
-   <zorder>pushButton_12</zorder>
-   <zorder>pushButton_27</zorder>
+   <zorder>label_date</zorder>
+   <zorder>label_time</zorder>
+   <zorder>pushButton_swap</zorder>
+   <zorder>label_vitactual</zorder>
+   <zorder>pushButton_vacinc</zorder>
+   <zorder>pushButton_vacdec</zorder>
+   <zorder>pushButton_drain</zorder>
    <zorder>label_12</zorder>
    <zorder>label_22</zorder>
-   <zorder>pushButton_25</zorder>
-   <zorder>comboBox_2</zorder>
+   <zorder>pushButton_start</zorder>
+   <zorder>comboBox_surgeonname</zorder>
   </widget>
  </widget>
  <resources/>
