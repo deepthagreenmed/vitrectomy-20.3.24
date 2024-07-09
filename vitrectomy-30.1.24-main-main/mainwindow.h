@@ -302,8 +302,8 @@ private:
     QTimer timeai3;
     bool aiflag=0;
     keypad *key;
-    QMessageBox *msg;
-    QTimer *timermsg;
+   // QMessageBox *msg;
+   // QTimer *timermsg;
     ltc2614 *l;
 
 };

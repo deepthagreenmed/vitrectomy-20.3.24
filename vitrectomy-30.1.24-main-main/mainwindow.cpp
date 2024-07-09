@@ -257,13 +257,13 @@ MainWindow::MainWindow(QWidget *parent)
     timermain->start(3000); // 3 seconds
     connect(timermain, &QTimer::timeout, this, &MainWindow::transitionToNewScreen);
 
-    msg = new QMessageBox(this);
-    timermsg = new QTimer(this);
-    connect(timermsg, &QTimer::timeout, [=]()
-    {
-        msg->close();
-        timermsg->stop();
-    });
+//    msg = new QMessageBox(this);
+//    timermsg = new QTimer(this);
+//    connect(timermsg, &QTimer::timeout, [=]()
+//    {
+//        msg->close();
+//        timermsg->stop();
+//    });
 
     ui->label_aipreset->setText("60");
 
@@ -291,20 +291,19 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
     if (value > maxValue) {
         int temp=value;
         //value=0;
-        dig=0;
-        //label->setText(QString::number(value));
+        //dig=0;
+        label->setText("");
+       // msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
+       // msg->show();
+       // timermsg->start(1000);
         label->setText(QString::number(dig));
-        msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
-        msg->show();
-        timermsg->start(1000);
-        label->setText(QString::number(temp));
-
     } else {
         label->setText(QString::number(value));
-        msg->close();
-        timermsg->stop();
+       // msg->close();
+       // timermsg->stop();
     }
 }
+
 // keypad showing code
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
@@ -3271,7 +3270,7 @@ void MainWindow::updateLabel2()
     {
         if(vitp==1)
         {
-            if(flag==0)
+            if(flag2==0)
             {
                nonlinearcall2();
             }
