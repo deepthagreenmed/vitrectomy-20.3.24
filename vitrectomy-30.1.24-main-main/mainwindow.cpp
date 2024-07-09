@@ -98,8 +98,6 @@ MainWindow::MainWindow(QWidget *parent)
      timerforondscreen->start(7000);
      connect(timerforondscreen, &QTimer::timeout, this, &MainWindow::timerCompleted);
 
-     setDBValues();
-
     //code to load database
     QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
     mydb1.setDatabaseName(PATH);
@@ -276,6 +274,8 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer *timernl3 = new QTimer;
     connect(timernl3, &QTimer::timeout, this, &MainWindow::nonlinearcall3);
     timernl3->start(1);
+
+    setDBValues();
 
 }
 
