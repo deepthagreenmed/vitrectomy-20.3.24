@@ -367,7 +367,7 @@ if(ui->lineEdit_vac->focusWidget())
     flag = false;
     if(!flag) {
     ui->lineEdit_vac->setFocus();
-      ui->lineEdit_vac->insert(digit);
+      ui->lineEdit_vac->insert(digit);F
 
  }
 }

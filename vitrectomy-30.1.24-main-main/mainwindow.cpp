@@ -98,6 +98,8 @@ MainWindow::MainWindow(QWidget *parent)
      timerforondscreen->start(7000);
      connect(timerforondscreen, &QTimer::timeout, this, &MainWindow::timerCompleted);
 
+     setDBValues();
+
     //code to load database
     QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
     mydb1.setDatabaseName(PATH);
@@ -141,7 +143,7 @@ MainWindow::MainWindow(QWidget *parent)
           }
 
                itemname36 = query.value(35).toString();
-               ui->label_aipreset->setText(itemname36);
+              // ui->label_aipreset->setText(itemname36);
         itemname43 = query.value(42).toString();
 
           itemname44= query.value(43).toString();
@@ -3371,4 +3373,21 @@ void MainWindow::on_clickedbackspace()
       data.chop(1);
       ui->label_led1->setText(data);
   }
+}
+
+void MainWindow::setDBValues()
+{
+    QSqlQuery query;
+    query.exec("select * from maindb where surgeon='"+surgeon+"'");
+    while(query.next())
+    {
+        ui->label_vacpreset->setText(query.value(35).toString());
+        vaclnl(query.value(36).toString());
+        ui->label_vitpreset->setText(query.value(33).toString());
+        vitlnl(query.value(34).toString());
+        ui->label_dia->setText(query.value(0).toString());
+        ui->label_led1->setText(query.value(49).toString());
+        ui->label_led2->setText(query.value(50).toString());
+    }
+
 }

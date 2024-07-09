@@ -63,6 +63,7 @@ public:
     int beep_2to3=0;
     QString madtype;
     QString surgeon;
+    void setDBValues();
 
 
 signals:
