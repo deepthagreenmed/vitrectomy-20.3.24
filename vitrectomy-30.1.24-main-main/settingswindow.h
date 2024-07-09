@@ -84,7 +84,7 @@ public slots:
     void on_led_clicked();
 
     //vac
-    void on_vac_clicked();
+    void on_ia_clicked();
 
     //vit
     void on_vit_clicked();

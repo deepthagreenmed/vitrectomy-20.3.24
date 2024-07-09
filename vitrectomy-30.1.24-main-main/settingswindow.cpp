@@ -24,7 +24,7 @@ settingswindow::settingswindow(QWidget *parent) :
 
     connect(ui->pushButton_save, &QPushButton::clicked, this, &settingswindow::on_dia_clicked);
     connect(ui->pushButton_save_2, &QPushButton::clicked, this, &settingswindow::on_led_clicked);
-    connect(ui->pushButton_save_3, &QPushButton::clicked, this, &settingswindow::on_vac_clicked);
+    connect(ui->pushButton_save_3, &QPushButton::clicked, this, &settingswindow::on_ia_clicked);
     connect(ui->pushButton_save_4, &QPushButton::clicked, this, &settingswindow::on_vit_clicked);
     connect(ui->pushButton_goback, &QPushButton::clicked, this, &settingswindow::show_surgery_screen);
     connect(ui->pushButton_save_5, &QPushButton::clicked, this, &settingswindow::on_save_clicked);
@@ -464,7 +464,7 @@ void settingswindow::on_led_clicked()
 }
 
 // Vaccum (mm/hg) and mode
-void settingswindow::on_vac_clicked()
+void settingswindow::on_ia_clicked()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
