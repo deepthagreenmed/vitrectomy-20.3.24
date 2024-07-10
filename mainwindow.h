@@ -63,7 +63,7 @@ public:
     int beep_2to3=0;
     QString madtype;
     QString surgeon;
-    void setDBValues();
+  //  void setDBValues();
 
 
 signals:
@@ -71,6 +71,8 @@ signals:
 
 
 public slots:
+
+    void setFPValues();
 
     void receiveString(const QString& str);
 

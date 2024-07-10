@@ -91,7 +91,12 @@ MainWindow::MainWindow(QWidget *parent)
     l = new ltc2614;
     key = new keypad;
 
-    setDBValues();
+
+    QTimer *timerfp = new QTimer;
+    connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
+    timerfp->start(1);
+
+    //setDBValues();
 
 
     connect(ui->comboBox_surgeonname, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
@@ -3401,33 +3406,54 @@ void MainWindow::on_clickedbackspace()
   }
 }
 
-void MainWindow::setDBValues()
+//void MainWindow::setDBValues()
+//{
+//    QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
+//    mydb1.setDatabaseName(PATH);
+//    mydb1.open();
+
+//    QSqlQuery query;
+
+//    surgeon=ui->label_surgeonname->text();
+
+//    QString vacmode, vitmode;
+
+//    query.exec("select * from maindb where surgeon='"+surgeon+"'");
+//    while(query.next())
+//    {
+//        ui->label_led1->setText(query.value(49).toString());
+//        ui->label_led2->setText(query.value(50).toString());
+//        ui->label_vacpreset->setText(query.value(35).toString());
+//        vacmode=query.value(36).toString();
+//        ui->label_vitpreset->setText(query.value(33).toString());
+//        vitmode=query.value(34).toString();
+//        ui->label_dia->setText(query.value(0).toString());
+//    }
+
+//    vaclnl(vacmode);
+//    vitlnl(vitmode);
+
+//    mydb1.close();
+
+//}
+
+void MainWindow::setFPValues()
 {
-    QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
-    mydb1.setDatabaseName(PATH);
-    mydb1.open();
-
-    QSqlQuery query;
-
-    surgeon=ui->label_surgeonname->text();
-
-    QString vacmode, vitmode;
-
-    query.exec("select * from maindb where surgeon='"+surgeon+"'");
-    while(query.next())
+    avg=fp->convert(CHANNEL_0);
+    if(avg>=0 && avg<=fp0)
     {
-        ui->label_led1->setText(query.value(49).toString());
-        ui->label_led2->setText(query.value(50).toString());
-        ui->label_vacpreset->setText(query.value(35).toString());
-        vacmode=query.value(36).toString();
-        ui->label_vitpreset->setText(query.value(33).toString());
-        vitmode=query.value(34).toString();
-        ui->label_dia->setText(query.value(0).toString());
+        ui->label_dialvalue->setText("0");
     }
-
-    vaclnl(vacmode);
-    vitlnl(vitmode);
-
-    mydb1.close();
-
+    if(avg>fp0 && avg<=(fp0+fp1))
+    {
+        ui->label_dialvalue->setText("1");
+    }
+    if(avg>(fp0+fp1) && avg<=(fp0+fp1+fp2))
+    {
+        ui->label_dialvalue->setText("2");
+    }
+    else if(avg>(fp0+fp1+fp2) && avg<=(fp0+fp1+fp2+fp3))
+    {
+        ui->label_dialvalue->setText("3");
+    }
 }
