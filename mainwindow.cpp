@@ -91,6 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
     l = new ltc2614;
     key = new keypad;
 
+    setDBValues();
+
 
     connect(ui->comboBox_surgeonname, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
@@ -170,7 +172,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     hhandler->vit_off();
 
-    ui->label_vitpreset->setText(QString::number(vit_value));
+    //ui->label_vitpreset->setText(QString::number(vit_value));
 
     timerzero.start(100);
     connect(&timerzero,&QTimer::timeout, this, &MainWindow::setZero);
@@ -275,8 +277,6 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer *timernl3 = new QTimer;
     connect(timernl3, &QTimer::timeout, this, &MainWindow::nonlinearcall3);
     timernl3->start(1);
-
-    setDBValues();
 
 }
 
@@ -408,7 +408,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
-        key->move(1430,400);
+        key->move(1440,620);
         key->show();
         ui->label_led2->setFocus();
         ui->label_vitpreset->clearFocus();
@@ -427,7 +427,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
-        key->move(860,400);
+        key->move(840,770);
         key->show();
         ui->label_led1->setFocus();
         ui->label_vitpreset->clearFocus();

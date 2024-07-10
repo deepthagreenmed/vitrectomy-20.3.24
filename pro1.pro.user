@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2024-07-10T11:43:50. -->
+<!-- Written by QtCreator 4.11.1, 2024-07-10T13:01:41. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -320,9 +320,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">pro1 (on zynq)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/amt-05/Qtworkspace/vitrectomy-10.7.24/vitrectomy-30.1.24-main-main/pro1.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/amt-05/Qtworkspace/vitrectomy-10.7.24/vitrectomy-30.1.24-main-main/pro1.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">pro1 (on zynq)2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/amt-05/Qtworkspace/vitrectomy-10.7.24/pro1.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/amt-05/Qtworkspace/vitrectomy-10.7.24/pro1.pro</value>
     <value type="int" key="RemoteLinux.EnvironmentAspect.Version">1</value>
     <value type="QString" key="RemoteLinux.RunConfig.AlternateRemoteExecutable"></value>
     <value type="bool" key="RemoteLinux.RunConfig.UseAlternateRemoteExecutable">false</value>
