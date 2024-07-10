@@ -47,6 +47,8 @@ signals:
 
 public slots:
 
+    void updateComboBoxes(int index);
+
     void on_clicked(const QString& digit);
 
      void on_clickedbackspace();

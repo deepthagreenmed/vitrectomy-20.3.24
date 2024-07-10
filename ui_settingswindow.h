@@ -397,7 +397,6 @@ public:
         comboBox_20->addItem(QString());
         comboBox_20->addItem(QString());
         comboBox_20->addItem(QString());
-        comboBox_20->addItem(QString());
         comboBox_20->setObjectName(QString::fromUtf8("comboBox_20"));
         comboBox_20->setGeometry(QRect(35, 176, 351, 111));
         comboBox_20->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
@@ -406,7 +405,6 @@ public:
 "background-color: rgb(255, 255, 255);}\n"
 ""));
         comboBox_21 = new QComboBox(tab_9);
-        comboBox_21->addItem(QString());
         comboBox_21->addItem(QString());
         comboBox_21->addItem(QString());
         comboBox_21->addItem(QString());
@@ -426,7 +424,6 @@ public:
         comboBox_23->addItem(QString());
         comboBox_23->addItem(QString());
         comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
         comboBox_23->setObjectName(QString::fromUtf8("comboBox_23"));
         comboBox_23->setGeometry(QRect(749, 180, 351, 111));
         comboBox_23->setLayoutDirection(Qt::RightToLeft);
@@ -436,7 +433,6 @@ public:
 "background-color: rgb(255, 255, 255);}\n"
 ""));
         comboBox_24 = new QComboBox(tab_9);
-        comboBox_24->addItem(QString());
         comboBox_24->addItem(QString());
         comboBox_24->addItem(QString());
         comboBox_24->addItem(QString());
@@ -1033,7 +1029,7 @@ public:
 
         retranslateUi(settingswindow);
 
-        tabWidget_2->setCurrentIndex(3);
+        tabWidget_2->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(settingswindow);
@@ -1083,33 +1079,29 @@ public:
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_7), QCoreApplication::translate("settingswindow", "VIT", nullptr));
         pushButton_saveforall->setText(QString());
         pushButton_save_5->setText(QString());
-        comboBox_20->setItemText(0, QCoreApplication::translate("settingswindow", "Decrement", nullptr));
-        comboBox_20->setItemText(1, QCoreApplication::translate("settingswindow", "Increment", nullptr));
-        comboBox_20->setItemText(2, QCoreApplication::translate("settingswindow", "Reflux", nullptr));
-        comboBox_20->setItemText(3, QCoreApplication::translate("settingswindow", "PDM", nullptr));
-        comboBox_20->setItemText(4, QCoreApplication::translate("settingswindow", "Continuos irrigation", nullptr));
-        comboBox_20->setItemText(5, QCoreApplication::translate("settingswindow", "Power On/Off", nullptr));
+        comboBox_20->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_20->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_20->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_20->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_20->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
-        comboBox_21->setItemText(0, QCoreApplication::translate("settingswindow", "Decrement", nullptr));
-        comboBox_21->setItemText(1, QCoreApplication::translate("settingswindow", "Increment", nullptr));
-        comboBox_21->setItemText(2, QCoreApplication::translate("settingswindow", "Reflux", nullptr));
-        comboBox_21->setItemText(3, QCoreApplication::translate("settingswindow", "PDM", nullptr));
-        comboBox_21->setItemText(4, QCoreApplication::translate("settingswindow", "Continuos irrigation", nullptr));
-        comboBox_21->setItemText(5, QCoreApplication::translate("settingswindow", "Power On/Off", nullptr));
+        comboBox_21->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_21->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_21->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_21->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_21->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
-        comboBox_23->setItemText(0, QCoreApplication::translate("settingswindow", "Decrement", nullptr));
-        comboBox_23->setItemText(1, QCoreApplication::translate("settingswindow", "Increment", nullptr));
-        comboBox_23->setItemText(2, QCoreApplication::translate("settingswindow", "Reflux", nullptr));
-        comboBox_23->setItemText(3, QCoreApplication::translate("settingswindow", "PDM", nullptr));
-        comboBox_23->setItemText(4, QCoreApplication::translate("settingswindow", "Continuos irrigation", nullptr));
-        comboBox_23->setItemText(5, QCoreApplication::translate("settingswindow", "Power On/Off", nullptr));
+        comboBox_23->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_23->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_23->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_23->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_23->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
-        comboBox_24->setItemText(0, QCoreApplication::translate("settingswindow", "Decrement", nullptr));
-        comboBox_24->setItemText(1, QCoreApplication::translate("settingswindow", "Increment", nullptr));
-        comboBox_24->setItemText(2, QCoreApplication::translate("settingswindow", "Reflux", nullptr));
-        comboBox_24->setItemText(3, QCoreApplication::translate("settingswindow", "PDM", nullptr));
-        comboBox_24->setItemText(4, QCoreApplication::translate("settingswindow", "Continuos irrigation", nullptr));
-        comboBox_24->setItemText(5, QCoreApplication::translate("settingswindow", "Power On/Off", nullptr));
+        comboBox_24->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_24->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_24->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_24->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_24->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
         label_11->setText(QString());
         label_20->setText(QString());

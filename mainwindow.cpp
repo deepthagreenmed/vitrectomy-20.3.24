@@ -2100,6 +2100,8 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
            vitmode=query.value(34).toString();
          //  ui->label_dia->setText(query.value(0).toString());
 
+           madtype = query.value(48).toString();
+
 
            itemname35 = query.value(34).toString();
            if(itemname35=="Linear")
@@ -3457,3 +3459,4 @@ void MainWindow::setFPValues()
         ui->label_dialvalue->setText("3");
     }
 }
+

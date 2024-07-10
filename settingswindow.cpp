@@ -250,6 +250,12 @@ settingswindow::settingswindow(QWidget *parent) :
 
     ui->listWidget->setCurrentRow(currentindex);
 
+    // Connect signals to slot
+    connect(ui->comboBox_20, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
+    connect(ui->comboBox_21, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
+    connect(ui->comboBox_23, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
+    connect(ui->comboBox_24, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
+
 }
 
 // Show keypad
@@ -1184,7 +1190,7 @@ void settingswindow::on_clickedbackspace()
   }
 }
 
-void settingswindow::comboBoxSelection(int index)
+void settingswindow::updateComboBoxes(int index)
 {
     QStringList items;
     for (int i = 0; i < ui->comboBox_20->count(); ++i) {
@@ -1192,6 +1198,7 @@ void settingswindow::comboBoxSelection(int index)
     }
 
      QList<QComboBox *> combos = {ui->comboBox_20, ui->comboBox_21, ui->comboBox_23, ui->comboBox_24};
+     QStringList selectedItems;
 
      // Collect selected items
      for (QComboBox *combo : combos) {
