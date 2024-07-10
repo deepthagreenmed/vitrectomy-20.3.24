@@ -124,12 +124,23 @@ MainWindow::MainWindow(QWidget *parent)
         //qDebug()<<itemname48;
         surgeonind=itemname48.toInt();
     }
+
+    QString vacmode, vitmode;
+
      query.exec("select * from maindb where surgeon='"+surgeon+"'");
      if(query.next()){
         itemname1 = query.value(0).toString();
           ui->label_dia->setText(itemname1);
           itemname34 = query.value(33).toString();
           ui->label_vitpreset->setText(itemname34);
+
+          ui->label_led1->setText(query.value(49).toString());
+          ui->label_led2->setText(query.value(50).toString());
+          ui->label_vacpreset->setText(query.value(35).toString());
+          vacmode=query.value(36).toString();
+         // ui->label_vitpreset->setText(query.value(33).toString());
+          vitmode=query.value(34).toString();
+        //  ui->label_dia->setText(query.value(0).toString());
 
           itemname35 = query.value(34).toString();
 
@@ -157,6 +168,9 @@ MainWindow::MainWindow(QWidget *parent)
           itemname48 = query.value(47).toString();
 
      }
+
+     vaclnl(vacmode);
+     vitlnl(vitmode);
 
     mydb1.close();
 
@@ -427,7 +441,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
-        key->move(800,690);
+        key->move(70,740);
         key->show();
         ui->label_led1->setFocus();
         ui->label_vitpreset->clearFocus();
@@ -3388,13 +3402,13 @@ void MainWindow::setDBValues()
     query.exec("select * from maindb where surgeon='"+surgeon+"'");
     while(query.next())
     {
+        ui->label_led1->setText(query.value(49).toString());
+        ui->label_led2->setText(query.value(50).toString());
         ui->label_vacpreset->setText(query.value(35).toString());
         vacmode=query.value(36).toString();
         ui->label_vitpreset->setText(query.value(33).toString());
         vitmode=query.value(34).toString();
         ui->label_dia->setText(query.value(0).toString());
-        ui->label_led1->setText(query.value(49).toString());
-        ui->label_led2->setText(query.value(50).toString());
     }
 
     vaclnl(vacmode);
