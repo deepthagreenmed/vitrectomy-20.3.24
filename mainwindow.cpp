@@ -2068,6 +2068,8 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
             qDebug() << "Error updating lastselected column:";
         }
 
+        QString vacmode, vitmode;
+
        query.exec("select * from maindb where surgeon='"+surgeonid+"'");
        if(query.next()){
            QString itemname1;
@@ -2085,6 +2087,15 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
            itemname34 = query.value(33).toString();
            ui->label_vitpreset->setText(itemname34);
 
+           ui->label_led1->setText(query.value(49).toString());
+           ui->label_led2->setText(query.value(50).toString());
+           ui->label_vacpreset->setText(query.value(35).toString());
+           vacmode=query.value(36).toString();
+          // ui->label_vitpreset->setText(query.value(33).toString());
+           vitmode=query.value(34).toString();
+         //  ui->label_dia->setText(query.value(0).toString());
+
+
            itemname35 = query.value(34).toString();
            if(itemname35=="Linear")
            {
@@ -2097,8 +2108,8 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
                ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
 
            }
-                itemname36 = query.value(35).toString();
-                ui->label_aipreset->setText(itemname36);
+               // itemname36 = query.value(35).toString();
+               // ui->label_aipreset->setText(itemname36);
                 itemname44= query.value(43).toString();
                fp0=itemname44.toDouble()*40.95;
                 itemname45 = query.value(44).toString();
@@ -2112,6 +2123,9 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
                //qDebug()<<itemname46;
                //qDebug()<<itemname47;
            }
+
+       vaclnl(vacmode);
+       vitlnl(vitmode);
 
      //qDebug()<<fp0;
      //qDebug()<<fp1;
