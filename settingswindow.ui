@@ -56,7 +56,7 @@ QTabWidget::tab-bar { alignment: center; }
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>4</number>
    </property>
    <property name="iconSize">
     <size>
@@ -749,32 +749,27 @@ background-color: rgb(255, 255, 255);}
      </property>
      <item>
       <property name="text">
-       <string>Decrement</string>
+       <string>LED1 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Increment</string>
+       <string>LED2 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Reflux</string>
+       <string>Vitrectomy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>PDM</string>
+       <string>Diathermy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Continuos irrigation</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Power On/Off</string>
+       <string>Silicon Oil On/Off</string>
       </property>
      </item>
     </widget>
@@ -799,32 +794,27 @@ background-color: rgb(255, 255, 255);}
      </property>
      <item>
       <property name="text">
-       <string>Decrement</string>
+       <string>LED1 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Increment</string>
+       <string>LED2 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Reflux</string>
+       <string>Vitrectomy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>PDM</string>
+       <string>Diathermy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Continuos irrigation</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Power On/Off</string>
+       <string>Silicon Oil On/Off</string>
       </property>
      </item>
     </widget>
@@ -849,32 +839,27 @@ background-color: rgb(255, 255, 255);}
      </property>
      <item>
       <property name="text">
-       <string>Decrement</string>
+       <string>LED1 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Increment</string>
+       <string>LED2 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Reflux</string>
+       <string>Vitrectomy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>PDM</string>
+       <string>Diathermy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Continuos irrigation</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Power On/Off</string>
+       <string>Silicon Oil On/Off</string>
       </property>
      </item>
     </widget>
@@ -899,32 +884,27 @@ background-color: rgb(255, 255, 255);}
      </property>
      <item>
       <property name="text">
-       <string>Decrement</string>
+       <string>LED1 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Increment</string>
+       <string>LED2 On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Reflux</string>
+       <string>Vitrectomy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>PDM</string>
+       <string>Diathermy On/Off</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Continuos irrigation</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Power On/Off</string>
+       <string>Silicon Oil On/Off</string>
       </property>
      </item>
     </widget>
