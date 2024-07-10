@@ -408,7 +408,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
-        key->move(1440,620);
+        key->move(1350,690);
         key->show();
         ui->label_led2->setFocus();
         ui->label_vitpreset->clearFocus();
@@ -427,7 +427,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
-        key->move(840,770);
+        key->move(800,690);
         key->show();
         ui->label_led1->setFocus();
         ui->label_vitpreset->clearFocus();
@@ -1721,10 +1721,7 @@ void MainWindow::diaval(QString str)
 // Get name of surgeon
 void MainWindow::setsurgeon()
 {
-
-   surgeon;
    surgeon=ui->label_surgeonname->text();
-
 }
 
 // code for continuous press
@@ -3383,6 +3380,8 @@ void MainWindow::setDBValues()
     mydb1.open();
 
     QSqlQuery query;
+
+    surgeon=ui->label_surgeonname->text();
 
     QString vacmode, vitmode;
 
