@@ -2100,9 +2100,9 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
            vitmode=query.value(34).toString();
          //  ui->label_dia->setText(query.value(0).toString());
 
-           madtype = query.value(48).toString();
+           //madtype = query.value(48).toString();
 
-           qDebug()<<"Vitrectomy cutter type"<<madtype;
+           //qDebug()<<"Vitrectomy cutter type"<<madtype;
 
 
 
