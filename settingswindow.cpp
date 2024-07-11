@@ -488,6 +488,7 @@ void settingswindow::on_led_clicked()
     surgeonid = ui->lineEdit_5->text();
     led1 = ui->lineEdit_led1->text();
     led2 = ui->lineEdit_led2->text();
+
     emit led1str(led1);
     emit led2str(led2);
 
