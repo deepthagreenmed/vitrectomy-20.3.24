@@ -2902,18 +2902,18 @@ void MainWindow::updateLabel()
     // FOOTPEDAL
 
 // setting value for dial
-    avg = fp->convert(CHANNEL_0);
+    //avg = fp->convert(CHANNEL_0);
     //qDebug()<<fp0<<fp1<<fp2<<fp3;
 
 
   if(vp==0)
   {//linear
 
-      ui->dial->setValue(avg);
+     // ui->dial->setValue(avg);
 
-      if(avg >= 0 && avg <= fp0)
+      if(ui->label_dialvalue->text() == "0")
       {
-          ui->label_dialvalue->setText("0");
+          //ui->label_dialvalue->setText("0");
           l->writeDAC(0);
           int avg1 = vac->convert(CHANNEL_1)*0.1894;
           ui->label_vacactual->setText(QString::number(avg1));
@@ -2926,7 +2926,7 @@ void MainWindow::updateLabel()
 
 
       }
-      if(avg > fp0&& avg <= (fp1+fp0))
+      if(ui->label_dialvalue->text() == "1")
       {
 
           beep_0to1++;
@@ -2946,7 +2946,7 @@ void MainWindow::updateLabel()
           }
 
         //irrigation/aspiration
-          ui->label_dialvalue->setText("1");
+         // ui->label_dialvalue->setText("1");
           //diathermy();
           l->writeDAC(0);
           int avg1 = vac->convert(CHANNEL_1)*0.1894;
@@ -2957,7 +2957,7 @@ void MainWindow::updateLabel()
 
       }
       //vaccum
-      if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
+      if(ui->label_dialvalue->text() == "2")
       {
 
           beep_1to2++;
@@ -2970,7 +2970,7 @@ void MainWindow::updateLabel()
               beep_2to3=0;
           }
 
-          ui->label_dialvalue->setText("2");
+        //  ui->label_dialvalue->setText("2");
 
           if(flag2==0)
           {
@@ -3037,7 +3037,7 @@ void MainWindow::updateLabel()
 
       }
       //vitrectomy
-      if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
+      if(ui->label_dialvalue->text() == "3")
       {
 
           beep_2to3++;
@@ -3046,7 +3046,7 @@ void MainWindow::updateLabel()
                footpedalbeep();
           }
 
-       ui->label_dialvalue->setText("3");
+       //ui->label_dialvalue->setText("3");
 
        int dacval;
 
@@ -3122,7 +3122,7 @@ void MainWindow::updateLabel()
   {//non-linear
 
 
-    if(avg >= 0 && avg <= fp0)
+    if(ui->label_dialvalue->text() == "0")
     {
         beep_0to1=0;
         beep_1to2=0;
@@ -3137,7 +3137,7 @@ void MainWindow::updateLabel()
         ui->label_vacactual->setText(QString::number(avg1));
 
     }
-    if((avg > fp0 && avg <= (fp1+fp0)))
+    if(ui->label_dialvalue->text() == "1")
     {
 
         beep_0to1++;
@@ -3166,7 +3166,7 @@ void MainWindow::updateLabel()
        ui->label_vacactual->setText(QString::number(avg1));
 
     }
-    if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0)) && fp2!=0)
+    if(ui->label_dialvalue->text() == "2")
     {
 
         beep_1to2++;
@@ -3241,7 +3241,7 @@ void MainWindow::updateLabel()
     }
 
     //vitrectomy
-    if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
+    if(ui->label_dialvalue->text() == "3")
     {
 
         beep_2to3++;
