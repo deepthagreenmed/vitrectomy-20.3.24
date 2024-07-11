@@ -2102,6 +2102,9 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
 
            madtype = query.value(48).toString();
 
+           qDebug()<<"Vitrectomy cutter type"<<madtype;
+
+
 
            itemname35 = query.value(34).toString();
            if(itemname35=="Linear")
