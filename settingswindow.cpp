@@ -336,6 +336,27 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
   }
   return false;
 }
+
+// Set limits and input validation
+void settingswindow::updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue) {
+    //qDebug()<<value;
+    if (value > maxValue) {
+        int temp=value;
+        //value=0;
+        //dig=0;
+        label->setText("");
+       // msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
+       // msg->show();
+       // timermsg->start(1000);
+        label->setText(QString::number(dig));
+    } else {
+        label->setText(QString::number(value));
+       // msg->close();
+       // timermsg->stop();
+    }
+}
+
+
 // Insert digit from keypad
 void settingswindow::on_clicked(const QString& digit)
 {
@@ -348,7 +369,9 @@ void settingswindow::on_clicked(const QString& digit)
       if(!flag)
       {
       ui->lineEdit_powmax->setFocus();
-      ui->lineEdit_powmax->insert(digit);
+      int dig = digit.toInt();
+      int value = (ui->lineEdit_powmax->text()+digit).toInt();
+      updateLineEditValue(ui->lineEdit_powmax, dig, value, 100);
 
    }
   }
@@ -360,7 +383,9 @@ void settingswindow::on_clicked(const QString& digit)
       if(!flag)
       {
       ui->lineEdit_cutrate->setFocus();
-      ui->lineEdit_cutrate->insert(digit);
+      int dig = digit.toInt();
+      int value = (ui->lineEdit_cutrate->text()+digit).toInt();
+      updateLineEditValue(ui->lineEdit_cutrate, dig, value, 9600);
 
    }
   }
@@ -373,7 +398,9 @@ if(ui->lineEdit_vac->focusWidget())
     flag = false;
     if(!flag) {
     ui->lineEdit_vac->setFocus();
-      ui->lineEdit_vac->insert(digit);
+    int dig = digit.toInt();
+    int value = (ui->lineEdit_vac->text()+digit).toInt();
+    updateLineEditValue(ui->lineEdit_vac, dig, value, 650);
 
  }
 }
@@ -386,8 +413,9 @@ if(ui->lineEdit_led1->focusWidget())
     flag = false;
     if(!flag) {
     ui->lineEdit_led1->setFocus();
-      ui->lineEdit_led1->insert(digit);
-
+    int dig = digit.toInt();
+    int value = (ui->lineEdit_cutrate->text()+digit).toInt();
+    updateLineEditValue(ui->lineEdit_led1, dig, value, 100);
  }
 }
 if(ui->lineEdit_led2->focusWidget())
@@ -399,7 +427,9 @@ if(ui->lineEdit_led2->focusWidget())
     flag = false;
     if(!flag) {
     ui->lineEdit_led2->setFocus();
-      ui->lineEdit_led2->insert(digit);
+    int dig = digit.toInt();
+    int value = (ui->lineEdit_cutrate->text()+digit).toInt();
+    updateLineEditValue(ui->lineEdit_led2, dig, value, 100);
 
  }
 }

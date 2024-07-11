@@ -3442,6 +3442,7 @@ void MainWindow::on_clickedbackspace()
 void MainWindow::setFPValues()
 {
     avg=fp->convert(CHANNEL_0);
+
     if(avg>=0 && avg<=fp0)
     {
         ui->label_dialvalue->setText("0");

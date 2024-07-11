@@ -9,6 +9,7 @@
 #include <QDialog>
 #include <QMainWindow>
 #include <QMouseEvent>
+#include <QLineEdit>
 
 #define PATH "/home/main.db"
 
@@ -28,6 +29,7 @@ public:
      int currentindex=0;
     bool eventFilter(QObject* object, QEvent* event);
     void populatetype();
+    void updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue);
 
 
 signals:
