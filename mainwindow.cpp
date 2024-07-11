@@ -910,7 +910,24 @@ void MainWindow::vit_onoff()
             ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
             vip=1;
 
-            //if(avg>= (fp1+fp2+fp0)){hhandler->vit_on(1000/(vit_value/60));
+
+
+            QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
+            mydb1.setDatabaseName(PATH);
+            mydb1.open();
+            QSqlQuery query;
+
+            QString surgeon = ui->label_surgeonname->text();
+
+           query.exec("select * from maindb where surgeon='"+surgeon+"'");
+
+           if(query.next())
+           {
+               madtype = query.value(48).toString();
+           }
+
+            mydb1.close();
+
 
             connect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
             connect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
@@ -934,7 +951,7 @@ void MainWindow::vit_onoff()
                 animation1->start();
                 vip=0;
 
-               // if(avg<= (fp1+fp2+fp0)){hhandler->vit_off();}
+               hhandler->vit_off();
 
 
             disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);

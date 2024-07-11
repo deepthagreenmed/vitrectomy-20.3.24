@@ -250,6 +250,9 @@ settingswindow::settingswindow(QWidget *parent) :
 
     ui->listWidget->setCurrentRow(currentindex);
 
+    items << "Surgeon 1" << "Surgeon 2" << "Surgeon 3" << "Surgeon 4" << "Surgeon 5" << "Surgeon 6" << "Surgeon 7" << "Surgeon 8" << "Surgeon 9" << "Surgeon 10";
+    items << "Surgeon 11" << "Surgeon 12" << "Surgeon 13" << "Surgeon 14" << "Surgeon 15" << "Surgeon 16" << "Surgeon 17" << "Surgeon 18" << "Surgeon 19" << "Surgeon 20";
+
     // Connect signals to slot
     connect(ui->comboBox_20, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
     connect(ui->comboBox_21, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
@@ -1221,34 +1224,30 @@ void settingswindow::on_clickedbackspace()
   }
 }
 
-void settingswindow::updateComboBoxes(int index)
-{
-    QStringList items;
-    for (int i = 0; i < ui->comboBox_20->count(); ++i) {
-        items << ui->comboBox_20->itemText(i);
-    }
+void settingswindow::updateComboBoxes(int index) {
+        QList<QComboBox *> combos = {ui->comboBox_20, ui->comboBox_21, ui->comboBox_23, ui->comboBox_24};
 
-     QList<QComboBox *> combos = {ui->comboBox_20, ui->comboBox_21, ui->comboBox_23, ui->comboBox_24};
-     QStringList selectedItems;
-
-     // Collect selected items
-     for (QComboBox *combo : combos) {
-         if (combo->currentIndex() != -1) {
-             selectedItems.append(combo->currentText());
-         }
-     }
-
-    // Update each combo box
-    for (QComboBox *combo : combos) {
-        QString currentText = combo->currentText();
-        combo->blockSignals(true);
-        combo->clear();
-        for (const QString &item : items) {
-            if (!selectedItems.contains(item) || item == currentText) {
-                combo->addItem(item);
+        // Collect selected items
+        QSet<QString> selectedItems;
+        for (QComboBox *comboBox : combos) {
+            if (comboBox->currentIndex() != -1) {
+                selectedItems.insert(comboBox->currentText());
             }
         }
-        combo->setCurrentText(currentText);
-        combo->blockSignals(false);
+
+        // Update each combo box
+        for (QComboBox *comboBox : combos) {
+            QString currentText = comboBox->currentText();
+            comboBox->blockSignals(true); // Block signals to prevent recursive updates
+            comboBox->clear();
+
+            for (const QString &item : items) {
+                if (!selectedItems.contains(item) || item == currentText) {
+                    comboBox->addItem(item);
+                }
+            }
+
+            comboBox->setCurrentText(currentText);
+            comboBox->blockSignals(false); // Unblock signals
+        }
     }
-}

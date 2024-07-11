@@ -133,6 +133,7 @@ private:
       textkeypad *text;
       int led1value;
       int led2value;
+      QStringList items;
 
 
 
