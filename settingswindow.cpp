@@ -471,7 +471,7 @@ void settingswindow::on_dia_clicked()
 
     query.bindValue(diapm,"diapm");
 
-        mydb.close();
+    mydb.close();
 
 }
 
@@ -537,6 +537,10 @@ void settingswindow::on_vit_clicked()
      vcmin=ui->comboBox_cuttermode->currentText();
      type=ui->comboBox_cuttertype->currentText();
 
+     emit vitstr(vcmax);
+     emit vitmode(vcmin);
+     emit vittype(type);
+
      if(type == "Midlabs")
      {
          ui->lineEdit_maxcutrate->setText("8000");
@@ -555,10 +559,6 @@ void settingswindow::on_vit_clicked()
      query.bindValue(vcmax,"vcmax");
      query.bindValue(vcmin,"vcmin");
      query.bindValue(type, "type");
-
-     emit vitstr(vcmax);
-     emit vitmode(vcmin);
-     emit vittype(type);
 
      mydb.close();
 
