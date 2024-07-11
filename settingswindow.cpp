@@ -414,7 +414,7 @@ if(ui->lineEdit_led1->focusWidget())
     if(!flag) {
     ui->lineEdit_led1->setFocus();
     int dig = digit.toInt();
-    int value = (ui->lineEdit_cutrate->text()+digit).toInt();
+    int value = (ui->lineEdit_led1->text()+digit).toInt();
     updateLineEditValue(ui->lineEdit_led1, dig, value, 100);
  }
 }
@@ -428,7 +428,7 @@ if(ui->lineEdit_led2->focusWidget())
     if(!flag) {
     ui->lineEdit_led2->setFocus();
     int dig = digit.toInt();
-    int value = (ui->lineEdit_cutrate->text()+digit).toInt();
+    int value = (ui->lineEdit_led2->text()+digit).toInt();
     updateLineEditValue(ui->lineEdit_led2, dig, value, 100);
 
  }
