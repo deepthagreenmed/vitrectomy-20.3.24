@@ -185,7 +185,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QObject::connect(win2, &settingswindow::stringPassed, this, &MainWindow::receiveString);
 
-    avg=fp->convert(CHANNEL_0);
+    avgfp=fp->convert(CHANNEL_0);
 
     hhandler->vit_off();
 
@@ -227,7 +227,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dial->setStyleSheet("background-color: rgb(26, 95, 180);");
     ui->dial->setRange(0, 4096);
 
-    ui->dial->setValue(avg);
+    ui->dial->setValue(avgfp);
 
     connect(win2, &settingswindow::led1str, this, &MainWindow::led1val);
     connect(win2, &settingswindow::led2str, this, &MainWindow::led2val);
@@ -2185,9 +2185,9 @@ void MainWindow::nonlinearcall3()
         int vvalue;
         double ot;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1+fp2))
+        if(avgfp<=(fp0+fp1+fp2))
         {
             hhandler->vit_off();
             ui->label_vitactual->setText("0");
@@ -2234,9 +2234,9 @@ void MainWindow::nonlinearcall3()
         int vvalue;
         double ot;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1+fp2))
+        if(avgfp<=(fp0+fp1+fp2))
         {
             hhandler->vit_off();
             ui->label_vitactual->setText("0");
@@ -2289,9 +2289,9 @@ void MainWindow::nonlinearcall2()
         int vvalue;
         double ot;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1))
+        if(avgfp<=(fp0+fp1))
         {
             hhandler->vit_off();
             ui->label_vitactual->setText("0");
@@ -2339,9 +2339,9 @@ void MainWindow::nonlinearcall2()
         int vvalue;
         double ot;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1))
+        if(avgfp<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
             hhandler->vit_off();
@@ -2397,9 +2397,9 @@ void MainWindow::linearcall23()
         double ot;
         int idx1;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1))
+        if(avgfp<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
             hhandler->vit_off();
@@ -2421,7 +2421,7 @@ void MainWindow::linearcall23()
         }
 
         std::string line;
-        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
+        idx1 = ((avgfp-fp0-fp1)/(fp2+fp3))*lineCount;
         std::ifstream file2(PATH4);
 
         if(idx1>=1) {
@@ -2454,9 +2454,9 @@ void MainWindow::linearcall23()
         double ot;
         int idx1;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1))
+        if(avgfp<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
             hhandler->vit_off();
@@ -2478,7 +2478,7 @@ void MainWindow::linearcall23()
         }
 
         std::string line;
-        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
+        idx1 = ((avgfp-fp0-fp1)/(fp2+fp3))*lineCount;
         std::ifstream file2(PATH3);
 
         if(idx1>=1) {
@@ -2519,9 +2519,9 @@ void MainWindow::linearcall3()
         double ot;
         int idx1;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1))
+        if(avgfp<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
         }
@@ -2542,7 +2542,7 @@ void MainWindow::linearcall3()
         }
 
         std::string line;
-        idx1 = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
+        idx1 = ((avgfp-fp0-fp1-fp2)/fp3)*lineCount;
         std::ifstream file2(PATH4);
 
         if(idx1>=1) {
@@ -2574,9 +2574,9 @@ void MainWindow::linearcall3()
         double ot;
         int idx1;
 
-        int avg = fp->convert(CHANNEL_0);
+        avgfp = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1))
+        if(avgfp<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
         }
@@ -2597,7 +2597,7 @@ void MainWindow::linearcall3()
         }
 
         std::string line;
-        idx1 = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
+        idx1 = ((avgfp-fp0-fp1-fp2)/fp3)*lineCount;
         std::ifstream file2(PATH3);
 
         if(idx1>=1) {
@@ -2632,15 +2632,15 @@ void MainWindow::linearcall3()
 // Diathermy
 void MainWindow::diathermy()
 {
-    if(avg>fp0 && avg<=(fp0+fp1))
-    {
+//    if(avg>fp0 && avg<=(fp0+fp1))
+//    {
         hhandler->dia_on();
         hhandler->dia_count(ui->label_dia->text().toInt()*256/100);
-    }
-    else
-    {
-        hhandler->dia_off();
-    }
+//    }
+//    else
+//    {
+//        hhandler->dia_off();
+//    }
 }
 
 // Air injector on
@@ -2656,14 +2656,14 @@ void MainWindow::airinjectoron()
     hhandler->ai_on();
     hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-    int avg=0;
+    int avg2=0;
     for(int i=0; i<100; i++)
     {
-        avg += vac->convert(CHANNEL_2) * 0.1894;
+        avg2 += vac->convert(CHANNEL_2) * 0.1894;
     }
-    avg = static_cast<int>(avg/100);
+    avg2 = static_cast<int>(avg2/100);
 
-    int value = avg;
+    int value = avg2;
 
     ui->label_aiactual->setText(QString::number(value));
     hhandler->ai_actual_count(value);
@@ -2684,9 +2684,9 @@ void MainWindow::airinjectoroff()
 // Footpedal reading is less than 2
 void MainWindow::setZero()
 {
-    int avg = fp->convert(CHANNEL_0);
+    avgfp = fp->convert(CHANNEL_0);
 
-    if(avg<=(fp0+fp1))
+    if(avgfp<=(fp0+fp1))
     {
         ui->label_vitactual->setText("0");
         l->writeDAC(0);
@@ -2900,14 +2900,14 @@ void MainWindow::updateLabel()
     // FOOTPEDAL
 
 // setting value for dial
-    //avg = fp->convert(CHANNEL_0);
+    avgfp = fp->convert(CHANNEL_0);
     //qDebug()<<fp0<<fp1<<fp2<<fp3;
 
 
   if(vp==0)
   {//linear
 
-     // ui->dial->setValue(avg);
+      ui->dial->setValue(avgfp);
 
       if(ui->label_dialvalue->text() == "0")
       {
@@ -2991,7 +2991,7 @@ void MainWindow::updateLabel()
 
 
         std::string line;
-        idx = ((avg-fp0-fp1)/fp2)*lineCount;
+        idx = ((avgfp-fp0-fp1)/fp2)*lineCount;
         std::ifstream file2(PATH6);
 
         for (double i = 1; i <= idx; i++)
@@ -3087,7 +3087,7 @@ void MainWindow::updateLabel()
        }
        else if(flag2==1)
        {
-           idx = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
+           idx = ((avgfp-fp0-fp1-fp2)/fp3)*lineCount;
            for (int i = 1; i <= idx; i++) {
                std::getline(file2, line);
            }
@@ -3417,21 +3417,21 @@ void MainWindow::on_clickedbackspace()
 
 void MainWindow::setFPValues()
 {
-    avg=fp->convert(CHANNEL_0);
+    avgfp=fp->convert(CHANNEL_0);
 
-    if(avg>=0 && avg<=fp0)
+    if(avgfp>=0 && avgfp<=fp0)
     {
         ui->label_dialvalue->setText("0");
     }
-    if(avg>fp0 && avg<=(fp0+fp1))
+    if(avgfp>fp0 && avgfp<=(fp0+fp1))
     {
         ui->label_dialvalue->setText("1");
     }
-    if(avg>(fp0+fp1) && avg<=(fp0+fp1+fp2))
+    if(avgfp>(fp0+fp1) && avgfp<=(fp0+fp1+fp2))
     {
         ui->label_dialvalue->setText("2");
     }
-    else if(avg>(fp0+fp1+fp2) && avg<=(fp0+fp1+fp2+fp3))
+    else if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
     {
         ui->label_dialvalue->setText("3");
     }

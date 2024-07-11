@@ -284,7 +284,7 @@ private:
     int lp2=0;
     int sp=0;
     int p=0;
-    int avg=0;
+    int avgfp=0;
     double fp0;
     double fp1;
     double fp2;
