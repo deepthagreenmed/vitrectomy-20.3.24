@@ -912,21 +912,21 @@ void MainWindow::vit_onoff()
 
 
 
-            QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
-            mydb1.setDatabaseName(PATH);
-            mydb1.open();
-            QSqlQuery query;
+//            QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
+//            mydb1.setDatabaseName(PATH);
+//            mydb1.open();
+//            QSqlQuery query;
 
-            QString surgeon = ui->label_surgeonname->text();
+//            QString surgeon = ui->label_surgeonname->text();
 
-           query.exec("select * from maindb where surgeon='"+surgeon+"'");
+//           query.exec("select * from maindb where surgeon='"+surgeon+"'");
 
-           if(query.next())
-           {
-               madtype = query.value(48).toString();
-           }
+//           if(query.next())
+//           {
+//               madtype = query.value(48).toString();
+//           }
 
-            mydb1.close();
+//            mydb1.close();
 
 
             connect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
@@ -2196,15 +2196,16 @@ void MainWindow::swap_onoff()
 
 void MainWindow::nonlinearcall3()
 {
+   // ui->dial->setValue(fp0+fp1+fp2+fp3);
+
     if(vip==1&&vitp==1&&flag2==0) {
-    //qDebug()<<"Nonlinear3"<<madtype;
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1+fp2))
+        if(avg<=(fp0+fp1+fp2))
         {
             hhandler->vit_off();
             ui->label_vitactual->setText("0");
@@ -2251,9 +2252,9 @@ void MainWindow::nonlinearcall3()
         int vvalue;
         double ot;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1+fp2))
+        if(avg<=(fp0+fp1+fp2))
         {
             hhandler->vit_off();
             ui->label_vitactual->setText("0");
@@ -2301,14 +2302,15 @@ void MainWindow::nonlinearcall3()
 
 void MainWindow::nonlinearcall2()
 {
-    //qDebug()<<"Nonlinear2"<<madtype;
+  //  ui->dial->setValue(fp0+fp1+fp2);
+
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1))
+        if(avg<=(fp0+fp1))
         {
             hhandler->vit_off();
             ui->label_vitactual->setText("0");
@@ -2356,9 +2358,9 @@ void MainWindow::nonlinearcall2()
         int vvalue;
         double ot;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1))
+        if(avg<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
             hhandler->vit_off();
@@ -2408,15 +2410,16 @@ void MainWindow::nonlinearcall2()
 // Vitrectomy linear (2 and 3)
 void MainWindow::linearcall23()
 {
-    //qDebug()<<"Linear23"<<madtype;
+//    ui->dial->setValue(avgfp);
+
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
         int idx1;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1))
+        if(avg<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
             hhandler->vit_off();
@@ -2438,7 +2441,7 @@ void MainWindow::linearcall23()
         }
 
         std::string line;
-        idx1 = ((avgfp-fp0-fp1)/(fp2+fp3))*lineCount;
+        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
         std::ifstream file2(PATH4);
 
         if(idx1>=1) {
@@ -2471,9 +2474,9 @@ void MainWindow::linearcall23()
         double ot;
         int idx1;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1))
+        if(avg<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
             hhandler->vit_off();
@@ -2495,7 +2498,7 @@ void MainWindow::linearcall23()
         }
 
         std::string line;
-        idx1 = ((avgfp-fp0-fp1)/(fp2+fp3))*lineCount;
+        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
         std::ifstream file2(PATH3);
 
         if(idx1>=1) {
@@ -2530,15 +2533,16 @@ void MainWindow::linearcall23()
 // Vitrectomy linear (3)
 void MainWindow::linearcall3()
 {
-    //qDebug()<<"Linear3"<<madtype;
+   //ui->dial->setValue(avgfp);
+
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
         int idx1;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1))
+        if(avg<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
         }
@@ -2559,7 +2563,7 @@ void MainWindow::linearcall3()
         }
 
         std::string line;
-        idx1 = ((avgfp-fp0-fp1-fp2)/fp3)*lineCount;
+        idx1 = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
         std::ifstream file2(PATH4);
 
         if(idx1>=1) {
@@ -2591,9 +2595,9 @@ void MainWindow::linearcall3()
         double ot;
         int idx1;
 
-        avgfp = fp->convert(CHANNEL_0);
+        int avg = fp->convert(CHANNEL_0);
 
-        if(avgfp<=(fp0+fp1))
+        if(avg<=(fp0+fp1))
         {
             ui->label_vitactual->setText("0");
         }
@@ -2614,7 +2618,7 @@ void MainWindow::linearcall3()
         }
 
         std::string line;
-        idx1 = ((avgfp-fp0-fp1-fp2)/fp3)*lineCount;
+        idx1 = ((avg-fp0-fp1-fp2)/fp3)*lineCount;
         std::ifstream file2(PATH3);
 
         if(idx1>=1) {
@@ -2637,6 +2641,7 @@ void MainWindow::linearcall3()
             hhandler->vit_ontime(ot);
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
+            //qDebug()<<"actual"<<vvalue;
         }
         else {
             hhandler->vit_off();
@@ -2701,9 +2706,9 @@ void MainWindow::airinjectoroff()
 // Footpedal reading is less than 2
 void MainWindow::setZero()
 {
-    avgfp = fp->convert(CHANNEL_0);
+    int avgzero = fp->convert(CHANNEL_0);
 
-    if(avgfp<=(fp0+fp1))
+    if(avgzero<=(fp0+fp1))
     {
         ui->label_vitactual->setText("0");
         l->writeDAC(0);
@@ -3316,9 +3321,56 @@ void MainWindow::vitvalset()
     vit_value = ui->label_vitpreset->text().toInt();
 }
 
-// Interface with vitrectomy based on footpedal reading
+//Interface with vitrectomy based on footpedal reading
 void MainWindow::updateLabel2()
 {
+    int avg4 = fp->convert(CHANNEL_0);
+
+    if(ui->label_dialvalue->text() == "0")
+    {
+        if(vitp==0)
+        {
+            ui->dial->setValue(0);
+        }
+        else if(vitp==1)
+        {
+            ui->dial->setValue(0);
+        }
+    }
+    if(ui->label_dialvalue->text() == "1")
+    {
+        if(vitp==0)
+        {
+            ui->dial->setValue(avg4);
+        }
+        else if(vitp==1)
+        {
+            ui->dial->setValue(fp0+fp1);
+        }
+    }
+    if(ui->label_dialvalue->text() == "2")
+    {
+        if(vitp==0)
+        {
+            ui->dial->setValue(avg4);
+        }
+        else if(vitp==1)
+        {
+            ui->dial->setValue(fp0+fp1+fp2);
+        }
+    }
+    if(ui->label_dialvalue->text() == "3")
+    {
+        if(vitp==0)
+        {
+            ui->dial->setValue(avg4);
+        }
+        else if(vitp==1)
+        {
+            ui->dial->setValue(fp0+fp1+fp2+fp3);
+        }
+    }
+
     //qDebug()<<vip<<vitp<<flag2;
     if(vip==0)
     {
