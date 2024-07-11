@@ -3311,7 +3311,7 @@ void MainWindow::updateLabel2()
             }
             else if(flag2==1)
             {
-                nonlinearcall3();
+               nonlinearcall3();
             }
         }
         else if(vitp==0)
