@@ -401,7 +401,7 @@ public:
         comboBox_20->setGeometry(QRect(35, 176, 351, 111));
         comboBox_20->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
 "QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 32pt \"Ubuntu\";\n"
+"QComboBox{font: 16pt \"Ubuntu\";\n"
 "background-color: rgb(255, 255, 255);}\n"
 ""));
         comboBox_21 = new QComboBox(tab_9);
@@ -415,7 +415,7 @@ public:
         comboBox_21->setGeometry(QRect(38, 376, 351, 111));
         comboBox_21->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
 "QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 32pt \"Ubuntu\";\n"
+"QComboBox{font: 16pt \"Ubuntu\";\n"
 "background-color: rgb(255, 255, 255);}\n"
 ""));
         comboBox_23 = new QComboBox(tab_9);
@@ -429,7 +429,7 @@ public:
         comboBox_23->setLayoutDirection(Qt::RightToLeft);
         comboBox_23->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
 "QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 32pt \"Ubuntu\";\n"
+"QComboBox{font: 16pt \"Ubuntu\";\n"
 "background-color: rgb(255, 255, 255);}\n"
 ""));
         comboBox_24 = new QComboBox(tab_9);
@@ -443,7 +443,7 @@ public:
         comboBox_24->setLayoutDirection(Qt::RightToLeft);
         comboBox_24->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
 "QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 32pt \"Ubuntu\";\n"
+"QComboBox{font: 16pt \"Ubuntu\";\n"
 "background-color: rgb(255, 255, 255);}\n"
 ""));
         label_11 = new QLabel(tab_9);
@@ -457,7 +457,7 @@ public:
 "background-color: rgba(191, 64, 64, 0);"));
         label_35 = new QLabel(tab_9);
         label_35->setObjectName(QString::fromUtf8("label_35"));
-        label_35->setGeometry(QRect(-4, 96, 1121, 951));
+        label_35->setGeometry(QRect(0, 90, 1121, 951));
         label_35->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "font: 30pt \"Ubuntu\";border-radius: 20px;\n"
 "background-color: rgb(53, 63, 99);"));
