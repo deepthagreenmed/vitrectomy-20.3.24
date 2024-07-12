@@ -2099,17 +2099,7 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
            vitmode=query.value(34).toString();
          //  ui->label_dia->setText(query.value(0).toString());
 
-//           win2->on_dia_clicked();
-//           win2->on_led_clicked();
-//           win2->on_ia_clicked();
-//           win2->on_vit_clicked();
-
-
            madtype = query.value(48).toString();
-
-           //qDebug()<<"Vitrectomy cutter type"<<madtype;
-
-
 
            itemname35 = query.value(34).toString();
            if(itemname35=="Linear")
