@@ -2123,19 +2123,11 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
                fp2=itemname46.toDouble()*40.95;
                 itemname47 = query.value(46).toString();
                fp3=itemname47.toDouble()*40.95;
-               //qDebug()<<itemname44;
-               //qDebug()<<itemname45;
-               //qDebug()<<itemname46;
-               //qDebug()<<itemname47;
            }
 
        vaclnl(vacmode);
        vitlnl(vitmode);
 
-     //qDebug()<<fp0;
-     //qDebug()<<fp1;
-     //qDebug()<<fp2;
-     //qDebug()<<fp3;
     mydb1.close();
 
 }
@@ -2170,8 +2162,6 @@ void MainWindow::swap_onoff()
 
 void MainWindow::nonlinearcall3()
 {
-   // ui->dial->setValue(fp0+fp1+fp2+fp3);
-
     if(vip==1&&vitp==1&&flag2==0) {
     if(madtype=="Aktive") {
         int vvalue;
@@ -2276,8 +2266,6 @@ void MainWindow::nonlinearcall3()
 
 void MainWindow::nonlinearcall23()
 {
-  //  ui->dial->setValue(fp0+fp1+fp2);
-
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
@@ -2391,7 +2379,6 @@ void MainWindow::linearcall23()
         int idx1;
 
         int avg = fp->convert(CHANNEL_0);
-        //ui->dial->setValue(avg);
 
         if(avg<=(fp0+fp1))
         {
@@ -2433,7 +2420,7 @@ void MainWindow::linearcall23()
             ss >> vvalue;
             std::stringstream ss2(column2);
             ss2 >> ot;
-            //qDebug()<<ot<<vvalue;
+
             hhandler->vit_ontime(ot);
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
@@ -2490,7 +2477,6 @@ void MainWindow::linearcall23()
             ss >> vvalue;
             std::stringstream ss2(column2);
             ss2 >> ot;
-            //qDebug()<<ot<<vvalue;
 
             hhandler->vit_ontime(ot);
             hhandler->vit_on(1000/(vvalue/60));
@@ -2507,15 +2493,12 @@ void MainWindow::linearcall23()
 // Vitrectomy linear (3)
 void MainWindow::linearcall3()
 {
-   //ui->dial->setValue(avgfp);
-
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
         int idx1;
 
         int avg = fp->convert(CHANNEL_0);
-       // ui->dial->setValue(avg);
 
         if(avg<=(fp0+fp1+fp2))
         {
