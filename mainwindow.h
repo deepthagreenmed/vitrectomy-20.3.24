@@ -47,11 +47,13 @@ public:
    int surgeonind;
     int vit_value=60; //period
     float resolution = 0.000000005; //5ns
-    void nonlinearcall2();
 
-    void linearcall2();
-    void linearcall3();
     void linearcall23();
+    void linearcall3();
+    void nonlinearcall23();
+    void nonlinearcall3();
+
+
     LED *led1;
     LED *led2;
     bool eventFilter(QObject* object, QEvent* event);
@@ -105,7 +107,6 @@ public slots:
 
 
 private slots:
-        void nonlinearcall3();
 
         void transitionToNewScreen();
 

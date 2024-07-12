@@ -94,6 +94,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QTimer *timerfp = new QTimer;
     connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
+    //connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValuesNonlinear);
     timerfp->start(1);
 
 
@@ -910,23 +911,6 @@ void MainWindow::vit_onoff()
             ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
             vip=1;
 
-
-
-//            QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
-//            mydb1.setDatabaseName(PATH);
-//            mydb1.open();
-//            QSqlQuery query;
-
-//            QString surgeon = ui->label_surgeonname->text();
-
-//           query.exec("select * from maindb where surgeon='"+surgeon+"'");
-
-//           if(query.next())
-//           {
-//               madtype = query.value(48).toString();
-//           }
-
-//            mydb1.close();
 
 
             connect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
@@ -2121,7 +2105,7 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
 //           win2->on_vit_clicked();
 
 
-           //madtype = query.value(48).toString();
+           madtype = query.value(48).toString();
 
            //qDebug()<<"Vitrectomy cutter type"<<madtype;
 
@@ -2300,7 +2284,7 @@ void MainWindow::nonlinearcall3()
 }
 }
 
-void MainWindow::nonlinearcall2()
+void MainWindow::nonlinearcall23()
 {
   //  ui->dial->setValue(fp0+fp1+fp2);
 
@@ -2410,7 +2394,6 @@ void MainWindow::nonlinearcall2()
 // Vitrectomy linear (2 and 3)
 void MainWindow::linearcall23()
 {
-//    ui->dial->setValue(avgfp);
 
     if(madtype=="Aktive") {
         int vvalue;
@@ -2418,6 +2401,7 @@ void MainWindow::linearcall23()
         int idx1;
 
         int avg = fp->convert(CHANNEL_0);
+        //ui->dial->setValue(avg);
 
         if(avg<=(fp0+fp1))
         {
@@ -2430,7 +2414,7 @@ void MainWindow::linearcall23()
         int lineCount=0;
         while(file >> col1 >> col2)
         {
-            if(std::stoi(col1) < ui->label_vitpreset->text().toInt())
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
             {
                 lineCount++;
             }
@@ -2487,7 +2471,7 @@ void MainWindow::linearcall23()
         int lineCount=0;
         while(file >> col1 >> col2)
         {
-            if(std::stoi(col1) < ui->label_vitpreset->text().toInt())
+            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
             {
                 lineCount++;
             }
@@ -2541,8 +2525,9 @@ void MainWindow::linearcall3()
         int idx1;
 
         int avg = fp->convert(CHANNEL_0);
+       // ui->dial->setValue(avg);
 
-        if(avg<=(fp0+fp1))
+        if(avg<=(fp0+fp1+fp2))
         {
             ui->label_vitactual->setText("0");
         }
@@ -2597,7 +2582,7 @@ void MainWindow::linearcall3()
 
         int avg = fp->convert(CHANNEL_0);
 
-        if(avg<=(fp0+fp1))
+        if(avg<=(fp0+fp1+fp2))
         {
             ui->label_vitactual->setText("0");
         }
@@ -2929,7 +2914,7 @@ void MainWindow::updateLabel()
   if(vp==0)
   {//linear
 
-      ui->dial->setValue(avgfp);
+     // ui->dial->setValue(avgfp);
 
       if(ui->label_dialvalue->text() == "0")
       {
@@ -3148,8 +3133,8 @@ void MainWindow::updateLabel()
         beep_1to2=0;
         beep_2to3=0;
 
-        ui->dial->setValue(0);
-        ui->label_dialvalue->setText("0");
+      //  ui->dial->setValue(0);
+        //ui->label_dialvalue->setText("0");
         if(vip==1){hhandler->vit_off();}
         if(vip==0){hhandler->vit_off();}
         l->writeDAC(0);
@@ -3176,8 +3161,8 @@ void MainWindow::updateLabel()
             beep_2to3=0;
         }
 
-        ui->dial->setValue(fp1+fp0);
-        ui->label_dialvalue->setText("1");
+        //ui->dial->setValue(fp1+fp0);
+        //ui->label_dialvalue->setText("1");
         if(vip==1){hhandler->vit_off();}
         if(vip==0){hhandler->vit_off();}
 
@@ -3205,8 +3190,8 @@ void MainWindow::updateLabel()
         {
             //vaccum
             //normal
-        ui->dial->setValue(fp1+fp2+fp0);
-        ui->label_dialvalue->setText("2");
+       // ui->dial->setValue(fp1+fp2+fp0);
+       // ui->label_dialvalue->setText("2");
 
         int dacval;
 
@@ -3249,8 +3234,8 @@ void MainWindow::updateLabel()
         if(flag2==1)
         {
             //swap
-            ui->dial->setValue(fp1+fp2+fp0);
-            ui->label_dialvalue->setText("2");
+            //ui->dial->setValue(fp1+fp2+fp0);
+           // ui->label_dialvalue->setText("2");
 
             l->writeDAC(0);
             int avg1=vac->convert(CHANNEL_1)*0.1894;
@@ -3270,8 +3255,8 @@ void MainWindow::updateLabel()
              footpedalbeep();
         }
 
-         ui->dial->setValue(fp1+fp2+fp3+fp0);
-         ui->label_dialvalue->setText("3");
+        // ui->dial->setValue(fp1+fp2+fp3+fp0);
+        // ui->label_dialvalue->setText("3");
 
 
         int dacval;
@@ -3324,53 +3309,6 @@ void MainWindow::vitvalset()
 //Interface with vitrectomy based on footpedal reading
 void MainWindow::updateLabel2()
 {
-    int avg4 = fp->convert(CHANNEL_0);
-
-    if(ui->label_dialvalue->text() == "0")
-    {
-        if(vitp==0)
-        {
-            ui->dial->setValue(0);
-        }
-        else if(vitp==1)
-        {
-            ui->dial->setValue(0);
-        }
-    }
-    if(ui->label_dialvalue->text() == "1")
-    {
-        if(vitp==0)
-        {
-            ui->dial->setValue(avg4);
-        }
-        else if(vitp==1)
-        {
-            ui->dial->setValue(fp0+fp1);
-        }
-    }
-    if(ui->label_dialvalue->text() == "2")
-    {
-        if(vitp==0)
-        {
-            ui->dial->setValue(avg4);
-        }
-        else if(vitp==1)
-        {
-            ui->dial->setValue(fp0+fp1+fp2);
-        }
-    }
-    if(ui->label_dialvalue->text() == "3")
-    {
-        if(vitp==0)
-        {
-            ui->dial->setValue(avg4);
-        }
-        else if(vitp==1)
-        {
-            ui->dial->setValue(fp0+fp1+fp2+fp3);
-        }
-    }
-
     //qDebug()<<vip<<vitp<<flag2;
     if(vip==0)
     {
@@ -3383,11 +3321,11 @@ void MainWindow::updateLabel2()
         {
             if(flag2==0)
             {
-               nonlinearcall2();
+               nonlinearcall3();
             }
             else if(flag2==1)
             {
-               nonlinearcall3();
+               nonlinearcall23();
             }
         }
         else if(vitp==0)
@@ -3424,25 +3362,25 @@ void MainWindow::drain_onoff()
 //fp0
 void MainWindow::receiveString0(QString val)
 {
-    fp0=val.toInt();
+    fp0=val.toDouble();
 }
 
 //fp1
 void MainWindow::receiveString1(QString val)
 {
-    fp1=val.toInt();
+    fp1=val.toDouble();
 }
 
 //fp2
 void MainWindow::receiveString2(QString val)
 {
-    fp2=val.toInt();
+    fp2=val.toDouble();
 }
 
 //fp3
 void MainWindow::receiveString3(QString val)
 {
-    fp3=val.toInt();
+    fp3=val.toDouble();
 }
 
 void MainWindow::on_clickedbackspace()
@@ -3483,26 +3421,59 @@ void MainWindow::on_clickedbackspace()
       ui->label_led1->setText(data);
   }
 }
-
 void MainWindow::setFPValues()
 {
     avgfp=fp->convert(CHANNEL_0);
 
+   // qDebug()<<avgfp<<ui->label_dialvalue->text();
+
     if(avgfp>=0 && avgfp<=fp0)
     {
+        if(vitp==0)
+        {
+            ui->dial->setValue(avgfp);
+        }
+        if(vitp==1)
+        {
+            ui->dial->setValue(0);
+        }
         ui->label_dialvalue->setText("0");
     }
-    if(avgfp>fp0 && avgfp<=(fp0+fp1))
+    else if(avgfp>fp0 && avgfp<=(fp0+fp1))
     {
+        if(vitp==0)
+        {
+            ui->dial->setValue(avgfp);
+        }
+        if(vitp==1)
+        {
+            ui->dial->setValue(fp0+fp1);
+        }
         ui->label_dialvalue->setText("1");
     }
-    if(avgfp>(fp0+fp1) && avgfp<=(fp0+fp1+fp2))
+    else if(avgfp>(fp0+fp1) && avgfp<=(fp0+fp1+fp2))
     {
+        if(vitp==0)
+        {
+            ui->dial->setValue(avgfp);
+        }
+        if(vitp==1)
+        {
+            ui->dial->setValue(fp0+fp1+fp2);
+        }
         ui->label_dialvalue->setText("2");
     }
     else if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
     {
+        if(vitp==0)
+        {
+            ui->dial->setValue(avgfp);
+        }
+        if(vitp==1)
+        {
+            ui->dial->setValue(fp0+fp1+fp2+fp3);
+        }
         ui->label_dialvalue->setText("3");
     }
-}
 
+}

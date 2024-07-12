@@ -30,6 +30,7 @@ public:
     bool eventFilter(QObject* object, QEvent* event);
     void populatetype();
     void updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue);
+    //QString madtype;
 
 
 signals:

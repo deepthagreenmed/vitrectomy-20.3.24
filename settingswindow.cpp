@@ -544,6 +544,7 @@ void settingswindow::on_vit_clicked()
      emit vitstr(vcmax);
      emit vitmode(vcmin);
      emit vittype(type);
+     //madtype=type;
 
      if(type == "Midlabs")
      {
