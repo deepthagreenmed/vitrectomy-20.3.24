@@ -432,7 +432,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
          key->resize(491,271);
-        key->move(70,740);
+        key->move(40,690);
         key->show();
         ui->label_led1->setFocus();
         ui->label_vitpreset->clearFocus();

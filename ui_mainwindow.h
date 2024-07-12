@@ -486,13 +486,13 @@ public:
 "background-color: rgba(191, 64, 64, 0);"));
         label_led2 = new QLabel(centralwidget);
         label_led2->setObjectName(QString::fromUtf8("label_led2"));
-        label_led2->setGeometry(QRect(1160, 700, 191, 81));
+        label_led2->setGeometry(QRect(1160, 710, 191, 81));
         label_led2->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/textbox1.png);\n"
 "font: 45pt \"Ubuntu\";"));
         label_led2->setAlignment(Qt::AlignCenter);
         pushButton_led2inc = new QPushButton(centralwidget);
         pushButton_led2inc->setObjectName(QString::fromUtf8("pushButton_led2inc"));
-        pushButton_led2inc->setGeometry(QRect(1100, 710, 51, 61));
+        pushButton_led2inc->setGeometry(QRect(1100, 720, 51, 61));
         pushButton_led2inc->setStyleSheet(QString::fromUtf8("\n"
 "QPushButton{\n"
 "	background-image: url(:/new/prefix1/upnew1.png);\n"
@@ -506,7 +506,7 @@ public:
 "color:white;;}"));
         pushButton_led2dec = new QPushButton(centralwidget);
         pushButton_led2dec->setObjectName(QString::fromUtf8("pushButton_led2dec"));
-        pushButton_led2dec->setGeometry(QRect(1350, 710, 51, 61));
+        pushButton_led2dec->setGeometry(QRect(1350, 720, 51, 61));
         pushButton_led2dec->setStyleSheet(QString::fromUtf8("QPushButton{background-image: url(:/new/prefix1/downnew1.png);\n"
 "background-color: rgba(242, 179, 179, 0);}\n"
 "\n"

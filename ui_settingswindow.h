@@ -253,7 +253,7 @@ public:
 "border:none;"));
         label_30 = new QLabel(tab_8);
         label_30->setObjectName(QString::fromUtf8("label_30"));
-        label_30->setGeometry(QRect(260, 180, 471, 91));
+        label_30->setGeometry(QRect(140, 180, 471, 91));
         label_30->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "font: 35pt \"Ubuntu\";\n"
 "background-color: rgba(191, 64, 64, 0);"));
@@ -261,19 +261,19 @@ public:
         comboBox_mode->addItem(QString());
         comboBox_mode->addItem(QString());
         comboBox_mode->setObjectName(QString::fromUtf8("comboBox_mode"));
-        comboBox_mode->setGeometry(QRect(750, 310, 311, 81));
+        comboBox_mode->setGeometry(QRect(600, 310, 461, 81));
         comboBox_mode->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";"));
         comboBox_mode->setIconSize(QSize(50, 16));
         comboBox_mode->setFrame(true);
         lineEdit_vac = new QLineEdit(tab_8);
         lineEdit_vac->setObjectName(QString::fromUtf8("lineEdit_vac"));
-        lineEdit_vac->setGeometry(QRect(750, 190, 311, 81));
+        lineEdit_vac->setGeometry(QRect(610, 190, 311, 81));
         lineEdit_vac->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";\n"
 "background-color: rgb(255, 255, 255);border-radius: 20px;"));
         lineEdit_vac->setAlignment(Qt::AlignCenter);
         label_26 = new QLabel(tab_8);
         label_26->setObjectName(QString::fromUtf8("label_26"));
-        label_26->setGeometry(QRect(340, 310, 301, 81));
+        label_26->setGeometry(QRect(140, 310, 301, 81));
         label_26->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "font: 35pt \"Ubuntu\";\n"
 "background-color: rgba(191, 64, 64, 0);"));
@@ -1029,7 +1029,7 @@ public:
 
         retranslateUi(settingswindow);
 
-        tabWidget_2->setCurrentIndex(4);
+        tabWidget_2->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(settingswindow);

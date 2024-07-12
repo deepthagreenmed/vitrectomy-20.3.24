@@ -1070,7 +1070,7 @@ background-color: rgba(191, 64, 64, 0);</string>
     <property name="geometry">
      <rect>
       <x>1160</x>
-      <y>700</y>
+      <y>710</y>
       <width>191</width>
       <height>81</height>
      </rect>
@@ -1090,7 +1090,7 @@ font: 45pt &quot;Ubuntu&quot;;</string>
     <property name="geometry">
      <rect>
       <x>1100</x>
-      <y>710</y>
+      <y>720</y>
       <width>51</width>
       <height>61</height>
      </rect>
@@ -1116,7 +1116,7 @@ color:white;;}</string>
     <property name="geometry">
      <rect>
       <x>1350</x>
-      <y>710</y>
+      <y>720</y>
       <width>51</width>
       <height>61</height>
      </rect>
