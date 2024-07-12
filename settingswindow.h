@@ -105,6 +105,8 @@ public slots:
 
 
 private slots:
+    void onComboBoxTypeChanged(int index);
+
     void loadDatabaseFromList(const QString &currentText);
 
     //footpedal settings

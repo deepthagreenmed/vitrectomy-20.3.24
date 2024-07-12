@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_settingswindow_t {
-    QByteArrayData data[50];
-    char stringdata0[653];
+    QByteArrayData data[51];
+    char stringdata0[675];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -73,15 +73,16 @@ QT_MOC_LITERAL(37, 407, 14), // "on_vit_clicked"
 QT_MOC_LITERAL(38, 422, 19), // "show_surgery_screen"
 QT_MOC_LITERAL(39, 442, 21), // "on_saveforall_clicked"
 QT_MOC_LITERAL(40, 464, 15), // "on_save_clicked"
-QT_MOC_LITERAL(41, 480, 20), // "loadDatabaseFromList"
-QT_MOC_LITERAL(42, 501, 11), // "currentText"
-QT_MOC_LITERAL(43, 513, 22), // "on_fp_settings_clicked"
-QT_MOC_LITERAL(44, 536, 18), // "on_tab_dia_clicked"
-QT_MOC_LITERAL(45, 555, 18), // "on_tab_led_clicked"
-QT_MOC_LITERAL(46, 574, 17), // "on_tab_ia_clicked"
-QT_MOC_LITERAL(47, 592, 18), // "on_tab_vit_clicked"
-QT_MOC_LITERAL(48, 611, 17), // "on_tab_fp_clicked"
-QT_MOC_LITERAL(49, 629, 23) // "on_tab_fppreset_clicked"
+QT_MOC_LITERAL(41, 480, 21), // "onComboBoxTypeChanged"
+QT_MOC_LITERAL(42, 502, 20), // "loadDatabaseFromList"
+QT_MOC_LITERAL(43, 523, 11), // "currentText"
+QT_MOC_LITERAL(44, 535, 22), // "on_fp_settings_clicked"
+QT_MOC_LITERAL(45, 558, 18), // "on_tab_dia_clicked"
+QT_MOC_LITERAL(46, 577, 18), // "on_tab_led_clicked"
+QT_MOC_LITERAL(47, 596, 17), // "on_tab_ia_clicked"
+QT_MOC_LITERAL(48, 614, 18), // "on_tab_vit_clicked"
+QT_MOC_LITERAL(49, 633, 17), // "on_tab_fp_clicked"
+QT_MOC_LITERAL(50, 651, 23) // "on_tab_fppreset_clicked"
 
     },
     "settingswindow\0stringPassed\0\0str\0"
@@ -97,11 +98,11 @@ QT_MOC_LITERAL(49, 629, 23) // "on_tab_fppreset_clicked"
     "on_led_clicked\0on_ia_clicked\0"
     "on_vit_clicked\0show_surgery_screen\0"
     "on_saveforall_clicked\0on_save_clicked\0"
-    "loadDatabaseFromList\0currentText\0"
-    "on_fp_settings_clicked\0on_tab_dia_clicked\0"
-    "on_tab_led_clicked\0on_tab_ia_clicked\0"
-    "on_tab_vit_clicked\0on_tab_fp_clicked\0"
-    "on_tab_fppreset_clicked"
+    "onComboBoxTypeChanged\0loadDatabaseFromList\0"
+    "currentText\0on_fp_settings_clicked\0"
+    "on_tab_dia_clicked\0on_tab_led_clicked\0"
+    "on_tab_ia_clicked\0on_tab_vit_clicked\0"
+    "on_tab_fp_clicked\0on_tab_fppreset_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -111,7 +112,7 @@ static const uint qt_meta_data_settingswindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      44,   14, // methods
+      45,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -119,52 +120,53 @@ static const uint qt_meta_data_settingswindow[] = {
       13,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  234,    2, 0x06 /* Public */,
-       4,    1,  237,    2, 0x06 /* Public */,
-       5,    1,  240,    2, 0x06 /* Public */,
-       6,    1,  243,    2, 0x06 /* Public */,
-       7,    1,  246,    2, 0x06 /* Public */,
-       8,    1,  249,    2, 0x06 /* Public */,
-       9,    1,  252,    2, 0x06 /* Public */,
-      10,    1,  255,    2, 0x06 /* Public */,
-      11,    1,  258,    2, 0x06 /* Public */,
-      12,    1,  261,    2, 0x06 /* Public */,
-      13,    1,  264,    2, 0x06 /* Public */,
-      14,    1,  267,    2, 0x06 /* Public */,
-      15,    1,  270,    2, 0x06 /* Public */,
+       1,    1,  239,    2, 0x06 /* Public */,
+       4,    1,  242,    2, 0x06 /* Public */,
+       5,    1,  245,    2, 0x06 /* Public */,
+       6,    1,  248,    2, 0x06 /* Public */,
+       7,    1,  251,    2, 0x06 /* Public */,
+       8,    1,  254,    2, 0x06 /* Public */,
+       9,    1,  257,    2, 0x06 /* Public */,
+      10,    1,  260,    2, 0x06 /* Public */,
+      11,    1,  263,    2, 0x06 /* Public */,
+      12,    1,  266,    2, 0x06 /* Public */,
+      13,    1,  269,    2, 0x06 /* Public */,
+      14,    1,  272,    2, 0x06 /* Public */,
+      15,    1,  275,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      16,    1,  273,    2, 0x0a /* Public */,
-      18,    1,  276,    2, 0x0a /* Public */,
-      20,    0,  279,    2, 0x0a /* Public */,
-      21,    0,  280,    2, 0x0a /* Public */,
-      22,    0,  281,    2, 0x0a /* Public */,
-      23,    0,  282,    2, 0x0a /* Public */,
-      24,    0,  283,    2, 0x0a /* Public */,
-      25,    0,  284,    2, 0x0a /* Public */,
-      26,    0,  285,    2, 0x0a /* Public */,
-      27,    0,  286,    2, 0x0a /* Public */,
-      28,    0,  287,    2, 0x0a /* Public */,
-      29,    0,  288,    2, 0x0a /* Public */,
-      30,    1,  289,    2, 0x0a /* Public */,
-      31,    0,  292,    2, 0x0a /* Public */,
-      32,    0,  293,    2, 0x0a /* Public */,
-      33,    0,  294,    2, 0x0a /* Public */,
-      34,    0,  295,    2, 0x0a /* Public */,
-      35,    0,  296,    2, 0x0a /* Public */,
-      36,    0,  297,    2, 0x0a /* Public */,
-      37,    0,  298,    2, 0x0a /* Public */,
-      38,    0,  299,    2, 0x0a /* Public */,
-      39,    0,  300,    2, 0x0a /* Public */,
-      40,    0,  301,    2, 0x0a /* Public */,
-      41,    1,  302,    2, 0x08 /* Private */,
-      43,    0,  305,    2, 0x08 /* Private */,
-      44,    0,  306,    2, 0x08 /* Private */,
-      45,    0,  307,    2, 0x08 /* Private */,
-      46,    0,  308,    2, 0x08 /* Private */,
-      47,    0,  309,    2, 0x08 /* Private */,
-      48,    0,  310,    2, 0x08 /* Private */,
-      49,    0,  311,    2, 0x08 /* Private */,
+      16,    1,  278,    2, 0x0a /* Public */,
+      18,    1,  281,    2, 0x0a /* Public */,
+      20,    0,  284,    2, 0x0a /* Public */,
+      21,    0,  285,    2, 0x0a /* Public */,
+      22,    0,  286,    2, 0x0a /* Public */,
+      23,    0,  287,    2, 0x0a /* Public */,
+      24,    0,  288,    2, 0x0a /* Public */,
+      25,    0,  289,    2, 0x0a /* Public */,
+      26,    0,  290,    2, 0x0a /* Public */,
+      27,    0,  291,    2, 0x0a /* Public */,
+      28,    0,  292,    2, 0x0a /* Public */,
+      29,    0,  293,    2, 0x0a /* Public */,
+      30,    1,  294,    2, 0x0a /* Public */,
+      31,    0,  297,    2, 0x0a /* Public */,
+      32,    0,  298,    2, 0x0a /* Public */,
+      33,    0,  299,    2, 0x0a /* Public */,
+      34,    0,  300,    2, 0x0a /* Public */,
+      35,    0,  301,    2, 0x0a /* Public */,
+      36,    0,  302,    2, 0x0a /* Public */,
+      37,    0,  303,    2, 0x0a /* Public */,
+      38,    0,  304,    2, 0x0a /* Public */,
+      39,    0,  305,    2, 0x0a /* Public */,
+      40,    0,  306,    2, 0x0a /* Public */,
+      41,    1,  307,    2, 0x08 /* Private */,
+      42,    1,  310,    2, 0x08 /* Private */,
+      44,    0,  313,    2, 0x08 /* Private */,
+      45,    0,  314,    2, 0x08 /* Private */,
+      46,    0,  315,    2, 0x08 /* Private */,
+      47,    0,  316,    2, 0x08 /* Private */,
+      48,    0,  317,    2, 0x08 /* Private */,
+      49,    0,  318,    2, 0x08 /* Private */,
+      50,    0,  319,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -205,7 +207,8 @@ static const uint qt_meta_data_settingswindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   42,
+    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::QString,   43,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -259,14 +262,15 @@ void settingswindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 33: _t->show_surgery_screen(); break;
         case 34: _t->on_saveforall_clicked(); break;
         case 35: _t->on_save_clicked(); break;
-        case 36: _t->loadDatabaseFromList((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 37: _t->on_fp_settings_clicked(); break;
-        case 38: _t->on_tab_dia_clicked(); break;
-        case 39: _t->on_tab_led_clicked(); break;
-        case 40: _t->on_tab_ia_clicked(); break;
-        case 41: _t->on_tab_vit_clicked(); break;
-        case 42: _t->on_tab_fp_clicked(); break;
-        case 43: _t->on_tab_fppreset_clicked(); break;
+        case 36: _t->onComboBoxTypeChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 37: _t->loadDatabaseFromList((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 38: _t->on_fp_settings_clicked(); break;
+        case 39: _t->on_tab_dia_clicked(); break;
+        case 40: _t->on_tab_led_clicked(); break;
+        case 41: _t->on_tab_ia_clicked(); break;
+        case 42: _t->on_tab_vit_clicked(); break;
+        case 43: _t->on_tab_fp_clicked(); break;
+        case 44: _t->on_tab_fppreset_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -394,13 +398,13 @@ int settingswindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 44)
+        if (_id < 45)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 44;
+        _id -= 45;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 44)
+        if (_id < 45)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 44;
+        _id -= 45;
     }
     return _id;
 }

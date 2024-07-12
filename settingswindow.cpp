@@ -250,6 +250,9 @@ settingswindow::settingswindow(QWidget *parent) :
 
     ui->listWidget->setCurrentRow(currentindex);
 
+    // Connect the combo box's index changed signal to the slot
+    connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onComboBoxTypeChanged);
+
     items << "LED1 On/Off" << "LED2 On/Off" << "Vitrectomy On/Off" << "Diathermy On/Off" << "Silicon Oil On/Off";
 
     // Connect signals to slot
@@ -257,6 +260,7 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_21, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
     connect(ui->comboBox_23, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
     connect(ui->comboBox_24, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
+
 
 }
 
@@ -443,6 +447,13 @@ if(ui->lineEdit_led2->focusWidget())
 void settingswindow::on_clickedenter()
 {
     key->hide();
+
+    ui->lineEdit_powmax->setText(QString::number(static_cast<int>(std::round(ui->lineEdit_powmax->text().toInt()/5))*5));
+    ui->lineEdit_led1->setText(QString::number(static_cast<int>(std::round(ui->lineEdit_led1->text().toInt()/5))*5));
+    ui->lineEdit_led2->setText(QString::number(static_cast<int>(std::round(ui->lineEdit_led2->text().toInt()/5))*5));
+    ui->lineEdit_cutrate->setText(QString::number(static_cast<int>(std::round(ui->lineEdit_cutrate->text().toInt()/60))*60));
+    ui->lineEdit_vac->setText(QString::number(static_cast<int>(std::round(ui->lineEdit_vac->text().toInt()/5))*5));
+
 }
 
 settingswindow::~settingswindow()
@@ -543,20 +554,20 @@ void settingswindow::on_vit_clicked()
      emit vitstr(vcmax);
      emit vitmode(vcmin);
      emit vittype(type);
-     //madtype=type;
 
-     if(type == "Midlabs")
-     {
-         ui->lineEdit_maxcutrate->setText("8000");
-     }
-     else if(type == "Aktive")
-     {
-          ui->lineEdit_maxcutrate->setText("7500");
-     }
-     else if(type == "Dorc")
-     {
-          ui->lineEdit_maxcutrate->setText("8000");
-     }
+//     if(type == "Midlabs")
+//     {
+//         ui->lineEdit_maxcutrate->setText("8000");
+//     }
+//     else if(type == "Aktive")
+//     {
+//          ui->lineEdit_maxcutrate->setText("7500");
+//     }
+//     else if(type == "Dorc")
+//     {
+//          ui->lineEdit_maxcutrate->setText("8000");
+//     }
+
 
      query.prepare("update maindb set vcmax='"+vcmax+"',vcmin='"+vcmin+"',type='"+type+"'where surgeon='"+surgeonid+"'");
      query.exec();
@@ -1251,3 +1262,24 @@ void settingswindow::updateComboBoxes(int index) {
             comboBox->blockSignals(false); // Unblock signals
         }
     }
+
+void settingswindow::onComboBoxTypeChanged(int index)
+{
+    switch (index) {
+    //Midlabs
+    case 0:
+        ui->lineEdit_maxcutrate->setText("8000");
+        break;
+    //Aktive
+    case 1:
+        ui->lineEdit_maxcutrate->setText("7500");
+        break;
+    //Dorc
+    case 2:
+        ui->lineEdit_maxcutrate->setText("8000");
+        break;
+    default:
+        break;
+    }
+}
+

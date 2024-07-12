@@ -2363,27 +2363,70 @@ void MainWindow::linearcall23()
             hhandler->vit_off();
         }
 
-        std::string col1, col2;
-        std::ifstream file(PATH4);
-        int lineCount=0;
-        while(file >> col1 >> col2)
+
+
+        if(ui->label_dialvalue->text()=="2")
         {
-            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            std::string col1, col2;
+            std::ifstream file(PATH4);
+            int lineCount=0;
+            while(file >> col1 >> col2)
             {
-                lineCount++;
+                if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+                {
+                    lineCount++;
+                }
+                else
+                {
+                    lineCount = lineCount;
+                }
             }
-            else
-            {
-                lineCount = lineCount;
+
+            std::string line;
+            idx1 = ((avg-fp0-fp1)/fp2)*lineCount;
+            std::ifstream file2(PATH4);
+
+            if(idx1>=1) {
+                for (double i = 1; i <= idx1; i++)
+                {
+                    std::getline(file2, line);
+                }
+
+
+                std::istringstream iss(line);
+                std::string column1, column2;
+                iss >> column1 >> column2;
+
+                std::stringstream ss(column1);
+                ss >> vvalue;
+                std::stringstream ss2(column2);
+                ss2 >> ot;
+
+                hhandler->vit_ontime(ot);
+                hhandler->vit_on(1000/(vvalue/60));
+                ui->label_vitactual->setText(QString::number(vvalue));
             }
         }
+        else if(ui->label_dialvalue->text()=="3")
+        {
+            std::string col1, col2;
+            std::ifstream file(PATH4);
+            int lineCount=0;
+            while(file >> col1 >> col2)
+            {
+                if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+                {
+                    lineCount++;
+                }
+                else
+                {
+                    lineCount = lineCount;
+                }
+            }
 
-        std::string line;
-        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
-        std::ifstream file2(PATH4);
-
-        if(idx1>=1) {
-            for (double i = 1; i <= idx1; i++)
+            std::string line;
+            std::ifstream file2(PATH4);
+            for (double i = 1; i <= lineCount; i++)
             {
                 std::getline(file2, line);
             }
@@ -2402,10 +2445,9 @@ void MainWindow::linearcall23()
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
         }
-        else {
-            hhandler->vit_off();
         }
-    }
+
+
 
     else if(madtype=="Midlabs") {
         int vvalue;
@@ -2420,27 +2462,68 @@ void MainWindow::linearcall23()
             hhandler->vit_off();
         }
 
-        std::string col1, col2;
-        std::ifstream file(PATH3);
-        int lineCount=0;
-        while(file >> col1 >> col2)
+        if(ui->label_dialvalue->text()=="2")
         {
-            if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+            std::string col1, col2;
+            std::ifstream file(PATH3);
+            int lineCount=0;
+            while(file >> col1 >> col2)
             {
-                lineCount++;
+                if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+                {
+                    lineCount++;
+                }
+                else
+                {
+                    lineCount = lineCount;
+                }
             }
-            else
-            {
-                lineCount = lineCount;
+
+            std::string line;
+            idx1 = ((avg-fp0-fp1)/fp2)*lineCount;
+            std::ifstream file2(PATH3);
+
+            if(idx1>=1) {
+                for (double i = 1; i <= idx1; i++)
+                {
+                    std::getline(file2, line);
+                }
+
+
+                std::istringstream iss(line);
+                std::string column1, column2;
+                iss >> column1 >> column2;
+
+                std::stringstream ss(column1);
+                ss >> vvalue;
+                std::stringstream ss2(column2);
+                ss2 >> ot;
+
+                hhandler->vit_ontime(ot);
+                hhandler->vit_on(1000/(vvalue/60));
+                ui->label_vitactual->setText(QString::number(vvalue));
             }
         }
+        else if(ui->label_dialvalue->text()=="3")
+        {
+            std::string col1, col2;
+            std::ifstream file(PATH3);
+            int lineCount=0;
+            while(file >> col1 >> col2)
+            {
+                if(std::stoi(col1) <= ui->label_vitpreset->text().toInt())
+                {
+                    lineCount++;
+                }
+                else
+                {
+                    lineCount = lineCount;
+                }
+            }
 
-        std::string line;
-        idx1 = ((avg-fp0-fp1)/(fp2+fp3))*lineCount;
-        std::ifstream file2(PATH3);
-
-        if(idx1>=1) {
-            for (double i = 1; i <= idx1; i++)
+            std::string line;
+            std::ifstream file2(PATH3);
+            for (double i = 1; i <= lineCount; i++)
             {
                 std::getline(file2, line);
             }
@@ -2458,9 +2541,6 @@ void MainWindow::linearcall23()
             hhandler->vit_ontime(ot);
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
-        }
-        else {
-            hhandler->vit_off();
         }
     }
 
@@ -3247,11 +3327,28 @@ void MainWindow::updateLabel2()
         {
             if(flag2==0)
             {
-                linearcall3();
+                if(avgfp<4000)
+                {
+                    linearcall3();
+                }
+                else
+                {
+                    hhandler->vit_on(1000/(vit_value/60));
+                    ui->label_vitactual->setText(QString::number(vit_value));
+                }
+
             }
             else if(flag2==1)
             {
-                linearcall23();
+                if(avgfp<4000)
+                {
+                    linearcall23();
+                }
+                else
+                {
+                    hhandler->vit_on(1000/(vit_value/60));
+                    ui->label_vitactual->setText(QString::number(vit_value));
+                }
             }
         }
     }
