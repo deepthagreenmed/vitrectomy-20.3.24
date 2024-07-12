@@ -94,7 +94,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QTimer *timerfp = new QTimer;
     connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
-    //connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValuesNonlinear);
     timerfp->start(1);
 
 
@@ -142,9 +141,7 @@ MainWindow::MainWindow(QWidget *parent)
           ui->label_led2->setText(query.value(50).toString());
           ui->label_vacpreset->setText(query.value(35).toString());
           vacmode=query.value(36).toString();
-         // ui->label_vitpreset->setText(query.value(33).toString());
           vitmode=query.value(34).toString();
-        //  ui->label_dia->setText(query.value(0).toString());
 
           itemname35 = query.value(34).toString();
 
@@ -157,8 +154,6 @@ MainWindow::MainWindow(QWidget *parent)
                ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
           }
 
-               itemname36 = query.value(35).toString();
-              // ui->label_aipreset->setText(itemname36);
         itemname43 = query.value(42).toString();
 
           itemname44= query.value(43).toString();
@@ -189,8 +184,6 @@ MainWindow::MainWindow(QWidget *parent)
     avgfp=fp->convert(CHANNEL_0);
 
     hhandler->vit_off();
-
-    //ui->label_vitpreset->setText(QString::number(vit_value));
 
     timerzero.start(100);
     connect(&timerzero,&QTimer::timeout, this, &MainWindow::setZero);
@@ -341,7 +334,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_led1->clearFocus();
-        //ui->label_vacpreset->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
     }
@@ -359,7 +351,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_led1->clearFocus();
-        //ui->label_vitpreset->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -378,7 +369,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     ui->label_dia->clearFocus();
     ui->label_led2->clearFocus();
     ui->label_led1->clearFocus();
-    //ui->label_siloil->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -397,7 +387,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
           ui->label_dia->clearFocus();
           ui->label_led2->clearFocus();
           ui->label_led1->clearFocus();
-          //ui->label_aipreset->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
@@ -416,7 +405,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_vacpreset->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_led1->clearFocus();
-        //ui->label_dia->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -435,7 +423,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_vacpreset->clearFocus();
         ui->label_led1->clearFocus();
-        //ui->label_led2->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -454,7 +441,6 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         ui->label_dia->clearFocus();
         ui->label_led2->clearFocus();
         ui->label_vacpreset->clearFocus();
-        //ui->label_led1->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -1727,7 +1713,6 @@ void MainWindow::vitlnl(QString str)
 void MainWindow::typevit(QString str)
 {
     madtype = str;
-    //qDebug()<<madtype;
 }
 
 // Slot function to set value of diathermy
@@ -2365,7 +2350,6 @@ void MainWindow::nonlinearcall23()
 // Vitrectomy linear (2 and 3)
 void MainWindow::linearcall23()
 {
-
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
@@ -2532,7 +2516,7 @@ void MainWindow::linearcall3()
             ss >> vvalue;
             std::stringstream ss2(column2);
             ss2 >> ot;
-            //qDebug()<<ot<<vvalue;
+
             hhandler->vit_ontime(ot);
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
@@ -2587,12 +2571,10 @@ void MainWindow::linearcall3()
             ss >> vvalue;
             std::stringstream ss2(column2);
             ss2 >> ot;
-            //qDebug()<<ot<<vvalue;
 
             hhandler->vit_ontime(ot);
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
-            //qDebug()<<"actual"<<vvalue;
         }
         else {
             hhandler->vit_off();
@@ -2605,15 +2587,8 @@ void MainWindow::linearcall3()
 // Diathermy
 void MainWindow::diathermy()
 {
-//    if(avg>fp0 && avg<=(fp0+fp1))
-//    {
-        hhandler->dia_on();
-        hhandler->dia_count(ui->label_dia->text().toInt()*256/100);
-//    }
-//    else
-//    {
-//        hhandler->dia_off();
-//    }
+    hhandler->dia_on();
+    hhandler->dia_count(ui->label_dia->text().toInt()*256/100);
 }
 
 // Air injector on
@@ -2874,17 +2849,13 @@ void MainWindow::updateLabel()
 
 // setting value for dial
     avgfp = fp->convert(CHANNEL_0);
-    //qDebug()<<fp0<<fp1<<fp2<<fp3;
 
 
   if(vp==0)
   {//linear
 
-     // ui->dial->setValue(avgfp);
-
       if(ui->label_dialvalue->text() == "0")
       {
-          //ui->label_dialvalue->setText("0");
           l->writeDAC(0);
           int avg1 = vac->convert(CHANNEL_1)*0.1894;
           ui->label_vacactual->setText(QString::number(avg1));
@@ -2917,8 +2888,6 @@ void MainWindow::updateLabel()
           }
 
         //irrigation/aspiration
-         // ui->label_dialvalue->setText("1");
-          //diathermy();
           l->writeDAC(0);
           int avg1 = vac->convert(CHANNEL_1)*0.1894;
           ui->label_vacactual->setText(QString::number(avg1));
@@ -2941,7 +2910,6 @@ void MainWindow::updateLabel()
               beep_2to3=0;
           }
 
-        //  ui->label_dialvalue->setText("2");
 
           if(flag2==0)
           {
@@ -2979,7 +2947,7 @@ void MainWindow::updateLabel()
 
         std::stringstream ss(column1);
         ss >> dacval;
-        //qDebug()<<dacval;
+
         l->writeDAC(dacval);
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
@@ -3017,8 +2985,6 @@ void MainWindow::updateLabel()
                footpedalbeep();
           }
 
-       //ui->label_dialvalue->setText("3");
-
        int dacval;
 
        std::string col1, col2;
@@ -3051,7 +3017,6 @@ void MainWindow::updateLabel()
 
            std::stringstream ss(column1);
            ss >> dacval;
-           //qDebug()<<dacval;
 
            l->writeDAC(dacval);
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
@@ -3071,7 +3036,6 @@ void MainWindow::updateLabel()
 
            std::stringstream ss(column1);
            ss >> dacval;
-           //qDebug()<<dacval;
 
            l->writeDAC(dacval);
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
@@ -3099,8 +3063,6 @@ void MainWindow::updateLabel()
         beep_1to2=0;
         beep_2to3=0;
 
-      //  ui->dial->setValue(0);
-        //ui->label_dialvalue->setText("0");
         if(vip==1){hhandler->vit_off();}
         if(vip==0){hhandler->vit_off();}
         l->writeDAC(0);
@@ -3127,8 +3089,6 @@ void MainWindow::updateLabel()
             beep_2to3=0;
         }
 
-        //ui->dial->setValue(fp1+fp0);
-        //ui->label_dialvalue->setText("1");
         if(vip==1){hhandler->vit_off();}
         if(vip==0){hhandler->vit_off();}
 
@@ -3156,9 +3116,6 @@ void MainWindow::updateLabel()
         {
             //vaccum
             //normal
-       // ui->dial->setValue(fp1+fp2+fp0);
-       // ui->label_dialvalue->setText("2");
-
         int dacval;
 
         std::string col1, col2;
@@ -3188,7 +3145,7 @@ void MainWindow::updateLabel()
 
         std::stringstream ss(column1);
         ss >> dacval;
-        //qDebug()<<dacval;
+
         l->writeDAC(dacval);
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
@@ -3200,9 +3157,6 @@ void MainWindow::updateLabel()
         if(flag2==1)
         {
             //swap
-            //ui->dial->setValue(fp1+fp2+fp0);
-           // ui->label_dialvalue->setText("2");
-
             l->writeDAC(0);
             int avg1=vac->convert(CHANNEL_1)*0.1894;
             ui->label_vacactual->setText(QString::number(avg1));
@@ -3221,10 +3175,6 @@ void MainWindow::updateLabel()
              footpedalbeep();
         }
 
-        // ui->dial->setValue(fp1+fp2+fp3+fp0);
-        // ui->label_dialvalue->setText("3");
-
-
         int dacval;
 
         std::string col1, col2;
@@ -3254,7 +3204,7 @@ void MainWindow::updateLabel()
 
         std::stringstream ss(column1);
         ss >> dacval;
-        //qDebug()<<dacval;
+
         l->writeDAC(dacval);
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
@@ -3275,7 +3225,6 @@ void MainWindow::vitvalset()
 //Interface with vitrectomy based on footpedal reading
 void MainWindow::updateLabel2()
 {
-    //qDebug()<<vip<<vitp<<flag2;
     if(vip==0)
     {
         hhandler->vit_off();
