@@ -2054,9 +2054,6 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
 
         surgeonid=ui->comboBox_surgeonname->currentText();
         surgeonind=ui->comboBox_surgeonname->currentIndex();
-        //qDebug() << surgeonind;
-
-
 
 
         QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
@@ -2095,9 +2092,7 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
            ui->label_led2->setText(query.value(50).toString());
            ui->label_vacpreset->setText(query.value(35).toString());
            vacmode=query.value(36).toString();
-          // ui->label_vitpreset->setText(query.value(33).toString());
            vitmode=query.value(34).toString();
-         //  ui->label_dia->setText(query.value(0).toString());
 
            madtype = query.value(48).toString();
 
@@ -2113,8 +2108,6 @@ if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->c
                ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
 
            }
-               // itemname36 = query.value(35).toString();
-               // ui->label_aipreset->setText(itemname36);
                 itemname44= query.value(43).toString();
                fp0=itemname44.toDouble()*40.95;
                 itemname45 = query.value(44).toString();
