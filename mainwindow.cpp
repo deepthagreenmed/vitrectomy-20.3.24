@@ -3415,8 +3415,6 @@ void MainWindow::setFPValues()
 {
     avgfp=fp->convert(CHANNEL_0);
 
-   // qDebug()<<avgfp<<ui->label_dialvalue->text();
-
     if(avgfp>=0 && avgfp<=fp0)
     {
         if(vitp==0)
