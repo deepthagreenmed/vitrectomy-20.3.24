@@ -273,10 +273,8 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
         key->resize(491,271);
         key->move(980,280);
         key->show();
-        //ui->lineEdit_cutrate->setText("");
-      //qDebug() << "Left click";
+
     } else if ( k->button() == Qt::RightButton ) {
-      //qDebug() << "Right click";
     }
   }
   if(object == ui->lineEdit_powmax && event->type() == QEvent::MouseButtonPress) {
@@ -285,7 +283,6 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,290);
         key->show();
-        //ui->lineEdit_powmax->setText("");
 
 
     } else if ( k->button() == Qt::RightButton ) {
@@ -308,7 +305,6 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
            key->resize(491,271);
           key->move(980,290);
           key->show();
-          //ui->lineEdit_vac->setText("");
 
       } else if ( k->button() == Qt::RightButton ) {
 
@@ -320,7 +316,6 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,290);
         key->show();
-        //ui->lineEdit_led1->setText("");
 
     } else if ( k->button() == Qt::RightButton ) {
 
@@ -333,7 +328,6 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
          key->resize(491,271);
         key->move(980,380);
         key->show();
-        //ui->lineEdit_led2->setText("");
 
 
     } else if ( k->button() == Qt::RightButton ) {
