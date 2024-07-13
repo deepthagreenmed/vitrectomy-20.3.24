@@ -194,8 +194,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::updateLabel2);
     connect(timerfortd, &QTimer::timeout, this, &MainWindow::updatetimedate);
 
-    frequency = 1000 * vit_value/60;
-    dutycycle = frequency - 40;
 
     hhandler->ai_off();
     hhandler->ai_preset_count(0);
