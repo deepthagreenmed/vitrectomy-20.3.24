@@ -24,7 +24,7 @@
 #include <QString>
 #include <QProcess>
 
-#define PATH "/home/main.db"
+#define PATH "/home/vitrectomy.db"
 //#define PATH2 "/home/vsodata10.txt"
 #define PATH3 "/home/midlabs.txt"
 #define PATH4 "/home/aktive.txt"

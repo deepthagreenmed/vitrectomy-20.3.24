@@ -12,7 +12,7 @@
 #include <QLineEdit>
 #include <QListWidget>
 
-#define PATH "/home/main.db"
+#define PATH "/home/vitrectomy.db"
 
 namespace Ui {
 class settingswindow;
@@ -31,7 +31,6 @@ public:
     bool eventFilter(QObject* object, QEvent* event);
     void populatetype();
     void updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue);
-    //QString madtype;
 
 
 signals:
