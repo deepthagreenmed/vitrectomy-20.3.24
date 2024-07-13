@@ -3399,6 +3399,7 @@ void MainWindow::receiveString3(QString val)
     fp3=val.toDouble();
 }
 
+//Backspace on keypad
 void MainWindow::on_clickedbackspace()
 {
     if(ui->label_vacpreset->focusWidget()) {
@@ -3437,6 +3438,8 @@ void MainWindow::on_clickedbackspace()
       ui->label_led1->setText(data);
   }
 }
+
+// Linear/Nonlinear footpedal
 void MainWindow::setFPValues()
 {
     avgfp=fp->convert(CHANNEL_0);
@@ -3493,6 +3496,7 @@ void MainWindow::setFPValues()
 
 }
 
+// Transmit surgeon from settings window to main window
 void MainWindow::updateText(const QString &text)
 {
     ui->comboBox_surgeonname->setCurrentText(text);
