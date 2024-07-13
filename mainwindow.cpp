@@ -124,7 +124,6 @@ MainWindow::MainWindow(QWidget *parent)
     QString itemname48;
     if(query.next()){
         itemname48=query.value(0).toString();
-        //qDebug()<<itemname48;
         surgeonind=itemname48.toInt();
     }
 

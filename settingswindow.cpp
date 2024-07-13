@@ -770,7 +770,6 @@ else
 {
     ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
 }
-//qDebug()<<s1+s2+s3;
 
 
 }
@@ -1007,7 +1006,7 @@ void settingswindow::on_fp_settings_clicked()
 
 
         int sum=Fp0+Fp1+Fp2+Fp3;
-        qDebug()<<sum;
+        //qDebug()<<sum;
      if(sum==100){
      query.prepare("update maindb set fp0='"+fp0+"',fp1='"+fp1+"',fp2='"+fp2+"',fp3='"+fp3+"'where surgeon='"+surgeonid+"'");
 
@@ -1168,7 +1167,7 @@ void settingswindow::on_clickedspace()
 void settingswindow::on_clickedentertext()
 {
     QString docnamenew = ui->lineEdit_5->text();
-    qDebug()<<ui->lineEdit_5->text();
+    //qDebug()<<ui->lineEdit_5->text();
     QSqlDatabase db1 = QSqlDatabase::addDatabase("QSQLITE");
     db1.setDatabaseName(PATH);
 
