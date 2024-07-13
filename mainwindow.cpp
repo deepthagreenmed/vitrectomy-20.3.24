@@ -3327,7 +3327,7 @@ void MainWindow::updateLabel2()
         {
             if(flag2==0)
             {
-                if(avgfp<4000)
+                if(avgfp<4095)
                 {
                     linearcall3();
                 }
@@ -3340,7 +3340,7 @@ void MainWindow::updateLabel2()
             }
             else if(flag2==1)
             {
-                if(avgfp<4000)
+                if(avgfp<4095)
                 {
                     linearcall23();
                 }
