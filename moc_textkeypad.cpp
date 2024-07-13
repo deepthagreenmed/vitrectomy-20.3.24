@@ -41,13 +41,13 @@ QT_MOC_LITERAL(5, 40, 11), // "spacesignal"
 QT_MOC_LITERAL(6, 52, 11), // "entersignal"
 QT_MOC_LITERAL(7, 64, 9), // "entertext"
 QT_MOC_LITERAL(8, 74, 9), // "enterback"
-QT_MOC_LITERAL(9, 84, 10), // "spaceenter"
+QT_MOC_LITERAL(9, 84, 10), // "enterspace"
 QT_MOC_LITERAL(10, 95, 10) // "enterenter"
 
     },
     "textkeypad\0textsignal\0\0digit\0backsignal\0"
     "spacesignal\0entersignal\0entertext\0"
-    "enterback\0spaceenter\0enterenter"
+    "enterback\0enterspace\0enterenter"
 };
 #undef QT_MOC_LITERAL
 
@@ -103,7 +103,7 @@ void textkeypad::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->entersignal(); break;
         case 4: _t->entertext(); break;
         case 5: _t->enterback(); break;
-        case 6: _t->spaceenter(); break;
+        case 6: _t->enterspace(); break;
         case 7: _t->enterenter(); break;
         default: ;
         }

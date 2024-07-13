@@ -21,7 +21,7 @@ textkeypad::textkeypad(QWidget *parent) :
 
     connect(ui->pushButton_11, &QPushButton::clicked, this, &textkeypad::enterback);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &textkeypad::enterenter);
-    connect(ui->pushButton_42, &QPushButton::clicked, this, &textkeypad::spaceenter);
+    connect(ui->pushButton_42, &QPushButton::clicked, this, &textkeypad::enterspace);
 
 }
 
@@ -44,7 +44,7 @@ void textkeypad::enterback()
 {
     emit backsignal();
 }
-void textkeypad::spaceenter()
+void textkeypad::enterspace()
 {
     emit spacesignal();
 }

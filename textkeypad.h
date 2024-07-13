@@ -26,7 +26,7 @@ signals:
 private slots:
     void entertext();
     void enterback();
-    void spaceenter();
+    void enterspace();
     void enterenter();
 
 private:
