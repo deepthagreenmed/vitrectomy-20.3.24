@@ -278,6 +278,8 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_23, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
     connect(ui->comboBox_24, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
 
+    connect(ui->listWidget, &QListWidget::itemClicked, this, &settingswindow::updateSurgeon);
+
 
 }
 
@@ -1289,6 +1291,13 @@ void settingswindow::onCutterTypeChanged(int index)
         break;
     default:
         break;
+    }
+}
+
+void settingswindow::updateSurgeon() {
+    QListWidgetItem *selectedItem = ui->listWidget->currentItem();
+    if (selectedItem) {
+        emit textSelected(selectedItem->text());
     }
 }
 

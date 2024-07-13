@@ -10,6 +10,7 @@
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QLineEdit>
+#include <QListWidget>
 
 #define PATH "/home/main.db"
 
@@ -47,8 +48,12 @@ signals:
     void vitmode(QString str);
     void vittype(QString str);
     void diastr(QString str);
+    void textSelected(const QString &text);
+
 
 public slots:
+
+    void updateSurgeon();
 
     void updateComboBoxes(int index);
 

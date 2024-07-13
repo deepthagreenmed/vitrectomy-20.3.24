@@ -286,6 +286,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timernl3, &QTimer::timeout, this, &MainWindow::nonlinearcall3);
     timernl3->start(1);
 
+    connect(win2, &settingswindow::textSelected, this, &MainWindow::updateText);
+
 }
 
 // Show setup screen after 3 seconds
@@ -3489,4 +3491,9 @@ void MainWindow::setFPValues()
         ui->label_dialvalue->setText("3");
     }
 
+}
+
+void MainWindow::updateText(const QString &text)
+{
+    ui->comboBox_surgeonname->setCurrentText(text);
 }

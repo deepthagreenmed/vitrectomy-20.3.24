@@ -73,6 +73,8 @@ signals:
 
 public slots:
 
+    void updateText(const QString &text);
+
     void setFPValues();
 
     void receiveString(const QString& str);
