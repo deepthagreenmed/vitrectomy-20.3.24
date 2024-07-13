@@ -3439,7 +3439,7 @@ void MainWindow::on_clickedbackspace()
   }
 }
 
-// Linear/Nonlinear footpedal
+// Linear/Non-linear footpedal
 void MainWindow::setFPValues()
 {
     avgfp=fp->convert(CHANNEL_0);
