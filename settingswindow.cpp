@@ -652,8 +652,6 @@ QSqlDatabase::removeDatabase("QSQLITE");
 }
 
 
-
-
 // Load database from list
 void settingswindow::loadDatabaseFromList(const QString &currentText)
 {
