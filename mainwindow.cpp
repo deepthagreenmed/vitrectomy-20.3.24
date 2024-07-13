@@ -358,7 +358,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
   if(object == ui->label_siloil && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
-    key->resize(491, 271);
+    key->resize(491,271);
     key->move(850,450);
     key->show();
     ui->label_siloil->setFocus();
