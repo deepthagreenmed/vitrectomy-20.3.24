@@ -1199,7 +1199,7 @@ void settingswindow::on_clickedentertext()
     text->hide();
 }
 
-//Backspace
+//Backspace on keypad
 void settingswindow::on_clickedbackspace()
 {
     if(ui->lineEdit_powmax->focusWidget()) {
