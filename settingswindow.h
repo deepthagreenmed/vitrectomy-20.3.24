@@ -105,7 +105,7 @@ public slots:
 
 
 private slots:
-    void onComboBoxTypeChanged(int index);
+    void onCutterTypeChanged(int index);
 
     void loadDatabaseFromList(const QString &currentText);
 

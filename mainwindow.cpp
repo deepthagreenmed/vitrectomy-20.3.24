@@ -3326,7 +3326,7 @@ void MainWindow::updateLabel2()
         {
             if(flag2==0)
             {
-                if(avgfp<4095)
+                if(avgfp<4085)
                 {
                     linearcall3();
                 }
@@ -3339,7 +3339,7 @@ void MainWindow::updateLabel2()
             }
             else if(flag2==1)
             {
-                if(avgfp<4095)
+                if(avgfp<4085)
                 {
                     linearcall23();
                 }
@@ -3435,6 +3435,7 @@ void MainWindow::on_clickedbackspace()
 void MainWindow::setFPValues()
 {
     avgfp=fp->convert(CHANNEL_0);
+    //qDebug()<<avgfp;
 
     if(avgfp>=0 && avgfp<=fp0)
     {

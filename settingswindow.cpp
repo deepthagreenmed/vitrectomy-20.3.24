@@ -250,8 +250,25 @@ settingswindow::settingswindow(QWidget *parent) :
 
     ui->listWidget->setCurrentRow(currentindex);
 
+
+
+    if(ui->comboBox_cuttertype->currentText() == "Midlabs")
+     {
+         ui->lineEdit_maxcutrate->setText("8000");
+     }
+     if(ui->comboBox_cuttertype->currentText() == "Aktive")
+     {
+          ui->lineEdit_maxcutrate->setText("7500");
+     }
+     if(ui->comboBox_cuttertype->currentText() == "Dorc")
+     {
+          ui->lineEdit_maxcutrate->setText("8000");
+     }
+
+
+
     // Connect the combo box's index changed signal to the slot
-    connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onComboBoxTypeChanged);
+    connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onCutterTypeChanged);
 
     items << "LED1 On/Off" << "LED2 On/Off" << "Vitrectomy On/Off" << "Diathermy On/Off" << "Silicon Oil On/Off";
 
@@ -1255,7 +1272,7 @@ void settingswindow::updateComboBoxes(int index) {
         }
     }
 
-void settingswindow::onComboBoxTypeChanged(int index)
+void settingswindow::onCutterTypeChanged(int index)
 {
     switch (index) {
     //Midlabs

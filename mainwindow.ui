@@ -1313,7 +1313,7 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>1180</x>
+      <x>870</x>
       <y>40</y>
       <width>71</width>
       <height>61</height>
@@ -1329,7 +1329,7 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QLabel" name="label_43">
     <property name="geometry">
      <rect>
-      <x>1418</x>
+      <x>1290</x>
       <y>39</y>
       <width>67</width>
       <height>61</height>
@@ -1345,9 +1345,9 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QLabel" name="label_date">
     <property name="geometry">
      <rect>
-      <x>1250</x>
+      <x>970</x>
       <y>40</y>
-      <width>161</width>
+      <width>261</width>
       <height>61</height>
      </rect>
     </property>
@@ -1361,9 +1361,9 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QLabel" name="label_time">
     <property name="geometry">
      <rect>
-      <x>1480</x>
+      <x>1400</x>
       <y>40</y>
-      <width>121</width>
+      <width>181</width>
       <height>61</height>
      </rect>
     </property>
