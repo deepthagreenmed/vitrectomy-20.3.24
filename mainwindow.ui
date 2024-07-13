@@ -1329,7 +1329,7 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QLabel" name="label_43">
     <property name="geometry">
      <rect>
-      <x>1290</x>
+      <x>1250</x>
       <y>39</y>
       <width>67</width>
       <height>61</height>
@@ -1361,7 +1361,7 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QLabel" name="label_time">
     <property name="geometry">
      <rect>
-      <x>1400</x>
+      <x>1340</x>
       <y>40</y>
       <width>181</width>
       <height>61</height>
@@ -1641,8 +1641,8 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>pushButton_drain</zorder>
    <zorder>label_12</zorder>
    <zorder>label_22</zorder>
-   <zorder>pushButton_start</zorder>
    <zorder>comboBox_surgeonname</zorder>
+   <zorder>pushButton_start</zorder>
   </widget>
  </widget>
  <resources/>

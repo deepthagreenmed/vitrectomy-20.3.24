@@ -1023,8 +1023,8 @@ void settingswindow::on_fp_settings_clicked()
 
 
         int sum=Fp0+Fp1+Fp2+Fp3;
-        //qDebug()<<sum;
-     if(sum==100){
+
+        if(sum==100){
      query.prepare("update maindb set fp0='"+fp0+"',fp1='"+fp1+"',fp2='"+fp2+"',fp3='"+fp3+"'where surgeon='"+surgeonid+"'");
 
      if(!(query.exec()))

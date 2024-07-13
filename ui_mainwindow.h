@@ -579,7 +579,7 @@ public:
         label_15->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/dateimg1.png);"));
         label_43 = new QLabel(centralwidget);
         label_43->setObjectName(QString::fromUtf8("label_43"));
-        label_43->setGeometry(QRect(1290, 39, 67, 61));
+        label_43->setGeometry(QRect(1250, 39, 67, 61));
         label_43->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/timeimg2.png);"));
         label_date = new QLabel(centralwidget);
         label_date->setObjectName(QString::fromUtf8("label_date"));
@@ -587,7 +587,7 @@ public:
         label_date->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";"));
         label_time = new QLabel(centralwidget);
         label_time->setObjectName(QString::fromUtf8("label_time"));
-        label_time->setGeometry(QRect(1400, 40, 181, 61));
+        label_time->setGeometry(QRect(1340, 40, 181, 61));
         label_time->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";"));
         comboBox_surgeonname = new QComboBox(centralwidget);
         comboBox_surgeonname->setObjectName(QString::fromUtf8("comboBox_surgeonname"));
@@ -738,8 +738,8 @@ public:
         pushButton_drain->raise();
         label_12->raise();
         label_22->raise();
-        pushButton_start->raise();
         comboBox_surgeonname->raise();
+        pushButton_start->raise();
 
         retranslateUi(MainWindow);
 

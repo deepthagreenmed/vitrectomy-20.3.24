@@ -1991,33 +1991,37 @@ void MainWindow::updatetimedate()
 // Load combobox from database
 void MainWindow::comboboxload()
 {
-    QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
-    mydb1.setDatabaseName(PATH);
+//    QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
+//    mydb1.setDatabaseName(PATH);
 
-    if (!mydb1.open()) {
-        qDebug() << "Error opening database:"  ;
-        return;
+//    if (!mydb1.open()) {
+//        qDebug() << "Error opening database:"  ;
+//        return;
+//    }
+
+//    QSqlQuery query;
+//    if (!query.exec("SELECT surgeon FROM maindb")) {
+//        qDebug() << "Error executing query:" ;
+//        mydb1.close();
+//        return;
+//    }
+
+//    ui->comboBox_surgeonname->clear(); // Clear existing items before loading new ones
+
+//    int i=0;
+//    while (query.next()) {
+//        QString itemName = query.value(i).toString();
+//        ui->comboBox_surgeonname->addItem(itemName);
+//        i++;
+//   }
+//    mydb1.close();
+
+    ui->comboBox_surgeonname->clear();
+
+    // Adding surgeons to the combo box
+    for (int i = 1; i <= 20; ++i) {
+        ui->comboBox_surgeonname->addItem(QString("Surgeon %1").arg(i));
     }
-
-    QSqlQuery query;
-    if (!query.exec("SELECT surgeon FROM maindb")) {
-        qDebug() << "Error executing query:" ;
-        mydb1.close();
-        return;
-    }
-
-    ui->comboBox_surgeonname->clear(); // Clear existing items before loading new ones
-
-
-    while (query.next()) {
-        QString itemName = query.value(0).toString();
-
-
-        ui->comboBox_surgeonname->addItem(itemName);
-
-
-   }
-    mydb1.close();
 }
 
 // Change screens after 3 seconds
@@ -2032,8 +2036,9 @@ void MainWindow::timerCompleted()
 
 // Combo box
 void MainWindow::onComboBoxClicked()
-{timerforondscreen->stop();
-if((ui->comboBox_surgeonname->currentIndex())>=1 && (ui->comboBox_surgeonname->currentIndex())<=19)
+{
+    timerforondscreen->stop();
+if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->currentIndex())<20)
 {
 
         surgeonid=ui->comboBox_surgeonname->currentText();
