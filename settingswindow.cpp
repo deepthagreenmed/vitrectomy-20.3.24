@@ -462,7 +462,6 @@ void settingswindow::on_dia_clicked()
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName(PATH);
 
-
     mydb.open();
 
     QSqlQuery query;
