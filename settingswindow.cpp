@@ -567,19 +567,6 @@ void settingswindow::on_vit_clicked()
      emit vitmode(vcmin);
      emit vittype(type);
 
-//     if(type == "Midlabs")
-//     {
-//         ui->lineEdit_maxcutrate->setText("8000");
-//     }
-//     else if(type == "Aktive")
-//     {
-//          ui->lineEdit_maxcutrate->setText("7500");
-//     }
-//     else if(type == "Dorc")
-//     {
-//          ui->lineEdit_maxcutrate->setText("8000");
-//     }
-
 
      query.prepare("update maindb set vcmax='"+vcmax+"',vcmin='"+vcmin+"',type='"+type+"'where surgeon='"+surgeonid+"'");
      query.exec();
