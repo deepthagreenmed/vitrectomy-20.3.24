@@ -556,7 +556,7 @@ void settingswindow::on_vit_clicked()
     mydb.setDatabaseName(PATH);
     mydb.open();
      QSqlQuery query;
-     QString surgeon,vcmax,vcmin,vvmax,vvmin,vaspmax,type;
+     QString vcmax,vcmin,vvmax,vvmin,vaspmax,type;
 
      surgeonid=ui->lineEdit_5->text();
      vcmax=ui->lineEdit_cutrate->text();
@@ -1201,6 +1201,7 @@ void settingswindow::on_clickedentertext()
     text->hide();
 }
 
+//Backspace
 void settingswindow::on_clickedbackspace()
 {
     if(ui->lineEdit_powmax->focusWidget()) {
@@ -1233,6 +1234,7 @@ void settingswindow::on_clickedbackspace()
   }
 }
 
+//Update combo boxes
 void settingswindow::updateComboBoxes(int index) {
         QList<QComboBox *> combos = {ui->comboBox_20, ui->comboBox_21, ui->comboBox_23, ui->comboBox_24};
 
@@ -1261,6 +1263,7 @@ void settingswindow::updateComboBoxes(int index) {
         }
     }
 
+// Set max cut rate for each vitrectomy cutter
 void settingswindow::onCutterTypeChanged(int index)
 {
     switch (index) {
@@ -1281,6 +1284,7 @@ void settingswindow::onCutterTypeChanged(int index)
     }
 }
 
+// Get selected surgeon
 void settingswindow::updateSurgeon() {
     QListWidgetItem *selectedItem = ui->listWidget->currentItem();
     if (selectedItem) {
