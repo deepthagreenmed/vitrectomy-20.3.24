@@ -1267,21 +1267,26 @@ void settingswindow::updateComboBoxes(int index) {
 void settingswindow::onCutterTypeChanged(int index)
 {
     switch (index) {
+
     //Midlabs
     case 0:
         ui->lineEdit_maxcutrate->setText("8000");
         break;
+
     //Aktive
     case 1:
         ui->lineEdit_maxcutrate->setText("7500");
         break;
+
     //Dorc
     case 2:
         ui->lineEdit_maxcutrate->setText("8000");
         break;
+
     default:
         break;
     }
+
 }
 
 // Get selected surgeon
