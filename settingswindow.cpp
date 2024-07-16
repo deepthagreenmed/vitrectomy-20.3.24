@@ -993,23 +993,23 @@ void settingswindow::on_fp_settings_clicked()
      QSqlQuery query;
      QString surgeon;
      QString fp0,fp1,fp2,fp3;
-     int Fp0,Fp1,Fp2,Fp3;
+     double Fp0,Fp1,Fp2,Fp3;
 
      surgeonid=ui->lineEdit_5->text();
      fp0=ui->lineEdit_zero->text();
-     Fp0=fp0.toInt();
+     Fp0=fp0.toDouble();
 
      fp1=ui->lineEdit_one->text();
-     Fp1=fp1.toInt();
+     Fp1=fp1.toDouble();
 
      fp2=ui->lineEdit_two->text();
-     Fp2=fp2.toInt();
+     Fp2=fp2.toDouble();
 
      fp3=ui->lineEdit_three->text();
-     Fp3=fp3.toInt();
+     Fp3=fp3.toDouble();
 
 
-        int sum=Fp0+Fp1+Fp2+Fp3;
+        double sum=Fp0+Fp1+Fp2+Fp3;
 
         if(sum==100){
      query.prepare("update maindb set fp0='"+fp0+"',fp1='"+fp1+"',fp2='"+fp2+"',fp3='"+fp3+"'where surgeon='"+surgeonid+"'");
