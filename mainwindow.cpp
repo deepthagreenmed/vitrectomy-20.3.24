@@ -3456,10 +3456,16 @@ void MainWindow::setFPValues()
         if(vitp==0)
         {
             ui->dial->setValue(avgfp);
+            l->writeDAC(0);
+            int avg1=vac->convert(CHANNEL_1)*0.1894;
+            ui->label_vacactual->setText(QString::number(avg1));
         }
         if(vitp==1)
         {
             ui->dial->setValue(0);
+            l->writeDAC(0);
+            int avg1=vac->convert(CHANNEL_1)*0.1894;
+            ui->label_vacactual->setText(QString::number(avg1));
         }
         ui->label_dialvalue->setText("0");
     }
@@ -3468,10 +3474,16 @@ void MainWindow::setFPValues()
         if(vitp==0)
         {
             ui->dial->setValue(avgfp);
+            l->writeDAC(0);
+            int avg1=vac->convert(CHANNEL_1)*0.1894;
+            ui->label_vacactual->setText(QString::number(avg1));
         }
         if(vitp==1)
         {
             ui->dial->setValue(fp0+fp1);
+            l->writeDAC(0);
+            int avg1=vac->convert(CHANNEL_1)*0.1894;
+            ui->label_vacactual->setText(QString::number(avg1));
         }
         ui->label_dialvalue->setText("1");
     }
