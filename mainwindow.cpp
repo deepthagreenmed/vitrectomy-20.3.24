@@ -3528,7 +3528,7 @@ void MainWindow::setFPValues()
         ui->label_dialvalue->setText("3");
     }
 
-    qDebug()<<fp0<<fp1<<fp2<<fp3<<avgfp;
+    qDebug()<<vac->convert(CHANNEL_1)<<avgfp;
 
 }
 
