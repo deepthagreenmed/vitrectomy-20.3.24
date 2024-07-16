@@ -3165,7 +3165,7 @@ void MainWindow::updateLabel()
        if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
 
      }
-  }
+
   if(vp==1)
   {//non-linear
 
