@@ -111,7 +111,7 @@ public slots:
 
 private slots:
 
-     void vaccum390();
+        //void vaccum390();
 
         void pressureval();
 
