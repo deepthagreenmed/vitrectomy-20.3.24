@@ -14,7 +14,6 @@
 #include <QObject>
 #include <QDebug>
 
-
 class pressuresensor : public QObject
 {
     Q_OBJECT
