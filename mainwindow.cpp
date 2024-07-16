@@ -3516,6 +3516,8 @@ void MainWindow::setFPValues()
         ui->label_dialvalue->setText("3");
     }
 
+    qDebug()<<fp0<<fp1<<fp2<<fp3<<avgfp;
+
 }
 
 // Transmit surgeon from settings window to main window
