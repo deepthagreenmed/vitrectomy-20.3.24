@@ -3384,25 +3384,25 @@ void MainWindow::drain_onoff()
 //fp0
 void MainWindow::receiveString0(QString val)
 {
-    fp0=val.toDouble();
+    fp0=val.toDouble()*40.95;
 }
 
 //fp1
 void MainWindow::receiveString1(QString val)
 {
-    fp1=val.toDouble();
+    fp1=val.toDouble()*40.95;
 }
 
 //fp2
 void MainWindow::receiveString2(QString val)
 {
-    fp2=val.toDouble();
+    fp2=val.toDouble()*40.95;
 }
 
 //fp3
 void MainWindow::receiveString3(QString val)
 {
-    fp3=val.toDouble();
+    fp3=val.toDouble()*40.95;
 }
 
 //Backspace on keypad
