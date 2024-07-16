@@ -74,6 +74,8 @@ signals:
 
 public slots:
 
+    void vaccum390();
+
     void updateText(const QString &text);
 
     void setFPValues();

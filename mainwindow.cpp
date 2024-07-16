@@ -294,6 +294,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerpressure, &QTimer::timeout, this, &MainWindow::pressureval);
     timerpressure->start(100); // milliseconds
 
+    QTimer *timer390 = new QTimer;
+    connect(timer390, &QTimer::timeout, this, &MainWindow::vaccum390);
+    timer390->start(1);
+
 }
 
 // Show setup screen after 3 seconds
@@ -3551,4 +3555,17 @@ void MainWindow::pressureval()
     //ui->label_2->setText(QString::number(psi));
     //float bar = static_cast<float>(0.0689476*psi);
     //ui->label_3->setText(QString::number(bar));
+}
+
+void MainWindow::vaccum390()
+{
+    if(ui->label_vacpreset->text().toInt()>=390)
+    {
+        int dacval=(((ui->label_vacpreset->text().toInt()-390)/500)*16384)+12900;
+        l->writeDAC(dacval);
+        qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
+        int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
+    }
+
 }
