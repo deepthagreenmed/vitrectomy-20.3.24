@@ -23,6 +23,7 @@ SOURCES += \
     led.cpp \
     main.cpp \
     mainwindow.cpp \
+    pressuresensor.cpp \
     settingswindow.cpp \
     keypad.cpp \
     textkeypad.cpp
@@ -33,6 +34,7 @@ HEADERS += \
     led.h \
     ltc2614.h \
     mainwindow.h \
+    pressuresensor.h \
     settingswindow.h \
     keypad.h \
     textkeypad.h \

@@ -288,6 +288,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(win2, &settingswindow::textSelected, this, &MainWindow::updateText);
 
+    pressure=new pressuresensor;
+
+    QTimer *timerpressure = new QTimer(this);
+    connect(timerpressure, &QTimer::timeout, this, &MainWindow::pressureval);
+    timerpressure->start(100); // milliseconds
+
 }
 
 // Show setup screen after 3 seconds
@@ -3500,4 +3506,16 @@ void MainWindow::setFPValues()
 void MainWindow::updateText(const QString &text)
 {
     ui->comboBox_surgeonname->setCurrentText(text);
+}
+
+void MainWindow::pressureval()
+{
+    float sample=pressure->convert();
+    //ui->label->setText(QString::number(sample));
+    float psi = static_cast<float>(0.007*sample-5.22);
+    qDebug()<<"Pressure"<<psi;
+    //float psi = ((((float)sample - MIN_COUNT) * (100 - 0)) / (MAX_COUNT - MIN_COUNT)) + 0;
+    //ui->label_2->setText(QString::number(psi));
+    //float bar = static_cast<float>(0.0689476*psi);
+    //ui->label_3->setText(QString::number(bar));
 }

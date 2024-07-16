@@ -8,6 +8,7 @@
 #include "hwhandler.h"
 #include "led.h"
 #include "ltc2614.h"
+#include "pressuresensor.h"
 
 #include <iostream>
 #include <fstream>
@@ -109,6 +110,8 @@ public slots:
 
 
 private slots:
+
+        void pressureval();
 
         void transitionToNewScreen();
 
@@ -310,6 +313,7 @@ private:
    // QMessageBox *msg;
    // QTimer *timermsg;
     ltc2614 *l;
+    pressuresensor *pressure;
 
 };
 #endif // MAINWINDOW_H
