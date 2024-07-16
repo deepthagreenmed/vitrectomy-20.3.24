@@ -3477,11 +3477,19 @@ void MainWindow::setFPValues()
     }
     else if(avgfp>(fp0+fp1) && avgfp<=(fp0+fp1+fp2))
     {
-        if(vitp==0)
+        if(vp==0 && flag2==0)
         {
             ui->dial->setValue(avgfp);
         }
-        if(vitp==1)
+        if(vp==1 && flag2==0)
+        {
+            ui->dial->setValue(fp0+fp1+fp2);
+        }
+        if(vitp==0 && flag2==1)
+        {
+            ui->dial->setValue(avgfp);
+        }
+        if(vitp==1 && flag2==1)
         {
             ui->dial->setValue(fp0+fp1+fp2);
         }
@@ -3489,11 +3497,19 @@ void MainWindow::setFPValues()
     }
     else if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
     {
-        if(vitp==0)
+        if(vitp==0 && flag2==0)
         {
             ui->dial->setValue(avgfp);
         }
-        if(vitp==1)
+        if(vitp==1 && flag2==0)
+        {
+            ui->dial->setValue(fp0+fp1+fp2+fp3);
+        }
+        if(vp==0 && flag2==1)
+        {
+            ui->dial->setValue(avgfp);
+        }
+        if(vp==1 && flag2==1)
         {
             ui->dial->setValue(fp0+fp1+fp2+fp3);
         }
@@ -3513,7 +3529,7 @@ void MainWindow::pressureval()
     float sample=pressure->convert();
     //ui->label->setText(QString::number(sample));
     float psi = static_cast<float>(0.007*sample-5.22);
-    qDebug()<<"Pressure"<<psi;
+    //qDebug()<<"Pressure"<<psi;
     //float psi = ((((float)sample - MIN_COUNT) * (100 - 0)) / (MAX_COUNT - MIN_COUNT)) + 0;
     //ui->label_2->setText(QString::number(psi));
     //float bar = static_cast<float>(0.0689476*psi);
