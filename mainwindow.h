@@ -74,8 +74,6 @@ signals:
 
 public slots:
 
-    void vaccum390();
-
     void updateText(const QString &text);
 
     void setFPValues();
@@ -112,6 +110,8 @@ public slots:
 
 
 private slots:
+
+     void vaccum390();
 
         void pressureval();
 

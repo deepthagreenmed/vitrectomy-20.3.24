@@ -298,6 +298,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer390, &QTimer::timeout, this, &MainWindow::vaccum390);
     timer390->start(1);
 
+
 }
 
 // Show setup screen after 3 seconds
@@ -3098,6 +3099,7 @@ void MainWindow::updateLabel()
        }
 
 
+
        std::ifstream file2(PATH6);
        std::string line;
        if(flag2==0)
@@ -3140,6 +3142,7 @@ void MainWindow::updateLabel()
 
 
        }
+
 
 
        file.close();
@@ -3559,13 +3562,12 @@ void MainWindow::pressureval()
 
 void MainWindow::vaccum390()
 {
-    if(ui->label_vacpreset->text().toInt()>=390)
+    if(ui->label_vacpreset->text().toInt()>390)
     {
-        int dacval=(((ui->label_vacpreset->text().toInt()-390)/500)*16384)+12900;
+        int dacval=(ui->label_vacpreset->text().toInt()/500)*16384;
         l->writeDAC(dacval);
         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
     }
-
 }
