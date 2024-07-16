@@ -1019,6 +1019,10 @@ void settingswindow::on_fp_settings_clicked()
          qDebug()<<"yes";
      }
 
+     emit stringPassed0(QString::number(Fp0));
+     emit stringPassed1(QString::number(Fp1));
+     emit stringPassed2(QString::number(Fp2));
+     emit stringPassed3(QString::number(Fp3));
 
      query.bindValue(fp0,"fp0");
      query.bindValue(fp1,"fp1");
@@ -1028,11 +1032,7 @@ void settingswindow::on_fp_settings_clicked()
         }else
      {QMessageBox::information(nullptr, "Information", "check the Total of positons 0,1,2,3.");}
       db1.close();
-      emit stringPassed0(QString::number(Fp0));
-      emit stringPassed1(QString::number(Fp1));
-      emit stringPassed2(QString::number(Fp2));
-      emit stringPassed3(QString::number(Fp3));
-QSqlDatabase::removeDatabase("QSQLITE");
+
 }
 
 // Diathermy tab
