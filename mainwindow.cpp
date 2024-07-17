@@ -3105,7 +3105,7 @@ void MainWindow::updateLabel()
 //           ui->label_vacactual->setText(QString::number(avg1));
         if(ui->label_vacpreset->text().toInt()>390)
         {
-         int dacval=16383;
+         int dacval=ui->label_vacpreset->text().toInt()*16383/500;
          l->writeDAC(dacval);
          qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
          int avg1 = vac->convert(CHANNEL_1)*0.1894;
@@ -3489,7 +3489,8 @@ void MainWindow::setFPValues()
             ui->dial->setValue(avgfp);
             l->writeDAC(0);
             int avg1=vac->convert(CHANNEL_1)*0.1894;
-            ui->label_vacactual->setText(QString::number(avg1));
+            //ui->label_vacactual->setText(QString::number(avg1));
+            ui->label_vacactual->setText("0");
         }
         if(vitp==1)
         {
@@ -3497,6 +3498,7 @@ void MainWindow::setFPValues()
             l->writeDAC(0);
             int avg1=vac->convert(CHANNEL_1)*0.1894;
             ui->label_vacactual->setText(QString::number(avg1));
+            ui->label_vacactual->setText("0");
         }
         ui->label_dialvalue->setText("0");
     }
