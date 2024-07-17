@@ -111,6 +111,8 @@ public slots:
 
 private slots:
 
+        void dacvalue();
+
         void pressureval();
 
         void transitionToNewScreen();

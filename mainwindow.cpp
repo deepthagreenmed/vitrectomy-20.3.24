@@ -294,6 +294,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerpressure, &QTimer::timeout, this, &MainWindow::pressureval);
     timerpressure->start(100); // milliseconds
 
+    QTimer *timerdac = new QTimer;
+    connect(timerdac, &QTimer::timeout, this, &MainWindow::dacvalue);
+    timerdac->start(1);
+
 
 }
 
@@ -2728,14 +2732,14 @@ void MainWindow::setZero()
     if(avgzero<=(fp0+fp1) && avgzero>fp0)
     {
         ui->label_vitactual->setText("0");
-        l->writeDAC(0);
-        int avg1=vac->convert(CHANNEL_1)*0.1894;
-        ui->label_vacactual->setText(QString::number(avg1));
+//        l->writeDAC(0);
+//        int avg1=vac->convert(CHANNEL_1)*0.1894;
+//        ui->label_vacactual->setText(QString::number(avg1));
     }
-    else
-    {
-        ui->label_vacactual->setText("0");
-    }
+//    else
+//    {
+//        ui->label_vacactual->setText("0");
+//    }
 }
 
 // LED1 and LED2
@@ -3095,6 +3099,7 @@ void MainWindow::updateLabel()
 
 //           std::istringstream iss(line);
 //           std::string column1, column2;
+
 //           iss >> column1 >> column2;
 
 //           std::stringstream ss(column1);
@@ -3488,18 +3493,18 @@ void MainWindow::setFPValues()
         if(vitp==0)
         {
             ui->dial->setValue(avgfp);
-            l->writeDAC(0);
-            int avg1=vac->convert(CHANNEL_1)*0.1894;
+            //l->writeDAC(0);
+            //int avg1=vac->convert(CHANNEL_1)*0.1894;
             //ui->label_vacactual->setText(QString::number(avg1));
-            ui->label_vacactual->setText("0");
+            //ui->label_vacactual->setText("0");
         }
         if(vitp==1)
         {
             ui->dial->setValue(0);
-            l->writeDAC(0);
-            int avg1=vac->convert(CHANNEL_1)*0.1894;
-            ui->label_vacactual->setText(QString::number(avg1));
-            ui->label_vacactual->setText("0");
+            //l->writeDAC(0);
+            //int avg1=vac->convert(CHANNEL_1)*0.1894;
+            //ui->label_vacactual->setText(QString::number(avg1));
+            //ui->label_vacactual->setText("0");
         }
         ui->label_dialvalue->setText("0");
     }
@@ -3508,16 +3513,16 @@ void MainWindow::setFPValues()
         if(vitp==0)
         {
             ui->dial->setValue(avgfp);
-            l->writeDAC(0);
-            int avg1=vac->convert(CHANNEL_1)*0.1894;
-            ui->label_vacactual->setText(QString::number(avg1));
+            //l->writeDAC(0);
+            //int avg1=vac->convert(CHANNEL_1)*0.1894;
+            //ui->label_vacactual->setText(QString::number(avg1));
         }
         if(vitp==1)
         {
             ui->dial->setValue(fp0+fp1);
-            l->writeDAC(0);
-            int avg1=vac->convert(CHANNEL_1)*0.1894;
-            ui->label_vacactual->setText(QString::number(avg1));
+            //l->writeDAC(0);
+            //int avg1=vac->convert(CHANNEL_1)*0.1894;
+            //ui->label_vacactual->setText(QString::number(avg1));
         }
         ui->label_dialvalue->setText("1");
     }
@@ -3585,4 +3590,23 @@ void MainWindow::pressureval()
     //ui->label_2->setText(QString::number(psi));
     //float bar = static_cast<float>(0.0689476*psi);
     //ui->label_3->setText(QString::number(bar));
+}
+
+void MainWindow::dacvalue()
+{
+    if(avgfp>=0 && avgfp<=fp0)
+    {
+        l->writeDAC(0);
+        int avg1=vac->convert(CHANNEL_1)*0.1894;
+        //ui->label_vacactual->setText(QString::number(avg1));
+        ui->label_vacactual->setText("0");
+    }
+
+    else if(avgfp>fp0 && avgfp<=(fp0+fp1))
+    {
+        l->writeDAC(0);
+        int avg1=vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
+    }
+
 }
