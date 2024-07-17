@@ -3091,8 +3091,6 @@ void MainWindow::updateLabel()
           }
 
 
-
-
           if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
 
       }
