@@ -3116,37 +3116,52 @@ void MainWindow::updateLabel()
                footpedalbeep();
           }
 
-//       int dacval;
+          int dacval;
 
 
-//       std::ifstream file2(PATH6);
-//       std::string line;
-//       if(flag2==0)
-//       {
-//           for (int i = 1; i <= lineCount; i++) {
-//               std::getline(file2, line);
-//           }
+          if(flag2==0)
+          {
+              std::string col1, col2;
+              std::ifstream file(PATH6);
+                int lineCount=0;
+              while(file >> col1 >> col2)
+              {
+                  if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+                  {
+                      lineCount++;
+                  }
+                  else
+                  {
+                      lineCount = lineCount;
+                  }
+              }
 
-//           std::istringstream iss(line);
-//           std::string column1, column2;
+              std::ifstream file2(PATH6);
+              std::string line;
+              for (int i = 1; i <= lineCount; i++) {
+                  std::getline(file2, line);
+              }
 
-//           iss >> column1 >> column2;
+              std::istringstream iss(line);
+              std::string column1, column2;
 
-//           std::stringstream ss(column1);
-//           ss >> dacval;
+              iss >> column1 >> column2;
 
-//           l->writeDAC(dacval);
-//           qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-//           int avg1 = vac->convert(CHANNEL_1)*0.1894;
-//           ui->label_vacactual->setText(QString::number(avg1));
-        //if(ui->label_vacpreset->text().toInt()>390)
-        //{
+              std::stringstream ss(column1);
+              ss >> dacval;
+
+              l->writeDAC(dacval);
+              qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
+              int avg1 = vac->convert(CHANNEL_1)*0.1894;
+              ui->label_vacactual->setText(QString::number(avg1));
+           if(ui->label_vacpreset->text().toInt()>390)
+           {
          int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
          l->writeDAC(dacval);
          qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
          int avg1 = vac->convert(CHANNEL_1)*0.1894;
          //ui->label_vacactual->setText(QString::number(avg1));
-        //}
+        }
 
         ui->label_vacactual->setText(ui->label_vacpreset->text());
 
@@ -3367,6 +3382,15 @@ void MainWindow::updateLabel()
         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         //ui->label_vacactual->setText(QString::number(avg1));
+
+        if(ui->label_vacpreset->text().toInt()>390)
+        {
+            int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+            l->writeDAC(dacval);
+            qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
+            int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        }
+
 
         ui->label_vacactual->setText(ui->label_vacpreset->text());
 
