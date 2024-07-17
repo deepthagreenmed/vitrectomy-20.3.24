@@ -111,8 +111,6 @@ public slots:
 
 private slots:
 
-        //void vaccum390();
-
         void pressureval();
 
         void transitionToNewScreen();
