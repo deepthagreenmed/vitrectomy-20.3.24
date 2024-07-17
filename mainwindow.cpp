@@ -3171,7 +3171,7 @@ void MainWindow::updateLabel()
            l->writeDAC(dacval);
            qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
-           ui->label_vacactual->setText(QString::number(avg1));
+           //ui->label_vacactual->setText(QString::number(avg1));
 
            ui->label_vacactual->setText(ui->label_vacpreset->text());
 
@@ -3341,7 +3341,7 @@ void MainWindow::updateLabel()
         l->writeDAC(dacval);
         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
-        ui->label_vacactual->setText(QString::number(avg1));
+        //ui->label_vacactual->setText(QString::number(avg1));
 
         ui->label_vacactual->setText(ui->label_vacpreset->text());
 
