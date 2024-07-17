@@ -2949,7 +2949,8 @@ void MainWindow::updateLabel()
       {
           l->writeDAC(0);
           int avg1 = vac->convert(CHANNEL_1)*0.1894;
-          ui->label_vacactual->setText(QString::number(avg1));
+//          ui->label_vacactual->setText(QString::number(avg1));
+          ui->label_vacactual->setText("0");
          if(vip==1){hhandler->vit_off();}
          if(vip==0){hhandler->vit_off();}
 
@@ -3102,12 +3103,14 @@ void MainWindow::updateLabel()
 //           qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
 //           int avg1 = vac->convert(CHANNEL_1)*0.1894;
 //           ui->label_vacactual->setText(QString::number(avg1));
-
+        if(ui->label_vacpreset->text().toInt()>390)
+        {
          int dacval=16383;
          l->writeDAC(dacval);
          qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
          int avg1 = vac->convert(CHANNEL_1)*0.1894;
          ui->label_vacactual->setText(QString::number(avg1));
+        }
 
        }
        else if(flag2==1)
@@ -3149,6 +3152,11 @@ void MainWindow::updateLabel()
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
            ui->label_vacactual->setText(QString::number(avg1));
 
+           if(avgfp>4085)
+           {
+               ui->label_vacactual->setText(ui->label_vacpreset->text());
+           }
+
            file.close();
             file2.close();
 
@@ -3176,8 +3184,8 @@ void MainWindow::updateLabel()
         if(vip==0){hhandler->vit_off();}
         l->writeDAC(0);
         int avg1=vac->convert(CHANNEL_1)*0.1894;
-        ui->label_vacactual->setText(QString::number(avg1));
-
+        //ui->label_vacactual->setText(QString::number(avg1));
+        ui->label_vacactual->setText("0");
     }
     if(ui->label_dialvalue->text() == "1")
     {
@@ -3319,6 +3327,11 @@ void MainWindow::updateLabel()
         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
+
+        if(avgfp>4085)
+        {
+            ui->label_vacactual->setText(ui->label_vacpreset->text());
+        }
 
         file.close();
         file2.close();
