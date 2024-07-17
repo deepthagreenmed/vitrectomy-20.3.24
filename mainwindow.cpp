@@ -298,10 +298,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerdac, &QTimer::timeout, this, &MainWindow::dacvalue);
     timerdac->start(1);
 
-    QTimer *timervac = new QTimer;
-    connect(timervac, &QTimer::timeout, this, &MainWindow::vacpreset);
-    timervac->start(100);
-
 
 
 }
@@ -480,16 +476,10 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vacpreset->setFocus();
       int dig = digit.toInt();
-
-      if(digit.startsWith('0'))
-      {
-          ui->label_vacpreset->setText(ui->label_vacpreset->text());
-      }
-      //else {
       //zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
-    // }
+      vacpreset(QString::number(value));
    }
   }
   if(ui->label_vitpreset->focusWidget()) {
@@ -3215,6 +3205,7 @@ void MainWindow::updateLabel()
        if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
 
      }
+  }
 
   if(vp==1)
   {//non-linear

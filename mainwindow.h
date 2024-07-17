@@ -59,7 +59,7 @@ public:
     LED *led2;
     bool eventFilter(QObject* object, QEvent* event);
     void updateLabelValue(QLabel* label, int dig, int value, int maxValue);
-    //void zeropreset(QLabel *label, int dig, int prevValue);
+    void vacpreset(const QString &text);
     void switchled(LED *led, int choice);
     void footpedalbeep();
     int beep_0to1=0;
@@ -111,8 +111,6 @@ public slots:
 
 
 private slots:
-
-        void vacpreset(const QString &text);
 
         void dacvalue();
 
