@@ -329,18 +329,6 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
     }
 }
 
-void MainWindow::zeropreset(QLabel *label, int dig, int prevValue)
-{
-    if(dig!=0)
-    {
-        label->setText(QString::number(dig));
-    }
-    else
-    {
-        label->setText(QString::number(prevValue));
-    }
-}
-
 // keypad showing code
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
@@ -487,9 +475,16 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vacpreset->setFocus();
       int dig = digit.toInt();
-      zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
+
+      if(dig==0)
+      {
+          ui->label_vacpreset->setText(ui->label_vacpreset->text());
+      }
+      else {
+      //zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
+      }
 
    }
   }
@@ -504,7 +499,7 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vitpreset->setFocus();
       int dig = digit.toInt();
-      zeropreset(ui->label_vitpreset, dig, ui->label_vitpreset->text().toInt());
+      //zeropreset(ui->label_vitpreset, dig, ui->label_vitpreset->text().toInt());
       int value = (ui->label_vitpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vitpreset, dig, value, 9600);
    }
@@ -520,7 +515,7 @@ if(ui->label_siloil->focusWidget()) {
     {
     ui->label_siloil->setFocus();
     int dig = digit.toInt();
-    zeropreset(ui->label_siloil, dig, ui->label_siloil->text().toInt());
+    //zeropreset(ui->label_siloil, dig, ui->label_siloil->text().toInt());
      int value = (ui->label_siloil->text()+digit).toInt();
     updateLabelValue(ui->label_siloil, dig, value, 100);
 
@@ -537,7 +532,7 @@ if(ui->label_aipreset->focusWidget()) {
     {
     ui->label_aipreset->setFocus();
     int dig = digit.toInt();
-    zeropreset(ui->label_aipreset, dig, ui->label_aipreset->text().toInt());
+    //zeropreset(ui->label_aipreset, dig, ui->label_aipreset->text().toInt());
     int value = (ui->label_aipreset->text()+digit).toInt();
     updateLabelValue(ui->label_aipreset, dig, value, 100);
 
@@ -554,7 +549,7 @@ if(ui->label_dia->focusWidget()) {
     {
     ui->label_dia->setFocus();
     int dig = digit.toInt();
-    zeropreset(ui->label_dia, dig, ui->label_dia->text().toInt());
+    //zeropreset(ui->label_dia, dig, ui->label_dia->text().toInt());
     int value = (ui->label_dia->text()+digit).toInt();
     updateLabelValue(ui->label_dia, dig, value, 100);
 
@@ -571,7 +566,7 @@ if(ui->label_led2->focusWidget()) {
     {
     ui->label_led2->setFocus();
     int dig = digit.toInt();
-    zeropreset(ui->label_led2, dig, ui->label_led2->text().toInt());
+    //zeropreset(ui->label_led2, dig, ui->label_led2->text().toInt());
     int value = (ui->label_led2->text()+digit).toInt();
     updateLabelValue(ui->label_led2, dig, value, 100);
 
@@ -588,7 +583,7 @@ if(ui->label_led1->focusWidget()) {
     {
     ui->label_led1->setFocus();
     int dig = digit.toInt();
-    zeropreset(ui->label_led1, dig, ui->label_led1->text().toInt());
+    //zeropreset(ui->label_led1, dig, ui->label_led1->text().toInt());
     int value = (ui->label_led1->text()+digit).toInt();
     updateLabelValue(ui->label_led1, dig, value, 100);
 
@@ -3178,10 +3173,7 @@ void MainWindow::updateLabel()
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
            ui->label_vacactual->setText(QString::number(avg1));
 
-           if(avgfp>4085)
-           {
-               ui->label_vacactual->setText(ui->label_vacpreset->text());
-           }
+           ui->label_vacactual->setText(ui->label_vacpreset->text());
 
            file.close();
             file2.close();
@@ -3351,10 +3343,7 @@ void MainWindow::updateLabel()
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
 
-        if(avgfp>4085)
-        {
-            ui->label_vacactual->setText(ui->label_vacpreset->text());
-        }
+        ui->label_vacactual->setText(ui->label_vacpreset->text());
 
         file.close();
         file2.close();
@@ -3568,10 +3557,7 @@ void MainWindow::setFPValues()
     }
     else if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
     {
-        if(avgfp>4085)
-        {
-            ui->label_vacactual->setText(ui->label_vacpreset->text());
-        }
+        ui->label_vacactual->setText(ui->label_vacpreset->text());
 
         if(vitp==0 && flag2==0)
         {
