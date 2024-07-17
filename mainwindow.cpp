@@ -364,7 +364,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
   if(object == ui->label_vitpreset && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
-         key->resize(491,271);
+        key->resize(491,271);
         key->move(110,500);
         key->show();
         ui->label_vitpreset->setFocus();
@@ -400,7 +400,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
   if(object == ui->label_aipreset && event->type() == QEvent::MouseButtonPress) {
       QMouseEvent *k = static_cast<QMouseEvent *> (event);
       if( k->button() == Qt::LeftButton ) {
-           key->resize(491,271);
+          key->resize(491,271);
           key->move(1400,390);
           key->show();
           ui->label_aipreset->setFocus();
@@ -418,7 +418,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
   if(object == ui->label_dia && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
-         key->resize(491,271);
+        key->resize(491,271);
         key->move(1400,450);
         key->show();
         ui->label_dia->setFocus();
@@ -436,7 +436,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
   if(object == ui->label_led2 && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
-         key->resize(491,271);
+        key->resize(491,271);
         key->move(1350,690);
         key->show();
         ui->label_led2->setFocus();
@@ -454,7 +454,7 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
   if(object == ui->label_led1 && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
-         key->resize(491,271);
+        key->resize(491,271);
         key->move(40,690);
         key->show();
         ui->label_led1->setFocus();
