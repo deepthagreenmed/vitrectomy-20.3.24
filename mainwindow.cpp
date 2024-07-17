@@ -476,7 +476,7 @@ void MainWindow::on_clicked(const QString& digit)
       ui->label_vacpreset->setFocus();
       int dig = digit.toInt();
 
-      if(dig==0)
+      if(digit.startsWith('0'))
       {
           ui->label_vacpreset->setText(ui->label_vacpreset->text());
       }
@@ -484,8 +484,7 @@ void MainWindow::on_clicked(const QString& digit)
       //zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
-      }
-
+     }
    }
   }
   if(ui->label_vitpreset->focusWidget()) {
