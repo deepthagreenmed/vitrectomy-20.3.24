@@ -3542,6 +3542,11 @@ void MainWindow::setFPValues()
     }
     else if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
     {
+        if(avgfp>4085)
+        {
+            ui->label_vacactual->setText(ui->label_vacpreset->text());
+        }
+
         if(vitp==0 && flag2==0)
         {
             ui->dial->setValue(avgfp);
