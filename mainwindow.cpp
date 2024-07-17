@@ -3085,9 +3085,6 @@ void MainWindow::updateLabel()
 //       int dacval;
 
 
-
-
-
 //       std::ifstream file2(PATH6);
 //       std::string line;
 //       if(flag2==0)
