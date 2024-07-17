@@ -2729,7 +2729,7 @@ void MainWindow::setZero()
 {
     int avgzero = fp->convert(CHANNEL_0);
 
-    if(avgzero<=(fp0+fp1) && avgzero>fp0)
+    if(avgzero<=(fp0+fp1))
     {
         ui->label_vitactual->setText("0");
 //        l->writeDAC(0);
