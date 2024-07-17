@@ -419,7 +419,7 @@ if(ui->lineEdit_vac->focusWidget())
     ui->lineEdit_vac->setFocus();
     int dig = digit.toInt();
     int value = (ui->lineEdit_vac->text()+digit).toInt();
-    updateLineEditValue(ui->lineEdit_vac, dig, value, 650);
+    updateLineEditValue(ui->lineEdit_vac, dig, value, 500);
 
  }
 }

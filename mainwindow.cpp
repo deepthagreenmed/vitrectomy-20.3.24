@@ -475,7 +475,7 @@ void MainWindow::on_clicked(const QString& digit)
       ui->label_vacpreset->setFocus();
       int dig = digit.toInt();
       int value = (ui->label_vacpreset->text()+digit).toInt();
-      updateLabelValue(ui->label_vacpreset, dig, value, 650);
+      updateLabelValue(ui->label_vacpreset, dig, value, 500);
 
    }
   }
@@ -1481,9 +1481,9 @@ void MainWindow::increaseVaccumValue()
 {
     int currentValue = ui->label_vacpreset->text().toInt();
     int newValue = currentValue + 5;
-    if(newValue > 650)
+    if(newValue > 500)
     {
-        newValue = 650;
+        newValue = 500;
     }
     ui->label_vacpreset->setText(QString::number(newValue));
 }
