@@ -112,6 +112,8 @@ public slots:
 
 private slots:
 
+        void vacpreset(const QString &text);
+
         void dacvalue();
 
         void pressureval();
@@ -317,6 +319,7 @@ private:
 //    QTimer *timermsg;
     ltc2614 *l;
     pressuresensor *pressure;
+    int vacprevval;
 
 };
 #endif // MAINWINDOW_H

@@ -298,6 +298,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerdac, &QTimer::timeout, this, &MainWindow::dacvalue);
     timerdac->start(1);
 
+    QTimer *timervac = new QTimer;
+    connect(timervac, &QTimer::timeout, this, &MainWindow::vacpreset);
+    timervac->start(100);
+
+
 
 }
 
@@ -480,11 +485,11 @@ void MainWindow::on_clicked(const QString& digit)
       {
           ui->label_vacpreset->setText(ui->label_vacpreset->text());
       }
-      else {
+      //else {
       //zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
-     }
+    // }
    }
   }
   if(ui->label_vitpreset->focusWidget()) {
@@ -3086,6 +3091,15 @@ void MainWindow::updateLabel()
               }
           }
 
+          if(ui->label_vacpreset->text().toInt()>390)
+          {
+           int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+           l->writeDAC(dacval);
+           qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
+           int avg1 = vac->convert(CHANNEL_1)*0.1894;
+           ui->label_vacactual->setText(QString::number(avg1));
+          }
+
 
           if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
 
@@ -3123,16 +3137,19 @@ void MainWindow::updateLabel()
 //           qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
 //           int avg1 = vac->convert(CHANNEL_1)*0.1894;
 //           ui->label_vacactual->setText(QString::number(avg1));
-        if(ui->label_vacpreset->text().toInt()>390)
-        {
+        //if(ui->label_vacpreset->text().toInt()>390)
+        //{
          int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
          l->writeDAC(dacval);
          qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
          int avg1 = vac->convert(CHANNEL_1)*0.1894;
-         ui->label_vacactual->setText(QString::number(avg1));
-        }
+         //ui->label_vacactual->setText(QString::number(avg1));
+        //}
+
+        ui->label_vacactual->setText(ui->label_vacpreset->text());
 
        }
+
        else if(flag2==1)
        {
           int dacval;
@@ -3170,9 +3187,7 @@ void MainWindow::updateLabel()
            l->writeDAC(dacval);
            qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
-           //ui->label_vacactual->setText(QString::number(avg1));
-
-           ui->label_vacactual->setText(ui->label_vacpreset->text());
+           ui->label_vacactual->setText(QString::number(avg1));
 
            file.close();
             file2.close();
@@ -3341,6 +3356,15 @@ void MainWindow::updateLabel()
         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         //ui->label_vacactual->setText(QString::number(avg1));
+
+//        if(ui->label_vacpreset->text().toInt()>390)
+//        {
+//         int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+//         l->writeDAC(dacval);
+//         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
+//         int avg1 = vac->convert(CHANNEL_1)*0.1894;
+//         ui->label_vacactual->setText(QString::number(avg1));
+//        }
 
         ui->label_vacactual->setText(ui->label_vacpreset->text());
 
@@ -3614,4 +3638,13 @@ void MainWindow::dacvalue()
         ui->label_vacactual->setText(QString::number(avg1));
     }
 
+}
+
+void MainWindow::vacpreset(const QString &text) {
+    if (text.startsWith('0')) {
+        ui->label_vacpreset->setText(QString::number(vacprevval));
+    } else {
+        vacprevval = text.toInt();
+        ui->label_vacpreset->setText(text);
+    }
 }
