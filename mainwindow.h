@@ -59,6 +59,7 @@ public:
     LED *led2;
     bool eventFilter(QObject* object, QEvent* event);
     void updateLabelValue(QLabel* label, int dig, int value, int maxValue);
+    void zeropreset(QLabel *label, int dig, int prevValue);
     void switchled(LED *led, int choice);
     void footpedalbeep();
     int beep_0to1=0;
@@ -312,8 +313,8 @@ private:
     QTimer timeai3;
     bool aiflag=0;
     keypad *key;
-   // QMessageBox *msg;
-   // QTimer *timermsg;
+//    QMessageBox *msg;
+//    QTimer *timermsg;
     ltc2614 *l;
     pressuresensor *pressure;
 

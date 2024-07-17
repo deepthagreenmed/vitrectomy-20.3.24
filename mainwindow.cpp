@@ -320,11 +320,24 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
        // msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
        // msg->show();
        // timermsg->start(1000);
-        label->setText(QString::number(dig));
+
+       label->setText(QString::number(dig));
     } else {
         label->setText(QString::number(value));
        // msg->close();
        // timermsg->stop();
+    }
+}
+
+void MainWindow::zeropreset(QLabel *label, int dig, int prevValue)
+{
+    if(dig!=0)
+    {
+        label->setText(QString::number(dig));
+    }
+    else
+    {
+        label->setText(QString::number(prevValue));
     }
 }
 
@@ -474,6 +487,7 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vacpreset->setFocus();
       int dig = digit.toInt();
+      zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
 
@@ -490,6 +504,7 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vitpreset->setFocus();
       int dig = digit.toInt();
+      zeropreset(ui->label_vitpreset, dig, ui->label_vitpreset->text().toInt());
       int value = (ui->label_vitpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vitpreset, dig, value, 9600);
    }
@@ -505,6 +520,7 @@ if(ui->label_siloil->focusWidget()) {
     {
     ui->label_siloil->setFocus();
     int dig = digit.toInt();
+    zeropreset(ui->label_siloil, dig, ui->label_siloil->text().toInt());
      int value = (ui->label_siloil->text()+digit).toInt();
     updateLabelValue(ui->label_siloil, dig, value, 100);
 
@@ -521,6 +537,7 @@ if(ui->label_aipreset->focusWidget()) {
     {
     ui->label_aipreset->setFocus();
     int dig = digit.toInt();
+    zeropreset(ui->label_aipreset, dig, ui->label_aipreset->text().toInt());
     int value = (ui->label_aipreset->text()+digit).toInt();
     updateLabelValue(ui->label_aipreset, dig, value, 100);
 
@@ -537,6 +554,7 @@ if(ui->label_dia->focusWidget()) {
     {
     ui->label_dia->setFocus();
     int dig = digit.toInt();
+    zeropreset(ui->label_dia, dig, ui->label_dia->text().toInt());
     int value = (ui->label_dia->text()+digit).toInt();
     updateLabelValue(ui->label_dia, dig, value, 100);
 
@@ -553,6 +571,7 @@ if(ui->label_led2->focusWidget()) {
     {
     ui->label_led2->setFocus();
     int dig = digit.toInt();
+    zeropreset(ui->label_led2, dig, ui->label_led2->text().toInt());
     int value = (ui->label_led2->text()+digit).toInt();
     updateLabelValue(ui->label_led2, dig, value, 100);
 
@@ -569,6 +588,7 @@ if(ui->label_led1->focusWidget()) {
     {
     ui->label_led1->setFocus();
     int dig = digit.toInt();
+    zeropreset(ui->label_led1, dig, ui->label_led1->text().toInt());
     int value = (ui->label_led1->text()+digit).toInt();
     updateLabelValue(ui->label_led1, dig, value, 100);
 
