@@ -476,7 +476,7 @@ void MainWindow::on_clicked(const QString& digit)
       //zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
-      vacpreset(QString::number(value));
+      //vacpreset(QString::number(value));
    }
   }
   if(ui->label_vitpreset->focusWidget()) {
@@ -3646,14 +3646,14 @@ void MainWindow::dacvalue()
 
 }
 
-void MainWindow::vacpreset(const QString &text) {
-    if (text.startsWith('0')) {
-        ui->label_vacpreset->setText(QString::number(vacpresetval));
-    } else {
-        vacpresetval = text.toInt();
-        ui->label_vacpreset->setText(text);
-    }
-}
+//void MainWindow::vacpreset(const QString &text) {
+//    if (text.startsWith('0')) {
+//        ui->label_vacpreset->setText(QString::number(vacpresetval));
+//    } else {f
+//        vacpresetval = text.toInt();
+//        ui->label_vacpreset->setText(text);
+//    }
+//}
 
 void MainWindow::swapval(int value)
 {

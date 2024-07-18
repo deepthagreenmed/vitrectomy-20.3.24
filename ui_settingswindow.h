@@ -830,7 +830,7 @@ public:
         label_37->setAlignment(Qt::AlignCenter);
         pushButton_swap = new QPushButton(tab_10);
         pushButton_swap->setObjectName(QString::fromUtf8("pushButton_swap"));
-        pushButton_swap->setGeometry(QRect(160, 790, 101, 51));
+        pushButton_swap->setGeometry(QRect(90, 790, 101, 51));
         pushButton_swap->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
 "background-color: rgba(191, 64, 64, 0);"));
         tabWidget_2->addTab(tab_10, QString());
