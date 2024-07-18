@@ -1462,23 +1462,6 @@ color: rgb(255, 255, 255);
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_swap">
-    <property name="geometry">
-     <rect>
-      <x>1200</x>
-      <y>830</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
-background-color: rgba(191, 64, 64, 0);</string>
-    </property>
-    <property name="text">
-     <string>SWAP OFF</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_vitactual">
     <property name="geometry">
      <rect>
@@ -1551,7 +1534,7 @@ color:white;;}</string>
     <property name="geometry">
      <rect>
       <x>1200</x>
-      <y>930</y>
+      <y>830</y>
       <width>101</width>
       <height>51</height>
      </rect>
@@ -1634,15 +1617,14 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>label_43</zorder>
    <zorder>label_date</zorder>
    <zorder>label_time</zorder>
-   <zorder>pushButton_swap</zorder>
    <zorder>label_vitactual</zorder>
    <zorder>pushButton_vacinc</zorder>
    <zorder>pushButton_vacdec</zorder>
    <zorder>pushButton_drain</zorder>
    <zorder>label_12</zorder>
    <zorder>label_22</zorder>
-   <zorder>comboBox_surgeonname</zorder>
    <zorder>pushButton_start</zorder>
+   <zorder>comboBox_surgeonname</zorder>
   </widget>
  </widget>
  <resources/>

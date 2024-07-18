@@ -98,7 +98,6 @@ public:
     QLabel *label_22;
     QPushButton *pushButton_start;
     QLabel *label_39;
-    QPushButton *pushButton_swap;
     QLabel *label_vitactual;
     QPushButton *pushButton_vacinc;
     QPushButton *pushButton_vacdec;
@@ -620,11 +619,6 @@ public:
         label_39->setObjectName(QString::fromUtf8("label_39"));
         label_39->setGeometry(QRect(0, 0, 1920, 1080));
         label_39->setStyleSheet(QString::fromUtf8("background-color: rgb(119, 118, 123);"));
-        pushButton_swap = new QPushButton(centralwidget);
-        pushButton_swap->setObjectName(QString::fromUtf8("pushButton_swap"));
-        pushButton_swap->setGeometry(QRect(1200, 830, 101, 51));
-        pushButton_swap->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
         label_vitactual = new QLabel(centralwidget);
         label_vitactual->setObjectName(QString::fromUtf8("label_vitactual"));
         label_vitactual->setGeometry(QRect(110, 910, 311, 141));
@@ -657,7 +651,7 @@ public:
 "color:white;;}"));
         pushButton_drain = new QPushButton(centralwidget);
         pushButton_drain->setObjectName(QString::fromUtf8("pushButton_drain"));
-        pushButton_drain->setGeometry(QRect(1200, 930, 101, 51));
+        pushButton_drain->setGeometry(QRect(1200, 830, 101, 51));
         pushButton_drain->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
 "color: rgb(255, 120, 0);\n"
 "background-color: rgba(191, 64, 64, 0);"));
@@ -731,15 +725,14 @@ public:
         label_43->raise();
         label_date->raise();
         label_time->raise();
-        pushButton_swap->raise();
         label_vitactual->raise();
         pushButton_vacinc->raise();
         pushButton_vacdec->raise();
         pushButton_drain->raise();
         label_12->raise();
         label_22->raise();
-        comboBox_surgeonname->raise();
         pushButton_start->raise();
+        comboBox_surgeonname->raise();
 
         retranslateUi(MainWindow);
 
@@ -819,7 +812,6 @@ public:
         label_22->setText(QString());
         pushButton_start->setText(QCoreApplication::translate("MainWindow", "START", nullptr));
         label_39->setText(QString());
-        pushButton_swap->setText(QCoreApplication::translate("MainWindow", "SWAP OFF", nullptr));
         label_vitactual->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         pushButton_vacinc->setText(QString());
         pushButton_vacdec->setText(QString());

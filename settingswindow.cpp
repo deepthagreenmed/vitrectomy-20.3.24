@@ -39,6 +39,8 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->pushButton_fp, &QPushButton::clicked, this, &settingswindow::on_tab_fp_clicked);
     connect(ui->pushButton_fps, &QPushButton::clicked, this, &settingswindow::on_tab_fppreset_clicked);
 
+    connect(ui->pushButton_swap, &QPushButton::clicked, this, &settingswindow::swap_onoff);
+
 
 
     //code to load database in the starting
@@ -1293,5 +1295,24 @@ void settingswindow::updateSurgeon() {
     if (selectedItem) {
         emit textSelected(selectedItem->text());
     }
+}
+
+// Turn swap on or off
+void settingswindow::swap_onoff()
+{
+    QString swap = ui->pushButton_swap->text();
+
+    if(swap.compare("SWAP OFF") == 0)
+    {
+        ui->pushButton_swap->setText("SWAP ON");
+        flag2=1;
+    }
+    else if(swap.compare("SWAP ON") == 0)
+    {
+        ui->pushButton_swap->setText("SWAP OFF");
+        flag2=0;
+    }
+
+    emit swapsignal(flag2);
 }
 

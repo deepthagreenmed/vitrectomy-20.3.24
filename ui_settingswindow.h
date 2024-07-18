@@ -112,6 +112,7 @@ public:
     QLabel *label_39;
     QLabel *label_40;
     QLabel *label_37;
+    QPushButton *pushButton_swap;
     QLabel *label_19;
     QLabel *label_17;
     QListWidget *listWidget;
@@ -827,6 +828,11 @@ public:
         label_37->setFont(font1);
         label_37->setStyleSheet(QString::fromUtf8("background-color: rgba(191, 64, 64, 0);"));
         label_37->setAlignment(Qt::AlignCenter);
+        pushButton_swap = new QPushButton(tab_10);
+        pushButton_swap->setObjectName(QString::fromUtf8("pushButton_swap"));
+        pushButton_swap->setGeometry(QRect(160, 790, 101, 51));
+        pushButton_swap->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
+"background-color: rgba(191, 64, 64, 0);"));
         tabWidget_2->addTab(tab_10, QString());
         label_27->raise();
         label_16->raise();
@@ -864,6 +870,7 @@ public:
         label_39->raise();
         label_40->raise();
         label_37->raise();
+        pushButton_swap->raise();
         label_19 = new QLabel(settingswindow);
         label_19->setObjectName(QString::fromUtf8("label_19"));
         label_19->setGeometry(QRect(0, -20, 1920, 1080));
@@ -1139,6 +1146,7 @@ public:
         label_39->setText(QCoreApplication::translate("settingswindow", "2", nullptr));
         label_40->setText(QCoreApplication::translate("settingswindow", "3", nullptr));
         label_37->setText(QCoreApplication::translate("settingswindow", "0", nullptr));
+        pushButton_swap->setText(QCoreApplication::translate("settingswindow", "SWAP OFF", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_10), QCoreApplication::translate("settingswindow", "Foot Pedal Preset", nullptr));
         label_19->setText(QString());
         label_17->setText(QString());

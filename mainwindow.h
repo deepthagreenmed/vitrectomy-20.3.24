@@ -107,6 +107,8 @@ public slots:
 
      void vitvalset();
 
+     void swapval(int value);
+
 
 
 
@@ -261,9 +263,6 @@ private slots:
         //setup screen
         void showsetupscreen();
 
-        //swap on/off
-        void swap_onoff();
-
         //drain on/off
         void drain_onoff();
 
@@ -304,7 +303,7 @@ private:
     int vacc=1;
     double idx;
      bool flag = false;
-    int flag2=0;
+    int flag2;
     int flag3=0;
     QTimer timedia;
     QTimer timeai;

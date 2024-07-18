@@ -1849,6 +1849,23 @@ background-color: rgb(53, 63, 99);</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_swap">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>790</y>
+       <width>101</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
+background-color: rgba(191, 64, 64, 0);</string>
+     </property>
+     <property name="text">
+      <string>SWAP OFF</string>
+     </property>
+    </widget>
     <zorder>label_27</zorder>
     <zorder>label_16</zorder>
     <zorder>label_36</zorder>
@@ -1885,6 +1902,7 @@ background-color: rgb(53, 63, 99);</string>
     <zorder>label_39</zorder>
     <zorder>label_40</zorder>
     <zorder>label_37</zorder>
+    <zorder>pushButton_swap</zorder>
    </widget>
   </widget>
   <widget class="QLabel" name="label_19">

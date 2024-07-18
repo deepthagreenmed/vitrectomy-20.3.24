@@ -48,6 +48,7 @@ signals:
     void vittype(QString str);
     void diastr(QString str);
     void textSelected(const QString &text);
+    void swapsignal(int flag2);
 
 
 public slots:
@@ -109,6 +110,10 @@ public slots:
 
 
 private slots:
+
+    //swap on/off
+    void swap_onoff();
+
     void onCutterTypeChanged(int index);
 
     void loadDatabaseFromList(const QString &currentText);
@@ -141,6 +146,7 @@ private:
       int led1value;
       int led2value;
       QStringList items;
+      int flag2=0;
 
 
 

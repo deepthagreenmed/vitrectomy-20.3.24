@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_endcase, &QPushButton::clicked, this, &MainWindow::setsurgeon);
     connect(ui->pushButton_vitlinearnonlinear, &QPushButton::clicked, this, &MainWindow::vit_linear_nonlinear);
     connect(ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::showsetupscreen);
-    connect(ui->pushButton_swap, &QPushButton::clicked, this, &MainWindow::swap_onoff);
+    connect(win2, &settingswindow::swapsignal, this, &MainWindow::swapval);
     connect(ui->pushButton_drain, &QPushButton::clicked, this, &MainWindow::drain_onoff);
 
 
@@ -297,8 +297,6 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer *timerdac = new QTimer;
     connect(timerdac, &QTimer::timeout, this, &MainWindow::dacvalue);
     timerdac->start(1);
-
-
 
 }
 
@@ -2145,23 +2143,6 @@ void MainWindow::showsetupscreen()
         ui->pushButton_start->lower();
 }
 
-// Turn swap on or off
-void MainWindow::swap_onoff()
-{
-    QString swap = ui->pushButton_swap->text();
-
-    if(swap.compare("SWAP OFF") == 0)
-    {
-        ui->pushButton_swap->setText("SWAP ON");
-        flag2=1;
-    }
-    else if(swap.compare("SWAP ON") == 0)
-    {
-        ui->pushButton_swap->setText("SWAP OFF");
-        flag2=0;
-    }
-}
-
 void MainWindow::nonlinearcall3()
 {
     if(vip==1&&vitp==1&&flag2==0) {
@@ -3673,4 +3654,9 @@ void MainWindow::vacpreset(const QString &text) {
         vacpresetval = text.toInt();
         ui->label_vacpreset->setText(text);
     }
+}
+
+void MainWindow::swapval(int value)
+{
+    flag2=value;
 }
