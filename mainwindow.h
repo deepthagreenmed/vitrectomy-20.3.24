@@ -317,7 +317,7 @@ private:
 //    QTimer *timermsg;
     ltc2614 *l;
     pressuresensor *pressure;
-    int vacprevval;
+    int vacpresetval;
 
 };
 #endif // MAINWINDOW_H

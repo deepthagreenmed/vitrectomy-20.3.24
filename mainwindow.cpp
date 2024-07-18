@@ -3667,9 +3667,9 @@ void MainWindow::dacvalue()
 
 void MainWindow::vacpreset(const QString &text) {
     if (text.startsWith('0')) {
-        ui->label_vacpreset->setText(QString::number(vacprevval));
+        ui->label_vacpreset->setText(QString::number(vacpresetval));
     } else {
-        vacprevval = text.toInt();
+        vacpresetval = text.toInt();
         ui->label_vacpreset->setText(text);
     }
 }
