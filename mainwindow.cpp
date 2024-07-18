@@ -319,7 +319,6 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
        // msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
        // msg->show();
        // timermsg->start(1000);
-
        label->setText(QString::number(dig));
     } else {
         label->setText(QString::number(value));
