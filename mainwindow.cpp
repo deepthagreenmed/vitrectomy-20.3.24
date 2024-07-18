@@ -2894,7 +2894,8 @@ void MainWindow::switchled(LED *led, int choice)
             case(50):
                 led2->processUserInput(17);
                 led2->processUserInput(1);
-                break;            case(45):
+                break;
+            case(45):
                 led2->processUserInput(18);
                 led2->processUserInput(1);
                 break;
