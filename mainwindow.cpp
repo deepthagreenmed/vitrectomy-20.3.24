@@ -314,9 +314,13 @@ void MainWindow::transitionToNewScreen() {
 void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValue) {
     //qDebug()<<value;
 
-    if(label == ui->label_vacpreset)
-    {
-        vacpreset(QString::number(dig));
+    if(label == ui->label_vacpreset) {
+        if (dig==0 && ui->label_vacpreset->text().isEmpty()) {
+            ui->label_vacpreset->setText(QString::number(vacpresetval));
+        } else {
+            vacpresetval = value;
+            ui->label_vacpreset->setText(QString::number(value));
+        }
     }
 
     if (value > maxValue) {
@@ -3641,7 +3645,7 @@ void MainWindow::dacvalue()
     {
         l->writeDAC(0);
         int avg1=vac->convert(CHANNEL_1)*0.1894;
-        ui->label_vacactual->setText(QString::number(avg1));
+        ui->label_vacactual->setTextQString::number(avg1));
     }
 
 }
