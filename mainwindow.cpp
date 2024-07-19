@@ -3651,14 +3651,14 @@ void MainWindow::dacvalue()
 
 }
 
-void MainWindow::vacpreset(QString number) {
-    if (number.startsWith('0') && ui->label_vacpreset->text().isEmpty()) {
-        ui->label_vacpreset->setText(QString::number(vacpresetval));
-    } else {
-        vacpresetval = number.toInt();
-        ui->label_vacpreset->setText(number);
-    }
-}
+//void MainWindow::vacpreset(QString number) {
+//    if (number.startsWith('0') && ui->label_vacpreset->text().isEmpty()) {
+//        ui->label_vacpreset->setText(QString::number(vacpresetval));
+//    } else {
+//        vacpresetval = number.toInt();
+//        ui->label_vacpreset->setText(number);
+//    }
+//}
 
 
 void MainWindow::swapval(int value)
