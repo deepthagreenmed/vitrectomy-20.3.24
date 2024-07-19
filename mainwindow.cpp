@@ -84,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(win2, &settingswindow::swapsignal, this, &MainWindow::swapval);
     connect(ui->pushButton_drain, &QPushButton::clicked, this, &MainWindow::drain_onoff);
 
+    vacpresetval = ui->label_vacpreset->text().toInt();
+
 
     fp = new footpedal;
     hhandler = new hwHandler;
@@ -473,10 +475,9 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vacpreset->setFocus();
       int dig = digit.toInt();
-      //zeropreset(ui->label_vacpreset, dig, ui->label_vacpreset->text().toInt());
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
-      //vacpreset(QString::number(value));
+      vacpreset(digit);
    }
   }
   if(ui->label_vitpreset->focusWidget()) {
@@ -3646,14 +3647,15 @@ void MainWindow::dacvalue()
 
 }
 
-//void MainWindow::vacpreset(const QString &text) {
-//    if (text.startsWith('0')) {
-//        ui->label_vacpreset->setText(QString::number(vacpresetval));
-//    } else {f
-//        vacpresetval = text.toInt();
-//        ui->label_vacpreset->setText(text);
-//    }
-//}
+void MainWindow::vacpreset(QString number) {
+    if (number.startsWith('0') && ui->label_vacpreset->text().isEmpty()) {
+        ui->label_vacpreset->setText(QString::number(vacpresetval));
+    } else {
+        vacpresetval = number.toInt();
+        ui->label_vacpreset->setText(number);
+    }
+}
+
 
 void MainWindow::swapval(int value)
 {
