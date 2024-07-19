@@ -313,6 +313,12 @@ void MainWindow::transitionToNewScreen() {
 // Set limits and input validation
 void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValue) {
     //qDebug()<<value;
+
+    if(label == ui->label_vacpreset)
+    {
+        vacpreset(QString::number(dig));
+    }
+
     if (value > maxValue) {
         int temp=value;
         //value=0;
@@ -477,7 +483,6 @@ void MainWindow::on_clicked(const QString& digit)
       int dig = digit.toInt();
       int value = (ui->label_vacpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vacpreset, dig, value, 500);
-      vacpreset(digit);
    }
   }
   if(ui->label_vitpreset->focusWidget()) {
