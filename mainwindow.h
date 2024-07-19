@@ -303,7 +303,7 @@ private:
     int vacc=1;
     double idx;
      bool flag = false;
-    int flag2;
+    int flag2=0;
     int flag3=0;
     QTimer timedia;
     QTimer timeai;
