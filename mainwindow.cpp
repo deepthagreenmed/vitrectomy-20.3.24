@@ -3552,7 +3552,7 @@ void MainWindow::setFPValues()
         }
         ui->label_dialvalue->setText("0");
     }
-    else if(avgfp>fp0 && avgfp<=(fp0+fp1))
+    if(avgfp>fp0 && avgfp<=(fp0+fp1))
     {
         if(vitp==0)
         {
@@ -3570,7 +3570,7 @@ void MainWindow::setFPValues()
         }
         ui->label_dialvalue->setText("1");
     }
-    else if(avgfp>(fp0+fp1) && avgfp<=(fp0+fp1+fp2))
+    if(avgfp>(fp0+fp1) && avgfp<=(fp0+fp1+fp2))
     {
         if(vp==0 && flag2==0)
         {
@@ -3590,7 +3590,7 @@ void MainWindow::setFPValues()
         }
         ui->label_dialvalue->setText("2");
     }
-    else if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
+    if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
     {
         ui->label_vacactual->setText(ui->label_vacpreset->text());
 
