@@ -496,7 +496,6 @@ void MainWindow::on_clicked(const QString& digit)
       {
       ui->label_vitpreset->setFocus();
       int dig = digit.toInt();
-      //zeropreset(ui->label_vitpreset, dig, ui->label_vitpreset->text().toInt());
       int value = (ui->label_vitpreset->text()+digit).toInt();
       updateLabelValue(ui->label_vitpreset, dig, value, 9600);
    }
@@ -512,8 +511,7 @@ if(ui->label_siloil->focusWidget()) {
     {
     ui->label_siloil->setFocus();
     int dig = digit.toInt();
-    //zeropreset(ui->label_siloil, dig, ui->label_siloil->text().toInt());
-     int value = (ui->label_siloil->text()+digit).toInt();
+    int value = (ui->label_siloil->text()+digit).toInt();
     updateLabelValue(ui->label_siloil, dig, value, 100);
 
  }
@@ -529,7 +527,6 @@ if(ui->label_aipreset->focusWidget()) {
     {
     ui->label_aipreset->setFocus();
     int dig = digit.toInt();
-    //zeropreset(ui->label_aipreset, dig, ui->label_aipreset->text().toInt());
     int value = (ui->label_aipreset->text()+digit).toInt();
     updateLabelValue(ui->label_aipreset, dig, value, 100);
 
@@ -546,7 +543,6 @@ if(ui->label_dia->focusWidget()) {
     {
     ui->label_dia->setFocus();
     int dig = digit.toInt();
-    //zeropreset(ui->label_dia, dig, ui->label_dia->text().toInt());
     int value = (ui->label_dia->text()+digit).toInt();
     updateLabelValue(ui->label_dia, dig, value, 100);
 
@@ -563,7 +559,6 @@ if(ui->label_led2->focusWidget()) {
     {
     ui->label_led2->setFocus();
     int dig = digit.toInt();
-    //zeropreset(ui->label_led2, dig, ui->label_led2->text().toInt());
     int value = (ui->label_led2->text()+digit).toInt();
     updateLabelValue(ui->label_led2, dig, value, 100);
 
@@ -580,7 +575,6 @@ if(ui->label_led1->focusWidget()) {
     {
     ui->label_led1->setFocus();
     int dig = digit.toInt();
-    //zeropreset(ui->label_led1, dig, ui->label_led1->text().toInt());
     int value = (ui->label_led1->text()+digit).toInt();
     updateLabelValue(ui->label_led1, dig, value, 100);
 
