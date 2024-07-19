@@ -320,14 +320,14 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
         //dig=0;
         label->setText("");
 
-//        if(label == ui->label_vacpreset) {
-//            if (dig==0 && ui->label_vacpreset->text().isEmpty()) {
-//                ui->label_vacpreset->setText(QString::number(vacpresetval));
-//            } else {
-//                vacpresetval = value;
-//                ui->label_vacpreset->setText(QString::number(value));
-//            }
-//        }
+        if(label == ui->label_vacpreset) {
+            if (dig==0 && ui->label_vacpreset->text().isEmpty()) {
+                ui->label_vacpreset->setText(QString::number(vacpresetval));
+            } else {
+                vacpresetval = value;
+                ui->label_vacpreset->setText(QString::number(value));
+            }
+        }
 
        // msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
        // msg->show();
