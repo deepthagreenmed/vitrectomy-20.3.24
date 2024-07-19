@@ -59,7 +59,6 @@ public:
     LED *led2;
     bool eventFilter(QObject* object, QEvent* event);
     void updateLabelValue(QLabel* label, int dig, int value, int maxValue);
-    void vacpreset(QString number);
     void switchled(LED *led, int choice);
     void footpedalbeep();
     int beep_0to1=0;

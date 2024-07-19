@@ -311,33 +311,30 @@ void MainWindow::transitionToNewScreen() {
 }
 
 // Set limits and input validation
-void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValue) {
-    //qDebug()<<value;
+void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValue)
+{
+    qDebug() << dig << value;
 
-    if (value > maxValue) {
-        int temp=value;
-        //value=0;
-        //dig=0;
-        label->setText("");
-
-        if(label == ui->label_vacpreset) {
-            if (dig==0 && ui->label_vacpreset->text().isEmpty()) {
-                ui->label_vacpreset->setText(QString::number(vacpresetval));
-                return;
-            } else {
-                vacpresetval = value;
-                ui->label_vacpreset->setText(QString::number(value));
-            }
-        }
-
-       // msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
-       // msg->show();
-       // timermsg->start(1000);
-       label->setText(QString::number(dig));
-    } else {
+    if (value > maxValue)
+    {
+        label->setText(QString::number(dig));
+    }
+    else
+    {
         label->setText(QString::number(value));
-       // msg->close();
-       // timermsg->stop();
+    }
+
+    if (label == ui->label_vacpreset)
+    {
+        if (dig == 0 && ui->label_vacpreset->text() == "0")
+        {
+            ui->label_vacpreset->setText(QString::number(vacpresetval));
+            return;
+        }
+        else
+        {
+            vacpresetval = ui->label_vacpreset->text().toInt();
+        }
     }
 }
 
@@ -663,8 +660,6 @@ void MainWindow::sil_oil_onoff()
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
         connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
         connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
-
-        hhandler->sil_oil_on();
 
         sp=1;
 
@@ -3652,17 +3647,42 @@ void MainWindow::dacvalue()
 
 }
 
-//void MainWindow::vacpreset(QString number) {
-//    if (number.startsWith('0') && ui->label_vacpreset->text().isEmpty()) {
-//        ui->label_vacpreset->setText(QString::number(vacpresetval));
-//    } else {
-//        vacpresetval = number.toInt();
-//        ui->label_vacpreset->setText(number);
-//    }
-//}
-
-
 void MainWindow::swapval(int value)
 {
     flag2=value;
 }
+
+//void MainWindow::siliconoil()
+//{
+//    if(sp==0)
+//    {
+//        hhandler->sil_oil_off();
+//        hhandler->vso_off();
+//    }
+//    else if(sp==1)
+//    {
+//        if(ui->label_dialvalue->text() == "0")
+//        {
+//            hhandler->sil_oil_off();
+//            hhandler->vso_off();
+//        }
+//        else
+//        {
+//            l->writeDAC(0);
+//            int avg1 = vac->convert(CHANNEL_1)*0.1894;
+//            ui->label_vacactual->setText("0");
+
+//            hhandler->vit_off();
+//            ui->label_vitactual->setText("0");
+
+//            avgfp=fp->convert(CHANNEL_0);
+//            int preset=ui->label_siloil->text().toInt();
+//            int point = ((avgfp-fp0)/(fp1+fp2+fp3))*preset;
+
+
+//        }
+
+//    }
+
+
+//}
