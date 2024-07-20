@@ -1263,6 +1263,86 @@ void settingswindow::updateComboBoxes(int index) {
         }
     }
 
+//Top left pedal
+void settingswindow::enableComboBox20()
+{
+    int tlpedal=0,blpedal=0,trpedal=0,brpedal=0;
+
+    items << "LED1 On/Off" << "LED2 On/Off" << "Vitrectomy On/Off" << "Diathermy On/Off" << "Silicon Oil On/Off";
+    if(ui->comboBox_20->currentText() == "LED1 On/Off")
+    {
+        if(tlpedal==0)
+        {
+            lp=1;
+            tlpedal=1;
+        }
+        else if(blpedal==0)
+        {
+            lp=0;
+            blpedal=1;
+        }
+        emit pedalsled1(lp);
+    }
+    else if(ui->comboBox_20->currentText() == "LED2 On/Off")
+    {
+        if(tlpedal==0)
+        {
+            lp2=1;
+            tlpedal=1;
+        }
+        else if(blpedal==0)
+        {
+            lp2=0;
+            blpedal=1;
+        }
+        emit pedalsled2(lp2);
+    }
+    else if(ui->comboBox_20->currentText() == "Vitrectomy On/Off")
+    {
+        if(tlpedal==0)
+        {
+            vip=1;
+            tlpedal=1;
+        }
+        else if(blpedal==0)
+        {
+            vip=0;
+            blpedal=1;
+        }
+        emit pedalsvit(vip);
+    }
+    else if(ui->comboBox_20->currentText() == "Diathermy On/Off")
+    {
+        if(tlpedal==0)
+        {
+            dp=1;
+            tlpedal=1;
+        }
+        else if(blpedal==0)
+        {
+            dp=0;
+            blpedal=1;
+        }
+        emit pedalsdia(dp);
+    }
+    else if(ui->comboBox_20->currentText() == "Silicon Oil On/Off")
+    {
+        if(tlpedal==0)
+        {
+            sp=1;
+            tlpedal=1;
+        }
+        else if(blpedal==0)
+        {
+            sp=0;
+            blpedal=1;
+        }
+    }
+    emit pedalssiloil(sp);
+
+}
+
+
 // Set max cut rate for each vitrectomy cutter
 void settingswindow::onCutterTypeChanged(int index)
 {

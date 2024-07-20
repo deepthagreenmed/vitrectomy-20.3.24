@@ -49,6 +49,11 @@ signals:
     void diastr(QString str);
     void textSelected(const QString &text);
     void swapsignal(int value);
+    void pedalsled1(int lp);
+    void pedalsled2(int lp2);
+    void pedalsvit(int vip);
+    void pedalsdia(int dp);
+    void pedalssiloil(int sp);
 
 
 public slots:
