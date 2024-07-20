@@ -23,7 +23,6 @@ SOURCES += \
     led.cpp \
     main.cpp \
     mainwindow.cpp \
-    pressuresensor.cpp \
     settingswindow.cpp \
     keypad.cpp \
     textkeypad.cpp
@@ -34,7 +33,7 @@ HEADERS += \
     led.h \
     ltc2614.h \
     mainwindow.h \
-    pressuresensor.h \
+    sensor.h \
     settingswindow.h \
     keypad.h \
     textkeypad.h \
@@ -108,3 +107,16 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/lib
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/ltc2614.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/ltc2614.lib
 else:unix: PRE_TARGETDEPS += $$PWD/./libltc2614.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/./release/ -lhscmann100pgsa5
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/./debug/ -lhscmann100pgsa5
+else:unix: LIBS += -L$$PWD/./ -lhscmann100pgsa5
+
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/libhscmann100pgsa5.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/libhscmann100pgsa5.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/./release/hscmann100pgsa5.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/./debug/hscmann100pgsa5.lib
+else:unix: PRE_TARGETDEPS += $$PWD/./libhscmann100pgsa5.a

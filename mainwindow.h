@@ -8,7 +8,7 @@
 #include "hwhandler.h"
 #include "led.h"
 #include "ltc2614.h"
-#include "pressuresensor.h"
+#include "sensor.h"
 
 #include <iostream>
 #include <fstream>
@@ -314,7 +314,7 @@ private:
 //    QMessageBox *msg;
 //    QTimer *timermsg;
     ltc2614 *l;
-    pressuresensor *pressure;
+    sensor *pres;
     int vacpresetval;
 
 };

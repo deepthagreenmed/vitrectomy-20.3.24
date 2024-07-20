@@ -290,11 +290,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(win2, &settingswindow::textSelected, this, &MainWindow::updateText);
 
-    pressure=new pressuresensor;
+    pres=new sensor;
 
-    QTimer *timerpressure = new QTimer(this);
-    connect(timerpressure, &QTimer::timeout, this, &MainWindow::pressureval);
-    timerpressure->start(100); // milliseconds
+    QTimer *timerpres = new QTimer(this);
+    connect(timerpres, &QTimer::timeout, this, &MainWindow::pressureval);
+    timerpres->start(100); // milliseconds
 
     QTimer *timerdac = new QTimer;
     connect(timerdac, &QTimer::timeout, this, &MainWindow::dacvalue);
@@ -3618,7 +3618,7 @@ void MainWindow::updateText(const QString &text)
 
 void MainWindow::pressureval()
 {
-    float sample=pressure->convert();
+    float sample=pres->convert();
     //ui->label->setText(QString::number(sample));
     float psi = static_cast<float>(0.007*sample-5.22);
     //qDebug()<<"Pressure"<<psi;
