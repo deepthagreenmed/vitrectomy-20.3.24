@@ -3650,6 +3650,7 @@ void MainWindow::dacvalue()
 void MainWindow::swapval(int value)
 {
     flag2=value;
+    qDebug()<<flag2;
 }
 
 //void MainWindow::siliconoil()
