@@ -3525,7 +3525,7 @@ void MainWindow::on_clickedbackspace()
 void MainWindow::setFPValues()
 {
     avgfp=fp->convert(CHANNEL_0);
-    qDebug()<<avgfp<<fp0<<fp1<<fp2<<fp3;
+    //qDebug()<<avgfp<<fp0<<fp1<<fp2<<fp3;
 
     if(avgfp>=0 && avgfp<=fp0)
     {
