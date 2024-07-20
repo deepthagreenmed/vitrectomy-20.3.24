@@ -48,7 +48,7 @@ signals:
     void vittype(QString str);
     void diastr(QString str);
     void textSelected(const QString &text);
-    void swapsignal(int flag2);
+    void swapsignal(int value);
 
 
 public slots:
