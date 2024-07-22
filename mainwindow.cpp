@@ -2151,7 +2151,6 @@ void MainWindow::showsetupscreen()
 
 void MainWindow::nonlinearcall3()
 {
-    if(vip==1&&vitp==1&&flag2==0) {
     if(madtype=="Aktive") {
         int vvalue;
         double ot;
@@ -2250,7 +2249,6 @@ void MainWindow::nonlinearcall3()
         ui->label_vitactual->setText(QString::number(vvalue));
     }
     }
-}
 }
 
 void MainWindow::nonlinearcall2()
@@ -2359,7 +2357,7 @@ void MainWindow::nonlinearcall2()
 }
 
 
-// Vitrectomy linear (2 and 3)
+// Vitrectomy linear 2
 void MainWindow::linearcall2()
 {
     if(madtype=="Aktive") {
@@ -2487,6 +2485,7 @@ void MainWindow::linearcall3()
         if(avg<=(fp0+fp1+fp2))
         {
             ui->label_vitactual->setText("0");
+            hhandler->vit_off();
         }
 
         std::string col1, col2;
@@ -2528,9 +2527,7 @@ void MainWindow::linearcall3()
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
         }
-        else {
-            hhandler->vit_off();
-        }
+
     }
     else if(madtype=="Midlabs") {
         int vvalue;
@@ -2542,6 +2539,7 @@ void MainWindow::linearcall3()
         if(avg<=(fp0+fp1+fp2))
         {
             ui->label_vitactual->setText("0");
+            hhandler->vit_off();
         }
 
         std::string col1, col2;
@@ -2583,9 +2581,7 @@ void MainWindow::linearcall3()
             hhandler->vit_on(1000/(vvalue/60));
             ui->label_vitactual->setText(QString::number(vvalue));
         }
-        else {
-            hhandler->vit_off();
-        }
+
     }
 
 }
