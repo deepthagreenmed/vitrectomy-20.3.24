@@ -300,6 +300,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerdac, &QTimer::timeout, this, &MainWindow::dacvalue);
     timerdac->start(1);
 
+    connect(win2, &settingswindow::led1_pedal, this, &MainWindow::led1_setvalue);
+    connect(win2, &settingswindow::led2_pedal, this, &MainWindow::led2_setvalue);
+    connect(win2, &settingswindow::vit_pedal, this, &MainWindow::vit_setvalue);
+    connect(win2, &settingswindow::dia_pedal, this, &MainWindow::dia_setvalue);
+    connect(win2, &settingswindow::siloil_pedal, this, &MainWindow::siloil_setvalue);
+
 }
 
 // Show setup screen after 3 seconds
@@ -3652,6 +3658,32 @@ void MainWindow::swapval(int value)
     flag2=value;
     qDebug()<<flag2;
 }
+
+void MainWindow::led1_setvalue(int value)
+{
+    lp=value;
+}
+
+void MainWindow::led2_setvalue(int value)
+{
+    lp2=value;
+}
+
+void MainWindow::vit_setvalue(int value)
+{
+    vip=value;
+}
+
+void MainWindow::dia_setvalue(int value)
+{
+    dp=value;
+}
+
+void MainWindow::siloil_setvalue(int value)
+{
+    sp=value;
+}
+
 
 //void MainWindow::siliconoil()
 //{

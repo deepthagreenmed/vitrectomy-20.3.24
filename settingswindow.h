@@ -49,50 +49,38 @@ signals:
     void diastr(QString str);
     void textSelected(const QString &text);
     void swapsignal(int value);
-    void pedalsled1(int lp);
-    void pedalsled2(int lp2);
-    void pedalsvit(int vip);
-    void pedalsdia(int dp);
-    void pedalssiloil(int sp);
+    void led1_pedal(int value);
+    void led2_pedal(int value);
+    void vit_pedal(int value);
+    void dia_pedal(int value);
+    void siloil_pedal(int value);
 
 
 public slots:
 
+    void selectComboBox20(int index);
+    void selectComboBox21(int index);
+    void selectComboBox23(int index);
+    void selectComboBox24(int index);
     void updateSurgeon();
-
     void updateComboBoxes(int index);
-
     void on_clicked(const QString& digit);
-
      void on_clickedbackspace();
-
      void on_clickedenter();
-
      void zeroinc();
-
      void zerodec();
-
      void oneinc();
-
      void onedec();
-
      void twoinc();
-
      void twodec();
-
      void threeinc();
-
      void threedec();
-
      void on_clickedtext(const QString& digit);
-
      void on_clickedbackspacetext();
-
      void on_clickedspace();
-
      void on_clickedentertext();
 
-    //dia
+     //dia
     void on_dia_clicked();
 
     //led
@@ -152,6 +140,15 @@ private:
       int led2value;
       QStringList items;
       int flag2=0;
+      int tlpedal=0;
+      int blpedal=0;
+      int trpedal=0;
+      int brpedal=0;
+      int lp;
+      int lp2;
+      int vip;
+      int dp;
+      int sp;
 
 
 

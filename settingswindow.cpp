@@ -280,6 +280,11 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_23, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
     connect(ui->comboBox_24, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
 
+    connect(ui->comboBox_20, SIGNAL(activated(int)), this, SLOT(selectComboBox20(int)));
+    connect(ui->comboBox_21, SIGNAL(activated(int)), this, SLOT(selectComboBox21(int)));
+    connect(ui->comboBox_23, SIGNAL(activated(int)), this, SLOT(selectComboBox23(int)));
+    connect(ui->comboBox_24, SIGNAL(activated(int)), this, SLOT(selectComboBox24(int)));
+
     connect(ui->listWidget, &QListWidget::itemClicked, this, &settingswindow::updateSurgeon);
 
 
@@ -1264,11 +1269,9 @@ void settingswindow::updateComboBoxes(int index) {
     }
 
 //Top left pedal
-void settingswindow::enableComboBox20()
+void settingswindow::selectComboBox20(int index)
 {
-    int tlpedal=0,blpedal=0,trpedal=0,brpedal=0;
 
-    items << "LED1 On/Off" << "LED2 On/Off" << "Vitrectomy On/Off" << "Diathermy On/Off" << "Silicon Oil On/Off";
     if(ui->comboBox_20->currentText() == "LED1 On/Off")
     {
         if(tlpedal==0)
@@ -1276,12 +1279,12 @@ void settingswindow::enableComboBox20()
             lp=1;
             tlpedal=1;
         }
-        else if(blpedal==0)
+        else if(tlpedal==1)
         {
             lp=0;
-            blpedal=1;
+            tlpedal=0;
         }
-        emit pedalsled1(lp);
+        emit led1_pedal(lp);
     }
     else if(ui->comboBox_20->currentText() == "LED2 On/Off")
     {
@@ -1290,12 +1293,12 @@ void settingswindow::enableComboBox20()
             lp2=1;
             tlpedal=1;
         }
-        else if(blpedal==0)
+        else if(tlpedal==1)
         {
             lp2=0;
-            blpedal=1;
+            tlpedal=0;
         }
-        emit pedalsled2(lp2);
+        emit led2_pedal(lp2);
     }
     else if(ui->comboBox_20->currentText() == "Vitrectomy On/Off")
     {
@@ -1304,12 +1307,12 @@ void settingswindow::enableComboBox20()
             vip=1;
             tlpedal=1;
         }
-        else if(blpedal==0)
+        else if(tlpedal==1)
         {
             vip=0;
-            blpedal=1;
+            tlpedal=0;
         }
-        emit pedalsvit(vip);
+        emit vit_pedal(vip);
     }
     else if(ui->comboBox_20->currentText() == "Diathermy On/Off")
     {
@@ -1318,12 +1321,12 @@ void settingswindow::enableComboBox20()
             dp=1;
             tlpedal=1;
         }
-        else if(blpedal==0)
+        else if(tlpedal==1)
         {
             dp=0;
-            blpedal=1;
+            tlpedal=0;
         }
-        emit pedalsdia(dp);
+        emit dia_pedal(dp);
     }
     else if(ui->comboBox_20->currentText() == "Silicon Oil On/Off")
     {
@@ -1332,13 +1335,244 @@ void settingswindow::enableComboBox20()
             sp=1;
             tlpedal=1;
         }
-        else if(blpedal==0)
+        else if(tlpedal==1)
         {
             sp=0;
-            blpedal=1;
+            tlpedal=0;
         }
     }
-    emit pedalssiloil(sp);
+    emit siloil_pedal(sp);
+
+}
+
+//Bottom left pedal
+void settingswindow::selectComboBox21(int index)
+{
+
+    if(ui->comboBox_21->currentText() == "LED1 On/Off")
+    {
+        if(blpedal==0)
+        {
+            lp=1;
+            blpedal=1;
+        }
+        else if(blpedal==1)
+        {
+            lp=0;
+            blpedal=0;
+        }
+        emit led1_pedal(lp);
+    }
+    else if(ui->comboBox_21->currentText() == "LED2 On/Off")
+    {
+        if(blpedal==0)
+        {
+            lp2=1;
+            blpedal=1;
+        }
+        else if(blpedal==1)
+        {
+            lp2=0;
+            blpedal=0;
+        }
+        emit led2_pedal(lp2);
+    }
+    else if(ui->comboBox_21->currentText() == "Vitrectomy On/Off")
+    {
+        if(blpedal==0)
+        {
+            vip=1;
+            blpedal=1;
+        }
+        else if(blpedal==1)
+        {
+            vip=0;
+            blpedal=0;
+        }
+        emit vit_pedal(vip);
+    }
+    else if(ui->comboBox_21->currentText() == "Diathermy On/Off")
+    {
+        if(blpedal==0)
+        {
+            dp=1;
+            blpedal=1;
+        }
+        else if(blpedal==1)
+        {
+            dp=0;
+            blpedal=0;
+        }
+        emit dia_pedal(dp);
+    }
+    else if(ui->comboBox_21->currentText() == "Silicon Oil On/Off")
+    {
+        if(blpedal==0)
+        {
+            sp=1;
+            blpedal=1;
+        }
+        else if(blpedal==1)
+        {
+            sp=0;
+            blpedal=0;
+        }
+    }
+    emit siloil_pedal(sp);
+
+}
+
+//Top right pedal
+void settingswindow::selectComboBox23(int index)
+{
+
+    if(ui->comboBox_23->currentText() == "LED1 On/Off")
+    {
+        if(trpedal==0)
+        {
+            lp=1;
+            trpedal=1;
+        }
+        else if(trpedal==1)
+        {
+            lp=0;
+            trpedal=0;
+        }
+        emit led1_pedal(lp);
+    }
+    else if(ui->comboBox_23->currentText() == "LED2 On/Off")
+    {
+        if(trpedal==0)
+        {
+            lp2=1;
+            trpedal=1;
+        }
+        else if(trpedal==1)
+        {
+            lp2=0;
+            trpedal=0;
+        }
+        emit led2_pedal(lp2);
+    }
+    else if(ui->comboBox_23->currentText() == "Vitrectomy On/Off")
+    {
+        if(trpedal==0)
+        {
+            vip=1;
+            trpedal=1;
+        }
+        else if(trpedal==1)
+        {
+            vip=0;
+            trpedal=0;
+        }
+        emit vit_pedal(vip);
+    }
+    else if(ui->comboBox_23->currentText() == "Diathermy On/Off")
+    {
+        if(trpedal==0)
+        {
+            dp=1;
+            trpedal=1;
+        }
+        else if(trpedal==1)
+        {
+            dp=0;
+            trpedal=0;
+        }
+        emit dia_pedal(dp);
+    }
+    else if(ui->comboBox_23->currentText() == "Silicon Oil On/Off")
+    {
+        if(trpedal==0)
+        {
+            sp=1;
+            trpedal=1;
+        }
+        else if(trpedal==1)
+        {
+            sp=0;
+            trpedal=0;
+        }
+    }
+    emit siloil_pedal(sp);
+
+}
+
+//Bottom right pedal
+void settingswindow::selectComboBox24(int index)
+{
+
+    if(ui->comboBox_24->currentText() == "LED1 On/Off")
+    {
+        if(brpedal==0)
+        {
+            lp=1;
+            brpedal=1;
+        }
+        else if(brpedal==1)
+        {
+            lp=0;
+            brpedal=0;
+        }
+        emit led1_pedal(lp);
+    }
+    else if(ui->comboBox_24->currentText() == "LED2 On/Off")
+    {
+        if(brpedal==0)
+        {
+            lp2=1;
+            brpedal=1;
+        }
+        else if(brpedal==1)
+        {
+            lp2=0;
+            brpedal=0;
+        }
+        emit led2_pedal(lp2);
+    }
+    else if(ui->comboBox_24->currentText() == "Vitrectomy On/Off")
+    {
+        if(brpedal==0)
+        {
+            vip=1;
+            brpedal=1;
+        }
+        else if(brpedal==1)
+        {
+            vip=0;
+            brpedal=0;
+        }
+        emit vit_pedal(vip);
+    }
+    else if(ui->comboBox_24->currentText() == "Diathermy On/Off")
+    {
+        if(brpedal==0)
+        {
+            dp=1;
+            brpedal=1;
+        }
+        else if(brpedal==1)
+        {
+            dp=0;
+            brpedal=0;
+        }
+        emit dia_pedal(dp);
+    }
+    else if(ui->comboBox_24->currentText() == "Silicon Oil On/Off")
+    {
+        if(brpedal==0)
+        {
+            sp=1;
+            brpedal=1;
+        }
+        else if(brpedal==1)
+        {
+            sp=0;
+            brpedal=0;
+        }
+    }
+    emit siloil_pedal(sp);
 
 }
 
@@ -1395,4 +1629,3 @@ void settingswindow::swap_onoff()
 
     emit swapsignal(flag2);
 }
-

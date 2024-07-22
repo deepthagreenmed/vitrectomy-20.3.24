@@ -113,157 +113,163 @@ public slots:
 
 private slots:
 
-        void dacvalue();
+     void led1_setvalue(int value);
+     void led2_setvalue(int value);
+     void vit_setvalue(int value);
+     void dia_setvalue(int value);
+     void siloil_setvalue(int value);
 
-        void pressureval();
+    void dacvalue();
 
-        void transitionToNewScreen();
+    void pressureval();
 
-        void setZero();
+    void transitionToNewScreen();
 
-         void updateLabel();
+    void setZero();
 
-         void updateLabel2();
+     void updateLabel();
 
-        void diathermy();
+     void updateLabel2();
 
-        void airinjectoroff();
+    void diathermy();
 
-         void updatetimedate();
+    void airinjectoroff();
 
-        void increaseVaccumValue();
+     void updatetimedate();
 
-        void decreaseVaccumValue();
+    void increaseVaccumValue();
 
-        void increaseVitrectomyValue();
+    void decreaseVaccumValue();
 
-        void decreaseVitrectomyValue();
+    void increaseVitrectomyValue();
 
-        void increaseDiathermyValue();
+    void decreaseVitrectomyValue();
 
-        void decreaseDiathermyValue();
+    void increaseDiathermyValue();
 
-        void increaseAirInjectorValue();
+    void decreaseDiathermyValue();
 
-        void decreaseAirInjectorValue();
+    void increaseAirInjectorValue();
 
-        void increaseledvalue();
+    void decreaseAirInjectorValue();
 
-        void decreaseledvalue();
+    void increaseledvalue();
 
-        void increaseledvalue2();
+    void decreaseledvalue();
 
-        void decreaseledvalue2();
+    void increaseledvalue2();
 
-        void increasesiliconoil();
+    void decreaseledvalue2();
 
-        void decreasesiliconoil();
+    void increasesiliconoil();
 
-        //settings window
-        void showsettingswindow();
+    void decreasesiliconoil();
 
-        //silicon oil
-        void sil_oil_onoff();
+    //settings window
+    void showsettingswindow();
 
-        //vaccum linear/nonlinear
-        void vac_linear_nonlinear();
+    //silicon oil
+    void sil_oil_onoff();
 
-        //led1
-        void led1_onoff();
+    //vaccum linear/nonlinear
+    void vac_linear_nonlinear();
 
-        //diathermy
-        void dia_onoff();
+    //led1
+    void led1_onoff();
 
-        //air injector
-        void ai_onoff();
+    //diathermy
+    void dia_onoff();
 
-        //vitrectomy
-        void vit_onoff();
+    //air injector
+    void ai_onoff();
 
-        //surgeon
-        void setsurgeon();
+    //vitrectomy
+    void vit_onoff();
 
-        //continous press
-        //vaccum
-        void on_increase_vac_pressed();
+    //surgeon
+    void setsurgeon();
 
-        void on_increase_vac_released();
+    //continous press
+    //vaccum
+    void on_increase_vac_pressed();
 
-        void on_decrease_vac_pressed();
+    void on_increase_vac_released();
 
-        void on_decrease_vac_released();
+    void on_decrease_vac_pressed();
 
-        //vitrectomy
-        void on_increase_vit_pressed();
+    void on_decrease_vac_released();
 
-        void on_increase_vit_released();
+    //vitrectomy
+    void on_increase_vit_pressed();
 
-        void on_decrease_vit_pressed();
+    void on_increase_vit_released();
 
-        void on_decrease_vit_released();
+    void on_decrease_vit_pressed();
 
-        //silicon oil
-        void on_increase_sil_oil_pressed();
+    void on_decrease_vit_released();
 
-        void on_increase_sil_oil_released();
+    //silicon oil
+    void on_increase_sil_oil_pressed();
 
-        void on_decrease_sil_oil_pressed();
+    void on_increase_sil_oil_released();
 
-        void on_decrease_sil_oil_released();
+    void on_decrease_sil_oil_pressed();
 
-        //led1
-        void on_increase_led1_pressed();
+    void on_decrease_sil_oil_released();
 
-        void on_increase_led1_released();
+    //led1
+    void on_increase_led1_pressed();
 
-        void on_decrease_led1_pressed();
+    void on_increase_led1_released();
 
-        void on_decrease_led1_released();
+    void on_decrease_led1_pressed();
 
-        //air injector
-        void on_increase_ai_pressed();
+    void on_decrease_led1_released();
 
-        void on_increase_ai_released();
+    //air injector
+    void on_increase_ai_pressed();
 
-        void on_decrease_ai_pressed();
+    void on_increase_ai_released();
 
-        void on_decrease_ai_released();
+    void on_decrease_ai_pressed();
 
-        //diathermy
-        void on_increase_dia_pressed();
+    void on_decrease_ai_released();
 
-        void on_increase_dia_released();
+    //diathermy
+    void on_increase_dia_pressed();
 
-        void on_decrease_dia_pressed();
+    void on_increase_dia_released();
 
-        void on_decrease_dia_released();
+    void on_decrease_dia_pressed();
 
-        //led2
-        void on_increase_led2_pressed();
+    void on_decrease_dia_released();
 
-        void on_increase_led2_released();
+    //led2
+    void on_increase_led2_pressed();
 
-        void on_decrease_led2_pressed();
+    void on_increase_led2_released();
 
-        void on_decrease_led2_released();
+    void on_decrease_led2_pressed();
 
-        //vitrectomy linear/nonlinear
-        void vit_linear_nonlinear();
+    void on_decrease_led2_released();
 
-        //led2
-        void led2_onoff();
+    //vitrectomy linear/nonlinear
+    void vit_linear_nonlinear();
 
-        void comboboxload();
+    //led2
+    void led2_onoff();
 
-        void onComboBoxClicked();
+    void comboboxload();
 
-        void timerCompleted();
+    void onComboBoxClicked();
 
-        //setup screen
-        void showsetupscreen();
+    void timerCompleted();
 
-        //drain on/off
-        void drain_onoff();
+    //setup screen
+    void showsetupscreen();
+
+    //drain on/off
+    void drain_onoff();
 
 private:
     Ui::MainWindow *ui;
