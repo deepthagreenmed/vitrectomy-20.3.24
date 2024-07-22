@@ -49,9 +49,9 @@ public:
     int vit_value=60; //period
     float resolution = 0.000000005; //5ns
 
-    void linearcall23();
+    void linearcall2();
     void linearcall3();
-    void nonlinearcall23();
+    void nonlinearcall2();
     void nonlinearcall3();
 
 
