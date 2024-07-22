@@ -2966,16 +2966,6 @@ void MainWindow::updateLabel()
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
 
-//        if(ui->label_vacpreset->text().toInt()>390)
-//        {
-//         int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
-//         l->writeDAC(dacval);
-//         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-//         int avg1 = vac->convert(CHANNEL_1)*0.1894;
-//         ui->label_vacactual->setText(QString::number(avg1));
-//        }
-
-
 
         file.close();
         file2.close();
@@ -3099,15 +3089,6 @@ void MainWindow::updateLabel()
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
            ui->label_vacactual->setText(QString::number(avg1));
 
-//           if(ui->label_vacpreset->text().toInt()>390)
-//           {
-//            int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
-//            l->writeDAC(dacval);
-//            qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-//            int avg1 = vac->convert(CHANNEL_1)*0.1894;
-//            ui->label_vacactual->setText(QString::number(avg1));
-//           }
-
            file.close();
             file2.close();
 
@@ -3216,15 +3197,6 @@ void MainWindow::updateLabel()
         //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
-
-//        if(ui->label_vacpreset->text().toInt()>390)
-//        {
-//         int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
-//         l->writeDAC(dacval);
-//         qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-//         int avg1 = vac->convert(CHANNEL_1)*0.1894;
-//         ui->label_vacactual->setText(QString::number(avg1));
-//        }
 
         file.close();
          file2.close();
@@ -3335,15 +3307,33 @@ void MainWindow::updateLabel2()
         {
             if(flag2==0)
             {
-                linearcall3();
+                if(avgfp<4085)
+                {
+                    linearcall3();
+                }
+                else
+                {
+                    hhandler->vit_on(1000/(vit_value/60));
+                    ui->label_vitactual->setText(QString::number(vit_value));
+                }
+
             }
             else if(flag2==1)
             {
-                linearcall2();
+                if(avgfp<(fp0+fp1+fp2-11))
+                {
+                    linearcall2();
+                }
+                else
+                {
+                    hhandler->vit_on(1000/(vit_value/60));
+                    ui->label_vitactual->setText(QString::number(vit_value));
+                }
             }
         }
     }
 }
+
 
 // Turn drain on or off
 void MainWindow::drain_onoff()
