@@ -6,7 +6,7 @@ LED::LED(const std::string& port) : portName(port) {
         throw std::runtime_error("Error: Unable to open data file");
     }
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////////
 LED::~LED() {
     file.close();
 }
