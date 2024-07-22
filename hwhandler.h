@@ -78,6 +78,8 @@ public:
     static void sil_oil_on();
     static void sil_oil_off();
 
+    void write_motor(uint16_t status, uint16_t direction, uint16_t value);
+
 
 signals:
 

@@ -2605,6 +2605,7 @@ void MainWindow::airinjectoron()
 
     aiflag=1;
     hhandler->ai_on();
+    hhandler->write_motor(0x01, 0x03, ui->label_aipreset->text().toInt());
     hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
     int avg2=0;
@@ -2627,6 +2628,7 @@ void MainWindow::airinjectoroff()
     aiflag=0;
     hhandler->ai_off();
     hhandler->ai_preset_count(0);
+    hhandler->write_motor(0x00, 0x03, 0);
     ui->label_aiactual->setText("0");
     hhandler->ai_actual_count(0);
 
