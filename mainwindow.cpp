@@ -3335,28 +3335,11 @@ void MainWindow::updateLabel2()
         {
             if(flag2==0)
             {
-                if(avgfp<4085)
-                {
-                    linearcall3();
-                }
-                else
-                {
-                    hhandler->vit_on(1000/(vit_value/60));
-                    ui->label_vitactual->setText(QString::number(vit_value));
-                }
-
+                linearcall3();
             }
             else if(flag2==1)
             {
-                if(avgfp<4085)
-                {
-                    linearcall2();
-                }
-                else
-                {
-                    hhandler->vit_on(1000/(vit_value/60));
-                    ui->label_vitactual->setText(QString::number(vit_value));
-                }
+                linearcall2();
             }
         }
     }
