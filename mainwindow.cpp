@@ -863,6 +863,20 @@ void MainWindow::ai_onoff()
 
             hhandler->ai_on();
 
+            int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
+            hhandler->write_motor(0x01, 0x03, preset);
+            hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+
+            int avg2=0;
+            for(int i=0; i<10; i++)
+            {
+                avg2 += vac->convert(CHANNEL_2) * 0.1894;
+            }
+            avg2 = static_cast<int>(avg2/10);
+            int value = avg2;
+            ui->label_aiactual->setText(QString::number(value));
+            hhandler->ai_actual_count(value);
+
             timeai.start(25);
             connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
