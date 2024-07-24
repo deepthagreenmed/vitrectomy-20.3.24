@@ -1578,7 +1578,7 @@ void MainWindow::increaseAirInjectorValue()
         int p = ui->label_aipreset->text().toInt();
         airinj->aivalue(p);
     });
-    timeai.start(100); // Timer set to trigger every 1000 ms
+    timeai.start(100); // Timer set to trigger every 100 ms
 
   //  airinjectoron();
 
