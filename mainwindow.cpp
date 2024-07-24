@@ -2605,7 +2605,7 @@ void MainWindow::airinjectoron()
 
     aiflag=1;
     hhandler->ai_on();
-    int preset=90+1.5*(ui->label_aipreset->text().toInt());
+    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
     hhandler->write_motor(0x01, 0x03, preset);
     hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
