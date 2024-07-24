@@ -94,7 +94,7 @@ public slots:
     void typevit(QString str);
     void diaval(QString val);
 
-    void aibackground();
+    //void aibackground();
 
     void on_clicked(const QString& digit);
 
