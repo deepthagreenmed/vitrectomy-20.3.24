@@ -861,7 +861,7 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            timeai.start(1);
+            timeai.start(25);
             connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
             timeai2.stop();
@@ -887,7 +887,7 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
-            timeai2.start(1);
+            timeai2.start(25);
             connect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
 
             timeai.stop();
