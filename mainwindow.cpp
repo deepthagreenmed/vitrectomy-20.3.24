@@ -2596,7 +2596,7 @@ void MainWindow::airinjectoron()
     int value = avg2;
     ui->label_aiactual->setText(QString::number(value));
     hhandler->ai_actual_count(value);
-    qDebug()<<ui->label_aipreset->text().toInt()<<ui->label_aiactual->text().toInt();
+    qDebug()<<preset<<value;
 }
 
 // Air injector off
