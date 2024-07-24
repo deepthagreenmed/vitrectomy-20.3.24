@@ -1294,22 +1294,6 @@ background-color: rgba(191, 64, 64, 0);
      <enum>QProgressBar::BottomToTop</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_testtube">
-    <property name="geometry">
-     <rect>
-      <x>1288</x>
-      <y>277</y>
-      <width>71</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/new/prefix1/img/airscale2.png);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
@@ -1609,7 +1593,6 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>label_31</zorder>
    <zorder>pushButton_siloildec</zorder>
    <zorder>progressBar</zorder>
-   <zorder>label_testtube</zorder>
    <zorder>pushButton_vitonoff</zorder>
    <zorder>pushButton_siloilonoff</zorder>
    <zorder>pushButton_led2onoff</zorder>
@@ -1623,8 +1606,8 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>pushButton_drain</zorder>
    <zorder>label_12</zorder>
    <zorder>label_22</zorder>
-   <zorder>pushButton_start</zorder>
    <zorder>comboBox_surgeonname</zorder>
+   <zorder>pushButton_start</zorder>
   </widget>
  </widget>
  <resources/>
