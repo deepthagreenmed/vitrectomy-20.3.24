@@ -113,6 +113,7 @@ public slots:
 
 
 private slots:
+     void aislot(int a);
 
      void led1_setvalue(int value);
      void led2_setvalue(int value);

@@ -93,6 +93,8 @@ MainWindow::MainWindow(QWidget *parent)
     key = new keypad;
     airinj = new airinjector;
 
+    connect(airinj, &airinjector::aisignal, this, &MainWindow::aislot);
+
 
     QTimer *timerfp = new QTimer;
     connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
@@ -3648,3 +3650,8 @@ void MainWindow::siloil_setvalue(int value)
 
 
 //}
+
+void MainWindow::aislot(int a)
+{
+    ui->label_aiactual->setText(QString::number(a));
+}

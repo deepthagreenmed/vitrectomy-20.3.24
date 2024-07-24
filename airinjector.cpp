@@ -30,4 +30,6 @@ void airinjector::aivalue(int p)
     hhandler->ai_preset_count(preset);
     hhandler->ai_actual_count(actual);
 
+    emit aisignal(actual);
+
 }
