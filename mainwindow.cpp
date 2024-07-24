@@ -2614,7 +2614,6 @@ void MainWindow::airinjectoroff()
     hhandler->write_motor(0x00, 0x03, 0);
     ui->label_aiactual->setText("0");
     hhandler->ai_actual_count(0);
-
 }
 
 // Footpedal reading is less than 2
@@ -2625,14 +2624,7 @@ void MainWindow::setZero()
     if(avgzero<=(fp0+fp1))
     {
         ui->label_vitactual->setText("0");
-//        l->writeDAC(0);
-//        int avg1=vac->convert(CHANNEL_1)*0.1894;
-//        ui->label_vacactual->setText(QString::number(avg1));
     }
-//    else
-//    {
-//        ui->label_vacactual->setText("0");
-//    }
 }
 
 // LED1 and LED2
