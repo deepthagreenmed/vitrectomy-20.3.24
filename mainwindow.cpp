@@ -840,7 +840,7 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            timeai.start(25);
+            timeai.start(1000);
             connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
