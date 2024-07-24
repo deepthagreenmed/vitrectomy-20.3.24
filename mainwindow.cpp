@@ -2582,21 +2582,40 @@ void MainWindow::airinjectoron()
     }
 
     aiflag=1;
-    //hhandler->ai_on();
-    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-    hhandler->write_motor(0x01, 0x03, preset);
-    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-    int avg2=0;
-    for(int i=0; i<10; i++)
-    {
-        avg2 += vac->convert(CHANNEL_2) * 0.1894;
-    }
-    avg2 = static_cast<int>(avg2/10);
-    int value = avg2;
-    ui->label_aiactual->setText(QString::number(value));
-    hhandler->ai_actual_count(value);
-    qDebug()<<preset<<value;
+    // Create a QProcess object
+    QProcess process;
+
+    // Define the path to the executable and any arguments
+    QString executable = "/home/airinjector"; // Replace with your executable path
+    QStringList arguments;
+    arguments << ui->label_aipreset->text();
+
+    // Start the process
+    process.start(executable, arguments);
+
+    // Wait for the process to finish
+    process.waitForFinished();
+
+    // Output the result
+    QString output = process.readAllStandardOutput();
+    qDebug() << "Output:" << output;
+
+    //hhandler->ai_on();
+//    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
+//    hhandler->write_motor(0x01, 0x03, preset);
+//    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+
+//    int avg2=0;
+//    for(int i=0; i<10; i++)
+//    {
+//        avg2 += vac->convert(CHANNEL_2) * 0.1894;
+//    }
+//    avg2 = static_cast<int>(avg2/10);
+//    int value = avg2;
+//    ui->label_aiactual->setText(QString::number(value));
+//    hhandler->ai_actual_count(value);
+//    qDebug()<<preset<<value;
 }
 
 // Air injector off
