@@ -234,9 +234,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(win2, &settingswindow::diastr, this, &MainWindow::diaval);
 
-//    timeai3.start(1);
-//    connect(&timeai3, &QTimer::timeout, this, &MainWindow::aibackground);
-
     connect(key, &keypad::textsignal, this, &MainWindow::on_clicked);
     connect(key, &keypad::entersignal, this, &MainWindow::on_clickedenter);
     connect(key, &keypad::backsignal, this, &MainWindow::on_clickedbackspace);
@@ -621,24 +618,6 @@ MainWindow::~MainWindow()
 
 }
 
-// Create separate thread for air injector, turn on or off
-//void MainWindow::aibackground()
-//{
-//    if(aiflag)
-//    {
-//        QThread *onThread = new QThread;
-//        connect(onThread, &QThread::started, this, &MainWindow::airinjectoron);
-//        connect(this, &MainWindow::airinjectoronFinished, onThread, &QThread::quit);
-//        connect(onThread, &QThread::finished, onThread, &QThread::deleteLater);
-//        onThread->start();
-//    }
-
-//    if(!aiflag)
-//    {
-//        airinjectoroff();
-//    }
-//}
-
 //settings window showing
 void MainWindow::showsettingswindow()
 {
@@ -861,34 +840,36 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            if(ui->label_aipreset->text().toInt() == 0)
-            {
-                airinjectoroff();
-            }
-            else
-            {
-                hhandler->ai_on();
+            airinjectoron();
 
-                int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-                hhandler->write_motor(0x01, 0x03, preset);
-                hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+//            if(ui->label_aipreset->text().toInt() == 0)
+//            {
+//                airinjectoroff();
+//            }
+//            else
+//            {
+//                hhandler->ai_on();
 
-                int avg2=0;
-                for(int i=0; i<10; i++)
-                {
-                    avg2 += vac->convert(CHANNEL_2) * 0.1894;
-                }
-                avg2 = static_cast<int>(avg2/10);
-                int value = avg2;
-                ui->label_aiactual->setText(QString::number(value));
-                hhandler->ai_actual_count(value);
+//                int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
+//                hhandler->write_motor(0x01, 0x03, preset);
+//                hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-                timeai.start(25);
-                connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
+//                int avg2=0;
+//                for(int i=0; i<10; i++)
+//                {
+//                    avg2 += vac->convert(CHANNEL_2) * 0.1894;
+//                }
+//                avg2 = static_cast<int>(avg2/10);
+//                int value = avg2;
+//                ui->label_aiactual->setText(QString::number(value));
+//                hhandler->ai_actual_count(value);
 
-                timeai2.stop();
-                disconnect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
-            }
+//                timeai.start(25);
+//                connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
+
+//                timeai2.stop();
+//                disconnect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
+//            }
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -911,12 +892,13 @@ void MainWindow::ai_onoff()
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
             hhandler->ai_off();
+            airinjectoroff();
 
-            timeai2.start(25);
-            connect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
+//            timeai2.start(25);
+//            connect(&timeai2, &QTimer::timeout, this, &MainWindow::airinjectoroff);
 
-            timeai.stop();
-            disconnect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
+//            timeai.stop();
+//            disconnect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
             disconnect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             disconnect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -1599,28 +1581,9 @@ void MainWindow::increaseAirInjectorValue()
     ui->label_aipreset->setText(QString::number(newValue));
     //ui->progressBar->setValue(newValue);
 
-    if(ui->label_aipreset->text().toInt() == 0)
-    {
-        airinjectoroff();
-    }
-    else
-    {
-        hhandler->ai_on();
+    airinjectoron();
 
-        int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-        hhandler->write_motor(0x01, 0x03, preset);
-        hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-        int avg2=0;
-        for(int i=0; i<10; i++)
-        {
-            avg2 += vac->convert(CHANNEL_2) * 0.1894;
-        }
-        avg2 = static_cast<int>(avg2/10);
-        int value = avg2;
-        ui->label_aiactual->setText(QString::number(value));
-        hhandler->ai_actual_count(value);
-    }
 }
 
 // Decrease air injector
@@ -1635,28 +1598,9 @@ void MainWindow::decreaseAirInjectorValue()
     ui->label_aipreset->setText(QString::number(newValue));
     //ui->progressBar->setValue(newValue);
 
-    if(ui->label_aipreset->text().toInt() == 0)
-    {
-        airinjectoroff();
-    }
-    else
-    {
-        hhandler->ai_on();
+    airinjectoron();
 
-        int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-        hhandler->write_motor(0x01, 0x03, preset);
-        hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-        int avg2=0;
-        for(int i=0; i<10; i++)
-        {
-            avg2 += vac->convert(CHANNEL_2) * 0.1894;
-        }
-        avg2 = static_cast<int>(avg2/10);
-        int value = avg2;
-        ui->label_aiactual->setText(QString::number(value));
-        hhandler->ai_actual_count(value);
-    }
 }
 
 // Increase LED1
@@ -2676,21 +2620,20 @@ void MainWindow::airinjectoron()
 
     aiflag=1;
     hhandler->ai_on();
-//    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-//    hhandler->write_motor(0x01, 0x03, preset);
-//    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
+    hhandler->write_motor(0x01, 0x03, preset);
+    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-//    int avg2=0;
-//    for(int i=0; i<10; i++)
-//    {
-//        avg2 += vac->convert(CHANNEL_2) * 0.1894;
-//    }
-//    avg2 = static_cast<int>(avg2/10);
-//    int value = avg2;
-//    ui->label_aiactual->setText(QString::number(value));
-//    hhandler->ai_actual_count(value);
+    int avg2=0;
+    for(int i=0; i<10; i++)
+    {
+        avg2 += vac->convert(CHANNEL_2) * 0.1894;
+    }
+    avg2 = static_cast<int>(avg2/10);
+    int value = avg2;
+    ui->label_aiactual->setText(QString::number(value));
+    hhandler->ai_actual_count(value);
     qDebug()<<ui->label_aipreset->text().toInt()<<ui->label_aiactual->text().toInt();
-    //emit airinjectoronFinished();
 }
 
 // Air injector off
