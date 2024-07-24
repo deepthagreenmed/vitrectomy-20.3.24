@@ -49,35 +49,13 @@
 #define CHANNEL_2                   0xA7
 #define CHANNEL_3                   0xE7
 
-#define REG1 32
-#define REG2 36
+#define MOT_CTRL_REG                32
+#define MOT_COUNT_REG               36
+
 
 class hwHandler: public QThread
 {
     Q_OBJECT
-
-    int Flow_LUT[42]={95,95,  //0
-                    110,110,  //2
-                    112,112,  //4
-                    115,115,  //6
-                    122,122,  //8
-                    130,130, //10
-                    145,145, //12
-                    155,150, //14
-                    165,155, //16
-                    175,160, //18
-                    185,170, //20
-                    195,195, //22
-                    205,205, //24
-                    215,215, //26
-                    225,225, //28
-                    245,245, //30
-                    255,255, //32
-                    265,265, //34
-                    275,275, //36
-                    290,290, //38
-                    299,299  //40
-                    };
 
 public:
     explicit hwHandler(QObject *parent = 0);
