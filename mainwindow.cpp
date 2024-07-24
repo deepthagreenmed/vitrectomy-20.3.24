@@ -93,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
     key = new keypad;
     airinj = new airinjector;
 
-    connect(airinj, &airinjector::aisignal, this, &MainWindow::aislot);
+    //connect(airinj, &airinjector::aisignal, this, &MainWindow::aislot);
 
 
     QTimer *timerfp = new QTimer;
@@ -850,19 +850,41 @@ void MainWindow::ai_onoff()
                 return;
             }
 
-            connect(&timeai, &QTimer::timeout, this, [this]{
-                int p = ui->label_aipreset->text().toInt();
-                airinj->aivalue(p);
+           // int p = ui->label_aipreset->text().toInt();
+
+            // Define the lambda function with arguments and return value
+            auto myFunction = [this](int p) -> int {
+                int preset;
+                int actual;
+
+                preset = p;
+                if (preset == NULL)
+                   std::cout<<"useage airingector PRESET";
+                int flow=90+ (int)(preset* 1.5);
+                hhandler->write_motor(0x01,0x03,flow);
+
+                actual=0;
+                for(int i=0; i<10; i++)
+                {
+                    actual += vac->convert(CHANNEL_2) * 0.1894;
+                }
+                actual = static_cast<int>(actual/10);
+                std::cout << actual <<" "<< preset << std::endl;
+
+                hhandler->ai_on();
+                hhandler->ai_preset_count(preset);
+                hhandler->ai_actual_count(actual);
+
+                return actual;
+            };
+
+            QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
+                int arg1 = ui->label_aipreset->text().toInt();
+                int actual = myFunction(arg1);
+                ui->label_aiactual->setText(QString::number(actual));
             });
-            timeai.start(100); // Timer set to trigger every 1000 ms
+        timeai.start(100);
 
-
-//            QThread thread;
-//            moveToThread(&thread);
-//            QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
-//            QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
-//            thread.start();
-//            thread.wait();
 
             //airinjectoron();
 
@@ -1576,11 +1598,38 @@ void MainWindow::increaseAirInjectorValue()
 //    thread.start();
 //    thread.wait();
 
-    connect(&timeai, &QTimer::timeout, this, [this]{
-        int p = ui->label_aipreset->text().toInt();
-        airinj->aivalue(p);
+    // Define the lambda function with arguments and return value
+    auto myFunction = [this](int p) -> int {
+        int preset;
+        int actual;
+
+        preset = p;
+        if (preset == NULL)
+           std::cout<<"useage airingector PRESET";
+        int flow=90+ (int)(preset* 1.5);
+        hhandler->write_motor(0x01,0x03,flow);
+
+        actual=0;
+        for(int i=0; i<10; i++)
+        {
+            actual += vac->convert(CHANNEL_2) * 0.1894;
+        }
+        actual = static_cast<int>(actual/10);
+        std::cout << actual <<" "<< preset << std::endl;
+
+        hhandler->ai_on();
+        hhandler->ai_preset_count(preset);
+        hhandler->ai_actual_count(actual);
+
+        return actual;
+    };
+
+    QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
+        int arg1 = ui->label_aipreset->text().toInt();
+        int actual = myFunction(arg1);
+        ui->label_aiactual->setText(QString::number(actual));
     });
-    timeai.start(100); // Timer set to trigger every 100 ms
+timeai.start(100);
 
   //  airinjectoron();
 
@@ -1611,11 +1660,38 @@ void MainWindow::decreaseAirInjectorValue()
 //    thread.start();
 //    thread.wait();
 
-    connect(&timeai, &QTimer::timeout, this, [this]{
-        int p = ui->label_aipreset->text().toInt();
-        airinj->aivalue(p);
-    });
-    timeai.start(100); // Timer set to trigger every 1000 ms
+     // Define the lambda function with arguments and return value
+            auto myFunction = [this](int p) -> int {
+                int preset;
+                int actual;
+
+                preset = p;
+                if (preset == NULL)
+                   std::cout<<"useage airingector PRESET";
+                int flow=90+ (int)(preset* 1.5);
+                hhandler->write_motor(0x01,0x03,flow);
+
+                actual=0;
+                for(int i=0; i<10; i++)
+                {
+                    actual += vac->convert(CHANNEL_2) * 0.1894;
+                }
+                actual = static_cast<int>(actual/10);
+                std::cout << actual <<" "<< preset << std::endl;
+
+                hhandler->ai_on();
+                hhandler->ai_preset_count(preset);
+                hhandler->ai_actual_count(actual);
+
+                return actual;
+            };
+
+            QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
+                int arg1 = ui->label_aipreset->text().toInt();
+                int actual = myFunction(arg1);
+                ui->label_aiactual->setText(QString::number(actual));
+            });
+            timeai.start(100);
 
     //airinjectoron();
 
@@ -3651,7 +3727,7 @@ void MainWindow::siloil_setvalue(int value)
 
 //}
 
-void MainWindow::aislot(int a)
-{
-    ui->label_aiactual->setText(QString::number(a));
-}
+//void MainWindow::aislot(int a)
+//{
+//    ui->label_aiactual->setText(QString::number(a));
+//}

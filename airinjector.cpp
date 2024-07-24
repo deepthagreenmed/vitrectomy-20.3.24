@@ -7,7 +7,7 @@ airinjector::airinjector()
 
 }
 
-void airinjector::aivalue(int p)
+int airinjector::aivalue(int p)
 {
     int preset;
     int actual;
@@ -30,6 +30,12 @@ void airinjector::aivalue(int p)
     hhandler->ai_preset_count(preset);
     hhandler->ai_actual_count(actual);
 
-    emit aisignal(actual);
+    return actual;
+    //emit aisignal(actual);
 
 }
+
+//void airinjector::aivalue2(int a)
+//{
+//    emit aisignal(a);
+//}

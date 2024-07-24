@@ -12,12 +12,7 @@ class airinjector
 {
 public:
     airinjector();
-
-signals:
-    void aisignal(int a);
-
-public slots:
-    void aivalue(int p);
+    int aivalue(int p);
 
 private:
     hwHandler *hhandler;
