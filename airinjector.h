@@ -1,8 +1,12 @@
 #ifndef AIRINJECTOR_H
 #define AIRINJECTOR_H
+
 #include "vaccum.h"
 #include "hwhandler.h"
+
 #include <QObject>
+
+#include <iostream>
 
 class airinjector
 {
