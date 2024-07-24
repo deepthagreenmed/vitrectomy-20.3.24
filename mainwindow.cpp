@@ -840,8 +840,8 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            timeai.start(1000);
-            connect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
+            hhandler->ai_on();
+            airinjectoron();
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -862,9 +862,6 @@ void MainWindow::ai_onoff()
             animation4->setDuration(250);
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-
-            timeai.stop();
-            disconnect(&timeai, &QTimer::timeout, this, &MainWindow::airinjectoron);
 
             hhandler->ai_off();
             airinjectoroff();
@@ -1548,7 +1545,6 @@ void MainWindow::increaseAirInjectorValue()
         newValue=100;
     }
     ui->label_aipreset->setText(QString::number(newValue));
-    //ui->progressBar->setValue(newValue);
 
     airinjectoron();
 
@@ -1565,10 +1561,8 @@ void MainWindow::decreaseAirInjectorValue()
         newValue=0;
     }
     ui->label_aipreset->setText(QString::number(newValue));
-    //ui->progressBar->setValue(newValue);
 
     airinjectoron();
-
 
 }
 
@@ -2588,7 +2582,7 @@ void MainWindow::airinjectoron()
     }
 
     aiflag=1;
-    hhandler->ai_on();
+    //hhandler->ai_on();
     int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
     hhandler->write_motor(0x01, 0x03, preset);
     hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
