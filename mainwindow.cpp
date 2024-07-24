@@ -2610,11 +2610,11 @@ void MainWindow::airinjectoron()
     hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
     int avg2=0;
-    for(int i=0; i<1000; i++)
+    for(int i=0; i<10; i++)
     {
         avg2 += vac->convert(CHANNEL_2) * 0.1894;
     }
-    avg2 = static_cast<int>(avg2/1000);
+    avg2 = static_cast<int>(avg2/10);
 
     int value = avg2;
 
