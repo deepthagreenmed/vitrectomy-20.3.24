@@ -2615,9 +2615,7 @@ void MainWindow::airinjectoron()
         avg2 += vac->convert(CHANNEL_2) * 0.1894;
     }
     avg2 = static_cast<int>(avg2/10);
-
     int value = avg2;
-
     ui->label_aiactual->setText(QString::number(value));
     hhandler->ai_actual_count(value);
     emit airinjectoronFinished();
