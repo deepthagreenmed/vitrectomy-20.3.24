@@ -9,6 +9,7 @@
 #include "led.h"
 #include "ltc2614.h"
 #include "sensor.h"
+#include "airinjector.h"
 
 #include <iostream>
 #include <fstream>
@@ -275,11 +276,10 @@ private:
     Ui::MainWindow *ui;
     settingswindow *win2;
     QSqlDatabase mydb1;
-       QSqlDatabase mydb2;
-
+    QSqlDatabase mydb2;
+    airinjector *airinj;
     QTimer time;
     QTimer *timerforondscreen ;
-
     int frequency;
     float dutycycle;
     QPropertyAnimation *animation;

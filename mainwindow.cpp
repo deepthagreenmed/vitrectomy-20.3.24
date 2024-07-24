@@ -91,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
     vac = new Vaccum;
     l = new ltc2614;
     key = new keypad;
+    airinj = new airinjector;
 
 
     QTimer *timerfp = new QTimer;
@@ -841,12 +842,25 @@ void MainWindow::ai_onoff()
 
             hhandler->ai_on();
 
-            QThread thread;
-            moveToThread(&thread);
-            QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
-            QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
-            thread.start();
-            thread.wait();
+            if(ui->label_aipreset->text().toInt() == 0)
+            {
+                airinjectoroff();
+                return;
+            }
+
+            connect(&timeai, &QTimer::timeout, this, [this]{
+                int p = ui->label_aipreset->text().toInt();
+                airinj->aivalue(p);
+            });
+            timeai.start(100); // Timer set to trigger every 1000 ms
+
+
+//            QThread thread;
+//            moveToThread(&thread);
+//            QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
+//            QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
+//            thread.start();
+//            thread.wait();
 
             //airinjectoron();
 
@@ -1553,12 +1567,20 @@ void MainWindow::increaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
-    QThread thread;
-    moveToThread(&thread);
-    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
-    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
-    thread.start();
-    thread.wait();
+//    QThread thread;
+//    moveToThread(&thread);
+//    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
+//    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
+//    thread.start();
+//    thread.wait();
+
+    connect(&timeai, &QTimer::timeout, this, [this]{
+        int p = ui->label_aipreset->text().toInt();
+        airinj->aivalue(p);
+    });
+    timeai.start(100); // Timer set to trigger every 1000 ms
+
+  //  airinjectoron();
 
 
 }
@@ -1574,12 +1596,26 @@ void MainWindow::decreaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
-    QThread thread;
-    moveToThread(&thread);
-    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
-    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
-    thread.start();
-    thread.wait();
+    if(ui->label_aipreset->text().toInt() == 0)
+    {
+        airinjectoroff();
+        return;
+    }
+
+//    QThread thread;
+//    moveToThread(&thread);
+//    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
+//    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
+//    thread.start();
+//    thread.wait();
+
+    connect(&timeai, &QTimer::timeout, this, [this]{
+        int p = ui->label_aipreset->text().toInt();
+        airinj->aivalue(p);
+    });
+    timeai.start(100); // Timer set to trigger every 1000 ms
+
+    //airinjectoron();
 
 }
 

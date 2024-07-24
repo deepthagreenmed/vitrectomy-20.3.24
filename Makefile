@@ -52,7 +52,8 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = led.cpp \
+SOURCES       = airinjector.cpp \
+		led.cpp \
 		main.cpp \
 		mainwindow.cpp \
 		settingswindow.cpp \
@@ -67,7 +68,8 @@ SOURCES       = led.cpp \
 		moc_keypad.cpp \
 		moc_textkeypad.cpp \
 		moc_vaccum.cpp
-OBJECTS       = led.o \
+OBJECTS       = airinjector.o \
+		led.o \
 		main.o \
 		mainwindow.o \
 		settingswindow.o \
@@ -258,7 +260,8 @@ DIST          = ../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueab
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/lib/mkspecs/features/exceptions.prf \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/lib/mkspecs/features/yacc.prf \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/lib/mkspecs/features/lex.prf \
-		pro1.pro footpedal.h \
+		pro1.pro airinjector.h \
+		footpedal.h \
 		hwhandler.h \
 		led.h \
 		ltc2614.h \
@@ -267,7 +270,8 @@ DIST          = ../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueab
 		settingswindow.h \
 		keypad.h \
 		textkeypad.h \
-		vaccum.h led.cpp \
+		vaccum.h airinjector.cpp \
+		led.cpp \
 		main.cpp \
 		mainwindow.cpp \
 		settingswindow.cpp \
@@ -655,8 +659,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents img.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/lib/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents footpedal.h hwhandler.h led.h ltc2614.h mainwindow.h sensor.h settingswindow.h keypad.h textkeypad.h vaccum.h $(DISTDIR)/
-	$(COPY_FILE) --parents led.cpp main.cpp mainwindow.cpp settingswindow.cpp keypad.cpp textkeypad.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents airinjector.h footpedal.h hwhandler.h led.h ltc2614.h mainwindow.h sensor.h settingswindow.h keypad.h textkeypad.h vaccum.h $(DISTDIR)/
+	$(COPY_FILE) --parents airinjector.cpp led.cpp main.cpp mainwindow.cpp settingswindow.cpp keypad.cpp textkeypad.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui settingswindow.ui keypad.ui textkeypad.ui $(DISTDIR)/
 
 
@@ -887,6 +891,7 @@ moc_mainwindow.cpp: mainwindow.h \
 		led.h \
 		ltc2614.h \
 		sensor.h \
+		airinjector.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/QLabel \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/qlabel.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QPropertyAnimation \
@@ -996,6 +1001,29 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
+airinjector.o: airinjector.cpp airinjector.h \
+		vaccum.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QObject \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qobject.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QVector \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qvector.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QTimer \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qtimer.h \
+		hwhandler.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QThread \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qthread.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QDebug \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qdebug.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QFile \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qfile.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QCoreApplication \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qcoreapplication.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QEventLoop \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qeventloop.h \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QTime \
+		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/qdatetime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o airinjector.o airinjector.cpp
+
 led.o: led.cpp led.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o led.o led.cpp
 
@@ -1041,6 +1069,7 @@ main.o: main.cpp mainwindow.h \
 		led.h \
 		ltc2614.h \
 		sensor.h \
+		airinjector.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/QLabel \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/qlabel.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QPropertyAnimation \
@@ -1097,6 +1126,7 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		led.h \
 		ltc2614.h \
 		sensor.h \
+		airinjector.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/QLabel \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/qlabel.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QPropertyAnimation \
@@ -1165,6 +1195,7 @@ settingswindow.o: settingswindow.cpp settingswindow.h \
 		led.h \
 		ltc2614.h \
 		sensor.h \
+		airinjector.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/QLabel \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtWidgets/qlabel.h \
 		../../xsdk-2023.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi/usr/include/QtCore/QPropertyAnimation \
