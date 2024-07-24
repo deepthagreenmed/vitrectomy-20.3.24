@@ -88,7 +88,6 @@ public:
     QLabel *label_7;
     QLabel *label_40;
     QProgressBar *progressBar;
-    QLabel *label_testtube;
     QLabel *label_15;
     QLabel *label_43;
     QLabel *label_date;
@@ -568,10 +567,6 @@ public:
         progressBar->setOrientation(Qt::Vertical);
         progressBar->setInvertedAppearance(false);
         progressBar->setTextDirection(QProgressBar::BottomToTop);
-        label_testtube = new QLabel(centralwidget);
-        label_testtube->setObjectName(QString::fromUtf8("label_testtube"));
-        label_testtube->setGeometry(QRect(1288, 277, 71, 181));
-        label_testtube->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/airscale2.png);"));
         label_15 = new QLabel(centralwidget);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(870, 40, 71, 61));
@@ -717,7 +712,6 @@ public:
         label_31->raise();
         pushButton_siloildec->raise();
         progressBar->raise();
-        label_testtube->raise();
         pushButton_vitonoff->raise();
         pushButton_siloilonoff->raise();
         pushButton_led2onoff->raise();
@@ -731,8 +725,8 @@ public:
         pushButton_drain->raise();
         label_12->raise();
         label_22->raise();
-        pushButton_start->raise();
         comboBox_surgeonname->raise();
+        pushButton_start->raise();
 
         retranslateUi(MainWindow);
 
@@ -803,7 +797,6 @@ public:
         label_44->setText(QString());
         label_7->setText(QString());
         label_40->setText(QString());
-        label_testtube->setText(QString());
         label_15->setText(QString());
         label_43->setText(QString());
         label_date->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
