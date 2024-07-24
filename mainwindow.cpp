@@ -24,7 +24,6 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -841,7 +840,15 @@ void MainWindow::ai_onoff()
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
             hhandler->ai_on();
-            airinjectoron();
+
+            QThread thread;
+            moveToThread(&thread);
+            QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
+            QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
+            thread.start();
+            thread.wait();
+
+            //airinjectoron();
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -1546,7 +1553,12 @@ void MainWindow::increaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
-    airinjectoron();
+    QThread thread;
+    moveToThread(&thread);
+    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
+    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
+    thread.start();
+    thread.wait();
 
 
 }
@@ -1562,7 +1574,12 @@ void MainWindow::decreaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
-    airinjectoron();
+    QThread thread;
+    moveToThread(&thread);
+    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
+    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
+    thread.start();
+    thread.wait();
 
 }
 
@@ -2583,39 +2600,40 @@ void MainWindow::airinjectoron()
 
     aiflag=1;
 
-    // Create a QProcess object
-    QProcess process;
+//    // Create a QProcess object
+//    QProcess process;
 
-    // Define the path to the executable and any arguments
-    QString executable = "/home/airinjector"; // Replace with your executable path
-    QStringList arguments;
-    arguments << ui->label_aipreset->text();
+//    // Define the path to the executable and any arguments
+//    QString executable = "/home/airinjector"; // Replace with your executable path
+//    QStringList arguments;
+//    arguments << ui->label_aipreset->text();
 
-    // Start the process
-    process.start(executable, arguments);
+//    // Start the process
+//    process.start(executable, arguments);
 
-    // Wait for the process to finish
-    process.waitForFinished();
+//    // Wait for the process to finish
+//    process.waitForFinished();
 
-    // Output the result
-    QString output = process.readAllStandardOutput();
-    qDebug() << "Output:" << output;
+//    // Output the result
+//    QString output = process.readAllStandardOutput();
+//    qDebug() << "Output:" << output;
 
     //hhandler->ai_on();
-//    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-//    hhandler->write_motor(0x01, 0x03, preset);
-//    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-//    int avg2=0;
-//    for(int i=0; i<10; i++)
-//    {
-//        avg2 += vac->convert(CHANNEL_2) * 0.1894;
-//    }
-//    avg2 = static_cast<int>(avg2/10);
-//    int value = avg2;
-//    ui->label_aiactual->setText(QString::number(value));
-//    hhandler->ai_actual_count(value);
-//    qDebug()<<preset<<value;
+    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
+    hhandler->write_motor(0x01, 0x03, preset);
+    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+
+    int avg2=0;
+    for(int i=0; i<10; i++)
+    {
+        avg2 += vac->convert(CHANNEL_2) * 0.1894;
+    }
+    avg2 = static_cast<int>(avg2/10);
+    int value = avg2;
+    ui->label_aiactual->setText(QString::number(value));
+    hhandler->ai_actual_count(value);
+    qDebug()<<preset<<value;
 }
 
 // Air injector off
