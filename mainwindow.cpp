@@ -850,8 +850,6 @@ void MainWindow::ai_onoff()
                 return;
             }
 
-           // int p = ui->label_aipreset->text().toInt();
-
             // Define the lambda function with arguments and return value
             auto myFunction = [this](int p) -> int {
                 int preset;
