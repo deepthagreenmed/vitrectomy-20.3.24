@@ -77,8 +77,8 @@ public:
     static void ai_preset_count(int count);
     static void ai_actual_count(int count);
 
-    static void sil_oil_on();
-    static void sil_oil_off();
+    static void siloil_on();
+    static void siloil_off();
 
     void write_motor(uint16_t status, uint16_t direction, uint16_t value);
 

@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[99];
-    char stringdata0[1675];
+    char stringdata0[1670];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -89,48 +89,48 @@ QT_MOC_LITERAL(53, 702, 17), // "decreaseledvalue2"
 QT_MOC_LITERAL(54, 720, 18), // "increasesiliconoil"
 QT_MOC_LITERAL(55, 739, 18), // "decreasesiliconoil"
 QT_MOC_LITERAL(56, 758, 18), // "showsettingswindow"
-QT_MOC_LITERAL(57, 777, 13), // "sil_oil_onoff"
-QT_MOC_LITERAL(58, 791, 20), // "vac_linear_nonlinear"
-QT_MOC_LITERAL(59, 812, 10), // "led1_onoff"
-QT_MOC_LITERAL(60, 823, 9), // "dia_onoff"
-QT_MOC_LITERAL(61, 833, 8), // "ai_onoff"
-QT_MOC_LITERAL(62, 842, 9), // "vit_onoff"
-QT_MOC_LITERAL(63, 852, 10), // "setsurgeon"
-QT_MOC_LITERAL(64, 863, 23), // "on_increase_vac_pressed"
-QT_MOC_LITERAL(65, 887, 24), // "on_increase_vac_released"
-QT_MOC_LITERAL(66, 912, 23), // "on_decrease_vac_pressed"
-QT_MOC_LITERAL(67, 936, 24), // "on_decrease_vac_released"
-QT_MOC_LITERAL(68, 961, 23), // "on_increase_vit_pressed"
-QT_MOC_LITERAL(69, 985, 24), // "on_increase_vit_released"
-QT_MOC_LITERAL(70, 1010, 23), // "on_decrease_vit_pressed"
-QT_MOC_LITERAL(71, 1034, 24), // "on_decrease_vit_released"
-QT_MOC_LITERAL(72, 1059, 27), // "on_increase_sil_oil_pressed"
-QT_MOC_LITERAL(73, 1087, 28), // "on_increase_sil_oil_released"
-QT_MOC_LITERAL(74, 1116, 27), // "on_decrease_sil_oil_pressed"
-QT_MOC_LITERAL(75, 1144, 28), // "on_decrease_sil_oil_released"
-QT_MOC_LITERAL(76, 1173, 24), // "on_increase_led1_pressed"
-QT_MOC_LITERAL(77, 1198, 25), // "on_increase_led1_released"
-QT_MOC_LITERAL(78, 1224, 24), // "on_decrease_led1_pressed"
-QT_MOC_LITERAL(79, 1249, 25), // "on_decrease_led1_released"
-QT_MOC_LITERAL(80, 1275, 22), // "on_increase_ai_pressed"
-QT_MOC_LITERAL(81, 1298, 23), // "on_increase_ai_released"
-QT_MOC_LITERAL(82, 1322, 22), // "on_decrease_ai_pressed"
-QT_MOC_LITERAL(83, 1345, 23), // "on_decrease_ai_released"
-QT_MOC_LITERAL(84, 1369, 23), // "on_increase_dia_pressed"
-QT_MOC_LITERAL(85, 1393, 24), // "on_increase_dia_released"
-QT_MOC_LITERAL(86, 1418, 23), // "on_decrease_dia_pressed"
-QT_MOC_LITERAL(87, 1442, 24), // "on_decrease_dia_released"
-QT_MOC_LITERAL(88, 1467, 24), // "on_increase_led2_pressed"
-QT_MOC_LITERAL(89, 1492, 25), // "on_increase_led2_released"
-QT_MOC_LITERAL(90, 1518, 24), // "on_decrease_led2_pressed"
-QT_MOC_LITERAL(91, 1543, 25), // "on_decrease_led2_released"
-QT_MOC_LITERAL(92, 1569, 20), // "vit_linear_nonlinear"
-QT_MOC_LITERAL(93, 1590, 10), // "led2_onoff"
-QT_MOC_LITERAL(94, 1601, 12), // "comboboxload"
-QT_MOC_LITERAL(95, 1614, 17), // "onComboBoxClicked"
-QT_MOC_LITERAL(96, 1632, 14), // "timerCompleted"
-QT_MOC_LITERAL(97, 1647, 15), // "showsetupscreen"
-QT_MOC_LITERAL(98, 1663, 11) // "drain_onoff"
+QT_MOC_LITERAL(57, 777, 12), // "siloil_onoff"
+QT_MOC_LITERAL(58, 790, 20), // "vac_linear_nonlinear"
+QT_MOC_LITERAL(59, 811, 10), // "led1_onoff"
+QT_MOC_LITERAL(60, 822, 9), // "dia_onoff"
+QT_MOC_LITERAL(61, 832, 8), // "ai_onoff"
+QT_MOC_LITERAL(62, 841, 9), // "vit_onoff"
+QT_MOC_LITERAL(63, 851, 10), // "setsurgeon"
+QT_MOC_LITERAL(64, 862, 23), // "on_increase_vac_pressed"
+QT_MOC_LITERAL(65, 886, 24), // "on_increase_vac_released"
+QT_MOC_LITERAL(66, 911, 23), // "on_decrease_vac_pressed"
+QT_MOC_LITERAL(67, 935, 24), // "on_decrease_vac_released"
+QT_MOC_LITERAL(68, 960, 23), // "on_increase_vit_pressed"
+QT_MOC_LITERAL(69, 984, 24), // "on_increase_vit_released"
+QT_MOC_LITERAL(70, 1009, 23), // "on_decrease_vit_pressed"
+QT_MOC_LITERAL(71, 1033, 24), // "on_decrease_vit_released"
+QT_MOC_LITERAL(72, 1058, 26), // "on_increase_siloil_pressed"
+QT_MOC_LITERAL(73, 1085, 27), // "on_increase_siloil_released"
+QT_MOC_LITERAL(74, 1113, 26), // "on_decrease_siloil_pressed"
+QT_MOC_LITERAL(75, 1140, 27), // "on_decrease_siloil_released"
+QT_MOC_LITERAL(76, 1168, 24), // "on_increase_led1_pressed"
+QT_MOC_LITERAL(77, 1193, 25), // "on_increase_led1_released"
+QT_MOC_LITERAL(78, 1219, 24), // "on_decrease_led1_pressed"
+QT_MOC_LITERAL(79, 1244, 25), // "on_decrease_led1_released"
+QT_MOC_LITERAL(80, 1270, 22), // "on_increase_ai_pressed"
+QT_MOC_LITERAL(81, 1293, 23), // "on_increase_ai_released"
+QT_MOC_LITERAL(82, 1317, 22), // "on_decrease_ai_pressed"
+QT_MOC_LITERAL(83, 1340, 23), // "on_decrease_ai_released"
+QT_MOC_LITERAL(84, 1364, 23), // "on_increase_dia_pressed"
+QT_MOC_LITERAL(85, 1388, 24), // "on_increase_dia_released"
+QT_MOC_LITERAL(86, 1413, 23), // "on_decrease_dia_pressed"
+QT_MOC_LITERAL(87, 1437, 24), // "on_decrease_dia_released"
+QT_MOC_LITERAL(88, 1462, 24), // "on_increase_led2_pressed"
+QT_MOC_LITERAL(89, 1487, 25), // "on_increase_led2_released"
+QT_MOC_LITERAL(90, 1513, 24), // "on_decrease_led2_pressed"
+QT_MOC_LITERAL(91, 1538, 25), // "on_decrease_led2_released"
+QT_MOC_LITERAL(92, 1564, 20), // "vit_linear_nonlinear"
+QT_MOC_LITERAL(93, 1585, 10), // "led2_onoff"
+QT_MOC_LITERAL(94, 1596, 12), // "comboboxload"
+QT_MOC_LITERAL(95, 1609, 17), // "onComboBoxClicked"
+QT_MOC_LITERAL(96, 1627, 14), // "timerCompleted"
+QT_MOC_LITERAL(97, 1642, 15), // "showsetupscreen"
+QT_MOC_LITERAL(98, 1658, 11) // "drain_onoff"
 
     },
     "MainWindow\0airinjectoronFinished\0\0"
@@ -153,7 +153,7 @@ QT_MOC_LITERAL(98, 1663, 11) // "drain_onoff"
     "decreaseledvalue\0increaseledvalue2\0"
     "decreaseledvalue2\0increasesiliconoil\0"
     "decreasesiliconoil\0showsettingswindow\0"
-    "sil_oil_onoff\0vac_linear_nonlinear\0"
+    "siloil_onoff\0vac_linear_nonlinear\0"
     "led1_onoff\0dia_onoff\0ai_onoff\0vit_onoff\0"
     "setsurgeon\0on_increase_vac_pressed\0"
     "on_increase_vac_released\0"
@@ -163,10 +163,10 @@ QT_MOC_LITERAL(98, 1663, 11) // "drain_onoff"
     "on_increase_vit_released\0"
     "on_decrease_vit_pressed\0"
     "on_decrease_vit_released\0"
-    "on_increase_sil_oil_pressed\0"
-    "on_increase_sil_oil_released\0"
-    "on_decrease_sil_oil_pressed\0"
-    "on_decrease_sil_oil_released\0"
+    "on_increase_siloil_pressed\0"
+    "on_increase_siloil_released\0"
+    "on_decrease_siloil_pressed\0"
+    "on_decrease_siloil_released\0"
     "on_increase_led1_pressed\0"
     "on_increase_led1_released\0"
     "on_decrease_led1_pressed\0"
@@ -452,7 +452,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 47: _t->increasesiliconoil(); break;
         case 48: _t->decreasesiliconoil(); break;
         case 49: _t->showsettingswindow(); break;
-        case 50: _t->sil_oil_onoff(); break;
+        case 50: _t->siloil_onoff(); break;
         case 51: _t->vac_linear_nonlinear(); break;
         case 52: _t->led1_onoff(); break;
         case 53: _t->dia_onoff(); break;
@@ -467,10 +467,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 62: _t->on_increase_vit_released(); break;
         case 63: _t->on_decrease_vit_pressed(); break;
         case 64: _t->on_decrease_vit_released(); break;
-        case 65: _t->on_increase_sil_oil_pressed(); break;
-        case 66: _t->on_increase_sil_oil_released(); break;
-        case 67: _t->on_decrease_sil_oil_pressed(); break;
-        case 68: _t->on_decrease_sil_oil_released(); break;
+        case 65: _t->on_increase_siloil_pressed(); break;
+        case 66: _t->on_increase_siloil_released(); break;
+        case 67: _t->on_decrease_siloil_pressed(); break;
+        case 68: _t->on_decrease_siloil_released(); break;
         case 69: _t->on_increase_led1_pressed(); break;
         case 70: _t->on_increase_led1_released(); break;
         case 71: _t->on_decrease_led1_pressed(); break;

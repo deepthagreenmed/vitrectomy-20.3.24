@@ -168,7 +168,7 @@ private slots:
     void showsettingswindow();
 
     //silicon oil
-    void sil_oil_onoff();
+    void siloil_onoff();
 
     //vaccum linear/nonlinear
     void vac_linear_nonlinear();
@@ -208,13 +208,13 @@ private slots:
     void on_decrease_vit_released();
 
     //silicon oil
-    void on_increase_sil_oil_pressed();
+    void on_increase_siloil_pressed();
 
-    void on_increase_sil_oil_released();
+    void on_increase_siloil_released();
 
-    void on_decrease_sil_oil_pressed();
+    void on_decrease_siloil_pressed();
 
-    void on_decrease_sil_oil_released();
+    void on_decrease_siloil_released();
 
     //led1
     void on_increase_led1_pressed();

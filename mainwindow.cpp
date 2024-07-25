@@ -43,10 +43,10 @@ MainWindow::MainWindow(QWidget *parent)
     (ui->pushButton_vitdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vit_pressed);
     (ui->pushButton_vitdec, &QPushButton::released, this, &MainWindow::on_decrease_vit_released);
 
-    (ui->pushButton_siloilinc, &QPushButton::pressed, this, &MainWindow::on_increase_sil_oil_pressed);
-    (ui->pushButton_siloilinc, &QPushButton::released, this, &MainWindow::on_increase_sil_oil_released);
-    (ui->pushButton_siloildec, &QPushButton::pressed, this, &MainWindow::on_decrease_sil_oil_pressed);
-    (ui->pushButton_siloildec, &QPushButton::released, this, &MainWindow::on_decrease_sil_oil_released);
+    (ui->pushButton_siloilinc, &QPushButton::pressed, this, &MainWindow::on_increase_siloil_pressed);
+    (ui->pushButton_siloilinc, &QPushButton::released, this, &MainWindow::on_increase_siloil_released);
+    (ui->pushButton_siloildec, &QPushButton::pressed, this, &MainWindow::on_decrease_siloil_pressed);
+    (ui->pushButton_siloildec, &QPushButton::released, this, &MainWindow::on_decrease_siloil_released);
 
     (ui->pushButton_led1inc, &QPushButton::pressed, this, &MainWindow::on_increase_led1_pressed);
     (ui->pushButton_led1inc, &QPushButton::released, this, &MainWindow::on_increase_led1_released);
@@ -70,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect(ui->pushButton_settingswindow, &QPushButton::clicked, this, &MainWindow::showsettingswindow);
-    connect(ui->pushButton_siloilonoff, &QPushButton::clicked, this, &MainWindow::sil_oil_onoff);
+    connect(ui->pushButton_siloilonoff, &QPushButton::clicked, this, &MainWindow::siloil_onoff);
     connect(ui->pushButton_vaclinearnonlinear, &QPushButton::clicked, this, &MainWindow::vac_linear_nonlinear);
     connect(ui->pushButton_led1onoff, &QPushButton::clicked, this, &MainWindow::led1_onoff);
     connect(ui->pushButton_diaonoff, &QPushButton::clicked, this, &MainWindow::dia_onoff);
@@ -265,14 +265,6 @@ MainWindow::MainWindow(QWidget *parent)
     timermain->setSingleShot(true);
     timermain->start(3000); // 3 seconds
     connect(timermain, &QTimer::timeout, this, &MainWindow::transitionToNewScreen);
-
-//    msg = new QMessageBox(this);
-//    timermsg = new QTimer(this);
-//    connect(timermsg, &QTimer::timeout, [=]()
-//    {
-//        msg->close();
-//        timermsg->stop();
-//    });
 
     ui->label_aipreset->setText("60");
 
@@ -626,7 +618,7 @@ void MainWindow::showsettingswindow()
 
 
 // Turn silicon oil on or off
-void MainWindow::sil_oil_onoff()
+void MainWindow::siloil_onoff()
 {
     if(sp==0)
     {
@@ -665,7 +657,7 @@ void MainWindow::sil_oil_onoff()
         disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
         disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
 
-        hhandler->sil_oil_off();
+        hhandler->siloil_off();
 
         sp=0;
         }
@@ -839,13 +831,15 @@ void MainWindow::ai_onoff()
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
-            hhandler->ai_on();
 
             if(ui->label_aipreset->text().toInt() == 0)
             {
                 airinjectoroff();
                 return;
             }
+
+            hhandler->ai_on();
+            hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
             // Define the lambda function with arguments and return value
             auto myFunction = [this](int p) -> int {
@@ -864,10 +858,8 @@ void MainWindow::ai_onoff()
                     actual += vac->convert(CHANNEL_2) * 0.1894;
                 }
                 actual = static_cast<int>(actual/10);
-                std::cout << actual <<" "<< preset << std::endl;
+                //std::cout << actual <<" "<< preset << std::endl;
 
-                hhandler->ai_on();
-                hhandler->ai_preset_count(preset);
                 hhandler->ai_actual_count(actual);
 
                 return actual;
@@ -879,9 +871,6 @@ void MainWindow::ai_onoff()
                 ui->label_aiactual->setText(QString::number(actual));
             });
         timeai.start(100);
-
-
-            //airinjectoron();
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -968,540 +957,6 @@ void MainWindow::vit_onoff()
         }
 }
 
-// Interface with hardware based on footpedal reading
-//void MainWindow::updateLabel()
-//{
-
-//    // FOOTPEDAL
-
-// setting value for dial
-//    avg = fp->convert(CHANNEL_0);
-
-
-//  if(vp==0)
-//  {//linear
-
-//      ui->dial->setValue(avg);
-
-//      if(avg >= 0 && avg <= fp0)
-//      {
-//          ui->label_dialvalue->setText("0");
-//          hhandler->vso_off();
-//          int avg1=vac->stabilize();
-//          ui->label_vacactual->setText(QString::number(avg1));
-//         if(vip==1){hhandler->vit_off();}
-//         if(vip==0){hhandler->vit_off();}
-
-//         beep_0to1=0;
-//         beep_1to2=0;
-//         beep_2to3=0;
-
-
-
-
-//      }
-//      if(avg > fp0&& avg <= (fp1+fp0))
-//      {
-
-//          beep_0to1++;
-//          if(beep_0to1==1)
-//          {
-//               footpedalbeep();
-//          }
-//          else if(beep_1to2>1)
-//          {
-//              beep_1to2=0;
-
-//          }
-//          else if(beep_1to2>1 && beep_2to3>1)
-//          {
-//              beep_1to2=0;
-//              beep_2to3=0;
-//          }
-
-//        //irrigation/aspiration
-//          ui->label_dialvalue->setText("1");
-//          hhandler->vso_off();
-//          int avg1=vac->stabilize();
-//          ui->label_vacactual->setText(QString::number(avg1));
-//          if(vip==1){hhandler->vit_off();}
-//          if(vip==0){hhandler->vit_off();}
-
-
-//      }
-//      if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0))&&fp2!=0)
-//      {
-
-//          beep_1to2++;
-//          if(beep_1to2==1)
-//          {
-//               footpedalbeep();
-//          }
-//          else if(beep_2to3>1)
-//          {
-//              beep_2to3=0;
-//          }
-
-//          if(flag2==0)
-//          {
-//          //vaccum
-//          ui->label_dialvalue->setText("2");
-
-//          float freq = 12000;
-//          float timeon;
-
-//          std::string col1, col2;
-//          std::ifstream file(PATH2);
-//            int lineCount=0;
-//          while(file >> col1 >> col2)
-//          {
-//              if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
-//              {
-//                  lineCount++;
-//              }
-//              else
-//              {
-//                  lineCount = lineCount;
-//              }
-//          }
-
-
-//        std::string line;
-//        idx = ((avg-fp0-fp1)/fp2)*lineCount;
-//        std::ifstream file2(PATH2);
-
-//        for (double i = 1; i <= idx; i++)
-//        {
-//            std::getline(file2, line);
-//        }
-
-
-//        std::istringstream iss(line);
-//        std::string column1, column2;
-//        iss >> column1 >> column2;
-
-//        std::stringstream ss(column1);
-//        ss >> timeon;
-
-//        timeon = (timeon * 65/100) + 35;
-
-
-//         // timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
-
-
-//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//        {
-//            turnoffvso();
-//        }
-//else {
-
-//        if(timeon>=35) {
-//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-//            hhandler->vso_period(((1 / freq) / resolution));
-//            int avg1=vac->stabilize();
-//            ui->label_vacactual->setText(QString::number(avg1));
-//            qDebug()<<timeon<<avg1;
-//          }
-//          else {
-//              hhandler->vso_off();
-//              int avg1=vac->stabilize();
-//              ui->label_vacactual->setText(QString::number(avg1));
-//              qDebug()<<timeon<<avg1;
-
-//        }
-//          }
-
-//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//        {
-//            turnoffvso();
-//        }
-
-
-
-//        file.close();
-//        file2.close();
-
-//          if(vip==1){hhandler->vit_off();}
-
-
-
-//          if(vip==0){hhandler->vit_off();}
-//          }
-//          else {
-//              if(flag2==1)
-//              {
-//                  //swap
-//               ui->label_dialvalue->setText("2");
-
-//               hhandler->vso_off();
-//               int avg1=vac->stabilize();
-//               ui->label_vacactual->setText(QString::number(avg1));
-
-//               if(vip==1 && vitp==1){
-//                    nonlinearcall();
-//               }
-//               if(vip==1 && vitp==0)
-//               {
-//                   linearcall2();
-//               }
-//               if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
-
-//              }
-//          }
-//      }
-//      //vitrectomy
-//      if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3+fp0))&&fp2!=0&&fp3!=0)
-//      {
-
-//          beep_2to3++;
-//          if(beep_2to3==1)
-//          {
-//               footpedalbeep();
-//          }
-
-//       ui->label_dialvalue->setText("3");
-
-//       float freq = 12000;
-//       float timeon;
-
-//       std::string col1, col2;
-//       std::ifstream file(PATH2);
-//         int lineCount=0;
-//       while(file >> col1 >> col2)
-//       {
-//           if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
-//           {
-//               lineCount++;
-//           }
-//           else
-//           {
-//               lineCount = lineCount;
-//           }
-//       }
-
-
-//       std::ifstream file2(PATH2);
-//       std::string line;
-//       for (int i = 1; i <= lineCount; i++) {
-//           std::getline(file2, line);
-//       }
-
-
-//       std::istringstream iss(line);
-//       std::string column1, column2;
-//       iss >> column1 >> column2;
-
-//       std::stringstream ss(column1);
-//       ss >> timeon;
-
-//       timeon = (timeon * 65/100) + 35;
-
-
-//      //  timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
-
-
-//       if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//       {
-//           turnoffvso();
-//       }
-//else {
-
-//        if(timeon>=35) {
-//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-//            hhandler->vso_period(((1 / freq) / resolution));
-//            int avg1=vac->stabilize();
-//            ui->label_vacactual->setText(QString::number(avg1));
-//            qDebug()<<timeon<<avg1;
-//          }
-//          else {
-//              hhandler->vso_off();
-//              int avg1=vac->stabilize();
-//              ui->label_vacactual->setText(QString::number(avg1));
-//              qDebug()<<timeon<<avg1;
-
-//          }
-
-//}
-
-//       if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//       {
-//           turnoffvso();
-//       }
-
-//       file.close();
-//        file2.close();
-
-
-//       if(vip==1 && vitp==1){
-//            nonlinearcall();
-//       }
-//       else if(vip==1 && vitp==0)
-//       {
-//            linearcall3();
-
-//       }
-//       if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
-
-//     }
-//  }
-//  if(vp==1)
-//  {//non-linear
-
-
-//    if(avg >= 0 && avg <= fp0)
-//    {
-//        beep_0to1=0;
-//        beep_1to2=0;
-//        beep_2to3=0;
-
-//        ui->dial->setValue(0);
-//        ui->label_dialvalue->setText("0");
-//        if(vip==1){hhandler->vit_off();}
-//        if(vip==0){hhandler->vit_off();}
-//        hhandler->vso_off();
-//        int avg1=vac->stabilize();
-//        ui->label_vacactual->setText(QString::number(avg1));
-
-//    }
-//    if((avg > fp0 && avg <= (fp1+fp0)))
-//    {
-
-//        beep_0to1++;
-//        if(beep_0to1==1)
-//        {
-//             footpedalbeep();
-//        }
-//        else if(beep_1to2>1)
-//        {
-//            beep_1to2=0;
-
-//        }
-//        else if(beep_1to2>1 && beep_2to3>1)
-//        {
-//            beep_1to2=0;
-//            beep_2to3=0;
-//        }
-
-//        ui->dial->setValue((fp1+fp0));
-//        ui->label_dialvalue->setText("1");
-//        if(vip==1){hhandler->vit_off();}
-//       if(vip==0){hhandler->vit_off();}
-
-//       hhandler->vso_off();
-//       int avg1=vac->stabilize();
-//       ui->label_vacactual->setText(QString::number(avg1));
-
-//    }
-//    if((avg > (fp1+fp0) && avg <= (fp1+fp2+fp0)) && fp2!=0)
-//    {
-
-//        beep_1to2++;
-//        if(beep_1to2==1)
-//        {
-//             footpedalbeep();
-//        }
-//        else if(beep_2to3>1)
-//        {
-//            beep_2to3=0;
-//        }
-
-//        if(flag2==0)
-//        {
-//            //vaccum
-//            //normal
-//        ui->dial->setValue(fp1+fp2+fp0);
-//        ui->label_dialvalue->setText("2");
-
-//        if(vip==1){hhandler->vit_off();}
-//        if(vip==0){hhandler->vit_off();}
-
-//        float freq = 12000;
-//        float timeon;
-
-//                std::string col1, col2;
-//                std::ifstream file(PATH2);
-//                  int lineCount=0;
-//                while(file >> col1 >> col2)
-//                {
-//                    if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
-//                    {
-//                        lineCount++;
-//                    }
-//                    else
-//                    {
-//                        lineCount = lineCount;
-//                    }
-//                }
-
-//                std::ifstream file2(PATH2);
-//                std::string line;
-//                for (int i = 1; i <= lineCount; i++) {
-//                    std::getline(file2, line);
-//                }
-
-//                std::istringstream iss(line);
-//                std::string column1, column2;
-//                iss >> column1 >> column2;
-
-//                std::stringstream ss(column1);
-//                ss >> timeon;
-
-//                timeon = (timeon * 65/100) + 35;
-
-
-
-//        //timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
-
-//                if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//                {
-//                    turnoffvso();
-//                }
-//else {
-
-
-//        if(timeon>=35) {
-//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-//            hhandler->vso_period(((1 / freq) / resolution));
-//            int avg1=vac->stabilize();
-//            ui->label_vacactual->setText(QString::number(avg1));
-//            qDebug()<<timeon<<avg1;
-//          }
-//          else {
-//              hhandler->vso_off();
-//              int avg1=vac->stabilize();
-//              ui->label_vacactual->setText(QString::number(avg1));
-//              qDebug()<<timeon<<avg1;
-
-//          }
-//          }
-
-//                if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//                {
-//                    turnoffvso();
-//                }
-
-//        file.close();
-//         file2.close();
-//    }
-//}
-//    else {
-//        if(flag2==1)
-//        {
-//            //swap
-//            ui->dial->setValue(fp1+fp2+fp0);
-//            ui->label_dialvalue->setText("2");
-
-//           if(vip==1 && vitp==1){
-//                nonlinearcall();
-//           }
-//           if(vip==1 && vitp==0)
-//           {
-//               linearcall2();
-//           }
-//           if(vip==0){hhandler->vit_off();ui->label_vitactual->setText("0");}
-
-//           hhandler->vso_off();
-//           int avg1=vac->stabilize();
-//           ui->label_vacactual->setText(QString::number(avg1));
-//        }
-//    }
-
-//    //vitrectomy
-//    if((avg > (fp1+fp2+fp0)&& avg <= (fp1+fp2+fp3)+fp0)&&fp2!=0&&fp3!=0)
-//    {
-
-//        beep_2to3++;
-//        if(beep_2to3==1)
-//        {
-//             footpedalbeep();
-//        }
-
-//         ui->dial->setValue(fp1+fp2+fp3+fp0);
-//         ui->label_dialvalue->setText("3");
-
-//        if(vip==1 && vitp==1){
-//            nonlinearcall();        }
-//        if(vip==1 && vitp==0)
-//        {
-//            linearcall3();
-
-//        }
-//        if(vip==0){hhandler->vit_off();ui->label_vitactual->setText("0");}
-
-
-
-//        float freq = 12000;
-//        float timeon;
-
-//        std::string col1, col2;
-//        std::ifstream file(PATH2);
-//          int lineCount=0;
-//        while(file >> col1 >> col2)
-//        {
-//            if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
-//            {
-//                lineCount++;
-//            }
-//            else
-//            {
-//                lineCount = lineCount;
-//            }
-//        }
-
-//        std::ifstream file2(PATH2);
-//        std::string line;
-//        for (int i = 1; i <= lineCount; i++) {
-//            std::getline(file2, line);
-//        }
-
-//        std::istringstream iss(line);
-//        std::string column1, column2;
-//        iss >> column1 >> column2;
-
-//        std::stringstream ss(column1);
-//        ss >> timeon;
-
-//        timeon = (timeon * 65/100) + 35;
-
-
-
-//    //     timeon = 60 + ((ui->label_vacpreset->text().toInt()*100/650)*0.4);
-
-//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//        {
-//            turnoffvso();
-//        }
-//else {
-
-//        if(timeon>=35) {
-//            hhandler->vso_ontime(((timeon / (100*freq)) / resolution));
-//            hhandler->vso_period(((1 / freq) / resolution));
-//            int avg1=vac->stabilize();
-//            ui->label_vacactual->setText(QString::number(avg1));
-//            qDebug()<<timeon<<avg1;
-//          }
-//          else {
-//              hhandler->vso_off();
-//              int avg1=vac->stabilize();
-//              ui->label_vacactual->setText(QString::number(avg1));
-//              qDebug()<<timeon<<avg1;
-
-//          }
-//        }
-
-//        if(ui->label_vacactual->text().toInt() >= ui->label_vacpreset->text().toInt())
-//        {
-//            turnoffvso();
-//        }
-
-//        file.close();
-//        file2.close();
-
-//    }
-//  }
-//}
-
-
 // Increase vaccum
 void MainWindow::increaseVaccumValue()
 {
@@ -1586,6 +1041,9 @@ void MainWindow::increaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
+    hhandler->ai_on();
+    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+
     // Define the lambda function with arguments and return value
     auto myFunction = [this](int p) -> int {
         int preset;
@@ -1603,10 +1061,8 @@ void MainWindow::increaseAirInjectorValue()
             actual += vac->convert(CHANNEL_2) * 0.1894;
         }
         actual = static_cast<int>(actual/10);
-        std::cout << actual <<" "<< preset << std::endl;
+//        std::cout << actual <<" "<< preset << std::endl;
 
-        hhandler->ai_on();
-        hhandler->ai_preset_count(preset);
         hhandler->ai_actual_count(actual);
 
         return actual;
@@ -1617,9 +1073,7 @@ void MainWindow::increaseAirInjectorValue()
         int actual = myFunction(arg1);
         ui->label_aiactual->setText(QString::number(actual));
     });
-timeai.start(100);
-
-  //  airinjectoron();
+    timeai.start(100);
 
 
 }
@@ -1641,38 +1095,39 @@ void MainWindow::decreaseAirInjectorValue()
         return;
     }
 
+    hhandler->ai_on();
+    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+
      // Define the lambda function with arguments and return value
-            auto myFunction = [this](int p) -> int {
-                int preset;
-                int actual;
+    auto myFunction = [this](int p) -> int {
+        int preset;
+        int actual;
 
-                preset = p;
-                if (preset == NULL)
-                   std::cout<<"useage airingector PRESET";
-                int flow=90+ (int)(preset* 1.5);
-                hhandler->write_motor(0x01,0x03,flow);
+        preset = p;
+        if (preset == NULL)
+           std::cout<<"useage airingector PRESET";
+        int flow=90+ (int)(preset* 1.5);
+        hhandler->write_motor(0x01,0x03,flow);
 
-                actual=0;
-                for(int i=0; i<10; i++)
-                {
-                    actual += vac->convert(CHANNEL_2) * 0.1894;
-                }
-                actual = static_cast<int>(actual/10);
-                std::cout << actual <<" "<< preset << std::endl;
+        actual=0;
+        for(int i=0; i<10; i++)
+        {
+            actual += vac->convert(CHANNEL_2) * 0.1894;
+        }
+        actual = static_cast<int>(actual/10);
+//      std::cout << actual <<" "<< preset << std::endl;
 
-                hhandler->ai_on();
-                hhandler->ai_preset_count(preset);
-                hhandler->ai_actual_count(actual);
+        hhandler->ai_actual_count(actual);
 
-                return actual;
-            };
+        return actual;
+    };
 
-            QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
-                int arg1 = ui->label_aipreset->text().toInt();
-                int actual = myFunction(arg1);
-                ui->label_aiactual->setText(QString::number(actual));
-            });
-            timeai.start(100);
+    QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
+        int arg1 = ui->label_aipreset->text().toInt();
+        int actual = myFunction(arg1);
+        ui->label_aiactual->setText(QString::number(actual));
+    });
+    timeai.start(100);
 
 }
 
@@ -1908,7 +1363,7 @@ void MainWindow::on_decrease_vit_released()
 }
 
 // Increase silicon oil (press)
-void MainWindow::on_increase_sil_oil_pressed()
+void MainWindow::on_increase_siloil_pressed()
 {if(sp==1)
     {
     time.start(300);
@@ -1916,7 +1371,7 @@ void MainWindow::on_increase_sil_oil_pressed()
 }}
 
 // Increase silicon oil (release)
-void MainWindow::on_increase_sil_oil_released()
+void MainWindow::on_increase_siloil_released()
 {if(sp==1)
     {
     time.stop();
@@ -1924,7 +1379,7 @@ void MainWindow::on_increase_sil_oil_released()
 }}
 
 // Decrease silicon oil (press)
-void MainWindow::on_decrease_sil_oil_pressed()
+void MainWindow::on_decrease_siloil_pressed()
 {if(sp==1)
     {
     time.start(300);
@@ -1932,7 +1387,7 @@ void MainWindow::on_decrease_sil_oil_pressed()
 }}
 
 // Decrease silicon oil (release)
-void MainWindow::on_decrease_sil_oil_released()
+void MainWindow::on_decrease_siloil_released()
 {if(sp==1)
     {
     time.stop();
@@ -2068,23 +1523,16 @@ void MainWindow::on_decrease_dia_released()
 // Turn vitrectomy linear or non-linear
 void MainWindow::vit_linear_nonlinear()
 {
-
     if(vitp==0)
     {
 
        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
        vitp=1;
-
-
-
     }
     else
     {
-
         ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
         vitp=0;
-
-
     }
 }
 
@@ -2103,31 +1551,6 @@ void MainWindow::updatetimedate()
 // Load combobox from database
 void MainWindow::comboboxload()
 {
-//    QSqlDatabase mydb1 = QSqlDatabase::addDatabase("QSQLITE");
-//    mydb1.setDatabaseName(PATH);
-
-//    if (!mydb1.open()) {
-//        qDebug() << "Error opening database:"  ;
-//        return;
-//    }
-
-//    QSqlQuery query;
-//    if (!query.exec("SELECT surgeon FROM maindb")) {
-//        qDebug() << "Error executing query:" ;
-//        mydb1.close();
-//        return;
-//    }
-
-//    ui->comboBox_surgeonname->clear(); // Clear existing items before loading new ones
-
-//    int i=0;
-//    while (query.next()) {
-//        QString itemName = query.value(i).toString();
-//        ui->comboBox_surgeonname->addItem(itemName);
-//        i++;
-//   }
-//    mydb1.close();
-
     ui->comboBox_surgeonname->clear();
 
     // Adding surgeons to the combo box
@@ -2682,53 +2105,6 @@ void MainWindow::diathermy()
     hhandler->dia_count(ui->label_dia->text().toInt()*256/100);
 }
 
-// Air injector on
-//void MainWindow::airinjectoron()
-//{
-//    if(ui->label_aipreset->text().toInt() == 0)
-//    {
-//        airinjectoroff();
-//        return;
-//    }
-
-//    aiflag=1;
-
-//    // Create a QProcess object
-//    QProcess process;
-
-//    // Define the path to the executable and any arguments
-//    QString executable = "/home/airinjector"; // Replace with your executable path
-//    QStringList arguments;
-//    arguments << ui->label_aipreset->text();
-
-//    // Start the process
-//    process.start(executable, arguments);
-
-//    // Wait for the process to finish
-//    process.waitForFinished();
-
-//    // Output the result
-//    QString output = process.readAllStandardOutput();
-//    qDebug() << "Output:" << output;
-
-//    //hhandler->ai_on();
-
-//    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-//    hhandler->write_motor(0x01, 0x03, preset);
-//    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
-
-//    int avg2=0;
-//    for(int i=0; i<10; i++)
-//    {
-//        avg2 += vac->convert(CHANNEL_2) * 0.1894;
-//    }
-//    avg2 = static_cast<int>(avg2/10);
-//    int value = avg2;
-//    ui->label_aiactual->setText(QString::number(value));
-//    hhandler->ai_actual_count(value);
-//    qDebug()<<preset<<value;
-//}
-
 // Air injector off
 void MainWindow::airinjectoroff()
 {
@@ -2966,8 +2342,6 @@ void MainWindow::updateLabel()
       if(ui->label_dialvalue->text() == "0")
       {
           l->writeDAC(0);
-          int avg1 = vac->convert(CHANNEL_1)*0.1894;
-//          ui->label_vacactual->setText(QString::number(avg1));
           ui->label_vacactual->setText("0");
          if(vip==1){hhandler->vit_off();}
          if(vip==0){hhandler->vit_off();}
@@ -3059,7 +2433,6 @@ void MainWindow::updateLabel()
         ss >> dacval;
 
         l->writeDAC(dacval);
-        //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
 
@@ -3130,17 +2503,11 @@ void MainWindow::updateLabel()
               ss >> dacval;
 
               l->writeDAC(dacval);
-              //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-              int avg1 = vac->convert(CHANNEL_1)*0.1894;
-              //ui->label_vacactual->setText(QString::number(avg1));
 
            if(ui->label_vacpreset->text().toInt()>390)
            {
              int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
              l->writeDAC(dacval);
-             //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-             int avg1 = vac->convert(CHANNEL_1)*0.1894;
-             //ui->label_vacactual->setText(QString::number(avg1));
             }
 
         ui->label_vacactual->setText(ui->label_vacpreset->text());
@@ -3182,7 +2549,6 @@ void MainWindow::updateLabel()
            ss >> dacval;
 
            l->writeDAC(dacval);
-           //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
            int avg1 = vac->convert(CHANNEL_1)*0.1894;
            ui->label_vacactual->setText(QString::number(avg1));
 
@@ -3210,8 +2576,6 @@ void MainWindow::updateLabel()
         if(vip==1){hhandler->vit_off();}
         if(vip==0){hhandler->vit_off();}
         l->writeDAC(0);
-        int avg1=vac->convert(CHANNEL_1)*0.1894;
-        //ui->label_vacactual->setText(QString::number(avg1));
         ui->label_vacactual->setText("0");
     }
     if(ui->label_dialvalue->text() == "1")
@@ -3291,7 +2655,6 @@ void MainWindow::updateLabel()
         ss >> dacval;
 
         l->writeDAC(dacval);
-        //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
 
@@ -3351,16 +2714,11 @@ void MainWindow::updateLabel()
         ss >> dacval;
 
         l->writeDAC(dacval);
-        //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-        int avg1 = vac->convert(CHANNEL_1)*0.1894;
-        //ui->label_vacactual->setText(QString::number(avg1));
 
         if(ui->label_vacpreset->text().toInt()>390)
         {
             int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
             l->writeDAC(dacval);
-            //qDebug()<<vac->convert(CHANNEL_1)<<dacval<<avgfp;
-            int avg1 = vac->convert(CHANNEL_1)*0.1894;
         }
 
 
@@ -3517,25 +2875,16 @@ void MainWindow::on_clickedbackspace()
 void MainWindow::setFPValues()
 {
     avgfp=fp->convert(CHANNEL_0);
-    //qDebug()<<avgfp<<fp0<<fp1<<fp2<<fp3;
 
     if(avgfp>=0 && avgfp<=fp0)
     {
         if(vitp==0)
         {
             ui->dial->setValue(avgfp);
-            //l->writeDAC(0);
-            //int avg1=vac->convert(CHANNEL_1)*0.1894;
-            //ui->label_vacactual->setText(QString::number(avg1));
-            //ui->label_vacactual->setText("0");
         }
         if(vitp==1)
         {
             ui->dial->setValue(0);
-            //l->writeDAC(0);
-            //int avg1=vac->convert(CHANNEL_1)*0.1894;
-            //ui->label_vacactual->setText(QString::number(avg1));
-            //ui->label_vacactual->setText("0");
         }
         ui->label_dialvalue->setText("0");
     }
@@ -3544,16 +2893,10 @@ void MainWindow::setFPValues()
         if(vitp==0)
         {
             ui->dial->setValue(avgfp);
-            //l->writeDAC(0);
-            //int avg1=vac->convert(CHANNEL_1)*0.1894;
-            //ui->label_vacactual->setText(QString::number(avg1));
         }
         if(vitp==1)
         {
             ui->dial->setValue(fp0+fp1);
-            //l->writeDAC(0);
-            //int avg1=vac->convert(CHANNEL_1)*0.1894;
-            //ui->label_vacactual->setText(QString::number(avg1));
         }
         ui->label_dialvalue->setText("1");
     }
@@ -3625,8 +2968,6 @@ void MainWindow::dacvalue()
     if(avgfp>=0 && avgfp<=fp0)
     {
         l->writeDAC(0);
-        int avg1=vac->convert(CHANNEL_1)*0.1894;
-        //ui->label_vacactual->setText(QString::number(avg1));
         ui->label_vacactual->setText("0");
     }
 
@@ -3675,14 +3016,14 @@ void MainWindow::siloil_setvalue(int value)
 //{
 //    if(sp==0)
 //    {
-//        hhandler->sil_oil_off();
+//        hhandler->siloil_off();
 //        hhandler->vso_off();
 //    }
 //    else if(sp==1)
 //    {
 //        if(ui->label_dialvalue->text() == "0")
 //        {
-//            hhandler->sil_oil_off();
+//            hhandler->siloil_off();
 //            hhandler->vso_off();
 //        }
 //        else
