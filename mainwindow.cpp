@@ -841,16 +841,15 @@ void MainWindow::ai_onoff()
             hhandler->ai_on();
             hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-            // Define the lambda function with arguments and return value
-            auto myFunction = [this](int p) -> int {
-                int preset;
-                int actual;
+            int preset=ui->label_aipreset->text().toInt();
+            if (preset == NULL)
+               std::cout<<"useage airingector PRESET";
+            int flow=90+ (int)(preset* 1.5);
+            hhandler->write_motor(0x01,0x03,flow);
 
-                preset = p;
-                if (preset == NULL)
-                   std::cout<<"useage airingector PRESET";
-                int flow=90+ (int)(preset* 1.5);
-                hhandler->write_motor(0x01,0x03,flow);
+            // Define the lambda function with arguments and return value
+            auto myFunction = [this]() -> int {
+                int actual;
 
                 actual=0;
                 for(int i=0; i<10; i++)
@@ -866,8 +865,8 @@ void MainWindow::ai_onoff()
             };
 
             QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
-                int arg1 = ui->label_aipreset->text().toInt();
-                int actual = myFunction(arg1);
+                //int arg1 = ui->label_aipreset->text().toInt();
+                int actual = myFunction();
                 ui->label_aiactual->setText(QString::number(actual));
             });
             timeai.start(100);
@@ -1044,16 +1043,15 @@ void MainWindow::increaseAirInjectorValue()
     hhandler->ai_on();
     hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-    // Define the lambda function with arguments and return value
-    auto myFunction = [this](int p) -> int {
-        int preset;
-        int actual;
+    int preset=ui->label_aipreset->text().toInt();
+    if (preset == NULL)
+       std::cout<<"useage airingector PRESET";
+    int flow=90+ (int)(preset* 1.5);
+    hhandler->write_motor(0x01,0x03,flow);
 
-        preset = p;
-        if (preset == NULL)
-           std::cout<<"useage airingector PRESET";
-        int flow=90+ (int)(preset* 1.5);
-        hhandler->write_motor(0x01,0x03,flow);
+    // Define the lambda function with arguments and return value
+    auto myFunction = [this]() -> int {
+        int actual;
 
         actual=0;
         for(int i=0; i<10; i++)
@@ -1061,7 +1059,7 @@ void MainWindow::increaseAirInjectorValue()
             actual += vac->convert(CHANNEL_2) * 0.1894;
         }
         actual = static_cast<int>(actual/10);
-//        std::cout << actual <<" "<< preset << std::endl;
+        //std::cout << actual <<" "<< preset << std::endl;
 
         hhandler->ai_actual_count(actual);
 
@@ -1069,12 +1067,11 @@ void MainWindow::increaseAirInjectorValue()
     };
 
     QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
-        int arg1 = ui->label_aipreset->text().toInt();
-        int actual = myFunction(arg1);
+        //int arg1 = ui->label_aipreset->text().toInt();
+        int actual = myFunction();
         ui->label_aiactual->setText(QString::number(actual));
     });
     timeai.start(100);
-
 
 }
 
@@ -1098,16 +1095,15 @@ void MainWindow::decreaseAirInjectorValue()
     hhandler->ai_on();
     hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-     // Define the lambda function with arguments and return value
-    auto myFunction = [this](int p) -> int {
-        int preset;
-        int actual;
+    int preset=ui->label_aipreset->text().toInt();
+    if (preset == NULL)
+       std::cout<<"useage airingector PRESET";
+    int flow=90+ (int)(preset* 1.5);
+    hhandler->write_motor(0x01,0x03,flow);
 
-        preset = p;
-        if (preset == NULL)
-           std::cout<<"useage airingector PRESET";
-        int flow=90+ (int)(preset* 1.5);
-        hhandler->write_motor(0x01,0x03,flow);
+    // Define the lambda function with arguments and return value
+    auto myFunction = [this]() -> int {
+        int actual;
 
         actual=0;
         for(int i=0; i<10; i++)
@@ -1115,7 +1111,7 @@ void MainWindow::decreaseAirInjectorValue()
             actual += vac->convert(CHANNEL_2) * 0.1894;
         }
         actual = static_cast<int>(actual/10);
-//      std::cout << actual <<" "<< preset << std::endl;
+        //std::cout << actual <<" "<< preset << std::endl;
 
         hhandler->ai_actual_count(actual);
 
@@ -1123,12 +1119,11 @@ void MainWindow::decreaseAirInjectorValue()
     };
 
     QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
-        int arg1 = ui->label_aipreset->text().toInt();
-        int actual = myFunction(arg1);
+        //int arg1 = ui->label_aipreset->text().toInt();
+        int actual = myFunction();
         ui->label_aiactual->setText(QString::number(actual));
     });
     timeai.start(100);
-
 }
 
 // Increase LED1
