@@ -1589,13 +1589,6 @@ void MainWindow::increaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
-//    QThread thread;
-//    moveToThread(&thread);
-//    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
-//    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
-//    thread.start();
-//    thread.wait();
-
     // Define the lambda function with arguments and return value
     auto myFunction = [this](int p) -> int {
         int preset;
@@ -1651,13 +1644,6 @@ void MainWindow::decreaseAirInjectorValue()
         return;
     }
 
-//    QThread thread;
-//    moveToThread(&thread);
-//    QObject::connect(&thread, &QThread::started, this, &MainWindow::airinjectoron);
-//    QObject::connect(&thread, &QThread::finished, &thread, &QThread::deleteLater);
-//    thread.start();
-//    thread.wait();
-
      // Define the lambda function with arguments and return value
             auto myFunction = [this](int p) -> int {
                 int preset;
@@ -1690,8 +1676,6 @@ void MainWindow::decreaseAirInjectorValue()
                 ui->label_aiactual->setText(QString::number(actual));
             });
             timeai.start(100);
-
-    //airinjectoron();
 
 }
 
@@ -2702,15 +2686,15 @@ void MainWindow::diathermy()
 }
 
 // Air injector on
-void MainWindow::airinjectoron()
-{
-    if(ui->label_aipreset->text().toInt() == 0)
-    {
-        airinjectoroff();
-        return;
-    }
+//void MainWindow::airinjectoron()
+//{
+//    if(ui->label_aipreset->text().toInt() == 0)
+//    {
+//        airinjectoroff();
+//        return;
+//    }
 
-    aiflag=1;
+//    aiflag=1;
 
 //    // Create a QProcess object
 //    QProcess process;
@@ -2730,23 +2714,23 @@ void MainWindow::airinjectoron()
 //    QString output = process.readAllStandardOutput();
 //    qDebug() << "Output:" << output;
 
-    //hhandler->ai_on();
+//    //hhandler->ai_on();
 
-    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
-    hhandler->write_motor(0x01, 0x03, preset);
-    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+//    int preset=static_cast<int>(90+1.5*(ui->label_aipreset->text().toInt()));
+//    hhandler->write_motor(0x01, 0x03, preset);
+//    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
 
-    int avg2=0;
-    for(int i=0; i<10; i++)
-    {
-        avg2 += vac->convert(CHANNEL_2) * 0.1894;
-    }
-    avg2 = static_cast<int>(avg2/10);
-    int value = avg2;
-    ui->label_aiactual->setText(QString::number(value));
-    hhandler->ai_actual_count(value);
-    qDebug()<<preset<<value;
-}
+//    int avg2=0;
+//    for(int i=0; i<10; i++)
+//    {
+//        avg2 += vac->convert(CHANNEL_2) * 0.1894;
+//    }
+//    avg2 = static_cast<int>(avg2/10);
+//    int value = avg2;
+//    ui->label_aiactual->setText(QString::number(value));
+//    hhandler->ai_actual_count(value);
+//    qDebug()<<preset<<value;
+//}
 
 // Air injector off
 void MainWindow::airinjectoroff()

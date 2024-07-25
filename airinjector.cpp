@@ -31,11 +31,5 @@ int airinjector::aivalue(int p)
     hhandler->ai_actual_count(actual);
 
     return actual;
-    //emit aisignal(actual);
 
 }
-
-//void airinjector::aivalue2(int a)
-//{
-//    emit aisignal(a);
-//}

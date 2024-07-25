@@ -95,15 +95,13 @@ public slots:
     void typevit(QString str);
     void diaval(QString val);
 
-    //void aibackground();
-
     void on_clicked(const QString& digit);
 
      void on_clickedenter();
 
      void on_clickedbackspace();
 
-     void airinjectoron();
+     //void airinjectoron();
 
      void vitvalset();
 
