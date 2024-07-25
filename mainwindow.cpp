@@ -91,7 +91,6 @@ MainWindow::MainWindow(QWidget *parent)
     vac = new Vaccum;
     l = new ltc2614;
     key = new keypad;
-    airinj = new airinjector;
 
     //connect(airinj, &airinjector::aisignal, this, &MainWindow::aislot);
 
