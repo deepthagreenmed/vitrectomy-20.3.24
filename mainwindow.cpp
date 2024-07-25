@@ -85,6 +85,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     vacpresetval = ui->label_vacpreset->text().toInt();
 
+    for(int gpioPin=960; gpioPin<965; gpioPin++)
+    {
+        exportGPIO(gpioPin);
+        setGPIODirection(gpioPin, "in");
+    }
+
 
     fp = new footpedal;
     hhandler = new hwHandler;
@@ -3041,3 +3047,33 @@ void MainWindow::siloil_setvalue(int value)
 
 
 //}
+
+void MainWindow::exportGPIO(int pin) {
+    std::ofstream exportFile("/sys/class/gpio/export");
+    if (!exportFile.is_open()) {
+        std::cerr << "Unable to export GPIO" << std::endl;
+        return;
+    }
+    exportFile << pin;
+    exportFile.close();
+}
+
+void MainWindow::setGPIODirection(int pin, const std::string& direction) {
+    std::ofstream directionFile("/sys/class/gpio/gpio" + std::to_string(pin) + "/direction");
+    if (!directionFile.is_open()) {
+        std::cerr << "Unable to set GPIO direction" << std::endl;
+        return;
+    }
+    directionFile << direction;
+    directionFile.close();
+}
+
+void MainWindow::writeGPIO(int pin, int value) {
+    std::ofstream valueFile("/sys/class/gpio/gpio" + std::to_string(pin) + "/value");
+    if (!valueFile.is_open()) {
+        std::cerr << "Unable to write to GPIO" << std::endl;
+        return;
+    }
+    valueFile << value;
+    valueFile.close();
+}

@@ -15,6 +15,7 @@
 #include <string>
 #include <sstream>
 #include <cmath>
+#include <unistd.h>
 
 #include <QLabel>
 #include <QSqlDatabase>
@@ -66,6 +67,10 @@ public:
     int beep_2to3=0;
     QString madtype;
     QString surgeon;
+
+    void exportGPIO(int pin);
+    void setGPIODirection(int pin, const std::string& direction);
+    void writeGPIO(int pin, int value);
 
 
 signals:
