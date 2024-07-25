@@ -870,7 +870,7 @@ void MainWindow::ai_onoff()
                 int actual = myFunction(arg1);
                 ui->label_aiactual->setText(QString::number(actual));
             });
-        timeai.start(100);
+            timeai.start(100);
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
