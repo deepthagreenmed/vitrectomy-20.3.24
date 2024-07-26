@@ -845,9 +845,9 @@ void MainWindow::ai_onoff()
             }
 
             hhandler->ai_on();
-            hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+            int preset = ui->label_aipreset->text().toInt();
+            hhandler->ai_preset_count(preset);
 
-            int preset=ui->label_aipreset->text().toInt();
             if (preset == NULL)
                std::cout<<"useage airingector PRESET";
             //int flow=90+ (int)(preset* 1.5);
@@ -1048,9 +1048,9 @@ void MainWindow::increaseAirInjectorValue()
     ui->label_aipreset->setText(QString::number(newValue));
 
     hhandler->ai_on();
-    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+    int preset = ui->label_aipreset->text().toInt();
+    hhandler->ai_preset_count(preset);
 
-    int preset=ui->label_aipreset->text().toInt();
     if (preset == NULL)
        std::cout<<"useage airingector PRESET";
     int flow=130;
@@ -1100,9 +1100,9 @@ void MainWindow::decreaseAirInjectorValue()
     }
 
     hhandler->ai_on();
-    hhandler->ai_preset_count(ui->label_aipreset->text().toInt());
+    int preset = ui->label_aipreset->text().toInt();
+    hhandler->ai_preset_count(preset);
 
-    int preset=ui->label_aipreset->text().toInt();
     if (preset == NULL)
        std::cout<<"useage airingector PRESET";
     int flow=130;
