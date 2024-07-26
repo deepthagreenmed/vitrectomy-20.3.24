@@ -2110,7 +2110,6 @@ void MainWindow::diathermy()
 // Air injector off
 void MainWindow::airinjectoroff()
 {
-    aiflag=0;
     hhandler->ai_off();
     hhandler->ai_preset_count(0);
     hhandler->write_motor(0x00, 0x03, 0);

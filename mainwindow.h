@@ -315,7 +315,6 @@ private:
     QTimer timedia;
     QTimer timeai;
     QTimer timerzero;
-    bool aiflag=0;
     keypad *key;
 //    QMessageBox *msg;
 //    QTimer *timermsg;
