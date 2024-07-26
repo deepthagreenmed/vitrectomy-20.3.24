@@ -273,7 +273,7 @@ MainWindow::MainWindow(QWidget *parent)
     timermain->start(3000); // 3 seconds
     connect(timermain, &QTimer::timeout, this, &MainWindow::transitionToNewScreen);
 
-    ui->label_aipreset->setText("60");
+    //ui->label_aipreset->setText("60");
 
     QTimer *timervit = new QTimer;
     connect(timervit, &QTimer::timeout, this, &MainWindow::vitvalset);
