@@ -2513,6 +2513,9 @@ void MainWindow::updateLabel()
 
         ui->label_vacactual->setText(ui->label_vacpreset->text());
 
+        file.close();
+         file2.close();
+
        }
 
        else if(flag2==1)
