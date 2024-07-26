@@ -279,10 +279,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timervit, &QTimer::timeout, this, &MainWindow::vitvalset);
     timervit->start(1);
 
-//    QTimer *timernl3 = new QTimer;
-//    connect(timernl3, &QTimer::timeout, this, &MainWindow::nonlinearcall3);
-//    timernl3->start(1);
-
     connect(win2, &settingswindow::textSelected, this, &MainWindow::updateText);
 
     pres=new sensor;
