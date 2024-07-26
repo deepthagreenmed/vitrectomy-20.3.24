@@ -2113,8 +2113,8 @@ void MainWindow::airinjectoroff()
     hhandler->ai_off();
     hhandler->ai_preset_count(0);
     hhandler->write_motor(0x00, 0x03, 0);
-    ui->label_aiactual->setText("0");
     hhandler->ai_actual_count(0);
+    ui->label_aiactual->setText("0");
 }
 
 // Footpedal reading is less than 2
