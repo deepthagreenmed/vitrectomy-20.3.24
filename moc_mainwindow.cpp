@@ -84,8 +84,8 @@ QT_MOC_LITERAL(48, 600, 24), // "increaseAirInjectorValue"
 QT_MOC_LITERAL(49, 625, 24), // "decreaseAirInjectorValue"
 QT_MOC_LITERAL(50, 650, 16), // "increaseledvalue"
 QT_MOC_LITERAL(51, 667, 16), // "decreaseledvalue"
-QT_MOC_LITERAL(52, 684, 17), // "increaseledvalue2"
-QT_MOC_LITERAL(53, 702, 17), // "decreaseledvalue2"
+QT_MOC_LITERAL(52, 684, 17), // "increaseled2value"
+QT_MOC_LITERAL(53, 702, 17), // "decreaseled2value"
 QT_MOC_LITERAL(54, 720, 18), // "increasesiliconoil"
 QT_MOC_LITERAL(55, 739, 18), // "decreasesiliconoil"
 QT_MOC_LITERAL(56, 758, 18), // "showsettingswindow"
@@ -150,8 +150,8 @@ QT_MOC_LITERAL(98, 1658, 11) // "drain_onoff"
     "decreaseVitrectomyValue\0increaseDiathermyValue\0"
     "decreaseDiathermyValue\0increaseAirInjectorValue\0"
     "decreaseAirInjectorValue\0increaseledvalue\0"
-    "decreaseledvalue\0increaseledvalue2\0"
-    "decreaseledvalue2\0increasesiliconoil\0"
+    "decreaseledvalue\0increaseled2value\0"
+    "decreaseled2value\0increasesiliconoil\0"
     "decreasesiliconoil\0showsettingswindow\0"
     "siloil_onoff\0vac_linear_nonlinear\0"
     "led1_onoff\0dia_onoff\0ai_onoff\0vit_onoff\0"
@@ -447,8 +447,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 42: _t->decreaseAirInjectorValue(); break;
         case 43: _t->increaseledvalue(); break;
         case 44: _t->decreaseledvalue(); break;
-        case 45: _t->increaseledvalue2(); break;
-        case 46: _t->decreaseledvalue2(); break;
+        case 45: _t->increaseled2value(); break;
+        case 46: _t->decreaseled2value(); break;
         case 47: _t->increasesiliconoil(); break;
         case 48: _t->decreasesiliconoil(); break;
         case 49: _t->showsettingswindow(); break;

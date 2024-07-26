@@ -161,9 +161,9 @@ private slots:
 
     void decreaseledvalue();
 
-    void increaseledvalue2();
+    void increaseled2value();
 
-    void decreaseledvalue2();
+    void decreaseled2value();
 
     void increasesiliconoil();
 

@@ -747,8 +747,8 @@ void MainWindow::led2_onoff()
             led2->processUserInput(1);
         }
 
-        connect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
-        connect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
+        connect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
+        connect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
 
 
         lp2=1;
@@ -764,8 +764,8 @@ void MainWindow::led2_onoff()
 
         led2->processUserInput(2);
 
-        disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue2);
-        disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue2);
+        disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
+        disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
        lp2=0;
     }
 }
@@ -1163,7 +1163,7 @@ void MainWindow::decreaseledvalue()
 }
 
 // Increase LED2
-void MainWindow::increaseledvalue2()
+void MainWindow::increaseled2value()
 {
     int currentValue = ui->label_led2->text().toInt();
     int newValue = currentValue + 5;
@@ -1177,7 +1177,7 @@ void MainWindow::increaseledvalue2()
 }
 
 // Decrease LED2
-void MainWindow::decreaseledvalue2()
+void MainWindow::decreaseled2value()
 {
     int currentValue = ui->label_led2->text().toInt();
     int newValue = currentValue - 5;
@@ -1432,27 +1432,27 @@ void MainWindow::on_decrease_led1_released()
 void MainWindow::on_increase_led2_pressed()
 {
     time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue2);
+     connect(&time, &QTimer::timeout, this, &MainWindow::increaseled2value);
 }
 
 // Increase LED2 (release)
 void MainWindow::on_increase_led2_released()
 {
     time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue2);
+     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseled2value);
 }
 // Decrease LED2 (press)
 void MainWindow::on_decrease_led2_pressed()
 {
     time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue2);
+     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseled2value);
 }
 
 // Decrease LED2 (release)
 void MainWindow::on_decrease_led2_released()
 {
     time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue2);
+     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseled2value);
 }
 
 
