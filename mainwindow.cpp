@@ -850,7 +850,8 @@ void MainWindow::ai_onoff()
             int preset=ui->label_aipreset->text().toInt();
             if (preset == NULL)
                std::cout<<"useage airingector PRESET";
-            int flow=90+ (int)(preset* 1.5);
+            //int flow=90+ (int)(preset* 1.5);
+            int flow=130;
             hhandler->write_motor(0x01,0x03,flow);
 
             // Define the lambda function with arguments and return value
@@ -875,7 +876,7 @@ void MainWindow::ai_onoff()
                 int actual = myFunction();
                 ui->label_aiactual->setText(QString::number(actual));
             });
-            timeai.start(100);
+            timeai.start(10);
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -1052,7 +1053,7 @@ void MainWindow::increaseAirInjectorValue()
     int preset=ui->label_aipreset->text().toInt();
     if (preset == NULL)
        std::cout<<"useage airingector PRESET";
-    int flow=90+ (int)(preset* 1.5);
+    int flow=130;
     hhandler->write_motor(0x01,0x03,flow);
 
     // Define the lambda function with arguments and return value
@@ -1077,7 +1078,7 @@ void MainWindow::increaseAirInjectorValue()
         int actual = myFunction();
         ui->label_aiactual->setText(QString::number(actual));
     });
-    timeai.start(100);
+    timeai.start(10);
 
 }
 
@@ -1104,7 +1105,7 @@ void MainWindow::decreaseAirInjectorValue()
     int preset=ui->label_aipreset->text().toInt();
     if (preset == NULL)
        std::cout<<"useage airingector PRESET";
-    int flow=90+ (int)(preset* 1.5);
+    int flow=130;
     hhandler->write_motor(0x01,0x03,flow);
 
     // Define the lambda function with arguments and return value
@@ -1129,7 +1130,7 @@ void MainWindow::decreaseAirInjectorValue()
         int actual = myFunction();
         ui->label_aiactual->setText(QString::number(actual));
     });
-    timeai.start(100);
+    timeai.start(10);
 }
 
 // Increase LED1
