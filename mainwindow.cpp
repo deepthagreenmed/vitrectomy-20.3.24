@@ -205,6 +205,7 @@ MainWindow::MainWindow(QWidget *parent)
     hhandler->ai_off();
     hhandler->ai_preset_count(0);
     hhandler->ai_actual_count(0);
+    hhandler->write_motor(0x00,0x03,0);
 
     led1 = new LED(PORT1);
     led2 = new LED(PORT2);
@@ -2926,8 +2927,6 @@ void MainWindow::setFPValues()
     }
     if(avgfp>(fp0+fp1+fp2) && avgfp<=(fp0+fp1+fp2+fp3))
     {
-        ui->label_vacactual->setText(ui->label_vacpreset->text());
-
         if(vitp==0 && flag2==0)
         {
             ui->dial->setValue(avgfp);
