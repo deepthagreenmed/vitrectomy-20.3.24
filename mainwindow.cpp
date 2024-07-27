@@ -596,6 +596,12 @@ void MainWindow::on_clickedenter()
         switchled(led2, ui->label_led2->text().toInt());
     }
 
+    if(ui->label_aipreset->text().toInt() == 0)
+    {
+        airinjectoroff();
+        return;
+    }
+
     vit_value = static_cast<int>(std::round(vit_value/60))*60;
     ui->label_vitpreset->setText(QString::number(vit_value));
     ui->label_vacpreset->setText(QString::number(static_cast<int>(std::round(ui->label_vacpreset->text().toInt()/5))*5));
@@ -835,11 +841,7 @@ void MainWindow::ai_onoff()
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
 
-            if(ui->label_aipreset->text().toInt() == 0)
-            {
-                airinjectoroff();
-                return;
-            }
+
 
             //int flow=90+ (int)(preset* 1.5);
             int flow=130;
@@ -859,19 +861,24 @@ void MainWindow::ai_onoff()
                     actual += vac->convert(CHANNEL_2) * 0.1894;
                 }
                 actual = static_cast<int>(actual/10);
-                //std::cout << actual <<" "<< preset << std::endl;
 
                 hhandler->ai_actual_count(actual);
 
                 return actual;
             };
 
-            QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
-                //int arg1 = ui->label_aipreset->text().toInt();
-                int actual = myFunction();
-                ui->label_aiactual->setText(QString::number(actual));
-            });
-            timeai.start(10);
+        QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
+
+            if(ui->label_aipreset->text().toInt() == 0)
+            {
+                airinjectoroff();
+                return;
+            }
+
+            int actual = myFunction();
+            ui->label_aiactual->setText(QString::number(actual));
+        });
+        timeai.start(10);
 
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
@@ -1059,7 +1066,6 @@ void MainWindow::increaseAirInjectorValue()
             actual += vac->convert(CHANNEL_2) * 0.1894;
         }
         actual = static_cast<int>(actual/10);
-        //std::cout << actual <<" "<< preset << std::endl;
 
         hhandler->ai_actual_count(actual);
 
@@ -1067,7 +1073,13 @@ void MainWindow::increaseAirInjectorValue()
     };
 
     QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
-        //int arg1 = ui->label_aipreset->text().toInt();
+
+        if(ui->label_aipreset->text().toInt() == 0)
+        {
+            airinjectoroff();
+            return;
+        }
+
         int actual = myFunction();
         ui->label_aiactual->setText(QString::number(actual));
     });
@@ -1086,12 +1098,6 @@ void MainWindow::decreaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
-    if(ui->label_aipreset->text().toInt() == 0)
-    {
-        airinjectoroff();
-        return;
-    }
-
     int flow=130;
     hhandler->write_motor(0x01,0x03,flow);
 
@@ -1109,7 +1115,6 @@ void MainWindow::decreaseAirInjectorValue()
             actual += vac->convert(CHANNEL_2) * 0.1894;
         }
         actual = static_cast<int>(actual/10);
-        //std::cout << actual <<" "<< preset << std::endl;
 
         hhandler->ai_actual_count(actual);
 
@@ -1117,7 +1122,13 @@ void MainWindow::decreaseAirInjectorValue()
     };
 
     QObject::connect(&timeai, &QTimer::timeout, [this, myFunction]() {
-        //int arg1 = ui->label_aipreset->text().toInt();
+
+        if(ui->label_aipreset->text().toInt() == 0)
+        {
+            airinjectoroff();
+            return;
+        }
+
         int actual = myFunction();
         ui->label_aiactual->setText(QString::number(actual));
     });
