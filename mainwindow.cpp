@@ -1710,7 +1710,7 @@ void MainWindow::nonlinearcall3()
         ss2 >> ot;
 
         hhandler->vit_ontime(ot);
-        hhandler->vit_on(1000/(vvalue/60));
+        hhandler->vit_on(1000/(vvalue/60), madtype);
         ui->label_vitactual->setText(QString::number(vvalue));
     }
     }
@@ -1759,7 +1759,7 @@ void MainWindow::nonlinearcall3()
         ss2 >> ot;
 
         hhandler->vit_ontime(ot);
-        hhandler->vit_on(1000/(vvalue/60));
+        hhandler->vit_on(1000/(vvalue/60), madtype);
         ui->label_vitactual->setText(QString::number(vvalue));
     }
     }
@@ -1813,7 +1813,7 @@ void MainWindow::nonlinearcall2()
         ss2 >> ot;
 
         hhandler->vit_ontime(ot);
-        hhandler->vit_on(1000/(vvalue/60));
+        hhandler->vit_on(1000/(vvalue/60), madtype);
         ui->label_vitactual->setText(QString::number(vvalue));
         }
     }
@@ -1863,7 +1863,7 @@ void MainWindow::nonlinearcall2()
         ss2 >> ot;
 
         hhandler->vit_ontime(ot);
-        hhandler->vit_on(1000/(vvalue/60));
+        hhandler->vit_on(1000/(vvalue/60), madtype);
         ui->label_vitactual->setText(QString::number(vvalue));
     }
     }
@@ -1924,7 +1924,7 @@ void MainWindow::linearcall2()
             ss2 >> ot;
 
             hhandler->vit_ontime(ot);
-            hhandler->vit_on(1000/(vvalue/60));
+            hhandler->vit_on(1000/(vvalue/60), madtype);
             ui->label_vitactual->setText(QString::number(vvalue));
         }
     }
@@ -1978,7 +1978,7 @@ void MainWindow::linearcall2()
             ss2 >> ot;
 
             hhandler->vit_ontime(ot);
-            hhandler->vit_on(1000/(vvalue/60));
+            hhandler->vit_on(1000/(vvalue/60), madtype);
             ui->label_vitactual->setText(QString::number(vvalue));
         }
     }
@@ -2038,7 +2038,7 @@ void MainWindow::linearcall3()
             ss2 >> ot;
 
             hhandler->vit_ontime(ot);
-            hhandler->vit_on(1000/(vvalue/60));
+            hhandler->vit_on(1000/(vvalue/60), madtype);
             ui->label_vitactual->setText(QString::number(vvalue));
         }
 
@@ -2092,7 +2092,7 @@ void MainWindow::linearcall3()
             ss2 >> ot;
 
             hhandler->vit_ontime(ot);
-            hhandler->vit_on(1000/(vvalue/60));
+            hhandler->vit_on(1000/(vvalue/60), madtype);
             ui->label_vitactual->setText(QString::number(vvalue));
         }
 
@@ -2773,7 +2773,7 @@ void MainWindow::updateLabel2()
                 }
                 else
                 {
-                    hhandler->vit_on(1000/(vit_value/60));
+                    hhandler->vit_on(1000/(vit_value/60), madtype);
                     ui->label_vitactual->setText(QString::number(vit_value));
                 }
 
@@ -2786,7 +2786,7 @@ void MainWindow::updateLabel2()
                 }
                 else
                 {
-                    hhandler->vit_on(1000/(vit_value/60));
+                    hhandler->vit_on(1000/(vit_value/60), madtype);
                     ui->label_vitactual->setText(QString::number(vit_value));
                 }
             }
@@ -2986,7 +2986,7 @@ void MainWindow::dacvalue()
 void MainWindow::swapval(int value)
 {
     flag2=value;
-    qDebug()<<flag2;
+    qDebug()<<"Main window"<<flag2;
 }
 
 void MainWindow::led1_setvalue(int value)
