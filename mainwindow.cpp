@@ -841,18 +841,16 @@ void MainWindow::ai_onoff()
                 return;
             }
 
-            hhandler->ai_on();
-            int preset = ui->label_aipreset->text().toInt();
-            hhandler->ai_preset_count(preset);
-
-            if (preset == NULL)
-               std::cout<<"useage airingector PRESET";
             //int flow=90+ (int)(preset* 1.5);
             int flow=130;
             hhandler->write_motor(0x01,0x03,flow);
 
             // Define the lambda function with arguments and return value
             auto myFunction = [this]() -> int {
+                hhandler->ai_on();
+                int preset = ui->label_aipreset->text().toInt();
+                hhandler->ai_preset_count(preset);
+
                 int actual;
 
                 actual=0;
@@ -1044,17 +1042,15 @@ void MainWindow::increaseAirInjectorValue()
     }
     ui->label_aipreset->setText(QString::number(newValue));
 
-    hhandler->ai_on();
-    int preset = ui->label_aipreset->text().toInt();
-    hhandler->ai_preset_count(preset);
-
-    if (preset == NULL)
-       std::cout<<"useage airingector PRESET";
     int flow=130;
     hhandler->write_motor(0x01,0x03,flow);
 
     // Define the lambda function with arguments and return value
     auto myFunction = [this]() -> int {
+        hhandler->ai_on();
+        int preset = ui->label_aipreset->text().toInt();
+        hhandler->ai_preset_count(preset);
+
         int actual;
 
         actual=0;
@@ -1096,17 +1092,15 @@ void MainWindow::decreaseAirInjectorValue()
         return;
     }
 
-    hhandler->ai_on();
-    int preset = ui->label_aipreset->text().toInt();
-    hhandler->ai_preset_count(preset);
-
-    if (preset == NULL)
-       std::cout<<"useage airingector PRESET";
     int flow=130;
     hhandler->write_motor(0x01,0x03,flow);
 
     // Define the lambda function with arguments and return value
     auto myFunction = [this]() -> int {
+        hhandler->ai_on();
+        int preset = ui->label_aipreset->text().toInt();
+        hhandler->ai_preset_count(preset);
+
         int actual;
 
         actual=0;
