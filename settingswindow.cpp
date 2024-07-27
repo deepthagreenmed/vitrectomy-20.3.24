@@ -588,6 +588,7 @@ void settingswindow::on_vit_clicked()
 // Go to surgery screen
 void settingswindow::show_surgery_screen()
 {
+
     ui->lineEdit_cutrate->clearFocus();
     ui->lineEdit_powmax->clearFocus();
     ui->lineEdit_vac->clearFocus();
@@ -597,6 +598,7 @@ void settingswindow::show_surgery_screen()
     text->hide();
     this->close();
     parentWidget()->show();
+
 }
 
 // Save footpedal settings for all surgeons
@@ -1626,6 +1628,5 @@ void settingswindow::swap_onoff()
         ui->pushButton_swap->setText("SWAP OFF");
         flag2=0;
     }
-    qDebug()<<"Settings window"<<flag2;
-    emit swapsignal(flag2);
+
 }

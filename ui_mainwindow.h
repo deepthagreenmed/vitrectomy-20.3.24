@@ -15,7 +15,6 @@
 #include <QtWidgets/QDial>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
@@ -87,7 +86,6 @@ public:
     QLabel *label_44;
     QLabel *label_7;
     QLabel *label_40;
-    QProgressBar *progressBar;
     QLabel *label_15;
     QLabel *label_43;
     QLabel *label_date;
@@ -546,27 +544,6 @@ public:
         label_40->setGeometry(QRect(930, 1008, 111, 17));
         label_40->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);\n"
 ""));
-        progressBar = new QProgressBar(centralwidget);
-        progressBar->setObjectName(QString::fromUtf8("progressBar"));
-        progressBar->setGeometry(QRect(1300, 280, 41, 171));
-        progressBar->setStyleSheet(QString::fromUtf8("QProgressBar::chunk {\n"
-"	\n"
-"	background-color: qlineargradient(spread:pad, x1:0.498, y1:0.983, x2:0.473, y2:1, stop:0.432836 rgba(38, 162, 105, 255));\n"
-"	\n"
-"\n"
-"border-radius:20px;\n"
-"	\n"
-"}\n"
-"\n"
-"QProgressBar {\n"
-"background-color: rgba(191, 64, 64, 0);\n"
-"}\n"
-""));
-        progressBar->setValue(0);
-        progressBar->setTextVisible(false);
-        progressBar->setOrientation(Qt::Vertical);
-        progressBar->setInvertedAppearance(false);
-        progressBar->setTextDirection(QProgressBar::BottomToTop);
         label_15 = new QLabel(centralwidget);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(870, 40, 71, 61));
@@ -711,7 +688,6 @@ public:
         pushButton_siloilinc->raise();
         label_31->raise();
         pushButton_siloildec->raise();
-        progressBar->raise();
         pushButton_vitonoff->raise();
         pushButton_siloilonoff->raise();
         pushButton_led2onoff->raise();

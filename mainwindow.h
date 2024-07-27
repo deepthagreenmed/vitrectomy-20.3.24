@@ -109,8 +109,6 @@ public slots:
 
      void vitvalset();
 
-     void swapval(int value);
-
 
 
 

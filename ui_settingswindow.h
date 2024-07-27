@@ -582,7 +582,7 @@ public:
 "border-radius: 20px;font: 30pt \"Ubuntu\";"));
         label_6 = new QLabel(tab_10);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(460, 770, 51, 91));
+        label_6->setGeometry(QRect(430, 770, 51, 91));
         label_6->setStyleSheet(QString::fromUtf8("background-color:transparent;image: url(:/new/prefix1/img/icon1.png);"));
         pushButton_save_6 = new QPushButton(tab_10);
         pushButton_save_6->setObjectName(QString::fromUtf8("pushButton_save_6"));
@@ -832,7 +832,8 @@ public:
         pushButton_swap->setObjectName(QString::fromUtf8("pushButton_swap"));
         pushButton_swap->setGeometry(QRect(90, 770, 231, 91));
         pushButton_swap->setStyleSheet(QString::fromUtf8("border-radius: 30px;\n"
-"font-weight: bold;"));
+"font-weight: bold;\n"
+"font-size: 20px;"));
         tabWidget_2->addTab(tab_10, QString());
         label_27->raise();
         label_16->raise();
@@ -1078,7 +1079,7 @@ public:
         label_34->setText(QString());
         label_43->setText(QCoreApplication::translate("settingswindow", "Cutter Type", nullptr));
         comboBox_cuttertype->setItemText(0, QCoreApplication::translate("settingswindow", "Midlabs", nullptr));
-        comboBox_cuttertype->setItemText(1, QCoreApplication::translate("settingswindow", "Aktive", nullptr));
+        comboBox_cuttertype->setItemText(1, QCoreApplication::translate("settingswindow", "Alcon", nullptr));
         comboBox_cuttertype->setItemText(2, QCoreApplication::translate("settingswindow", "Dorc", nullptr));
 
         lineEdit_maxcutrate->setText(QString());

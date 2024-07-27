@@ -80,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_endcase, &QPushButton::clicked, this, &MainWindow::setsurgeon);
     connect(ui->pushButton_vitlinearnonlinear, &QPushButton::clicked, this, &MainWindow::vit_linear_nonlinear);
     connect(ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::showsetupscreen);
-    connect(win2, &settingswindow::swapsignal, this, &MainWindow::swapval);
+    //connect(win2, &settingswindow::swapsignal, this, &MainWindow::swapval);
     connect(ui->pushButton_drain, &QPushButton::clicked, this, &MainWindow::drain_onoff);
 
     vacpresetval = ui->label_vacpreset->text().toInt();
@@ -622,18 +622,93 @@ void MainWindow::showsettingswindow()
 {
 
     hhandler->vso_off();
+
     vip=0;
-    vit_onoff();
+    ui->label_38->setStyleSheet("");
+    ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
+    ui->pushButton_vitinc->lower();
+    ui->pushButton_vitdec->lower();
+    ui->label_vitpreset->lower();
+    ui->label_vitactual->lower();
+    animation1->setStartValue(QPoint(430,640));
+    animation1->setEndValue(QPoint(380,640));
+    animation1->setDuration(250);
+    ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    animation1->start();
+    hhandler->vit_off();
+    disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+    disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+
     sp=0;
-    siloil_onoff();
+    ui->label_19->setStyleSheet("");
+    ui->label_26->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+    ui->pushButton_siloildec->lower();
+    ui->pushButton_siloilinc->lower();
+    ui->label_siloil->lower();
+    animation->setStartValue(QPoint(980,160));
+    animation->setEndValue(QPoint(930, 160));
+    animation->setDuration(250);
+    animation->start();
+    ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
+    disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
+    hhandler->siloil_off();
+
     ap=0;
-    ai_onoff();
+    ui->label_13->setStyleSheet("");
+    ui->label_23->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
+    ui->pushButton_aidec->lower();
+    ui->pushButton_aiinc->lower();
+    ui->label_aiactual->lower();
+    ui->label_aipreset->lower();
+    animation4->setStartValue(QPoint(1350,160));
+    animation4->setEndValue(QPoint(1300,160));
+    animation4->setDuration(250);
+    animation4->start();
+    ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    hhandler->ai_off();
+    airinjectoroff();
+    disconnect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
+    disconnect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
+
     dp=0;
-    dia_onoff();
+    ui->label_14->setStyleSheet("");
+    ui->label_25->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+    ui->pushButton_diainc->lower();
+    ui->pushButton_diadec->lower();
+    ui->label_dia->lower();
+    animation2->setStartValue(QPoint(1490,620));
+    animation2->setEndValue(QPoint(1440,620));
+    animation2->setDuration(250);
+    animation2->start();
+    ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    hhandler->dia_off();
+    timedia.stop();
+    disconnect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
+    disconnect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
+    disconnect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
+
     lp=0;
-    led1_onoff();
+    ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+    animation3->setStartValue(QPoint(850,640));
+    animation3->setEndValue(QPoint(800,640));
+    animation3->setDuration(250);
+    animation3->start();
+    ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    led1->processUserInput(2);
+    disconnect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
+    disconnect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
+
     lp2=0;
-    led2_onoff();
+    ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+    animation5->setStartValue(QPoint(1110,640));
+    animation5->setEndValue(QPoint(1060,640));
+    animation5->setDuration(250);
+    animation5->start();
+    ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    led2->processUserInput(2);
+    disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
+    disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
 
     win2->show();
 }
@@ -2350,6 +2425,7 @@ void MainWindow::updateLabel()
 
 // setting value for dial
     avgfp = fp->convert(CHANNEL_0);
+    flag2=win2->flag2;
 
 
   if(vp==0)
@@ -2452,6 +2528,22 @@ void MainWindow::updateLabel()
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
 
+        if(ui->label_vacactual->text().toInt()>ui->label_vacpreset->text().toInt())
+        {
+            if(ui->label_vacpreset->text().toInt()>390)
+            {
+                int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+                l->writeDAC(dacval);
+                ui->label_vacactual->setText(ui->label_vacpreset->text());
+
+            }
+            else
+            {
+                ui->label_vacactual->setText(ui->label_vacpreset->text());
+            }
+
+        }
+
 
         file.close();
         file2.close();
@@ -2519,14 +2611,26 @@ void MainWindow::updateLabel()
               ss >> dacval;
 
               l->writeDAC(dacval);
+              int avg1 = vac->convert(CHANNEL_1)*0.1894;
+              ui->label_vacactual->setText(QString::number(avg1));
 
-           if(ui->label_vacpreset->text().toInt()>390)
-           {
-             int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
-             l->writeDAC(dacval);
-            }
+              if(ui->label_vacactual->text().toInt()>ui->label_vacpreset->text().toInt())
+              {
+                  if(ui->label_vacpreset->text().toInt()>390)
+                  {
+                      int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+                      l->writeDAC(dacval);
+                      ui->label_vacactual->setText(ui->label_vacpreset->text());
 
-        ui->label_vacactual->setText(ui->label_vacpreset->text());
+                  }
+                  else
+                  {
+                      ui->label_vacactual->setText(ui->label_vacpreset->text());
+                  }
+
+              }
+
+
 
         file.close();
          file2.close();
@@ -2535,41 +2639,60 @@ void MainWindow::updateLabel()
 
        else if(flag2==1)
        {
-          int dacval;
+              int dacval;
 
-          std::string col1, col2;
-          std::ifstream file(PATH6);
-            int lineCount=0;
-          while(file >> col1 >> col2)
-          {
-              if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+              std::string col1, col2;
+              std::ifstream file(PATH6);
+                int lineCount=0;
+              while(file >> col1 >> col2)
               {
-                  lineCount++;
+                  if(std::stoi(col2) <= ui->label_vacpreset->text().toInt())
+                  {
+                      lineCount++;
+                  }
+                  else
+                  {
+                      lineCount = lineCount;
+                  }
               }
-              else
-              {
-                  lineCount = lineCount;
-              }
-          }
 
-          std::ifstream file2(PATH6);
-          std::string line;
 
-           idx = ((avgfp-fp0-fp1-fp2)/fp3)*lineCount;
-           for (int i = 1; i <= idx; i++) {
-               std::getline(file2, line);
+            std::string line;
+            idx = ((avgfp-fp0-fp1-fp2)/fp3)*lineCount;
+            std::ifstream file2(PATH6);
+
+            for (double i = 1; i <= idx; i++)
+            {
+                std::getline(file2, line);
+            }
+
+
+            std::istringstream iss(line);
+            std::string column1, column2;
+            iss >> column1 >> column2;
+
+            std::stringstream ss(column1);
+            ss >> dacval;
+
+            l->writeDAC(dacval);
+            int avg1 = vac->convert(CHANNEL_1)*0.1894;
+            ui->label_vacactual->setText(QString::number(avg1));
+
+           if(ui->label_vacactual->text().toInt()>ui->label_vacpreset->text().toInt())
+           {
+               if(ui->label_vacpreset->text().toInt()>390)
+               {
+                   int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+                   l->writeDAC(dacval);
+                   ui->label_vacactual->setText(ui->label_vacpreset->text());
+
+               }
+               else
+               {
+                   ui->label_vacactual->setText(ui->label_vacpreset->text());
+               }
+
            }
-
-           std::istringstream iss(line);
-           std::string column1, column2;
-           iss >> column1 >> column2;
-
-           std::stringstream ss(column1);
-           ss >> dacval;
-
-           l->writeDAC(dacval);
-           int avg1 = vac->convert(CHANNEL_1)*0.1894;
-           ui->label_vacactual->setText(QString::number(avg1));
 
            file.close();
             file2.close();
@@ -2677,6 +2800,23 @@ void MainWindow::updateLabel()
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
         ui->label_vacactual->setText(QString::number(avg1));
 
+        if(ui->label_vacactual->text().toInt()>ui->label_vacpreset->text().toInt())
+        {
+            if(ui->label_vacpreset->text().toInt()>390)
+            {
+                int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+                l->writeDAC(dacval);
+                ui->label_vacactual->setText(ui->label_vacpreset->text());
+
+            }
+            else
+            {
+                ui->label_vacactual->setText(ui->label_vacpreset->text());
+            }
+
+        }
+
+
         file.close();
          file2.close();
     }
@@ -2733,15 +2873,25 @@ void MainWindow::updateLabel()
         ss >> dacval;
 
         l->writeDAC(dacval);
+        int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
 
-        if(ui->label_vacpreset->text().toInt()>390)
+        if(ui->label_vacactual->text().toInt()>ui->label_vacpreset->text().toInt())
         {
-            int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
-            l->writeDAC(dacval);
+            if(ui->label_vacpreset->text().toInt()>390)
+            {
+                int dacval=ui->label_vacpreset->text().toInt()*static_cast<int>(16383/500);
+                l->writeDAC(dacval);
+                ui->label_vacactual->setText(ui->label_vacpreset->text());
+
+            }
+            else
+            {
+                ui->label_vacactual->setText(ui->label_vacpreset->text());
+            }
+
         }
 
-
-        ui->label_vacactual->setText(ui->label_vacpreset->text());
 
         file.close();
         file2.close();
@@ -2759,6 +2909,8 @@ void MainWindow::vitvalset()
 //Interface with vitrectomy based on footpedal reading
 void MainWindow::updateLabel2()
 {
+    flag2=win2->flag2;
+
     if(vip==0)
     {
         hhandler->vit_off();
@@ -2893,6 +3045,8 @@ void MainWindow::on_clickedbackspace()
 // Linear/Non-linear footpedal
 void MainWindow::setFPValues()
 {
+    flag2=win2->flag2;
+
     avgfp=fp->convert(CHANNEL_0);
 
     if(avgfp>=0 && avgfp<=fp0)
@@ -2997,35 +3151,39 @@ void MainWindow::dacvalue()
 
 }
 
-void MainWindow::swapval(int value)
-{
-    flag2=value;
-    qDebug()<<"Main window"<<flag2;
-}
-
 void MainWindow::led1_setvalue(int value)
 {
     lp=value;
+    lp=win2->lp;
+    qDebug()<<"led1 pedal"<<lp;
 }
 
 void MainWindow::led2_setvalue(int value)
 {
     lp2=value;
+    lp2=win2->lp2;
+    qDebug()<<"led2 pedal"<<lp2;
 }
 
 void MainWindow::vit_setvalue(int value)
 {
     vip=value;
+    vip=win2->vip;
+    qDebug()<<"vit pedal"<<vip;
 }
 
 void MainWindow::dia_setvalue(int value)
 {
     dp=value;
+    dp=win2->dp;
+    qDebug()<<"dia pedal"<<dp;
 }
 
 void MainWindow::siloil_setvalue(int value)
 {
     sp=value;
+    sp=win2->sp;
+    qDebug()<<"silicon oil pedal"<<sp;
 }
 
 
