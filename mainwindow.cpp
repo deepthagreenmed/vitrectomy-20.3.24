@@ -621,6 +621,20 @@ MainWindow::~MainWindow()
 void MainWindow::showsettingswindow()
 {
 
+    hhandler->vso_off();
+    vip=0;
+    vit_onoff();
+    sp=0;
+    siloil_onoff();
+    ap=0;
+    ai_onoff();
+    dp=0;
+    dia_onoff();
+    lp=0;
+    led1_onoff();
+    lp2=0;
+    led2_onoff();
+
     win2->show();
 }
 

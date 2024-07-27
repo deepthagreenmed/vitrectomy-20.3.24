@@ -794,7 +794,7 @@ public:
         label_16->setStyleSheet(QString::fromUtf8("background-color: rgb(149, 165, 178);"));
         label_36 = new QLabel(tab_10);
         label_36->setObjectName(QString::fromUtf8("label_36"));
-        label_36->setGeometry(QRect(-4, 96, 1121, 951));
+        label_36->setGeometry(QRect(-20, 110, 1121, 951));
         label_36->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "font: 30pt \"Ubuntu\";border-radius: 20px;\n"
 "background-color: rgb(53, 63, 99);"));
@@ -830,9 +830,9 @@ public:
         label_37->setAlignment(Qt::AlignCenter);
         pushButton_swap = new QPushButton(tab_10);
         pushButton_swap->setObjectName(QString::fromUtf8("pushButton_swap"));
-        pushButton_swap->setGeometry(QRect(90, 790, 101, 51));
-        pushButton_swap->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
+        pushButton_swap->setGeometry(QRect(90, 770, 231, 91));
+        pushButton_swap->setStyleSheet(QString::fromUtf8("border-radius: 30px;\n"
+"font-weight: bold;"));
         tabWidget_2->addTab(tab_10, QString());
         label_27->raise();
         label_16->raise();
