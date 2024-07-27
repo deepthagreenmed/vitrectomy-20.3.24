@@ -642,8 +642,8 @@ void MainWindow::siloil_onoff()
         animation->start();
 
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-        connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
-        connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+        connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
+        connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
         sp=1;
 
@@ -662,8 +662,8 @@ void MainWindow::siloil_onoff()
         animation->start();
 
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-        disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoil);
-        disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoil);
+        disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
+        disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
         hhandler->siloil_off();
 
@@ -1192,7 +1192,7 @@ void MainWindow::decreaseled2value()
 }
 
 // Increase silicon oil
-void MainWindow::increasesiliconoil()
+void MainWindow::increasesiliconoilvalue()
 {
     int currentValue = ui->label_siloil->text().toInt();
     int newValue = currentValue + 5;
@@ -1204,7 +1204,7 @@ void MainWindow::increasesiliconoil()
 }
 
 // Decrease silicon oil
-void MainWindow::decreasesiliconoil()
+void MainWindow::decreasesiliconoilvalue()
 {
     int currentValue = ui->label_siloil->text().toInt();
     int newValue = currentValue - 5;
@@ -1370,7 +1370,7 @@ void MainWindow::on_increase_siloil_pressed()
 {if(sp==1)
     {
     time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoil);
+     connect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoilvalue);
 }}
 
 // Increase silicon oil (release)
@@ -1378,7 +1378,7 @@ void MainWindow::on_increase_siloil_released()
 {if(sp==1)
     {
     time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoil);
+     disconnect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoilvalue);
 }}
 
 // Decrease silicon oil (press)
@@ -1386,7 +1386,7 @@ void MainWindow::on_decrease_siloil_pressed()
 {if(sp==1)
     {
     time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoil);
+     connect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoilvalue);
 }}
 
 // Decrease silicon oil (release)
@@ -1394,7 +1394,7 @@ void MainWindow::on_decrease_siloil_released()
 {if(sp==1)
     {
     time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoil);
+     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoilvalue);
 }}
 
 // Increase LED1 (press)
