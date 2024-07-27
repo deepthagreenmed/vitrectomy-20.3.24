@@ -599,7 +599,6 @@ void MainWindow::on_clickedenter()
     if(ui->label_aipreset->text().toInt() == 0)
     {
         airinjectoroff();
-        return;
     }
 
     vit_value = static_cast<int>(std::round(vit_value/60))*60;
