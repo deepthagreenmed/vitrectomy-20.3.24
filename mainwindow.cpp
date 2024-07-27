@@ -1679,7 +1679,7 @@ void MainWindow::showsetupscreen()
 
 void MainWindow::nonlinearcall3()
 {
-    if(madtype=="Aktive") {
+    if(madtype=="Alcon") {
         int vvalue;
         double ot;
 
@@ -1781,7 +1781,7 @@ void MainWindow::nonlinearcall3()
 
 void MainWindow::nonlinearcall2()
 {
-    if(madtype=="Aktive") {
+    if(madtype=="Alcon") {
         int vvalue;
         double ot;
 
@@ -1888,7 +1888,7 @@ void MainWindow::nonlinearcall2()
 // Vitrectomy linear 2
 void MainWindow::linearcall2()
 {
-    if(madtype=="Aktive") {
+    if(madtype=="Alcon") {
         int vvalue;
         double ot;
         int idx1;
@@ -2003,7 +2003,7 @@ void MainWindow::linearcall2()
 // Vitrectomy linear (3)
 void MainWindow::linearcall3()
 {
-    if(madtype=="Aktive") {
+    if(madtype=="Alcon") {
         int vvalue;
         double ot;
         int idx1;

@@ -258,7 +258,7 @@ settingswindow::settingswindow(QWidget *parent) :
      {
          ui->lineEdit_maxcutrate->setText("8000");
      }
-     if(ui->comboBox_cuttertype->currentText() == "Aktive")
+     if(ui->comboBox_cuttertype->currentText() == "Alcon")
      {
           ui->lineEdit_maxcutrate->setText("7500");
      }
@@ -1587,7 +1587,7 @@ void settingswindow::onCutterTypeChanged(int index)
         ui->lineEdit_maxcutrate->setText("8000");
         break;
 
-    //Aktive
+    //Alcon
     case 1:
         ui->lineEdit_maxcutrate->setText("7500");
         break;
