@@ -62,7 +62,6 @@ signals:
 
 
 public slots:
-
     void selectComboBox20(int index);
     void selectComboBox21(int index);
     void selectComboBox23(int index);
@@ -84,52 +83,35 @@ public slots:
      void on_clickedbackspacetext();
      void on_clickedspace();
      void on_clickedentertext();
-
      //dia
     void on_dia_clicked();
-
     //led
     void on_led_clicked();
-
     //vac
     void on_ia_clicked();
-
     //vit
     void on_vit_clicked();
-
     //home screen
     void show_surgery_screen();
-
     //save for all surgeons
     void on_saveforall_clicked();
-
     //save for current surgeon
     void on_save_clicked();
 
 
 private slots:
-
     //swap on/off
     void swap_onoff();
-
     void onCutterTypeChanged(int index);
-
     void loadDatabaseFromList(const QString &currentText);
-
     //footpedal settings
     void on_fp_settings_clicked();
-
     //tabs
     void on_tab_dia_clicked();
-
     void on_tab_led_clicked();
-
     void on_tab_ia_clicked();
-
     void on_tab_vit_clicked();
-
     void on_tab_fp_clicked();
-
     void on_tab_fppreset_clicked();
 
 
@@ -144,7 +126,6 @@ private:
       int led1value;
       int led2value;
       QStringList items;
-
       int tlpedal=0;
       int blpedal=0;
       int trpedal=0;

@@ -49,13 +49,10 @@ public:
    int surgeonind;
     int vit_value=60; //period
     float resolution = 0.000000005; //5ns
-
     void linearcall2();
     void linearcall3();
     void nonlinearcall2();
     void nonlinearcall3();
-
-
     LED *led1;
     LED *led2;
     bool eventFilter(QObject* object, QEvent* event);
@@ -67,29 +64,21 @@ public:
     int beep_2to3=0;
     QString madtype;
     QString surgeon;
-
     void exportGPIO(int pin);
     void setGPIODirection(int pin, const std::string& direction);
     void writeGPIO(int pin, int value);
 
 
-signals:
-    void airinjectoronFinished();
 
 
 public slots:
-
     void updateText(const QString &text);
-
     void setFPValues();
-
     void receiveString(const QString& str);
-
     void receiveString0(QString val);
     void receiveString1(QString val);
     void receiveString2(QString val);
     void receiveString3(QString val);
-
     void led1val(QString str);
     void led2val(QString str);
     void vacval(QString str);
@@ -98,178 +87,104 @@ public slots:
     void vitlnl(QString str);
     void typevit(QString str);
     void diaval(QString val);
-
     void on_clicked(const QString& digit);
-
      void on_clickedenter();
-
      void on_clickedbackspace();
-
-     //void airinjectoron();
-
      void vitvalset();
 
 
 
 
 private slots:
-     //void aislot(int a);
-
      void led1_setvalue(int value);
      void led2_setvalue(int value);
      void vit_setvalue(int value);
      void dia_setvalue(int value);
      void siloil_setvalue(int value);
-
     void dacvalue();
-
     void pressureval();
-
     void transitionToNewScreen();
-
     void setZero();
-
      void updateLabel();
-
      void updateLabel2();
-
     void diathermy();
-
     void airinjectoroff();
-
      void updatetimedate();
-
     void increaseVaccumValue();
-
     void decreaseVaccumValue();
-
     void increaseVitrectomyValue();
-
     void decreaseVitrectomyValue();
-
     void increaseDiathermyValue();
-
     void decreaseDiathermyValue();
-
     void increaseAirInjectorValue();
-
     void decreaseAirInjectorValue();
-
     void increaseledvalue();
-
     void decreaseledvalue();
-
     void increaseled2value();
-
     void decreaseled2value();
-
     void increasesiliconoilvalue();
-
     void decreasesiliconoilvalue();
-
     //settings window
     void showsettingswindow();
-
     //silicon oil
     void siloil_onoff();
-
     //vaccum linear/nonlinear
     void vac_linear_nonlinear();
-
     //led1
     void led1_onoff();
-
     //diathermy
     void dia_onoff();
-
     //air injector
     void ai_onoff();
-
     //vitrectomy
     void vit_onoff();
-
     //surgeon
     void setsurgeon();
-
     //continous press
     //vaccum
     void on_increase_vac_pressed();
-
     void on_increase_vac_released();
-
     void on_decrease_vac_pressed();
-
     void on_decrease_vac_released();
-
     //vitrectomy
     void on_increase_vit_pressed();
-
     void on_increase_vit_released();
-
     void on_decrease_vit_pressed();
-
     void on_decrease_vit_released();
-
     //silicon oil
     void on_increase_siloil_pressed();
-
     void on_increase_siloil_released();
-
     void on_decrease_siloil_pressed();
-
     void on_decrease_siloil_released();
-
     //led1
     void on_increase_led1_pressed();
-
     void on_increase_led1_released();
-
     void on_decrease_led1_pressed();
-
     void on_decrease_led1_released();
-
     //air injector
     void on_increase_ai_pressed();
-
     void on_increase_ai_released();
-
     void on_decrease_ai_pressed();
-
     void on_decrease_ai_released();
-
     //diathermy
     void on_increase_dia_pressed();
-
     void on_increase_dia_released();
-
     void on_decrease_dia_pressed();
-
     void on_decrease_dia_released();
-
     //led2
     void on_increase_led2_pressed();
-
     void on_increase_led2_released();
-
     void on_decrease_led2_pressed();
-
     void on_decrease_led2_released();
-
     //vitrectomy linear/nonlinear
     void vit_linear_nonlinear();
-
     //led2
     void led2_onoff();
-
     void comboboxload();
-
     void onComboBoxClicked();
-
     void timerCompleted();
-
     //setup screen
     void showsetupscreen();
-
     //drain on/off
     void drain_onoff();
 
@@ -314,8 +229,6 @@ private:
     QTimer timeai;
     QTimer timerzero;
     keypad *key;
-//    QMessageBox *msg;
-//    QTimer *timermsg;
     ltc2614 *l;
     sensor *pres;
     int vacpresetval;
