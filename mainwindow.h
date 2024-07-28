@@ -49,6 +49,7 @@ public:
    int surgeonind;
     int vit_value=60; //period
     float resolution = 0.000000005; //5ns
+    float freq=12000;   //12kHz
     void linearcall2();
     void linearcall3();
     void nonlinearcall2();
@@ -96,7 +97,7 @@ public slots:
 
 
 private slots:
-     void siloil();
+     //void siloil();
      void led1_setvalue(int value);
      void led2_setvalue(int value);
      void vit_setvalue(int value);

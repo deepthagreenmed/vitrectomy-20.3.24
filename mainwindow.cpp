@@ -80,7 +80,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_endcase, &QPushButton::clicked, this, &MainWindow::setsurgeon);
     connect(ui->pushButton_vitlinearnonlinear, &QPushButton::clicked, this, &MainWindow::vit_linear_nonlinear);
     connect(ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::showsetupscreen);
-    //connect(win2, &settingswindow::swapsignal, this, &MainWindow::swapval);
     connect(ui->pushButton_drain, &QPushButton::clicked, this, &MainWindow::drain_onoff);
 
     vacpresetval = ui->label_vacpreset->text().toInt();
@@ -733,6 +732,11 @@ void MainWindow::siloil_onoff()
         connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
         connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
+        float ontime=50;
+        hhandler->vso_ontime((ontime/(100*freq))/resolution);
+        hhandler->vso_period((1/freq)/resolution);
+        hhandler->siloil_on();
+
         sp=1;
 
         }
@@ -753,6 +757,7 @@ void MainWindow::siloil_onoff()
         disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
         disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
+        hhandler->vso_off();
         hhandler->siloil_off();
 
         sp=0;
@@ -3190,40 +3195,40 @@ void MainWindow::siloil_setvalue(int value)
 }
 
 
-void MainWindow::siloil()
-{
-    if(sp==0)
-    {
-        hhandler->siloil_off();
-        hhandler->vso_off();
-    }
-    else if(sp==1)
-    {
-        if(ui->label_dialvalue->text() == "0")
-        {
-            hhandler->siloil_off();
-            hhandler->vso_off();
-        }
-        else
-        {
-            l->writeDAC(0);
-            int avg1 = vac->convert(CHANNEL_1)*0.1894;
-            ui->label_vacactual->setText("0");
+//void MainWindow::siloil()
+//{
+//    if(sp==0)
+//    {
+//        hhandler->siloil_off();
+//        hhandler->vso_off();
+//    }
+//    else if(sp==1)
+//    {
+//        if(ui->label_dialvalue->text() == "0")
+//        {
+//            hhandler->siloil_off();
+//            hhandler->vso_off();
+//        }
+//        else
+//        {
+//            l->writeDAC(0);
+//            int avg1 = vac->convert(CHANNEL_1)*0.1894;
+//            ui->label_vacactual->setText("0");
 
-            hhandler->vit_off();
-            ui->label_vitactual->setText("0");
+//            hhandler->vit_off();
+//            ui->label_vitactual->setText("0");
 
-            avgfp=fp->convert(CHANNEL_0);
-            int preset=ui->label_siloil->text().toInt();
-            int point = ((avgfp-fp0)/(fp1+fp2+fp3))*preset;
-
-
-        }
-
-    }
+//            avgfp=fp->convert(CHANNEL_0);
+//            int preset=ui->label_siloil->text().toInt();
+//            int point = ((avgfp-fp0)/(fp1+fp2+fp3))*preset;
 
 
-}
+//        }
+
+//    }
+
+
+//}
 
 void MainWindow::exportGPIO(int pin) {
     std::ofstream exportFile("/sys/class/gpio/export");
