@@ -273,8 +273,6 @@ MainWindow::MainWindow(QWidget *parent)
     timermain->start(3000); // 3 seconds
     connect(timermain, &QTimer::timeout, this, &MainWindow::transitionToNewScreen);
 
-    //ui->label_aipreset->setText("60");
-
     QTimer *timervit = new QTimer;
     connect(timervit, &QTimer::timeout, this, &MainWindow::vitvalset);
     timervit->start(1);
@@ -600,6 +598,7 @@ void MainWindow::on_clickedenter()
     {
         airinjectoroff();
     }
+
 
     vit_value = static_cast<int>(std::round(vit_value/60))*60;
     ui->label_vitpreset->setText(QString::number(vit_value));
@@ -1520,29 +1519,33 @@ void MainWindow::on_decrease_led1_released()
 }}
 // Increase LED2 (press)
 void MainWindow::on_increase_led2_pressed()
-{
+{ if(lp2==1) {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::increaseled2value);
+    }
 }
 
 // Increase LED2 (release)
 void MainWindow::on_increase_led2_released()
-{
+{ if(lp2==1) {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseled2value);
+    }
 }
 // Decrease LED2 (press)
 void MainWindow::on_decrease_led2_pressed()
-{
+{ if(lp2==1) {
     time.start(300);
      connect(&time, &QTimer::timeout, this, &MainWindow::decreaseled2value);
+    }
 }
 
 // Decrease LED2 (release)
 void MainWindow::on_decrease_led2_released()
-{
+{ if(lp2==1) {
     time.stop();
      disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseled2value);
+    }
 }
 
 
