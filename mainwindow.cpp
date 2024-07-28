@@ -3216,8 +3216,22 @@ void MainWindow::siloil()
             int avg1 = vac->convert(CHANNEL_1)*0.1894;
             ui->label_vacactual->setText("0");
 
-            hhandler->vit_off();
             ui->label_vitactual->setText("0");
+            vip=0;
+            ui->label_38->setStyleSheet("");
+            ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
+            ui->pushButton_vitinc->lower();
+            ui->pushButton_vitdec->lower();
+            ui->label_vitpreset->lower();
+            ui->label_vitactual->lower();
+            animation1->setStartValue(QPoint(430,640));
+            animation1->setEndValue(QPoint(380,640));
+            animation1->setDuration(250);
+            ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+            animation1->start();
+            hhandler->vit_off();
+            disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+            disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
             avgfp=fp->convert(CHANNEL_0);
             float value=((avgfp-fp0)/(fp1+fp2+fp3)*60)+40;
