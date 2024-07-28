@@ -30,43 +30,43 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(ui->pushButton_vacinc, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
-    connect(ui->pushButton_vacdec, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
+//    connect(ui->pushButton_vacinc, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
+//    connect(ui->pushButton_vacdec, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
 
-//    (ui->pushButton_vacinc, &QPushButton::pressed, this, &MainWindow::on_increase_vac_pressed);
-//    (ui->pushButton_vacinc, &QPushButton::released, this, &MainWindow::on_increase_vac_released);
-//    (ui->pushButton_vacdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vac_pressed);
-//    (ui->pushButton_vacdec, &QPushButton::released, this, &MainWindow::on_decrease_vac_released);
+    connect(ui->pushButton_vacinc, &QPushButton::pressed, this, &MainWindow::on_increase_vac_pressed);
+    connect(ui->pushButton_vacinc, &QPushButton::released, this, &MainWindow::on_increase_vac_released);
+    connect(ui->pushButton_vacdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vac_pressed);
+    connect(ui->pushButton_vacdec, &QPushButton::released, this, &MainWindow::on_decrease_vac_released);
 
-    (ui->pushButton_vitinc, &QPushButton::pressed, this, &MainWindow::on_increase_vit_pressed);
-    (ui->pushButton_vitinc, &QPushButton::released, this, &MainWindow::on_increase_vit_released);
-    (ui->pushButton_vitdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vit_pressed);
-    (ui->pushButton_vitdec, &QPushButton::released, this, &MainWindow::on_decrease_vit_released);
+    connect(ui->pushButton_vitinc, &QPushButton::pressed, this, &MainWindow::on_increase_vit_pressed);
+    connect(ui->pushButton_vitinc, &QPushButton::released, this, &MainWindow::on_increase_vit_released);
+    connect(ui->pushButton_vitdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vit_pressed);
+    connect(ui->pushButton_vitdec, &QPushButton::released, this, &MainWindow::on_decrease_vit_released);
 
-    (ui->pushButton_siloilinc, &QPushButton::pressed, this, &MainWindow::on_increase_siloil_pressed);
-    (ui->pushButton_siloilinc, &QPushButton::released, this, &MainWindow::on_increase_siloil_released);
-    (ui->pushButton_siloildec, &QPushButton::pressed, this, &MainWindow::on_decrease_siloil_pressed);
-    (ui->pushButton_siloildec, &QPushButton::released, this, &MainWindow::on_decrease_siloil_released);
+    connect(ui->pushButton_siloilinc, &QPushButton::pressed, this, &MainWindow::on_increase_siloil_pressed);
+    connect(ui->pushButton_siloilinc, &QPushButton::released, this, &MainWindow::on_increase_siloil_released);
+    connect(ui->pushButton_siloildec, &QPushButton::pressed, this, &MainWindow::on_decrease_siloil_pressed);
+    connect(ui->pushButton_siloildec, &QPushButton::released, this, &MainWindow::on_decrease_siloil_released);
 
-    (ui->pushButton_led1inc, &QPushButton::pressed, this, &MainWindow::on_increase_led1_pressed);
-    (ui->pushButton_led1inc, &QPushButton::released, this, &MainWindow::on_increase_led1_released);
-    (ui->pushButton_led1dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led1_pressed);
-    (ui->pushButton_led1dec, &QPushButton::released, this, &MainWindow::on_decrease_led1_released);
+    connect(ui->pushButton_led1inc, &QPushButton::pressed, this, &MainWindow::on_increase_led1_pressed);
+    connect(ui->pushButton_led1inc, &QPushButton::released, this, &MainWindow::on_increase_led1_released);
+    connect(ui->pushButton_led1dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led1_pressed);
+    connect(ui->pushButton_led1dec, &QPushButton::released, this, &MainWindow::on_decrease_led1_released);
 
-    (ui->pushButton_aiinc, &QPushButton::pressed, this, &MainWindow::on_increase_ai_pressed);
-    (ui->pushButton_aiinc, &QPushButton::released, this, &MainWindow::on_increase_ai_released);
-    (ui->pushButton_aidec, &QPushButton::pressed, this, &MainWindow::on_decrease_ai_pressed);
-    (ui->pushButton_aidec, &QPushButton::released, this, &MainWindow::on_decrease_ai_released);
+    connect(ui->pushButton_aiinc, &QPushButton::pressed, this, &MainWindow::on_increase_ai_pressed);
+    connect(ui->pushButton_aiinc, &QPushButton::released, this, &MainWindow::on_increase_ai_released);
+    connect(ui->pushButton_aidec, &QPushButton::pressed, this, &MainWindow::on_decrease_ai_pressed);
+    connect(ui->pushButton_aidec, &QPushButton::released, this, &MainWindow::on_decrease_ai_released);
 
-    (ui->pushButton_diainc, &QPushButton::pressed, this, &MainWindow::on_increase_dia_pressed);
-    (ui->pushButton_diainc, &QPushButton::released, this, &MainWindow::on_increase_dia_released);
-    (ui->pushButton_diadec, &QPushButton::pressed, this, &MainWindow::on_decrease_dia_pressed);
-    (ui->pushButton_diadec, &QPushButton::released, this, &MainWindow::on_decrease_dia_released);
+    connect(ui->pushButton_diainc, &QPushButton::pressed, this, &MainWindow::on_increase_dia_pressed);
+    connect(ui->pushButton_diainc, &QPushButton::released, this, &MainWindow::on_increase_dia_released);
+    connect(ui->pushButton_diadec, &QPushButton::pressed, this, &MainWindow::on_decrease_dia_pressed);
+    connect(ui->pushButton_diadec, &QPushButton::released, this, &MainWindow::on_decrease_dia_released);
 
-    (ui->pushButton_led2inc, &QPushButton::pressed, this, &MainWindow::on_increase_led2_pressed);
-    (ui->pushButton_led2inc, &QPushButton::released, this, &MainWindow::on_increase_led2_released);
-    (ui->pushButton_led2dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led2_pressed);
-    (ui->pushButton_led2dec, &QPushButton::released, this, &MainWindow::on_decrease_led2_released);
+    connect(ui->pushButton_led2inc, &QPushButton::pressed, this, &MainWindow::on_increase_led2_pressed);
+    connect(ui->pushButton_led2inc, &QPushButton::released, this, &MainWindow::on_increase_led2_released);
+    connect(ui->pushButton_led2dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led2_pressed);
+    connect(ui->pushButton_led2dec, &QPushButton::released, this, &MainWindow::on_decrease_led2_released);
 
 
     connect(ui->pushButton_settingswindow, &QPushButton::clicked, this, &MainWindow::showsettingswindow);
