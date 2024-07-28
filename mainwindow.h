@@ -97,7 +97,7 @@ public slots:
 
 
 private slots:
-     //void siloil();
+     void siloil();
      void led1_setvalue(int value);
      void led2_setvalue(int value);
      void vit_setvalue(int value);
@@ -234,6 +234,7 @@ private:
     ltc2614 *l;
     sensor *pres;
     int vacpresetval;
+    QTimer timesiloil;
 
 };
 #endif // MAINWINDOW_H
