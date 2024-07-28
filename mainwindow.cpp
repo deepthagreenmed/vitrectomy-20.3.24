@@ -30,8 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-//    connect(ui->pushButton_vacinc, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
-//    connect(ui->pushButton_vacdec, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
 
     connect(ui->pushButton_vacinc, &QPushButton::pressed, this, &MainWindow::on_increase_vac_pressed);
     connect(ui->pushButton_vacinc, &QPushButton::released, this, &MainWindow::on_increase_vac_released);
@@ -293,6 +291,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(win2, &settingswindow::vit_pedal, this, &MainWindow::vit_setvalue);
     connect(win2, &settingswindow::dia_pedal, this, &MainWindow::dia_setvalue);
     connect(win2, &settingswindow::siloil_pedal, this, &MainWindow::siloil_setvalue);
+
+    hhandler->vso_off();
 
 }
 
