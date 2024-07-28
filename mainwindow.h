@@ -96,6 +96,7 @@ public slots:
 
 
 private slots:
+     void siloil();
      void led1_setvalue(int value);
      void led2_setvalue(int value);
      void vit_setvalue(int value);
