@@ -29,7 +29,7 @@
 #define PATH "/home/vitrectomy.db"
 //#define PATH2 "/home/vsodata10.txt"
 #define PATH3 "/home/midlabs.txt"
-#define PATH4 "/home/aktive.txt"
+#define PATH4 "/home/alcon.txt"
 //#define PATH5 "/home/dorc.txt"
 #define PATH6 "/home/data_casete3.txt"
 
