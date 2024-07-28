@@ -3190,7 +3190,7 @@ void MainWindow::siloil_setvalue(int value)
 }
 
 
-//void MainWindow::siliconoil()
+//void MainWindow::siloil()
 //{
 //    if(sp==0)
 //    {
