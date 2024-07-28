@@ -310,7 +310,7 @@ void MainWindow::transitionToNewScreen() {
 // Set limits and input validation
 void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValue)
 {
-    qDebug() << dig << value;
+    //qDebug() << dig << value;
 
     if (value > maxValue)
     {
