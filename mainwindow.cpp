@@ -2203,7 +2203,7 @@ void MainWindow::linearcall3()
 void MainWindow::diathermy()
 {
     hhandler->dia_on();
-    hhandler->dia_count(ui->label_dia->text().toInt()*256/100);
+    hhandler->dia_count(ui->label_dia->text().toInt()*255/100);
 }
 
 // Air injector off
