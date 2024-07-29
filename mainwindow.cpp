@@ -3205,7 +3205,7 @@ void MainWindow::siloil()
     }
     else if(sp==1)
     {
-        if(ui->label_dialvalue->text() == "0")
+        if(ui->label_dialvalue->text() == "0" || ui->label_siloil->text().toInt()==0)
         {
             hhandler->siloil_off();
             hhandler->vso_off();
@@ -3234,8 +3234,10 @@ void MainWindow::siloil()
             disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
             avgfp=fp->convert(CHANNEL_0);
-            float value=((avgfp-fp0)/(fp1+fp2+fp3)*60)+40;
-            hhandler->vso_ontime((value/(100*freq))/resolution);
+            float value1 = ui->label_siloil->text().toInt();
+            float value2 = (((avgfp-fp0)/(fp1+fp2+fp3))*(100-((60*(value1/100))+40))+((60*(value1/100)))+40);
+            qDebug()<<value2;
+            hhandler->vso_ontime((value2/(100*freq))/resolution);
             hhandler->vso_period((1/freq)/resolution);
         }
     }
