@@ -618,9 +618,6 @@ MainWindow::~MainWindow()
 //settings window showing
 void MainWindow::showsettingswindow()
 {
-
-    hhandler->vso_off();
-
     vip=0;
     ui->label_38->setStyleSheet("");
     ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
@@ -628,11 +625,7 @@ void MainWindow::showsettingswindow()
     ui->pushButton_vitdec->lower();
     ui->label_vitpreset->lower();
     ui->label_vitactual->lower();
-    animation1->setStartValue(QPoint(430,640));
-    animation1->setEndValue(QPoint(380,640));
-    animation1->setDuration(250);
     ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-    animation1->start();
     hhandler->vit_off();
     disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
     disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
@@ -643,14 +636,12 @@ void MainWindow::showsettingswindow()
     ui->pushButton_siloildec->lower();
     ui->pushButton_siloilinc->lower();
     ui->label_siloil->lower();
-    animation->setStartValue(QPoint(980,160));
-    animation->setEndValue(QPoint(930, 160));
-    animation->setDuration(250);
-    animation->start();
     ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    hhandler->siloil_off();
+    hhandler->vso_off();
     disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
     disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
-    hhandler->siloil_off();
+
 
     ap=0;
     ui->label_13->setStyleSheet("");
@@ -659,10 +650,6 @@ void MainWindow::showsettingswindow()
     ui->pushButton_aiinc->lower();
     ui->label_aiactual->lower();
     ui->label_aipreset->lower();
-    animation4->setStartValue(QPoint(1350,160));
-    animation4->setEndValue(QPoint(1300,160));
-    animation4->setDuration(250);
-    animation4->start();
     ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
     hhandler->ai_off();
     airinjectoroff();
@@ -675,10 +662,6 @@ void MainWindow::showsettingswindow()
     ui->pushButton_diainc->lower();
     ui->pushButton_diadec->lower();
     ui->label_dia->lower();
-    animation2->setStartValue(QPoint(1490,620));
-    animation2->setEndValue(QPoint(1440,620));
-    animation2->setDuration(250);
-    animation2->start();
     ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
     hhandler->dia_off();
     timedia.stop();
@@ -688,10 +671,6 @@ void MainWindow::showsettingswindow()
 
     lp=0;
     ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-    animation3->setStartValue(QPoint(850,640));
-    animation3->setEndValue(QPoint(800,640));
-    animation3->setDuration(250);
-    animation3->start();
     ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
     led1->processUserInput(2);
     disconnect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
@@ -699,10 +678,6 @@ void MainWindow::showsettingswindow()
 
     lp2=0;
     ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-    animation5->setStartValue(QPoint(1110,640));
-    animation5->setEndValue(QPoint(1060,640));
-    animation5->setDuration(250);
-    animation5->start();
     ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
     led2->processUserInput(2);
     disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
@@ -3195,7 +3170,7 @@ void MainWindow::siloil_setvalue(int value)
     qDebug()<<"silicon oil pedal"<<sp;
 }
 
-
+//Silicon oil
 void MainWindow::siloil()
 {
     if(sp==0)
@@ -3205,6 +3180,24 @@ void MainWindow::siloil()
     }
     else if(sp==1)
     {
+        l->writeDAC(0);
+        int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText("0");
+
+        ui->label_vitactual->setText("0");
+        vip=0;
+        ui->label_38->setStyleSheet("");
+        ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
+        ui->pushButton_vitinc->lower();
+        ui->pushButton_vitdec->lower();
+        ui->label_vitpreset->lower();
+        ui->label_vitactual->lower();
+        ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        hhandler->vit_off();
+        disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+        disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+
+
         if(ui->label_dialvalue->text() == "0" || ui->label_siloil->text().toInt()==0)
         {
             hhandler->siloil_off();
@@ -3212,30 +3205,10 @@ void MainWindow::siloil()
         }
         else
         {
-            l->writeDAC(0);
-            int avg1 = vac->convert(CHANNEL_1)*0.1894;
-            ui->label_vacactual->setText("0");
-
-            ui->label_vitactual->setText("0");
-            vip=0;
-            ui->label_38->setStyleSheet("");
-            ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
-            ui->pushButton_vitinc->lower();
-            ui->pushButton_vitdec->lower();
-            ui->label_vitpreset->lower();
-            ui->label_vitactual->lower();
-            animation1->setStartValue(QPoint(430,640));
-            animation1->setEndValue(QPoint(380,640));
-            animation1->setDuration(250);
-            ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-            animation1->start();
-            hhandler->vit_off();
-            disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
-            disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
             avgfp=fp->convert(CHANNEL_0);
             float value1 = ui->label_siloil->text().toInt();
-            float value2 = (((avgfp-fp0)/(fp1+fp2+fp3))*(100-((60*(value1/100))+40))+((60*(value1/100)))+40);
+            float value2 = (((avgfp-fp0)/(fp1+fp2+fp3))*(55*(value1/100)))+45;
             qDebug()<<value2;
             hhandler->vso_ontime((value2/(100*freq))/resolution);
             hhandler->vso_period((1/freq)/resolution);
