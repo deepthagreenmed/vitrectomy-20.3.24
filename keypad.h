@@ -1,6 +1,8 @@
 #ifndef KEYPAD_H
 #define KEYPAD_H
 
+#include "hwhandler.h"
+
 #include <QWidget>
 #include <QMouseEvent>
 
@@ -17,6 +19,7 @@ public:
     ~keypad();
     QString digit;
     bool back = false;
+    void keysound();
 
 signals:
     void textsignal(const QString& digit);
@@ -33,7 +36,7 @@ private slots:
 
 private:
     Ui::keypad *ui;
-
+    hwHandler *hhandler;
 };
 
 #endif // KEYPAD_H

@@ -2528,6 +2528,8 @@ void MainWindow::updateLabel()
 
         }
 
+        hhandler->speaker_on(ui->label_vacactual->text().toInt());
+
 
         file.close();
         file2.close();
@@ -2614,7 +2616,7 @@ void MainWindow::updateLabel()
 
               }
 
-
+        hhandler->speaker_on(ui->label_vacactual->text().toInt());
 
         file.close();
          file2.close();
@@ -2677,6 +2679,8 @@ void MainWindow::updateLabel()
                }
 
            }
+
+           hhandler->speaker_on(ui->label_vacactual->text().toInt());
 
            file.close();
             file2.close();
@@ -2800,6 +2804,8 @@ void MainWindow::updateLabel()
 
         }
 
+        hhandler->speaker_on(ui->label_vacactual->text().toInt());
+
 
         file.close();
          file2.close();
@@ -2876,6 +2882,7 @@ void MainWindow::updateLabel()
 
         }
 
+        hhandler->speaker_on(ui->label_vacactual->text().toInt());
 
         file.close();
         file2.close();
@@ -2902,6 +2909,8 @@ void MainWindow::updateLabel2()
     }
     else if(vip==1)
     {
+        hhandler->speaker_on(ui->label_vitactual->text().toInt());
+
         if(vitp==1)
         {
             if(flag2==0)
@@ -2953,11 +2962,13 @@ void MainWindow::drain_onoff()
     if(drain.compare("DRAIN OFF") == 0)
     {
         ui->pushButton_drain->setText("DRAIN ON");
+        hhandler->safety_vent_on();
         flag3=1;
     }
     else if(drain.compare("DRAIN ON") == 0)
     {
         ui->pushButton_drain->setText("DRAIN OFF");
+        hhandler->safety_vent_off();
         flag3=0;
     }
 }

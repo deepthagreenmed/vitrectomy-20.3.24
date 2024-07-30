@@ -21,7 +21,8 @@ keypad::keypad(QWidget *parent) :
     connect(ui->pushButton_10, &QPushButton::clicked, this, &keypad::entertext);
     connect(ui->pushButton_11, &QPushButton::clicked, this, &keypad::enterback);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &keypad::enterenter);
-    //connect(ui->pushButton_13, &QPushButton::clicked, this, &keypad::entertext);
+
+    hhandler = new hwHandler;
 
 
 
@@ -45,16 +46,24 @@ void keypad::entertext()
 
 
      }
+     keysound();
 }
 
 void keypad::enterback()
 {
     back = true;
     emit backsignal();
+    keysound();
 }
 
 void keypad::enterenter()
 {
     emit entersignal();
+    keysound();
+}
+
+void keypad::keysound()
+{
+    hhandler->speaker_on(50);
 }
 

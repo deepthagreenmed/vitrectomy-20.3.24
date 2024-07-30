@@ -22,6 +22,8 @@
 #include <QTime>
 
 #define XPAR_AXI_COMBINED_BASEADDR 0x43C40000;
+#define SPEAKER_BASEADDR	0x43C30000
+
 #define MAP_SIZE 4096UL
 #define MAP_MASK (MAP_SIZE - 1)
 
@@ -51,6 +53,9 @@
 
 #define MOT_CTRL_REG                32
 #define MOT_COUNT_REG               36
+
+#define SPEAKER_ON                  0x81
+#define SPEAKER_OFF                 0x00
 
 
 class hwHandler: public QThread
@@ -82,6 +87,11 @@ public:
 
     void write_motor(uint16_t status, uint16_t direction, uint16_t value);
 
+    static void safety_vent_on();
+    static void safety_vent_off();
+
+    static void speaker_on(uint8_t value);
+    static void speaker_off();
 
 signals:
 
