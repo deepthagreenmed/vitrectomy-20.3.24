@@ -37,14 +37,11 @@ keypad::~keypad()
 void keypad::entertext()
 {
     QPushButton* button = qobject_cast<QPushButton*>(sender());
+
      if (button)
      {
-         digit = button->text();
-
-
-             emit textsignal(digit);
-
-
+        digit = button->text();
+        emit textsignal(digit);
      }
      keysound();
 }

@@ -140,6 +140,7 @@ private slots:
     void ai_onoff();
     //vitrectomy
     void vit_onoff();
+//    void vit_onoff2();
     //surgeon
     void setsurgeon();
     //continous press
@@ -209,7 +210,7 @@ private:
     int ap=0;
     int vip=0;
     int vitp=1;
-    int dp=0;
+    int dp;
     int lp=0;
     int lp2=0;
     int sp=0;

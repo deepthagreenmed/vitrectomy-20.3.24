@@ -280,10 +280,10 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_23, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
     connect(ui->comboBox_24, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
 
-    connect(ui->comboBox_20, SIGNAL(activated(int)), this, SLOT(selectComboBox20(int)));
-    connect(ui->comboBox_21, SIGNAL(activated(int)), this, SLOT(selectComboBox21(int)));
-    connect(ui->comboBox_23, SIGNAL(activated(int)), this, SLOT(selectComboBox23(int)));
-    connect(ui->comboBox_24, SIGNAL(activated(int)), this, SLOT(selectComboBox24(int)));
+//    connect(ui->comboBox_20, SIGNAL(activated(int)), this, SLOT(selectComboBox20(int)));
+//    connect(ui->comboBox_21, SIGNAL(activated(int)), this, SLOT(selectComboBox21(int)));
+//    connect(ui->comboBox_23, SIGNAL(activated(int)), this, SLOT(selectComboBox23(int)));
+//    connect(ui->comboBox_24, SIGNAL(activated(int)), this, SLOT(selectComboBox24(int)));
 
     connect(ui->listWidget, &QListWidget::itemClicked, this, &settingswindow::updateSurgeon);
 

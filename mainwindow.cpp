@@ -294,6 +294,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     hhandler->vso_off();
 
+    dp=0;
+
 }
 
 // Show setup screen after 3 seconds
@@ -851,19 +853,19 @@ void MainWindow::dia_onoff()
             ui->pushButton_diainc->raise();
             ui->pushButton_diadec->raise();
             ui->label_dia->raise();
-            animation2->setStartValue(QPoint(1440,620));
-            animation2->setEndValue(QPoint(1490,620));
-            animation2->setDuration(250);
-            animation2->start();
+//            animation2->setStartValue(QPoint(1440,620));
+//            animation2->setEndValue(QPoint(1490,620));
+//            animation2->setDuration(250);
+//            animation2->start();
             ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-
+            qDebug()<<"dia on";
             timedia.start(1000);
             connect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
 
 
             connect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             connect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
-            dp=1;
+            //dp=1;
 
         }
         else
@@ -873,12 +875,12 @@ void MainWindow::dia_onoff()
             ui->pushButton_diainc->lower();
             ui->pushButton_diadec->lower();
             ui->label_dia->lower();
-            animation2->setStartValue(QPoint(1490,620));
-            animation2->setEndValue(QPoint(1440,620));
-            animation2->setDuration(250);
-            animation2->start();
+//            animation2->setStartValue(QPoint(1490,620));
+//            animation2->setEndValue(QPoint(1440,620));
+//            animation2->setDuration(250);
+//            animation2->start();
             ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-
+            qDebug()<<"dia off";
             hhandler->dia_off();
 
             timedia.stop();
@@ -886,8 +888,9 @@ void MainWindow::dia_onoff()
 
             disconnect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             disconnect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
-           dp=0;
+           //dp=0;
         }
+        dp=!dp;
 }
 
 // Turn air injector on or off

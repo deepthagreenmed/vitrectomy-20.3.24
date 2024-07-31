@@ -32,11 +32,11 @@ public:
     void populatetype();
     void updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue);
     int flag2=0;
-    int lp=0;
-    int lp2=0;
-    int vip=0;
-    int dp=0;
-    int sp=0;
+    int lp;
+    int lp2;
+    int vip;
+    int dp;
+    int sp;
 
 
 signals:
