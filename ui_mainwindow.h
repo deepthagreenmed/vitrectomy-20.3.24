@@ -43,7 +43,6 @@ public:
     QPushButton *pushButton_led1inc;
     QPushButton *pushButton_siloilinc;
     QPushButton *pushButton_led1onoff;
-    QPushButton *pushButton_vitonoff;
     QPushButton *pushButton_diaonoff;
     QPushButton *pushButton_vaclinearnonlinear;
     QLabel *label_aiactual;
@@ -65,7 +64,6 @@ public:
     QLabel *label_30;
     QLabel *label_31;
     QLabel *label_32;
-    QLabel *label_33;
     QLabel *label_28;
     QLabel *label_dialvalue;
     QDial *dial;
@@ -99,6 +97,8 @@ public:
     QPushButton *pushButton_vacinc;
     QPushButton *pushButton_vacdec;
     QPushButton *pushButton_drain;
+    QPushButton *pushButton_vitonoff;
+    QLabel *label_33;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -290,11 +290,6 @@ public:
         pushButton_led1onoff->setGeometry(QRect(800, 640, 101, 51));
         pushButton_led1onoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
 "background-color: rgba(191, 64, 64, 0);"));
-        pushButton_vitonoff = new QPushButton(centralwidget);
-        pushButton_vitonoff->setObjectName(QString::fromUtf8("pushButton_vitonoff"));
-        pushButton_vitonoff->setGeometry(QRect(380, 640, 101, 51));
-        pushButton_vitonoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
         pushButton_diaonoff = new QPushButton(centralwidget);
         pushButton_diaonoff->setObjectName(QString::fromUtf8("pushButton_diaonoff"));
         pushButton_diaonoff->setGeometry(QRect(1440, 620, 101, 51));
@@ -419,11 +414,6 @@ public:
         label_32->setObjectName(QString::fromUtf8("label_32"));
         label_32->setGeometry(QRect(1440, 620, 51, 51));
         label_32->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
-""));
-        label_33 = new QLabel(centralwidget);
-        label_33->setObjectName(QString::fromUtf8("label_33"));
-        label_33->setGeometry(QRect(380, 640, 51, 51));
-        label_33->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
 ""));
         label_28 = new QLabel(centralwidget);
         label_28->setObjectName(QString::fromUtf8("label_28"));
@@ -627,6 +617,16 @@ public:
         pushButton_drain->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
 "color: rgb(255, 120, 0);\n"
 "background-color: rgba(191, 64, 64, 0);"));
+        pushButton_vitonoff = new QPushButton(centralwidget);
+        pushButton_vitonoff->setObjectName(QString::fromUtf8("pushButton_vitonoff"));
+        pushButton_vitonoff->setGeometry(QRect(380, 640, 101, 51));
+        pushButton_vitonoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
+"background-color: rgba(191, 64, 64, 0);"));
+        label_33 = new QLabel(centralwidget);
+        label_33->setObjectName(QString::fromUtf8("label_33"));
+        label_33->setGeometry(QRect(380, 640, 51, 51));
+        label_33->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
+""));
         MainWindow->setCentralWidget(centralwidget);
         label_39->raise();
         label_20->raise();
@@ -681,14 +681,12 @@ public:
         label_vitpreset->raise();
         label_24->raise();
         pushButton_vitdec->raise();
-        label_33->raise();
         label_19->raise();
         label_siloil->raise();
         label_26->raise();
         pushButton_siloilinc->raise();
         label_31->raise();
         pushButton_siloildec->raise();
-        pushButton_vitonoff->raise();
         pushButton_siloilonoff->raise();
         pushButton_led2onoff->raise();
         label_15->raise();
@@ -699,10 +697,12 @@ public:
         pushButton_vacinc->raise();
         pushButton_vacdec->raise();
         pushButton_drain->raise();
+        pushButton_vitonoff->raise();
+        label_33->raise();
         label_12->raise();
         label_22->raise();
-        comboBox_surgeonname->raise();
         pushButton_start->raise();
+        comboBox_surgeonname->raise();
 
         retranslateUi(MainWindow);
 
@@ -731,7 +731,6 @@ public:
         pushButton_led1inc->setText(QString());
         pushButton_siloilinc->setText(QString());
         pushButton_led1onoff->setText(QString());
-        pushButton_vitonoff->setText(QString());
         pushButton_diaonoff->setText(QString());
         pushButton_vaclinearnonlinear->setText(QString());
         label_aiactual->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
@@ -753,7 +752,6 @@ public:
         label_30->setText(QString());
         label_31->setText(QString());
         label_32->setText(QString());
-        label_33->setText(QString());
         label_28->setText(QString());
         label_dialvalue->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_38->setText(QString());
@@ -785,6 +783,8 @@ public:
         pushButton_vacinc->setText(QString());
         pushButton_vacdec->setText(QString());
         pushButton_drain->setText(QCoreApplication::translate("MainWindow", "DRAIN OFF", nullptr));
+        pushButton_vitonoff->setText(QString());
+        label_33->setText(QString());
     } // retranslateUi
 
 };

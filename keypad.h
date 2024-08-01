@@ -5,6 +5,7 @@
 
 #include <QWidget>
 #include <QMouseEvent>
+#include <QTimer>
 
 namespace Ui {
 class keypad;
@@ -37,6 +38,7 @@ private slots:
 private:
     Ui::keypad *ui;
     hwHandler *hhandler;
+    QTimer *clicktimer;
 };
 
 #endif // KEYPAD_H

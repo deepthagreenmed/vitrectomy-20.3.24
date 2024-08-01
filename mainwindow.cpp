@@ -14,7 +14,7 @@
 #include <QDateTime>
 #include <QRegExp>
 #include <QRegExpValidator>
-#include <QThread>
+//#include <QThread>
 
 #include <stdint.h>
 #include <cstdio>
@@ -30,55 +30,49 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    int vp=0;
+    int ap=0;
+    int vip=0;
+    int vitp=1;
+    int dp=0;
+    int lp=0;
+    int lp2=0;
+    int sp=0;
 
-    connect(ui->pushButton_vacinc, &QPushButton::pressed, this, &MainWindow::on_increase_vac_pressed);
-    connect(ui->pushButton_vacinc, &QPushButton::released, this, &MainWindow::on_increase_vac_released);
-    connect(ui->pushButton_vacdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vac_pressed);
-    connect(ui->pushButton_vacdec, &QPushButton::released, this, &MainWindow::on_decrease_vac_released);
+     clicktimer=new QTimer;
 
-    connect(ui->pushButton_vitinc, &QPushButton::pressed, this, &MainWindow::on_increase_vit_pressed);
-    connect(ui->pushButton_vitinc, &QPushButton::released, this, &MainWindow::on_increase_vit_released);
-    connect(ui->pushButton_vitdec, &QPushButton::pressed, this, &MainWindow::on_decrease_vit_pressed);
-    connect(ui->pushButton_vitdec, &QPushButton::released, this, &MainWindow::on_decrease_vit_released);
-
-    connect(ui->pushButton_siloilinc, &QPushButton::pressed, this, &MainWindow::on_increase_siloil_pressed);
-    connect(ui->pushButton_siloilinc, &QPushButton::released, this, &MainWindow::on_increase_siloil_released);
-    connect(ui->pushButton_siloildec, &QPushButton::pressed, this, &MainWindow::on_decrease_siloil_pressed);
-    connect(ui->pushButton_siloildec, &QPushButton::released, this, &MainWindow::on_decrease_siloil_released);
-
-    connect(ui->pushButton_led1inc, &QPushButton::pressed, this, &MainWindow::on_increase_led1_pressed);
-    connect(ui->pushButton_led1inc, &QPushButton::released, this, &MainWindow::on_increase_led1_released);
-    connect(ui->pushButton_led1dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led1_pressed);
-    connect(ui->pushButton_led1dec, &QPushButton::released, this, &MainWindow::on_decrease_led1_released);
-
-    connect(ui->pushButton_aiinc, &QPushButton::pressed, this, &MainWindow::on_increase_ai_pressed);
-    connect(ui->pushButton_aiinc, &QPushButton::released, this, &MainWindow::on_increase_ai_released);
-    connect(ui->pushButton_aidec, &QPushButton::pressed, this, &MainWindow::on_decrease_ai_pressed);
-    connect(ui->pushButton_aidec, &QPushButton::released, this, &MainWindow::on_decrease_ai_released);
-
-    connect(ui->pushButton_diainc, &QPushButton::pressed, this, &MainWindow::on_increase_dia_pressed);
-    connect(ui->pushButton_diainc, &QPushButton::released, this, &MainWindow::on_increase_dia_released);
-    connect(ui->pushButton_diadec, &QPushButton::pressed, this, &MainWindow::on_decrease_dia_pressed);
-    connect(ui->pushButton_diadec, &QPushButton::released, this, &MainWindow::on_decrease_dia_released);
-
-    connect(ui->pushButton_led2inc, &QPushButton::pressed, this, &MainWindow::on_increase_led2_pressed);
-    connect(ui->pushButton_led2inc, &QPushButton::released, this, &MainWindow::on_increase_led2_released);
-    connect(ui->pushButton_led2dec, &QPushButton::pressed, this, &MainWindow::on_decrease_led2_pressed);
-    connect(ui->pushButton_led2dec, &QPushButton::released, this, &MainWindow::on_decrease_led2_released);
+    connect(ui->pushButton_vacinc, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
+    connect(ui->pushButton_vacdec, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
+    connect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+    connect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+    connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
+    connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
+    connect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
+    connect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
+    connect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
+    connect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
+    connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
+    connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
+    connect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
+    connect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
 
 
     connect(ui->pushButton_settingswindow, &QPushButton::clicked, this, &MainWindow::showsettingswindow);
     connect(ui->pushButton_siloilonoff, &QPushButton::clicked, this, &MainWindow::siloil_onoff);
-    connect(ui->pushButton_vaclinearnonlinear, &QPushButton::clicked, this, &MainWindow::vac_linear_nonlinear);
     connect(ui->pushButton_led1onoff, &QPushButton::clicked, this, &MainWindow::led1_onoff);
     connect(ui->pushButton_diaonoff, &QPushButton::clicked, this, &MainWindow::dia_onoff);
     connect(ui->pushButton_aionoff, &QPushButton::clicked, this, &MainWindow::ai_onoff);
     connect(ui->pushButton_vitonoff, &QPushButton::clicked, this, &MainWindow::vit_onoff);
     connect(ui->pushButton_led2onoff, &QPushButton::clicked, this, &MainWindow::led2_onoff);
+    connect(ui->pushButton_drain, &QPushButton::clicked, this, &MainWindow::drain_onoff);
     connect(ui->pushButton_endcase, &QPushButton::clicked, this, &MainWindow::setsurgeon);
+    connect(ui->pushButton_vaclinearnonlinear, &QPushButton::clicked, this, &MainWindow::vac_linear_nonlinear);
     connect(ui->pushButton_vitlinearnonlinear, &QPushButton::clicked, this, &MainWindow::vit_linear_nonlinear);
     connect(ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::showsetupscreen);
-    connect(ui->pushButton_drain, &QPushButton::clicked, this, &MainWindow::drain_onoff);
+
+
+    clicktimer->setInterval(200);
+    clicktimer->setSingleShot(true);
 
     vacpresetval = ui->label_vacpreset->text().toInt();
 
@@ -96,8 +90,7 @@ MainWindow::MainWindow(QWidget *parent)
     key = new keypad;
 
 
-    QTimer *timerfp = new QTimer;
-    connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
+    QTimer *timerfp = new QTimer;    connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
     timerfp->start(1);
 
 
@@ -293,8 +286,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(win2, &settingswindow::siloil_pedal, this, &MainWindow::siloil_setvalue);
 
     hhandler->vso_off();
-
-    dp=0;
 
 }
 
@@ -692,6 +683,8 @@ void MainWindow::showsettingswindow()
 // Turn silicon oil on or off
 void MainWindow::siloil_onoff()
 {
+    if(!clicktimer->isActive()) {
+
     if(sp==0)
     {
         ui->label_19->setStyleSheet("background-color: rgb(116, 184, 222);");
@@ -702,7 +695,7 @@ void MainWindow::siloil_onoff()
 
         animation->setStartValue(QPoint(930,160));
         animation->setEndValue(QPoint(980, 160));
-        animation->setDuration(250);
+        animation->setDuration(20);
         animation->start();
 
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
@@ -725,7 +718,7 @@ void MainWindow::siloil_onoff()
 
         animation->setStartValue(QPoint(980,160));
         animation->setEndValue(QPoint(930, 160));
-        animation->setDuration(250);
+        animation->setDuration(20);
         animation->start();
 
         ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
@@ -740,12 +733,15 @@ void MainWindow::siloil_onoff()
 
         sp=0;
         }
+    clicktimer->start();
+    }
 
 }
 
 // Turn vaccum linear or non-linear
 void MainWindow::vac_linear_nonlinear()
 {
+    if(!clicktimer->isActive()) {
     if(vp==0)
     {
        ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/nonbg1.png);");
@@ -757,18 +753,22 @@ void MainWindow::vac_linear_nonlinear()
         ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/linbg3.png);");
         vp=0;
     }
+    clicktimer->start();
+    }
 }
 
 // Turn LED1 on or off
 void MainWindow::led1_onoff()
 {
+    if(!clicktimer->isActive()) {
+
         if(lp==0)
         {
             ui->label_27->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
 
             animation3->setStartValue(QPoint(800,640));
             animation3->setEndValue(QPoint(850,640));
-            animation3->setDuration(250);
+            animation3->setDuration(20);
             animation3->start();
             ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
@@ -790,7 +790,7 @@ void MainWindow::led1_onoff()
             ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
             animation3->setStartValue(QPoint(850,640));
             animation3->setEndValue(QPoint(800,640));
-            animation3->setDuration(250);
+            animation3->setDuration(20);
             animation3->start();
             ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
@@ -800,18 +800,22 @@ void MainWindow::led1_onoff()
             disconnect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
            lp=0;
         }
+        clicktimer->start();
+    }
 
 }
 
 // Turn LED2 on or off
 void MainWindow::led2_onoff()
 {
+    if(!clicktimer->isActive()) {
+
     if(lp2==0)
     {
         ui->label_41->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
         animation5->setStartValue(QPoint(1060,640));
         animation5->setEndValue(QPoint(1110,640));
-        animation5->setDuration(250);
+        animation5->setDuration(20);
         animation5->start();
         ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
@@ -831,7 +835,7 @@ void MainWindow::led2_onoff()
     {   ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
         animation5->setStartValue(QPoint(1110,640));
         animation5->setEndValue(QPoint(1060,640));
-        animation5->setDuration(250);
+        animation5->setDuration(20);
         animation5->start();
         ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
@@ -841,11 +845,15 @@ void MainWindow::led2_onoff()
         disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
        lp2=0;
     }
+    clicktimer->start();
+    }
 }
 
 // Turn diathermy on or off
 void MainWindow::dia_onoff()
 {
+    if(!clicktimer->isActive()) {
+
         if(dp==0)
         {
             ui->label_14->setStyleSheet("background-color: rgb(116, 184, 222);");
@@ -853,19 +861,19 @@ void MainWindow::dia_onoff()
             ui->pushButton_diainc->raise();
             ui->pushButton_diadec->raise();
             ui->label_dia->raise();
-//            animation2->setStartValue(QPoint(1440,620));
-//            animation2->setEndValue(QPoint(1490,620));
-//            animation2->setDuration(250);
-//            animation2->start();
+            animation2->setStartValue(QPoint(1440,620));
+            animation2->setEndValue(QPoint(1490,620));
+            animation2->setDuration(20);
+            animation2->start();
             ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-            qDebug()<<"dia on";
+            //qDebug()<<"dia on";
             timedia.start(1000);
             connect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
 
 
             connect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             connect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
-            //dp=1;
+            dp=1;
 
         }
         else
@@ -875,12 +883,11 @@ void MainWindow::dia_onoff()
             ui->pushButton_diainc->lower();
             ui->pushButton_diadec->lower();
             ui->label_dia->lower();
-//            animation2->setStartValue(QPoint(1490,620));
-//            animation2->setEndValue(QPoint(1440,620));
-//            animation2->setDuration(250);
-//            animation2->start();
+            animation2->setStartValue(QPoint(1490,620));
+            animation2->setEndValue(QPoint(1440,620));
+            animation2->setDuration(20);
+            animation2->start();
             ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-            qDebug()<<"dia off";
             hhandler->dia_off();
 
             timedia.stop();
@@ -888,14 +895,18 @@ void MainWindow::dia_onoff()
 
             disconnect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             disconnect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
-           //dp=0;
+           dp=0;
         }
-        dp=!dp;
+        clicktimer->start();
+    }
+
 }
 
 // Turn air injector on or off
 void MainWindow::ai_onoff()
 {
+    if(!clicktimer->isActive()) {
+
         if(ap==0)
         {
             ui->label_13->setStyleSheet("background-color: rgb(116, 184, 222);");
@@ -907,7 +918,7 @@ void MainWindow::ai_onoff()
 
             animation4->setStartValue(QPoint(1300,160));
             animation4->setEndValue(QPoint(1350,160));
-            animation4->setDuration(250);
+            animation4->setDuration(20);
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
 
@@ -967,7 +978,7 @@ void MainWindow::ai_onoff()
             ui->label_aipreset->lower();
             animation4->setStartValue(QPoint(1350,160));
             animation4->setEndValue(QPoint(1300,160));
-            animation4->setDuration(250);
+            animation4->setDuration(20);
             animation4->start();
             ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
@@ -979,11 +990,15 @@ void MainWindow::ai_onoff()
 
             ap=0;
         }
+    clicktimer->start();
+}
 }
 
 // Turn vitrectomy on or off
 void MainWindow::vit_onoff()
 {
+    if(!clicktimer->isActive()) {
+
         if(vip==0)
         {
             ui->label_38->setStyleSheet("background-color: rgb(116, 184, 222);");
@@ -996,7 +1011,7 @@ void MainWindow::vit_onoff()
 
             animation1->setStartValue(QPoint(380,640));
             animation1->setEndValue(QPoint(430,640));
-            animation1->setDuration(250);
+            animation1->setDuration(20);
             animation1->start();
             ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
             vip=1;
@@ -1020,7 +1035,7 @@ void MainWindow::vit_onoff()
 
                 animation1->setStartValue(QPoint(430,640));
                 animation1->setEndValue(QPoint(380,640));
-                animation1->setDuration(250);
+                animation1->setDuration(20);
                 ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
                 animation1->start();
                 vip=0;
@@ -1034,11 +1049,17 @@ void MainWindow::vit_onoff()
 
 
         }
+        clicktimer->start();
+    }
+
 }
 
 // Increase vaccum
 void MainWindow::increaseVaccumValue()
 {
+     if(vp==1) {
+    if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_vacpreset->text().toInt();
     int newValue = currentValue + 5;
     if(newValue > 500)
@@ -1046,11 +1067,17 @@ void MainWindow::increaseVaccumValue()
         newValue = 500;
     }
     ui->label_vacpreset->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }}
 }
 
 // Decrease vaccum
 void MainWindow::decreaseVaccumValue()
 {
+     if(vp==1) {
+    if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_vacpreset->text().toInt();
     int newValue = currentValue - 5;
     if(newValue < 0)
@@ -1058,11 +1085,16 @@ void MainWindow::decreaseVaccumValue()
         newValue = 0;
     }
     ui->label_vacpreset->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }}
 }
 
 // Increase vitrectomy
 void MainWindow::increaseVitrectomyValue()
 {
+     if(vip==1) {
+ if(!clicktimer->isActive()) {
 
     ui->label_vitpreset->setText(QString::number(vit_value));
     vit_value = vit_value + 60;
@@ -1071,11 +1103,17 @@ void MainWindow::increaseVitrectomyValue()
         vit_value=9600;
     }
     ui->label_vitpreset->setText(QString::number(vit_value));
+
+    clicktimer->start();
+ }}
 }
 
 // Decrease vitrectomy
 void MainWindow::decreaseVitrectomyValue()
 {
+     if(vip==1) {
+    if(!clicktimer->isActive()) {
+
     ui->label_vitpreset->setText(QString::number(vit_value));
     vit_value = vit_value - 60;
     if(vit_value<60)
@@ -1083,11 +1121,17 @@ void MainWindow::decreaseVitrectomyValue()
         vit_value=60;
     }
     ui->label_vitpreset->setText(QString::number(vit_value));
+
+    clicktimer->start();
+    }}
 }
 
 // Increase diathermy
 void MainWindow::increaseDiathermyValue()
 {
+     if(dp==1) {
+     if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_dia->text().toInt();
     int newValue = currentValue + 5;
     if(newValue>100)
@@ -1095,11 +1139,18 @@ void MainWindow::increaseDiathermyValue()
         newValue=100;
     }
     ui->label_dia->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }
+     }
 }
 
 // Decrease diathermy
 void MainWindow::decreaseDiathermyValue()
 {
+    if(dp==1) {
+    if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_dia->text().toInt();
     int newValue = currentValue - 5;
     if(newValue<0)
@@ -1107,11 +1158,18 @@ void MainWindow::decreaseDiathermyValue()
         newValue=0;
     }
     ui->label_dia->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }
+    }
 }
 
 // Increase air injector
 void MainWindow::increaseAirInjectorValue()
 {
+    if(ap==1) {
+     if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_aipreset->text().toInt();
     int newValue = currentValue + 1;
     if(newValue>100)
@@ -1156,11 +1214,17 @@ void MainWindow::increaseAirInjectorValue()
     });
     timeai.start(10);
 
+    clicktimer->start();
+    }
+}
 }
 
 // Decrease air injector
 void MainWindow::decreaseAirInjectorValue()
 {
+    if(ap==1) {
+     if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_aipreset->text().toInt();
     int newValue = currentValue - 1;
     if(newValue<0)
@@ -1204,11 +1268,18 @@ void MainWindow::decreaseAirInjectorValue()
         ui->label_aiactual->setText(QString::number(actual));
     });
     timeai.start(10);
+
+    clicktimer->start();
+    }
+}
 }
 
 // Increase LED1
 void MainWindow::increaseledvalue()
 {
+    if(lp==1) {
+    if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_led1->text().toInt();
     int newValue = currentValue + 5;
     if(newValue>100)
@@ -1218,12 +1289,19 @@ void MainWindow::increaseledvalue()
     double choice = newValue;
     switchled(led1, choice);
     ui->label_led1->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }
+    }
 
 }
 
 // Decrease LED1
 void MainWindow::decreaseledvalue()
 {
+    if(lp==1) {
+     if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_led1->text().toInt();
     int newValue = currentValue - 5;
     if(newValue<0)
@@ -1233,11 +1311,18 @@ void MainWindow::decreaseledvalue()
     double choice = newValue;
     switchled(led1, choice);
     ui->label_led1->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }
+    }
 }
 
 // Increase LED2
 void MainWindow::increaseled2value()
 {
+    if(lp2==1) {
+     if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_led2->text().toInt();
     int newValue = currentValue + 5;
     if(newValue>100)
@@ -1247,11 +1332,18 @@ void MainWindow::increaseled2value()
     double choice = newValue;
     switchled(led2, choice);
     ui->label_led2->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }
+    }
 }
 
 // Decrease LED2
 void MainWindow::decreaseled2value()
 {
+     if(lp2==1) {
+     if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_led2->text().toInt();
     int newValue = currentValue - 5;
     if(newValue<0)
@@ -1261,11 +1353,19 @@ void MainWindow::decreaseled2value()
     double choice = newValue;
     switchled(led2, choice);
     ui->label_led2->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }
+     }
 }
 
 // Increase silicon oil
 void MainWindow::increasesiliconoilvalue()
 {
+
+    if(sp==1) {
+     if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_siloil->text().toInt();
     int newValue = currentValue + 5;
     if(newValue>100)
@@ -1273,11 +1373,17 @@ void MainWindow::increasesiliconoilvalue()
         newValue=100;
     }
     ui->label_siloil->setText(QString::number(newValue));
+
+    clicktimer->start();
+     }}
 }
 
 // Decrease silicon oil
 void MainWindow::decreasesiliconoilvalue()
 {
+    if(sp==1) {
+    if(!clicktimer->isActive()) {
+
     int currentValue = ui->label_siloil->text().toInt();
     int newValue = currentValue - 5;
     if(newValue<0)
@@ -1285,6 +1391,9 @@ void MainWindow::decreasesiliconoilvalue()
         newValue=0;
     }
     ui->label_siloil->setText(QString::number(newValue));
+
+    clicktimer->start();
+    }}
 }
 
 // Slot function to set name of surgeon
@@ -1370,238 +1479,12 @@ void MainWindow::setsurgeon()
 
 // code for continuous press
 
-//Increase vaccum (press)
-void MainWindow::on_increase_vac_pressed()
-{
-
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increaseVaccumValue);
-
-}
-
-// Increase vaccum (release)
-void MainWindow::on_increase_vac_released()
-{
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseVaccumValue);
-
-}
-
-//Decrease vaccum (press)
-void MainWindow::on_decrease_vac_pressed()
-{
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseVaccumValue);
-}
-
-// Decrease vaccum (release)
-void MainWindow::on_decrease_vac_released()
-{
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseVaccumValue);
-}
-
-//Increase vitrectomy (press)
-void MainWindow::on_increase_vit_pressed()
-{if(vip==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increaseVitrectomyValue);
-}
-}
-
-// Increase vitrectomy (release)
-void MainWindow::on_increase_vit_released()
-{if(vip==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseVitrectomyValue);
-}
-}
-
-//Decrease vitrectomy (press)
-void MainWindow::on_decrease_vit_pressed()
-{
-    if(vip==1)
-        {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseVitrectomyValue);
-}}
-
-// Decrease vitrectomy (release)
-void MainWindow::on_decrease_vit_released()
-{if(vip==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseVitrectomyValue);
-}
-}
-
-// Increase silicon oil (press)
-void MainWindow::on_increase_siloil_pressed()
-{if(sp==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoilvalue);
-}}
-
-// Increase silicon oil (release)
-void MainWindow::on_increase_siloil_released()
-{if(sp==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increasesiliconoilvalue);
-}}
-
-// Decrease silicon oil (press)
-void MainWindow::on_decrease_siloil_pressed()
-{if(sp==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoilvalue);
-}}
-
-// Decrease silicon oil (release)
-void MainWindow::on_decrease_siloil_released()
-{if(sp==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreasesiliconoilvalue);
-}}
-
-// Increase LED1 (press)
-void MainWindow::on_increase_led1_pressed()
-{if(lp==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue);
-}
-}
-
-// Increase LED1 (release)
-void MainWindow::on_increase_led1_released()
-{if(lp==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseledvalue);
-}}
-
-// Decrease LED1 (press)
-void MainWindow::on_decrease_led1_pressed()
-{if(lp==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue);
-}}
-
-// Decrease LED1 (release)
-void MainWindow::on_decrease_led1_released()
-{if(lp==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseledvalue);
-}}
-// Increase LED2 (press)
-void MainWindow::on_increase_led2_pressed()
-{ if(lp2==1) {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increaseled2value);
-    }
-}
-
-// Increase LED2 (release)
-void MainWindow::on_increase_led2_released()
-{ if(lp2==1) {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseled2value);
-    }
-}
-// Decrease LED2 (press)
-void MainWindow::on_decrease_led2_pressed()
-{ if(lp2==1) {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseled2value);
-    }
-}
-
-// Decrease LED2 (release)
-void MainWindow::on_decrease_led2_released()
-{ if(lp2==1) {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseled2value);
-    }
-}
-
-
-// Increase air injector (press)
-void MainWindow::on_increase_ai_pressed()
-{if(ap==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increaseAirInjectorValue);
-}
-}
-
-// Increase air injector (release)
-void MainWindow::on_increase_ai_released()
-{if(ap==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseAirInjectorValue);
-}}
-
-// Decrease air injector (press)
-void MainWindow::on_decrease_ai_pressed()
-{if(ap==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseAirInjectorValue);
-}}
-
-// Decrease air injector (release)
-void MainWindow::on_decrease_ai_released()
-{if(ap==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseAirInjectorValue);
-}}
-
-// Increase diathermy (press)
-void MainWindow::on_increase_dia_pressed()
-{if(dp==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::increaseDiathermyValue);
-}}
-
-// Increase diathermy (release)
-void MainWindow::on_increase_dia_released()
-{if(dp==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::increaseDiathermyValue);
-}}
-
-// Decrease diathermy (press)
-void MainWindow::on_decrease_dia_pressed()
-{if(dp==1)
-    {
-    time.start(300);
-     connect(&time, &QTimer::timeout, this, &MainWindow::decreaseDiathermyValue);
-}}
-
-// Decrease diathermy (release)
-void MainWindow::on_decrease_dia_released()
-{if(dp==1)
-    {
-    time.stop();
-     disconnect(&time, &QTimer::timeout, this, &MainWindow::decreaseDiathermyValue);
-}
-}
 
 // Turn vitrectomy linear or non-linear
 void MainWindow::vit_linear_nonlinear()
 {
+    if(!clicktimer->isActive()) {
+
     if(vitp==0)
     {
 
@@ -1612,6 +1495,8 @@ void MainWindow::vit_linear_nonlinear()
     {
         ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
         vitp=0;
+    }
+    clicktimer->start();
     }
 }
 
@@ -2960,6 +2845,8 @@ void MainWindow::updateLabel2()
 // Turn drain on or off
 void MainWindow::drain_onoff()
 {
+    if(!clicktimer->isActive()) {
+
     QString drain = ui->pushButton_drain->text();
 
     if(drain.compare("DRAIN OFF") == 0)
@@ -2973,6 +2860,9 @@ void MainWindow::drain_onoff()
         ui->pushButton_drain->setText("DRAIN OFF");
         hhandler->safety_vent_off();
         flag3=0;
+    }
+
+    clicktimer->start();
     }
 }
 
@@ -3149,39 +3039,261 @@ void MainWindow::dacvalue()
 
 }
 
-void MainWindow::led1_setvalue(int value)
+void MainWindow::led1_setvalue(int pin, int value)
 {
     lp=value;
     lp=win2->lp;
+    //writeGPIO(pin,lp);
     qDebug()<<"led1 pedal"<<lp;
+    if(lp==0)
+    {
+        ui->label_27->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
+
+        animation3->setStartValue(QPoint(800,640));
+        animation3->setEndValue(QPoint(850,640));
+        animation3->setDuration(250);
+        animation3->start();
+        ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+
+
+        if(ui->label_led1->text().toInt() != 0)
+        {
+            led1->processUserInput(1);
+        }
+
+        connect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
+        connect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
+
+
+lp=1;
+
+    }
+    else
+    {
+        ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+        animation3->setStartValue(QPoint(850,640));
+        animation3->setEndValue(QPoint(800,640));
+        animation3->setDuration(250);
+        animation3->start();
+        ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+
+        led1->processUserInput(2);
+
+        disconnect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
+        disconnect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
+       lp=0;
+    }
+
 }
 
-void MainWindow::led2_setvalue(int value)
+void MainWindow::led2_setvalue(int pin, int value)
 {
     lp2=value;
     lp2=win2->lp2;
+    //writeGPIO(pin,lp2);
     qDebug()<<"led2 pedal"<<lp2;
+    if(lp2==0)
+    {
+        ui->label_41->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
+        animation5->setStartValue(QPoint(1060,640));
+        animation5->setEndValue(QPoint(1110,640));
+        animation5->setDuration(250);
+        animation5->start();
+        ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+
+        if(ui->label_led2->text().toInt() != 0)
+        {
+            led2->processUserInput(1);
+        }
+
+        connect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
+        connect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
+
+
+        lp2=1;
+
+    }
+    else
+    {   ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+        animation5->setStartValue(QPoint(1110,640));
+        animation5->setEndValue(QPoint(1060,640));
+        animation5->setDuration(250);
+        animation5->start();
+        ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+
+        led2->processUserInput(2);
+
+        disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
+        disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
+       lp2=0;
+    }
 }
 
-void MainWindow::vit_setvalue(int value)
+void MainWindow::vit_setvalue(int pin, int value)
 {
     vip=value;
     vip=win2->vip;
+    //writeGPIO(pin,vip);
     qDebug()<<"vit pedal"<<vip;
+    if(vip==0)
+    {
+        ui->label_38->setStyleSheet("background-color: rgb(116, 184, 222);");
+
+        ui->label_24->setStyleSheet("font: 40pt ;color: rgb(0, 0, 0);");
+        ui->pushButton_vitinc->raise();
+        ui->pushButton_vitdec->raise();
+        ui->label_vitpreset->raise();
+        ui->label_vitactual->raise();
+
+        animation1->setStartValue(QPoint(380,640));
+        animation1->setEndValue(QPoint(430,640));
+        animation1->setDuration(250);
+        animation1->start();
+        ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+        vip=1;
+
+
+
+        connect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+        connect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+
+
+
+    }
+
+    else if(vip==1)
+        {   ui->label_38->setStyleSheet("");
+            ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
+            ui->pushButton_vitinc->lower();
+            ui->pushButton_vitdec->lower();
+            ui->label_vitpreset->lower();
+            ui->label_vitactual->lower();
+
+            animation1->setStartValue(QPoint(430,640));
+            animation1->setEndValue(QPoint(380,640));
+            animation1->setDuration(250);
+            ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+            animation1->start();
+            vip=0;
+
+           hhandler->vit_off();
+
+
+        disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+        disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+
+
+
+    }
 }
 
-void MainWindow::dia_setvalue(int value)
+void MainWindow::dia_setvalue(int pin, int value)
 {
     dp=value;
     dp=win2->dp;
+    //writeGPIO(pin,dp);
     qDebug()<<"dia pedal"<<dp;
+    if(dp==0)
+    {
+        ui->label_14->setStyleSheet("background-color: rgb(116, 184, 222);");
+        ui->label_25->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
+        ui->pushButton_diainc->raise();
+        ui->pushButton_diadec->raise();
+        ui->label_dia->raise();
+        animation2->setStartValue(QPoint(1440,620));
+        animation2->setEndValue(QPoint(1490,620));
+        animation2->setDuration(250);
+        animation2->start();
+        ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+        //qDebug()<<"dia on";
+        timedia.start(1000);
+        connect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
+
+
+        connect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
+        connect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
+        dp=1;
+
+    }
+    else
+    {
+        ui->label_14->setStyleSheet("");
+        ui->label_25->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+        ui->pushButton_diainc->lower();
+        ui->pushButton_diadec->lower();
+        ui->label_dia->lower();
+        animation2->setStartValue(QPoint(1490,620));
+        animation2->setEndValue(QPoint(1440,620));
+        animation2->setDuration(250);
+        animation2->start();
+        ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        hhandler->dia_off();
+
+        timedia.stop();
+        disconnect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
+
+        disconnect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
+        disconnect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
+       dp=0;
+    }
 }
 
-void MainWindow::siloil_setvalue(int value)
+void MainWindow::siloil_setvalue(int pin, int value)
 {
     sp=value;
     sp=win2->sp;
+    //writeGPIO(pin,sp);
     qDebug()<<"silicon oil pedal"<<sp;
+    if(sp==0)
+    {
+        ui->label_19->setStyleSheet("background-color: rgb(116, 184, 222);");
+        ui->label_26->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
+        ui->pushButton_siloildec->raise();
+        ui->pushButton_siloilinc->raise();
+        ui->label_siloil->raise();
+
+        animation->setStartValue(QPoint(930,160));
+        animation->setEndValue(QPoint(980, 160));
+        animation->setDuration(250);
+        animation->start();
+
+        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+        connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
+        connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
+
+        timesiloil.start(100);
+        connect(&timesiloil, &QTimer::timeout, this, &MainWindow::siloil);
+
+        sp=1;
+
+    }
+    else
+    {
+        ui->label_19->setStyleSheet("");
+        ui->label_26->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
+        ui->pushButton_siloildec->lower();
+        ui->pushButton_siloilinc->lower();
+        ui->label_siloil->lower();
+
+        animation->setStartValue(QPoint(980,160));
+        animation->setEndValue(QPoint(930, 160));
+        animation->setDuration(250);
+        animation->start();
+
+        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
+        disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
+
+        hhandler->vso_off();
+        hhandler->siloil_off();
+
+        timesiloil.stop();
+        disconnect(&timesiloil, &QTimer::timeout, this, &MainWindow::siloil);
+
+        sp=0;
+    }
+
+
 }
 
 //Silicon oil

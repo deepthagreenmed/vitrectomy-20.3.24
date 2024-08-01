@@ -21,6 +21,7 @@ settingswindow::settingswindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    clicktimer=new QTimer;
 
     connect(ui->pushButton_save, &QPushButton::clicked, this, &settingswindow::on_dia_clicked);
     connect(ui->pushButton_save_2, &QPushButton::clicked, this, &settingswindow::on_led_clicked);
@@ -41,6 +42,8 @@ settingswindow::settingswindow(QWidget *parent) :
 
     connect(ui->pushButton_swap, &QPushButton::clicked, this, &settingswindow::swap_onoff);
 
+    clicktimer->setInterval(200);
+    clicktimer->setSingleShot(true);
 
 
     //code to load database in the starting
@@ -272,6 +275,7 @@ settingswindow::settingswindow(QWidget *parent) :
     // Connect the combo box's index changed signal to the slot
     connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onCutterTypeChanged);
 
+
     items << "LED1 On/Off" << "LED2 On/Off" << "Vitrectomy On/Off" << "Diathermy On/Off" << "Silicon Oil On/Off";
 
     // Connect signals to slot
@@ -280,10 +284,11 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_23, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
     connect(ui->comboBox_24, SIGNAL(currentIndexChanged(int)), this, SLOT(updateComboBoxes(int)));
 
-//    connect(ui->comboBox_20, SIGNAL(activated(int)), this, SLOT(selectComboBox20(int)));
-//    connect(ui->comboBox_21, SIGNAL(activated(int)), this, SLOT(selectComboBox21(int)));
-//    connect(ui->comboBox_23, SIGNAL(activated(int)), this, SLOT(selectComboBox23(int)));
-//    connect(ui->comboBox_24, SIGNAL(activated(int)), this, SLOT(selectComboBox24(int)));
+    connect(ui->comboBox_20, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBox20(int)));
+    connect(ui->comboBox_23, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBox23(int)));
+    connect(ui->comboBox_21, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBox21(int)));
+    connect(ui->comboBox_24, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBox24(int)));
+
 
     connect(ui->listWidget, &QListWidget::itemClicked, this, &settingswindow::updateSurgeon);
 
@@ -612,23 +617,24 @@ void settingswindow::on_saveforall_clicked()
 
 
     QSqlQuery qry;
-    QString tl,tr,bl,br;
 
-    tl=ui->comboBox_20->currentText();
-    tr=ui->comboBox_23->currentText();
-    bl=ui->comboBox_21->currentText();
-    br=ui->comboBox_24->currentText();
+    tl1=ui->comboBox_20->currentText();
+    tr1=ui->comboBox_23->currentText();
+    bl1=ui->comboBox_21->currentText();
+    br1=ui->comboBox_24->currentText();
     db1.open();
 
-    qry.prepare("update maindb set ftopleft='"+tl+"',ftopright='"+tr+"',fbottomleft='"+bl+"',fbottomright='"+br+"'");
+    qry.prepare("update maindb set ftopleft='"+tl1+"',ftopright='"+tr1+"',fbottomleft='"+bl1+"',fbottomright='"+br1+"'");
     qry.exec();
-    qry.bindValue(tl,"ftopleft");
-    qry.bindValue(tr,"ftopright");
-    qry.bindValue(bl,"fbottomleft");
-    qry.bindValue(br,"fbottomright");
+    qry.bindValue(tl1,"ftopleft");
+    qry.bindValue(tr1,"ftopright");
+    qry.bindValue(bl1,"fbottomleft");
+    qry.bindValue(br1,"fbottomright");
 
-db1.close();
-QSqlDatabase::removeDatabase("QSQLITE");
+    db1.close();
+    QSqlDatabase::removeDatabase("QSQLITE");
+
+
 }
 
 // Save footpedal settings for current surgeon
@@ -641,23 +647,25 @@ void settingswindow::on_save_clicked()
 
 
     QSqlQuery qry;
-    QString tl,tr,bl,br,surgeon;
+    QString surgeon;
     surgeon=ui->lineEdit_5->text();
-    tl=ui->comboBox_20->currentText();
-    tr=ui->comboBox_23->currentText();
-    bl=ui->comboBox_21->currentText();
-    br=ui->comboBox_24->currentText();
+    tl1=ui->comboBox_20->currentText();
+    tr1=ui->comboBox_23->currentText();
+    bl1=ui->comboBox_21->currentText();
+    br1=ui->comboBox_24->currentText();
     db1.open();
 
-    qry.prepare("update maindb set ftopleft='"+tl+"',ftopright='"+tr+"',fbottomleft='"+bl+"',fbottomright='"+br+"' where surgeon='"+surgeon+"'");
+    qry.prepare("update maindb set ftopleft='"+tl1+"',ftopright='"+tr1+"',fbottomleft='"+bl1+"',fbottomright='"+br1+"' where surgeon='"+surgeon+"'");
     qry.exec();
-    qry.bindValue(tl,"ftopleft");
-    qry.bindValue(tr,"ftopright");
-    qry.bindValue(bl,"fbottomleft");
-    qry.bindValue(br,"fbottomright");
+    qry.bindValue(tl1,"ftopleft");
+    qry.bindValue(tr1,"ftopright");
+    qry.bindValue(bl1,"fbottomleft");
+    qry.bindValue(br1,"fbottomright");
 
-db1.close();
-QSqlDatabase::removeDatabase("QSQLITE");
+    db1.close();
+    QSqlDatabase::removeDatabase("QSQLITE");
+
+
 }
 
 
@@ -796,6 +804,9 @@ mydb.close();
 // Footpedal 0 (increase)
 void settingswindow::zeroinc()
 {
+    if(!clicktimer->isActive())
+    {
+
     int value=ui->lineEdit_zero->text().toInt();
     int newvalue=value+1;
    ui->lineEdit_zero->setText(QString::number(newvalue));
@@ -816,11 +827,16 @@ void settingswindow::zeroinc()
    {
        ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
    }
+
+   clicktimer->start();
+    }
 }
 
 //  Footpedal 0 (decrease)
 void settingswindow::zerodec()
 {
+    if(!clicktimer->isActive())
+    {
     int value=ui->lineEdit_zero->text().toInt();
     int newvalue=value-1;
       ui->lineEdit_zero->setText(QString::number(newvalue));
@@ -841,11 +857,15 @@ void settingswindow::zerodec()
       {
           ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
+      clicktimer->start();
+       }
 }
 
 // Footpedal 1 (increase)
 void settingswindow::oneinc()
 {
+    if(!clicktimer->isActive())
+    {
     int value=ui->lineEdit_one->text().toInt();
     int newvalue=value+1;
    ui->lineEdit_one->setText(QString::number(newvalue));
@@ -866,11 +886,15 @@ void settingswindow::oneinc()
    {
        ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
    }
+   clicktimer->start();
+    }
 }
 
 // Footpedal 2 (increase)
 void settingswindow::twoinc()
 {
+    if(!clicktimer->isActive())
+    {
     int value=ui->lineEdit_two->text().toInt();
     int newvalue=value+1;
       ui->lineEdit_two->setText(QString::number(newvalue));
@@ -891,11 +915,15 @@ void settingswindow::twoinc()
       {
           ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
+      clicktimer->start();
+       }
 }
 
 // Footpedal 3 (increase)
 void settingswindow::threeinc()
 {
+    if(!clicktimer->isActive())
+    {
     int value=ui->lineEdit_three->text().toInt();
     int newvalue=value+1;
       ui->lineEdit_three->setText(QString::number(newvalue));
@@ -916,11 +944,15 @@ void settingswindow::threeinc()
       {
           ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
+      clicktimer->start();
+       }
 }
 
 // Footpedal 1 (decrease)
 void settingswindow::onedec()
 {
+    if(!clicktimer->isActive())
+    {
     int value=ui->lineEdit_one->text().toInt();
     int newvalue=value-1;
       ui->lineEdit_one->setText(QString::number(newvalue));
@@ -941,11 +973,15 @@ void settingswindow::onedec()
       {
           ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
+      clicktimer->start();
+       }
 }
 
 // Footpedal 2 (decrease)
 void settingswindow::twodec()
 {
+    if(!clicktimer->isActive())
+    {
     int value=ui->lineEdit_two->text().toInt();
     int newvalue=value-1;
      ui->lineEdit_two->setText(QString::number(newvalue));
@@ -966,11 +1002,15 @@ void settingswindow::twodec()
      {
          ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
      }
+     clicktimer->start();
+      }
 }
 
 // Footpedal 3 (decrease)
 void settingswindow::threedec()
 {
+    if(!clicktimer->isActive())
+    {
     int value=ui->lineEdit_three->text().toInt();;
     int newvalue=value-1;
       ui->lineEdit_three->setText(QString::number(newvalue));
@@ -991,6 +1031,8 @@ void settingswindow::threedec()
       {
           ui->pushButton_save_6->setStyleSheet("image: url(:/new/prefix1/img/notsave1.png);background-color: transparent; border:none;");
       }
+      clicktimer->start();
+       }
 }
 
 // Footpedal settings
@@ -1243,339 +1285,31 @@ void settingswindow::on_clickedbackspace()
 
 //Update combo boxes
 void settingswindow::updateComboBoxes(int index) {
-        QList<QComboBox *> combos = {ui->comboBox_20, ui->comboBox_21, ui->comboBox_23, ui->comboBox_24};
+    QList<QComboBox *> combos = {ui->comboBox_20, ui->comboBox_21, ui->comboBox_23, ui->comboBox_24};
 
-        // Collect selected items
-        QSet<QString> selectedItems;
-        for (QComboBox *comboBox : combos) {
-            if (comboBox->currentIndex() != -1) {
-                selectedItems.insert(comboBox->currentText());
+    // Collect selected items
+    QSet<QString> selectedItems;
+    for (QComboBox *comboBox : combos) {
+        if (comboBox->currentIndex() != -1) {
+            selectedItems.insert(comboBox->currentText());
+        }
+    }
+
+    // Update each combo box
+    for (QComboBox *comboBox : combos) {
+        QString currentText = comboBox->currentText();
+        comboBox->blockSignals(true); // Block signals to prevent recursive updates
+        comboBox->clear();
+
+        for (const QString &item : items) {
+            if (!selectedItems.contains(item) || item == currentText) {
+                comboBox->addItem(item);
             }
         }
 
-        // Update each combo box
-        for (QComboBox *comboBox : combos) {
-            QString currentText = comboBox->currentText();
-            comboBox->blockSignals(true); // Block signals to prevent recursive updates
-            comboBox->clear();
-
-            for (const QString &item : items) {
-                if (!selectedItems.contains(item) || item == currentText) {
-                    comboBox->addItem(item);
-                }
-            }
-
-            comboBox->setCurrentText(currentText);
-            comboBox->blockSignals(false); // Unblock signals
-        }
+        comboBox->setCurrentText(currentText);
+        comboBox->blockSignals(false); // Unblock signals
     }
-
-//Top left pedal
-void settingswindow::selectComboBox20(int index)
-{
-
-    if(ui->comboBox_20->currentText() == "LED1 On/Off")
-    {
-        if(tlpedal==0)
-        {
-            lp=1;
-            tlpedal=1;
-        }
-        else if(tlpedal==1)
-        {
-            lp=0;
-            tlpedal=0;
-        }
-        emit led1_pedal(lp);
-    }
-    else if(ui->comboBox_20->currentText() == "LED2 On/Off")
-    {
-        if(tlpedal==0)
-        {
-            lp2=1;
-            tlpedal=1;
-        }
-        else if(tlpedal==1)
-        {
-            lp2=0;
-            tlpedal=0;
-        }
-        emit led2_pedal(lp2);
-    }
-    else if(ui->comboBox_20->currentText() == "Vitrectomy On/Off")
-    {
-        if(tlpedal==0)
-        {
-            vip=1;
-            tlpedal=1;
-        }
-        else if(tlpedal==1)
-        {
-            vip=0;
-            tlpedal=0;
-        }
-        emit vit_pedal(vip);
-    }
-    else if(ui->comboBox_20->currentText() == "Diathermy On/Off")
-    {
-        if(tlpedal==0)
-        {
-            dp=1;
-            tlpedal=1;
-        }
-        else if(tlpedal==1)
-        {
-            dp=0;
-            tlpedal=0;
-        }
-        emit dia_pedal(dp);
-    }
-    else if(ui->comboBox_20->currentText() == "Silicon Oil On/Off")
-    {
-        if(tlpedal==0)
-        {
-            sp=1;
-            tlpedal=1;
-        }
-        else if(tlpedal==1)
-        {
-            sp=0;
-            tlpedal=0;
-        }
-    }
-    emit siloil_pedal(sp);
-
-}
-
-//Bottom left pedal
-void settingswindow::selectComboBox21(int index)
-{
-
-    if(ui->comboBox_21->currentText() == "LED1 On/Off")
-    {
-        if(blpedal==0)
-        {
-            lp=1;
-            blpedal=1;
-        }
-        else if(blpedal==1)
-        {
-            lp=0;
-            blpedal=0;
-        }
-        emit led1_pedal(lp);
-    }
-    else if(ui->comboBox_21->currentText() == "LED2 On/Off")
-    {
-        if(blpedal==0)
-        {
-            lp2=1;
-            blpedal=1;
-        }
-        else if(blpedal==1)
-        {
-            lp2=0;
-            blpedal=0;
-        }
-        emit led2_pedal(lp2);
-    }
-    else if(ui->comboBox_21->currentText() == "Vitrectomy On/Off")
-    {
-        if(blpedal==0)
-        {
-            vip=1;
-            blpedal=1;
-        }
-        else if(blpedal==1)
-        {
-            vip=0;
-            blpedal=0;
-        }
-        emit vit_pedal(vip);
-    }
-    else if(ui->comboBox_21->currentText() == "Diathermy On/Off")
-    {
-        if(blpedal==0)
-        {
-            dp=1;
-            blpedal=1;
-        }
-        else if(blpedal==1)
-        {
-            dp=0;
-            blpedal=0;
-        }
-        emit dia_pedal(dp);
-    }
-    else if(ui->comboBox_21->currentText() == "Silicon Oil On/Off")
-    {
-        if(blpedal==0)
-        {
-            sp=1;
-            blpedal=1;
-        }
-        else if(blpedal==1)
-        {
-            sp=0;
-            blpedal=0;
-        }
-    }
-    emit siloil_pedal(sp);
-
-}
-
-//Top right pedal
-void settingswindow::selectComboBox23(int index)
-{
-
-    if(ui->comboBox_23->currentText() == "LED1 On/Off")
-    {
-        if(trpedal==0)
-        {
-            lp=1;
-            trpedal=1;
-        }
-        else if(trpedal==1)
-        {
-            lp=0;
-            trpedal=0;
-        }
-        emit led1_pedal(lp);
-    }
-    else if(ui->comboBox_23->currentText() == "LED2 On/Off")
-    {
-        if(trpedal==0)
-        {
-            lp2=1;
-            trpedal=1;
-        }
-        else if(trpedal==1)
-        {
-            lp2=0;
-            trpedal=0;
-        }
-        emit led2_pedal(lp2);
-    }
-    else if(ui->comboBox_23->currentText() == "Vitrectomy On/Off")
-    {
-        if(trpedal==0)
-        {
-            vip=1;
-            trpedal=1;
-        }
-        else if(trpedal==1)
-        {
-            vip=0;
-            trpedal=0;
-        }
-        emit vit_pedal(vip);
-    }
-    else if(ui->comboBox_23->currentText() == "Diathermy On/Off")
-    {
-        if(trpedal==0)
-        {
-            dp=1;
-            trpedal=1;
-        }
-        else if(trpedal==1)
-        {
-            dp=0;
-            trpedal=0;
-        }
-        emit dia_pedal(dp);
-    }
-    else if(ui->comboBox_23->currentText() == "Silicon Oil On/Off")
-    {
-        if(trpedal==0)
-        {
-            sp=1;
-            trpedal=1;
-        }
-        else if(trpedal==1)
-        {
-            sp=0;
-            trpedal=0;
-        }
-    }
-    emit siloil_pedal(sp);
-
-}
-
-//Bottom right pedal
-void settingswindow::selectComboBox24(int index)
-{
-
-    if(ui->comboBox_24->currentText() == "LED1 On/Off")
-    {
-        if(brpedal==0)
-        {
-            lp=1;
-            brpedal=1;
-        }
-        else if(brpedal==1)
-        {
-            lp=0;
-            brpedal=0;
-        }
-        emit led1_pedal(lp);
-    }
-    else if(ui->comboBox_24->currentText() == "LED2 On/Off")
-    {
-        if(brpedal==0)
-        {
-            lp2=1;
-            brpedal=1;
-        }
-        else if(brpedal==1)
-        {
-            lp2=0;
-            brpedal=0;
-        }
-        emit led2_pedal(lp2);
-    }
-    else if(ui->comboBox_24->currentText() == "Vitrectomy On/Off")
-    {
-        if(brpedal==0)
-        {
-            vip=1;
-            brpedal=1;
-        }
-        else if(brpedal==1)
-        {
-            vip=0;
-            brpedal=0;
-        }
-        emit vit_pedal(vip);
-    }
-    else if(ui->comboBox_24->currentText() == "Diathermy On/Off")
-    {
-        if(brpedal==0)
-        {
-            dp=1;
-            brpedal=1;
-        }
-        else if(brpedal==1)
-        {
-            dp=0;
-            brpedal=0;
-        }
-        emit dia_pedal(dp);
-    }
-    else if(ui->comboBox_24->currentText() == "Silicon Oil On/Off")
-    {
-        if(brpedal==0)
-        {
-            sp=1;
-            brpedal=1;
-        }
-        else if(brpedal==1)
-        {
-            sp=0;
-            brpedal=0;
-        }
-    }
-    emit siloil_pedal(sp);
-
 }
 
 
@@ -1616,6 +1350,8 @@ void settingswindow::updateSurgeon() {
 // Turn swap on or off
 void settingswindow::swap_onoff()
 {
+    if(!clicktimer->isActive()) {
+
     QString swap = ui->pushButton_swap->text();
 
     if(swap.compare("SWAP OFF") == 0)
@@ -1628,5 +1364,170 @@ void settingswindow::swap_onoff()
         ui->pushButton_swap->setText("SWAP OFF");
         flag2=0;
     }
+
+    clicktimer->start();
+    }
+
+}
+
+void settingswindow::comboBox20(int index)
+{
+    if(tl1 == "LED1 On/Off")
+    {
+        lp=!lp;
+        //writeGPIO(960,lp);
+        emit led1_pedal(960,lp);
+
+    }
+    if(tl1 == "LED2 On/Off")
+    {
+        lp2=!lp2;
+        //writeGPIO(960,lp2);
+        emit led2_pedal(960,lp2);
+
+    }
+    if(tl1 == "Vitrectomy On/Off")
+    {
+        vip=!vip;
+        //writeGPIO(960,vip);
+        emit vit_pedal(960,vip);
+
+    }
+    if(tl1 == "Diathermy On/Off")
+    {
+        dp=!dp;
+        //writeGPIO(960,dp);
+        emit dia_pedal(960,dp);
+
+    }
+    if(tl1 == "Silicon Oil On/Off")
+    {
+        sp=!sp;
+        //writeGPIO(960,sp);
+        emit siloil_pedal(960,sp);
+    }
+    qDebug()<<"cb20";
+
+
+}
+
+void settingswindow::comboBox23(int index)
+{
+    if(tr1 == "LED1 On/Off")
+    {
+        lp=!lp;
+        //writeGPIO(961,lp);
+        emit led1_pedal(961,lp);
+
+    }
+    if(tr1 == "LED2 On/Off")
+    {
+        lp2=!lp2;
+        //writeGPIO(961,lp2);
+        emit led2_pedal(961,lp2);
+
+    }
+    if(tr1 == "Vitrectomy On/Off")
+    {
+        vip=!vip;
+        //writeGPIO(961,vip);
+        emit vit_pedal(961,vip);
+
+    }
+    if(tr1 == "Diathermy On/Off")
+    {
+        dp=!dp;
+        //writeGPIO(961,dp);
+        emit dia_pedal(961,dp);
+
+    }
+    if(tr1 == "Silicon Oil On/Off")
+    {
+        sp=!sp;
+        //writeGPIO(961,sp);
+        emit siloil_pedal(961,sp);
+    }
+    qDebug()<<"cb23";
+
+
+
+}
+
+void settingswindow::comboBox21(int index)
+{
+    if(bl1 == "LED1 On/Off")
+    {
+        lp=!lp;
+        //writeGPIO(962,lp);
+        emit led1_pedal(962,lp);
+    }
+    if(bl1 == "LED2 On/Off")
+    {
+        lp2=!lp2;
+        //writeGPIO(962,lp2);
+        emit led2_pedal(962,lp2);
+    }
+    if(bl1 == "Vitrectomy On/Off")
+    {
+        vip=!vip;
+        //writeGPIO(962,vip);
+        emit vit_pedal(962,vip);
+    }
+    if(bl1 == "Diathermy On/Off")
+    {
+        dp=!dp;
+        //writeGPIO(962,dp);
+        emit dia_pedal(962,dp);
+    }
+    if(bl1 == "Silicon Oil On/Off")
+    {
+        sp=!sp;
+        //writeGPIO(962,sp);
+        emit siloil_pedal(962,sp);
+    }
+
+    qDebug()<<"cb21";
+
+
+}
+
+void settingswindow::comboBox24(int index)
+{
+    if(br1 == "LED1 On/Off")
+    {
+        lp=!lp;
+        //writeGPIO(963,lp);
+        emit led1_pedal(963,lp);
+
+    }
+    if(br1 == "LED2 On/Off")
+    {
+        lp2=!lp2;
+        //writeGPIO(963,lp2);
+        emit led2_pedal(963,lp2);
+
+    }
+    if(br1 == "Vitrectomy On/Off")
+    {
+        vip=!vip;
+        //writeGPIO(963,vip);
+        emit vit_pedal(963,vip);
+
+    }
+    if(br1 == "Diathermy On/Off")
+    {
+        dp=!dp;
+        //writeGPIO(963,dp);
+        emit dia_pedal(963,dp);
+
+    }
+    if(br1 == "Silicon Oil On/Off")
+    {
+        sp=!sp;
+        //writeGPIO(963,sp);
+        emit siloil_pedal(963,sp);
+    }
+    qDebug()<<"cb24";
+
 
 }

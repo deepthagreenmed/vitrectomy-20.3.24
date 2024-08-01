@@ -9,6 +9,8 @@ keypad::keypad(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    clicktimer=new QTimer;
+
     connect(ui->pushButton, &QPushButton::clicked, this, &keypad::entertext);
     connect(ui->pushButton_2, &QPushButton::clicked, this, &keypad::entertext);
     connect(ui->pushButton_3, &QPushButton::clicked, this, &keypad::entertext);
@@ -22,7 +24,11 @@ keypad::keypad(QWidget *parent) :
     connect(ui->pushButton_11, &QPushButton::clicked, this, &keypad::enterback);
     connect(ui->pushButton_12, &QPushButton::clicked, this, &keypad::enterenter);
 
+    clicktimer->setInterval(200);
+    clicktimer->setSingleShot(true);
+
     hhandler = new hwHandler;
+
 
 
 
@@ -36,6 +42,8 @@ keypad::~keypad()
 
 void keypad::entertext()
 {
+    if(!clicktimer->isActive()) {
+
     QPushButton* button = qobject_cast<QPushButton*>(sender());
 
      if (button)
@@ -44,19 +52,31 @@ void keypad::entertext()
         emit textsignal(digit);
      }
      keysound();
+     clicktimer->start();
+    }
 }
 
 void keypad::enterback()
 {
+    if(!clicktimer->isActive()) {
+
     back = true;
     emit backsignal();
     keysound();
+
+    clicktimer->start();
+   }
 }
 
 void keypad::enterenter()
 {
+    if(!clicktimer->isActive()) {
+
     emit entersignal();
     keysound();
+
+    clicktimer->start();
+   }
 }
 
 void keypad::keysound()

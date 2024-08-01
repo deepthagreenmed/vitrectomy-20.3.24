@@ -98,11 +98,11 @@ public slots:
 
 private slots:
      void siloil();
-     void led1_setvalue(int value);
-     void led2_setvalue(int value);
-     void vit_setvalue(int value);
-     void dia_setvalue(int value);
-     void siloil_setvalue(int value);
+     void led1_setvalue(int pin, int value);
+     void led2_setvalue(int pin, int value);
+     void vit_setvalue(int pin, int value);
+     void dia_setvalue(int pin, int value);
+     void siloil_setvalue(int pin, int value);
     void dacvalue();
     void pressureval();
     void transitionToNewScreen();
@@ -143,42 +143,6 @@ private slots:
 //    void vit_onoff2();
     //surgeon
     void setsurgeon();
-    //continous press
-    //vaccum
-    void on_increase_vac_pressed();
-    void on_increase_vac_released();
-    void on_decrease_vac_pressed();
-    void on_decrease_vac_released();
-    //vitrectomy
-    void on_increase_vit_pressed();
-    void on_increase_vit_released();
-    void on_decrease_vit_pressed();
-    void on_decrease_vit_released();
-    //silicon oil
-    void on_increase_siloil_pressed();
-    void on_increase_siloil_released();
-    void on_decrease_siloil_pressed();
-    void on_decrease_siloil_released();
-    //led1
-    void on_increase_led1_pressed();
-    void on_increase_led1_released();
-    void on_decrease_led1_pressed();
-    void on_decrease_led1_released();
-    //air injector
-    void on_increase_ai_pressed();
-    void on_increase_ai_released();
-    void on_decrease_ai_pressed();
-    void on_decrease_ai_released();
-    //diathermy
-    void on_increase_dia_pressed();
-    void on_increase_dia_released();
-    void on_decrease_dia_pressed();
-    void on_decrease_dia_released();
-    //led2
-    void on_increase_led2_pressed();
-    void on_increase_led2_released();
-    void on_decrease_led2_pressed();
-    void on_decrease_led2_released();
     //vitrectomy linear/nonlinear
     void vit_linear_nonlinear();
     //led2
@@ -210,7 +174,7 @@ private:
     int ap=0;
     int vip=0;
     int vitp=1;
-    int dp;
+    int dp=0;
     int lp=0;
     int lp2=0;
     int sp=0;
@@ -236,6 +200,7 @@ private:
     sensor *pres;
     int vacpresetval;
     QTimer timesiloil;
+    QTimer *clicktimer;
 
 };
 #endif // MAINWINDOW_H

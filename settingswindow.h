@@ -32,11 +32,11 @@ public:
     void populatetype();
     void updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue);
     int flag2=0;
-    int lp;
-    int lp2;
-    int vip;
-    int dp;
-    int sp;
+    int lp=0;
+    int lp2=0;
+    int vip=0;
+    int dp=0;
+    int sp=0;
 
 
 signals:
@@ -54,18 +54,14 @@ signals:
     void vittype(QString str);
     void diastr(QString str);
     void textSelected(const QString &text);
-    void led1_pedal(int value);
-    void led2_pedal(int value);
-    void vit_pedal(int value);
-    void dia_pedal(int value);
-    void siloil_pedal(int value);
+    void led1_pedal(int pin, int value);
+    void led2_pedal(int pin, int value);
+    void vit_pedal(int pin, int value);
+    void dia_pedal(int pin, int value);
+    void siloil_pedal(int pin, int value);
 
 
 public slots:
-    void selectComboBox20(int index);
-    void selectComboBox21(int index);
-    void selectComboBox23(int index);
-    void selectComboBox24(int index);
     void updateSurgeon();
     void updateComboBoxes(int index);
     void on_clicked(const QString& digit);
@@ -114,9 +110,18 @@ private slots:
     void on_tab_fp_clicked();
     void on_tab_fppreset_clicked();
 
+    void comboBox20(int index);
+    void comboBox23(int index);
+    void comboBox21(int index);
+    void comboBox24(int index);
+
 
 private:
     Ui::settingswindow *ui;
+    QString tl1;
+    QString tr1;
+    QString bl1;
+    QString br1;
     bool flag = false;
       footpedal *fp;
       QSqlDatabase mydb;
@@ -130,6 +135,7 @@ private:
       int blpedal=0;
       int trpedal=0;
       int brpedal=0;
+      QTimer* clicktimer;
 
 
 
