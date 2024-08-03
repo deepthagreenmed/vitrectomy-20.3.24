@@ -64,6 +64,7 @@ class hwHandler: public QThread
 
 public:
     explicit hwHandler(QObject *parent = 0);
+
     int memfd;
     static void vit_on(int count, QString madtype);
     static void vit_off();

@@ -403,7 +403,7 @@ public:
         label_11->setStyleSheet(QString::fromUtf8("background-color: rgb(149, 165, 178);"));
         label_20 = new QLabel(tab_9);
         label_20->setObjectName(QString::fromUtf8("label_20"));
-        label_20->setGeometry(QRect(280, 130, 571, 611));
+        label_20->setGeometry(QRect(250, 130, 571, 611));
         label_20->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpbg1.png);\n"
 "background-color: rgba(191, 64, 64, 0);"));
         label_35 = new QLabel(tab_9);
@@ -419,7 +419,7 @@ public:
         comboBox_20->addItem(QString());
         comboBox_20->addItem(QString());
         comboBox_20->setObjectName(QString::fromUtf8("comboBox_20"));
-        comboBox_20->setGeometry(QRect(40, 290, 291, 61));
+        comboBox_20->setGeometry(QRect(10, 290, 291, 61));
         comboBox_20->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"
@@ -432,7 +432,7 @@ public:
         comboBox_21->addItem(QString());
         comboBox_21->addItem(QString());
         comboBox_21->setObjectName(QString::fromUtf8("comboBox_21"));
-        comboBox_21->setGeometry(QRect(40, 440, 291, 61));
+        comboBox_21->setGeometry(QRect(10, 440, 291, 61));
         comboBox_21->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"
@@ -445,7 +445,7 @@ public:
         comboBox_23->addItem(QString());
         comboBox_23->addItem(QString());
         comboBox_23->setObjectName(QString::fromUtf8("comboBox_23"));
-        comboBox_23->setGeometry(QRect(800, 450, 291, 61));
+        comboBox_23->setGeometry(QRect(770, 450, 291, 61));
         comboBox_23->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"
@@ -458,7 +458,7 @@ public:
         comboBox_24->addItem(QString());
         comboBox_24->addItem(QString());
         comboBox_24->setObjectName(QString::fromUtf8("comboBox_24"));
-        comboBox_24->setGeometry(QRect(800, 290, 291, 61));
+        comboBox_24->setGeometry(QRect(770, 290, 291, 61));
         comboBox_24->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"

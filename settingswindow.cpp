@@ -760,11 +760,11 @@ ui->lineEdit_5->setText(itemname43);
  ui->progressBar_three->setValue(ui->lineEdit_three->text().toInt());
 
 int s0,s1,s2,s3;
-    s0=ui->lineEdit_zero->text().toInt();
-    s1=ui->lineEdit_one->text().toInt();
-    s2=ui->lineEdit_two->text().toInt();
-    s3=ui->lineEdit_three->text().toInt();
-    ui->label_110->setText(QString::number(s0+s1+s2+s3));
+s0=ui->lineEdit_zero->text().toInt();
+s1=ui->lineEdit_one->text().toInt();
+s2=ui->lineEdit_two->text().toInt();
+s3=ui->lineEdit_three->text().toInt();
+ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
 int sum=s0+s1+s2+s3;
 if(sum==100)
@@ -796,11 +796,11 @@ void settingswindow::zeroinc()
    ui->lineEdit_zero->setText(QString::number(newvalue));
    ui->progressBar_zero->setValue(newvalue);
    int s0,s1,s2,s3;
-       s0=ui->lineEdit_zero->text().toInt();
-       s1=ui->lineEdit_one->text().toInt();
-       s2=ui->lineEdit_two->text().toInt();
-       s3=ui->lineEdit_three->text().toInt();
-       ui->label_110->setText(QString::number(s0+s1+s2+s3));
+   s0=ui->lineEdit_zero->text().toInt();
+   s1=ui->lineEdit_one->text().toInt();
+   s2=ui->lineEdit_two->text().toInt();
+   s3=ui->lineEdit_three->text().toInt();
+   ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
    int sum=s0+s1+s2+s3;
    if(sum==100)
@@ -826,11 +826,11 @@ void settingswindow::zerodec()
       ui->lineEdit_zero->setText(QString::number(newvalue));
       ui->progressBar_zero->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_zero->text().toInt();
-          s1=ui->lineEdit_one->text().toInt();
-          s2=ui->lineEdit_two->text().toInt();
-          s3=ui->lineEdit_three->text().toInt();
-          ui->label_110->setText(QString::number(s0+s1+s2+s3));
+      s0=ui->lineEdit_zero->text().toInt();
+      s1=ui->lineEdit_one->text().toInt();
+      s2=ui->lineEdit_two->text().toInt();
+      s3=ui->lineEdit_three->text().toInt();
+      ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
@@ -855,11 +855,11 @@ void settingswindow::oneinc()
    ui->lineEdit_one->setText(QString::number(newvalue));
    ui->progressBar_one->setValue(newvalue);
    int s0,s1,s2,s3;
-       s0=ui->lineEdit_zero->text().toInt();
-       s1=ui->lineEdit_one->text().toInt();
-       s2=ui->lineEdit_two->text().toInt();
-       s3=ui->lineEdit_three->text().toInt();
-       ui->label_110->setText(QString::number(s0+s1+s2+s3));
+   s0=ui->lineEdit_zero->text().toInt();
+   s1=ui->lineEdit_one->text().toInt();
+   s2=ui->lineEdit_two->text().toInt();
+   s3=ui->lineEdit_three->text().toInt();
+   ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
    int sum=s0+s1+s2+s3;
    if(sum==100)
@@ -884,11 +884,11 @@ void settingswindow::twoinc()
       ui->lineEdit_two->setText(QString::number(newvalue));
       ui->progressBar_two->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_zero->text().toInt();
-          s1=ui->lineEdit_one->text().toInt();
-          s2=ui->lineEdit_two->text().toInt();
-          s3=ui->lineEdit_three->text().toInt();
-          ui->label_110->setText(QString::number(s0+s1+s2+s3));
+      s0=ui->lineEdit_zero->text().toInt();
+      s1=ui->lineEdit_one->text().toInt();
+      s2=ui->lineEdit_two->text().toInt();
+      s3=ui->lineEdit_three->text().toInt();
+      ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
@@ -913,11 +913,11 @@ void settingswindow::threeinc()
       ui->lineEdit_three->setText(QString::number(newvalue));
       ui->progressBar_three->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_zero->text().toInt();
-          s1=ui->lineEdit_one->text().toInt();
-          s2=ui->lineEdit_two->text().toInt();
-          s3=ui->lineEdit_three->text().toInt();
-          ui->label_110->setText(QString::number(s0+s1+s2+s3));
+      s0=ui->lineEdit_zero->text().toInt();
+      s1=ui->lineEdit_one->text().toInt();
+      s2=ui->lineEdit_two->text().toInt();
+      s3=ui->lineEdit_three->text().toInt();
+      ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
@@ -942,11 +942,11 @@ void settingswindow::onedec()
       ui->lineEdit_one->setText(QString::number(newvalue));
       ui->progressBar_one->setValue(newvalue);
       int s0,s1,s2,s3;
-          s0=ui->lineEdit_zero->text().toInt();
-          s1=ui->lineEdit_one->text().toInt();
-          s2=ui->lineEdit_two->text().toInt();
-          s3=ui->lineEdit_three->text().toInt();
-          ui->label_110->setText(QString::number(s0+s1+s2+s3));
+      s0=ui->lineEdit_zero->text().toInt();
+      s1=ui->lineEdit_one->text().toInt();
+      s2=ui->lineEdit_two->text().toInt();
+      s3=ui->lineEdit_three->text().toInt();
+      ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
       int sum=s0+s1+s2+s3;
       if(sum==100)
@@ -971,11 +971,11 @@ void settingswindow::twodec()
      ui->lineEdit_two->setText(QString::number(newvalue));
      ui->progressBar_two->setValue(newvalue);
      int s0,s1,s2,s3;
-         s0=ui->lineEdit_zero->text().toInt();
-         s1=ui->lineEdit_one->text().toInt();
-         s2=ui->lineEdit_two->text().toInt();
-         s3=ui->lineEdit_three->text().toInt();
-         ui->label_110->setText(QString::number(s0+s1+s2+s3));
+     s0=ui->lineEdit_zero->text().toInt();
+     s1=ui->lineEdit_one->text().toInt();
+     s2=ui->lineEdit_two->text().toInt();
+     s3=ui->lineEdit_three->text().toInt();
+     ui->label_110->setText(QString::number(s0+s1+s2+s3));
 
      int sum=s0+s1+s2+s3;
      if(sum==100)
