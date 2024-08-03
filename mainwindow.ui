@@ -1085,26 +1085,6 @@ background-color: rgba(191, 64, 64, 0);
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_surgeonname">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>620</y>
-      <width>751</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255,255,255);
-border-radius:20px;
-font:30pt &quot;Ubuntu&quot;;
-font-weight: bold;</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
@@ -1384,23 +1364,122 @@ border: none;
      <string>OFF</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QComboBox" name="comboBox_surgeonname">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>28</y>
-      <width>781</width>
-      <height>81</height>
+      <x>680</x>
+      <y>630</y>
+      <width>721</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/docidbox.png);
-font: 1pt &quot;Ubuntu&quot;;
-</string>
+     <string notr="true">font: 45pt &quot;Ubuntu&quot;;
+background-color: rgb(0, 0, 0);
+color: rgb(255,255,255);
+border-radius:20px;
+font-weight: bold;</string>
     </property>
-    <property name="text">
-     <string/>
-    </property>
+    <item>
+     <property name="text">
+      <string>Surgeon 1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 5</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 6</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 7</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 8</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 9</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 10</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 11</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 12</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 13</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 14</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 15</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 16</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 17</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 18</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 19</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Surgeon 20</string>
+     </property>
+    </item>
    </widget>
    <zorder>label_39</zorder>
    <zorder>label_20</zorder>
@@ -1466,10 +1545,9 @@ font: 1pt &quot;Ubuntu&quot;;
    <zorder>pushButton_diaonoff</zorder>
    <zorder>pushButton_aionoff</zorder>
    <zorder>pushButton_siloilonoff</zorder>
-   <zorder>label_3</zorder>
    <zorder>label_12</zorder>
-   <zorder>label_2</zorder>
    <zorder>label_22</zorder>
+   <zorder>label_2</zorder>
    <zorder>comboBox_surgeonname</zorder>
    <zorder>pushButton_start</zorder>
   </widget>

@@ -86,8 +86,8 @@ MainWindow::MainWindow(QWidget *parent)
     timerfp->start(1);
 
     //ui->comboBox_surgeonname->setFocusPolicy(Qt::ClickFocus);
-    ui->comboBox_surgeonname->installEventFilter(this);
-    connect(ui->comboBox_surgeonname, &QComboBox::popupAboutToBeHidden, this, &MainWindow::onPopupAboutToBeHidden);
+    //ui->comboBox_surgeonname->installEventFilter(this);
+    //connect(ui->comboBox_surgeonname, &QComboBox::popupAboutToBeHidden, this, &MainWindow::onPopupAboutToBeHidden);
     connect(ui->comboBox_surgeonname, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
      timerforondscreen = new QTimer;
@@ -175,7 +175,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mydb1.close();
 
-    comboboxload();
+    //comboboxload();
 
     ui->comboBox_surgeonname->setCurrentIndex(surgeonind);
 
@@ -339,16 +339,16 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
 // keypad showing code
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
-    QComboBox *comboBox=ui->comboBox_surgeonname;
+//    QComboBox *comboBox=ui->comboBox_surgeonname;
 
-    if (event->type() == QEvent::MouseButtonPress) {
-                QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
-                if (comboBox->popup()->isVisible() &&
-                    !comboBox->rect().contains(mouseEvent->pos()) &&
-                    !comboBox->view()->rect().contains(mouseEvent->globalPos() - comboBox->mapToGlobal(QPoint(0, 0)))) {
-                    comboBox->hidePopup();
-                }
-            }
+//    if (event->type() == QEvent::MouseButtonPress) {
+//                QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+//                if (comboBox->popup()->isVisible() &&
+//                    !comboBox->rect().contains(mouseEvent->pos()) &&
+//                    !comboBox->view()->rect().contains(mouseEvent->globalPos() - comboBox->mapToGlobal(QPoint(0, 0)))) {
+//                    comboBox->hidePopup();
+//                }
+//            }
 
   if(object == ui->label_vacpreset && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
@@ -1387,7 +1387,7 @@ void MainWindow::decreasesiliconoilvalue()
 // Slot function to set name of surgeon
 void MainWindow::receiveString(const QString& str)
 {
-    ui->label_surgeonname->setText(str);
+    ui->comboBox_surgeonname->setCurrentText(str);
 }
 
 // Slot function to set value of LED1
@@ -1462,7 +1462,7 @@ void MainWindow::diaval(QString str)
 // Get name of surgeon
 void MainWindow::setsurgeon()
 {
-   surgeon=ui->label_surgeonname->text();
+   surgeon=ui->comboBox_surgeonname->currentText();
 }
 
 // code for continuous press

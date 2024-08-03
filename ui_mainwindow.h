@@ -77,7 +77,6 @@ public:
     QLabel *label_43;
     QLabel *label_date;
     QLabel *label_time;
-    QComboBox *comboBox_surgeonname;
     QLabel *label_12;
     QLabel *label_22;
     QPushButton *pushButton_start;
@@ -93,7 +92,7 @@ public:
     QPushButton *pushButton_diaonoff;
     QPushButton *pushButton_aionoff;
     QPushButton *pushButton_siloilonoff;
-    QLabel *label_3;
+    QComboBox *comboBox_surgeonname;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -482,15 +481,6 @@ public:
         label_time->setObjectName(QString::fromUtf8("label_time"));
         label_time->setGeometry(QRect(1340, 40, 181, 61));
         label_time->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";"));
-        comboBox_surgeonname = new QComboBox(centralwidget);
-        comboBox_surgeonname->setObjectName(QString::fromUtf8("comboBox_surgeonname"));
-        comboBox_surgeonname->setGeometry(QRect(670, 620, 751, 61));
-        comboBox_surgeonname->setFocusPolicy(Qt::ClickFocus);
-        comboBox_surgeonname->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);\n"
-"color: rgb(255,255,255);\n"
-"border-radius:20px;\n"
-"font:30pt \"Ubuntu\";\n"
-"font-weight: bold;"));
         label_12 = new QLabel(centralwidget);
         label_12->setObjectName(QString::fromUtf8("label_12"));
         label_12->setGeometry(QRect(0, 0, 1920, 1080));
@@ -588,12 +578,34 @@ public:
         pushButton_siloilonoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
 "border: none;\n"
 ""));
-        label_3 = new QLabel(centralwidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(20, 28, 781, 81));
-        label_3->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/docidbox.png);\n"
-"font: 1pt \"Ubuntu\";\n"
-""));
+        comboBox_surgeonname = new QComboBox(centralwidget);
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->addItem(QString());
+        comboBox_surgeonname->setObjectName(QString::fromUtf8("comboBox_surgeonname"));
+        comboBox_surgeonname->setGeometry(QRect(680, 630, 721, 61));
+        comboBox_surgeonname->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";\n"
+"background-color: rgb(0, 0, 0);\n"
+"color: rgb(255,255,255);\n"
+"border-radius:20px;\n"
+"font-weight: bold;"));
         MainWindow->setCentralWidget(centralwidget);
         label_39->raise();
         label_20->raise();
@@ -659,10 +671,9 @@ public:
         pushButton_diaonoff->raise();
         pushButton_aionoff->raise();
         pushButton_siloilonoff->raise();
-        label_3->raise();
         label_12->raise();
-        label_2->raise();
         label_22->raise();
+        label_2->raise();
         comboBox_surgeonname->raise();
         pushButton_start->raise();
 
@@ -741,7 +752,27 @@ public:
         pushButton_diaonoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
         pushButton_aionoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
         pushButton_siloilonoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
-        label_3->setText(QString());
+        comboBox_surgeonname->setItemText(0, QCoreApplication::translate("MainWindow", "Surgeon 1", nullptr));
+        comboBox_surgeonname->setItemText(1, QCoreApplication::translate("MainWindow", "Surgeon 2", nullptr));
+        comboBox_surgeonname->setItemText(2, QCoreApplication::translate("MainWindow", "Surgeon 3", nullptr));
+        comboBox_surgeonname->setItemText(3, QCoreApplication::translate("MainWindow", "Surgeon 4", nullptr));
+        comboBox_surgeonname->setItemText(4, QCoreApplication::translate("MainWindow", "Surgeon 5", nullptr));
+        comboBox_surgeonname->setItemText(5, QCoreApplication::translate("MainWindow", "Surgeon 6", nullptr));
+        comboBox_surgeonname->setItemText(6, QCoreApplication::translate("MainWindow", "Surgeon 7", nullptr));
+        comboBox_surgeonname->setItemText(7, QCoreApplication::translate("MainWindow", "Surgeon 8", nullptr));
+        comboBox_surgeonname->setItemText(8, QCoreApplication::translate("MainWindow", "Surgeon 9", nullptr));
+        comboBox_surgeonname->setItemText(9, QCoreApplication::translate("MainWindow", "Surgeon 10", nullptr));
+        comboBox_surgeonname->setItemText(10, QCoreApplication::translate("MainWindow", "Surgeon 11", nullptr));
+        comboBox_surgeonname->setItemText(11, QCoreApplication::translate("MainWindow", "Surgeon 12", nullptr));
+        comboBox_surgeonname->setItemText(12, QCoreApplication::translate("MainWindow", "Surgeon 13", nullptr));
+        comboBox_surgeonname->setItemText(13, QCoreApplication::translate("MainWindow", "Surgeon 14", nullptr));
+        comboBox_surgeonname->setItemText(14, QCoreApplication::translate("MainWindow", "Surgeon 15", nullptr));
+        comboBox_surgeonname->setItemText(15, QCoreApplication::translate("MainWindow", "Surgeon 16", nullptr));
+        comboBox_surgeonname->setItemText(16, QCoreApplication::translate("MainWindow", "Surgeon 17", nullptr));
+        comboBox_surgeonname->setItemText(17, QCoreApplication::translate("MainWindow", "Surgeon 18", nullptr));
+        comboBox_surgeonname->setItemText(18, QCoreApplication::translate("MainWindow", "Surgeon 19", nullptr));
+        comboBox_surgeonname->setItemText(19, QCoreApplication::translate("MainWindow", "Surgeon 20", nullptr));
+
     } // retranslateUi
 
 };

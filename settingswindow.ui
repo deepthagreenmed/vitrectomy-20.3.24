@@ -342,46 +342,10 @@ background-color: rgba(191, 64, 64, 0);</string>
       <string> Vaccum(mm/hg)</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_mode">
-     <property name="geometry">
-      <rect>
-       <x>600</x>
-       <y>310</y>
-       <width>461</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
-background-color: rgb(0, 0, 0);
-color: rgb(255,255,255);
-border-radius:20px;
-font-weight: bold;</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>50</width>
-       <height>16</height>
-      </size>
-     </property>
-     <property name="frame">
-      <bool>true</bool>
-     </property>
-     <item>
-      <property name="text">
-       <string>Linear</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>NON-Linear</string>
-      </property>
-     </item>
-    </widget>
     <widget class="QLineEdit" name="lineEdit_vac">
      <property name="geometry">
       <rect>
-       <x>610</x>
+       <x>630</x>
        <y>190</y>
        <width>311</width>
        <height>81</height>
@@ -450,13 +414,40 @@ background-color: rgb(53, 63, 99);</string>
       <string/>
      </property>
     </widget>
+    <widget class="QComboBox" name="comboBox_mode">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>320</y>
+       <width>401</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
+background-color: rgb(0, 0, 0);
+color: rgb(255,255,255);
+border-radius:20px;
+font-weight: bold;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Linear</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NON-Linear</string>
+      </property>
+     </item>
+    </widget>
     <zorder>label_14</zorder>
     <zorder>label_33</zorder>
     <zorder>label_30</zorder>
     <zorder>label_26</zorder>
     <zorder>lineEdit_vac</zorder>
-    <zorder>comboBox_mode</zorder>
     <zorder>pushButton_save_3</zorder>
+    <zorder>comboBox_mode</zorder>
    </widget>
    <widget class="QWidget" name="tab_7">
     <attribute name="title">
@@ -518,33 +509,6 @@ background-color: rgb(255, 255, 255);border-radius: 20px;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_cuttermode">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>310</y>
-       <width>401</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
-background-color: rgb(0, 0, 0);
-color: rgb(255,255,255);
-border-radius:20px;
-font-weight: bold;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Linear</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>NON-Linear</string>
-      </property>
-     </item>
-    </widget>
     <widget class="QLabel" name="label_13">
      <property name="geometry">
       <rect>
@@ -585,7 +549,7 @@ background-color: rgba(191, 64, 64, 0);</string>
     <widget class="QLabel" name="label_34">
      <property name="geometry">
       <rect>
-       <x>-10</x>
+       <x>-20</x>
        <y>96</y>
        <width>1121</width>
        <height>951</height>
@@ -617,38 +581,6 @@ background-color: rgba(191, 64, 64, 0);</string>
      <property name="text">
       <string>Cutter Type</string>
      </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_cuttertype">
-     <property name="geometry">
-      <rect>
-       <x>630</x>
-       <y>440</y>
-       <width>391</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
-background-color: rgb(0, 0, 0);
-color: rgb(255,255,255);
-border-radius:20px;
-font-weight: bold;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Midlabs</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Alcon</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Dorc</string>
-      </property>
-     </item>
     </widget>
     <widget class="QLineEdit" name="lineEdit_maxcutrate">
      <property name="geometry">
@@ -691,17 +623,76 @@ background-color: rgba(191, 64, 64, 0);</string>
       <string>Max Cutrate</string>
      </property>
     </widget>
+    <widget class="QComboBox" name="comboBox_cuttermode">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>310</y>
+       <width>401</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
+background-color: rgb(0, 0, 0);
+color: rgb(255,255,255);
+border-radius:20px;
+font-weight: bold;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Linear</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NON-Linear</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="comboBox_cuttertype">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>450</y>
+       <width>401</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 45pt &quot;Ubuntu&quot;;
+background-color: rgb(0, 0, 0);
+color: rgb(255,255,255);
+border-radius:20px;
+font-weight: bold;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Midlabs</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Alcon</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dorc</string>
+      </property>
+     </item>
+    </widget>
     <zorder>label_13</zorder>
     <zorder>label_34</zorder>
     <zorder>label_24</zorder>
     <zorder>label_28</zorder>
-    <zorder>comboBox_cuttermode</zorder>
     <zorder>pushButton_save_4</zorder>
     <zorder>lineEdit_cutrate</zorder>
     <zorder>label_43</zorder>
-    <zorder>comboBox_cuttertype</zorder>
     <zorder>lineEdit_maxcutrate</zorder>
     <zorder>label_46</zorder>
+    <zorder>comboBox_cuttermode</zorder>
+    <zorder>comboBox_cuttertype</zorder>
    </widget>
    <widget class="QWidget" name="tab_9">
     <attribute name="title">
@@ -743,54 +734,6 @@ border:none;</string>
       <string/>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_20">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>240</y>
-       <width>321</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-background-color: rgb(0, 0, 0);
-
-color: rgb(255, 255, 255);
-
-border-radius:20px;
-
-
-font:20pt &quot;Ubuntu&quot;;
-
-font-weight: bold;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>LED1 On/Off</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>LED2 On/Off</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Vitrectomy On/Off</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Diathermy On/Off</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Silicon Oil On/Off</string>
-      </property>
-     </item>
-    </widget>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
@@ -810,10 +753,10 @@ font-weight: bold;</string>
     <widget class="QLabel" name="label_20">
      <property name="geometry">
       <rect>
-       <x>370</x>
-       <y>150</y>
-       <width>391</width>
-       <height>421</height>
+       <x>280</x>
+       <y>130</y>
+       <width>571</width>
+       <height>611</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -842,26 +785,62 @@ background-color: rgb(53, 63, 99);</string>
       <string/>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_21">
+    <widget class="QComboBox" name="comboBox_20">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>360</y>
-       <width>321</width>
+       <x>40</x>
+       <y>290</y>
+       <width>291</width>
        <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">
+      <string notr="true">font: 20pt &quot;Ubuntu&quot;;
 background-color: rgb(0, 0, 0);
-
-color: rgb(255, 255, 255);
-
+color: rgb(255,255,255);
 border-radius:20px;
-
-
-font:20pt &quot;Ubuntu&quot;;
-
+font-weight: bold;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>LED1 On/Off</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>LED2 On/Off</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Vitrectomy On/Off</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Diathermy On/Off</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Silicon Oil On/Off</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="comboBox_21">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>440</y>
+       <width>291</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 20pt &quot;Ubuntu&quot;;
+background-color: rgb(0, 0, 0);
+color: rgb(255,255,255);
+border-radius:20px;
 font-weight: bold;</string>
      </property>
      <item>
@@ -893,23 +872,17 @@ font-weight: bold;</string>
     <widget class="QComboBox" name="comboBox_23">
      <property name="geometry">
       <rect>
-       <x>750</x>
-       <y>240</y>
-       <width>321</width>
+       <x>800</x>
+       <y>450</y>
+       <width>291</width>
        <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">
+      <string notr="true">font: 20pt &quot;Ubuntu&quot;;
 background-color: rgb(0, 0, 0);
-
-color: rgb(255, 255, 255);
-
+color: rgb(255,255,255);
 border-radius:20px;
-
-
-font:20pt &quot;Ubuntu&quot;;
-
 font-weight: bold;</string>
      </property>
      <item>
@@ -941,23 +914,17 @@ font-weight: bold;</string>
     <widget class="QComboBox" name="comboBox_24">
      <property name="geometry">
       <rect>
-       <x>750</x>
-       <y>360</y>
-       <width>321</width>
+       <x>800</x>
+       <y>290</y>
+       <width>291</width>
        <height>61</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">
+      <string notr="true">font: 20pt &quot;Ubuntu&quot;;
 background-color: rgb(0, 0, 0);
-
-color: rgb(255, 255, 255);
-
+color: rgb(255,255,255);
 border-radius:20px;
-
-
-font:20pt &quot;Ubuntu&quot;;
-
 font-weight: bold;</string>
      </property>
      <item>
@@ -990,8 +957,8 @@ font-weight: bold;</string>
     <zorder>label_35</zorder>
     <zorder>pushButton_saveforall</zorder>
     <zorder>pushButton_save_5</zorder>
-    <zorder>comboBox_20</zorder>
     <zorder>label_20</zorder>
+    <zorder>comboBox_20</zorder>
     <zorder>comboBox_21</zorder>
     <zorder>comboBox_23</zorder>
     <zorder>comboBox_24</zorder>

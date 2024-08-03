@@ -99,7 +99,7 @@ public slots:
 
 
 private slots:
-     void openComboBox(int index);
+     //void openComboBox(int index);
      void configOnOff();
      void siloil();
      void led1_setvalue(int pin, int value);
