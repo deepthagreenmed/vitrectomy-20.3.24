@@ -1024,7 +1024,6 @@ void MainWindow::vit_onoff()
 // Increase vaccum
 void MainWindow::increaseVaccumValue()
 {
-     if(vp==1) {
     if(!clicktimer->isActive()) {
 
     int currentValue = ui->label_vacpreset->text().toInt();
@@ -1036,13 +1035,12 @@ void MainWindow::increaseVaccumValue()
     ui->label_vacpreset->setText(QString::number(newValue));
 
     clicktimer->start();
-    }}
+    }
 }
 
 // Decrease vaccum
 void MainWindow::decreaseVaccumValue()
 {
-     if(vp==1) {
     if(!clicktimer->isActive()) {
 
     int currentValue = ui->label_vacpreset->text().toInt();
@@ -1054,7 +1052,8 @@ void MainWindow::decreaseVaccumValue()
     ui->label_vacpreset->setText(QString::number(newValue));
 
     clicktimer->start();
-    }}
+    }
+
 }
 
 // Increase vitrectomy
@@ -3349,6 +3348,8 @@ void MainWindow::configOnOff()
     query.bindValue(ap1,"ap");
     query.bindValue(sp1,"sp");
 
+    qDebug()<<vip1<<lp1<<lp21<<dp1<<ap1<<sp1;
+
 
     mydb.close();
 
@@ -3358,15 +3359,6 @@ void MainWindow::loadPresets()
 {
     QString styleoff="image: url(:/new/prefix1/img/off.png);border:none;";
     QString styleon="image: url(:/new/prefix1/img/on.png);border:none;";
-
-//    if(vp==0)
-//    {
-//       ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/nonbg1.png);");
-//    }
-//    if(vp==1)
-//    {
-//        ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/linbg3.png);");
-//    }
 
 
 
@@ -3380,18 +3372,6 @@ void MainWindow::loadPresets()
         ui->pushButton_vitonoff->setStyleSheet(styleon);
         ui->pushButton_vitonoff->setText("ON");
     }
-
-
-
-//    if(vitp==0)
-//    {
-//       ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
-//    }
-//    if(vitp==1)
-//    {
-//        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
-//    }
-
 
 
     if(lp==0)
@@ -3456,6 +3436,8 @@ void MainWindow::loadPresets()
         ui->pushButton_siloilonoff->setStyleSheet(styleon);
         ui->pushButton_siloilonoff->setText("ON");
     }
+
+    qDebug()<<vip<<lp<<lp2<<dp<<ap<<sp;
 
 
 }

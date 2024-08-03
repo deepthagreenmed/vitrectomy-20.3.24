@@ -1073,12 +1073,12 @@ void settingswindow::on_fp_settings_clicked()
 // Diathermy tab
 void settingswindow::on_tab_dia_clicked()
 {
-key->hide();
-ui->lineEdit_cutrate->clearFocus();
-ui->lineEdit_powmax->clearFocus();
-ui->lineEdit_vac->clearFocus();
-ui->lineEdit_led1->clearFocus();
-ui->lineEdit_led2->clearFocus();
+    key->hide();
+    ui->lineEdit_cutrate->clearFocus();
+    ui->lineEdit_powmax->clearFocus();
+    ui->lineEdit_vac->clearFocus();
+    ui->lineEdit_led1->clearFocus();
+    ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(0);
     ui->label_title->setText("Diathermy");
     ui->label_27->show();
@@ -1112,8 +1112,8 @@ void settingswindow::on_tab_ia_clicked()
     ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(2);
     ui->label_title->setText("I/A");
-        ui->vit->setStyleSheet("image: url(:/new/prefix1/img/iaicon3.png);");
-        ui->label_27->hide();
+    ui->vit->setStyleSheet("image: url(:/new/prefix1/img/iaicon3.png);");
+    ui->label_27->hide();
 
 }
 
@@ -1127,8 +1127,8 @@ void settingswindow::on_tab_vit_clicked()
     ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(3);
     ui->label_title->setText("Vitrectomy");
-        ui->vit->setStyleSheet("image: url(:/new/prefix1/img/viticon1.png);");
-            ui->label_27->hide();
+    ui->vit->setStyleSheet("image: url(:/new/prefix1/img/viticon1.png);");
+    ui->label_27->hide();
 
 }
 
@@ -1141,10 +1141,9 @@ void settingswindow::on_tab_fp_clicked()
     ui->lineEdit_led1->clearFocus();
     ui->lineEdit_led2->clearFocus();
     ui->tabWidget_2->setCurrentIndex(4);
-
     ui->label_title->setText("FS buttons");
-        ui->vit->setStyleSheet("image: url(:/new/prefix1/img/fpicon.png);");
-            ui->label_27->hide();
+    ui->vit->setStyleSheet("image: url(:/new/prefix1/img/fpicon.png);");
+    ui->label_27->hide();
 
 }
 
@@ -1160,8 +1159,8 @@ void settingswindow::on_tab_fppreset_clicked()
     key->hide();
     ui->tabWidget_2->setCurrentIndex(5);
     ui->label_title->setText("FS preset");
-        ui->vit->setStyleSheet("image: url(:/new/prefix1/img/fpsicon1.png);");
-            ui->label_27->hide();
+    ui->vit->setStyleSheet("image: url(:/new/prefix1/img/fpsicon1.png);");
+    ui->label_27->hide();
 
 }
 
