@@ -85,9 +85,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
     timerfp->start(1);
 
-    //ui->comboBox_surgeonname->setFocusPolicy(Qt::ClickFocus);
-    //ui->comboBox_surgeonname->installEventFilter(this);
-    //connect(ui->comboBox_surgeonname, &QComboBox::popupAboutToBeHidden, this, &MainWindow::onPopupAboutToBeHidden);
     connect(ui->comboBox_surgeonname, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
      timerforondscreen = new QTimer;
@@ -291,13 +288,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-//void MainWindow::openComboBox(int index) {
-//    // Override showPopup method directly using a lambda
-//    ui->comboBox_surgeonname->setStyleSheet("QComboBox::drop-down { subcontrol-position: right; width: 20px; }");
-//    ui->comboBox_surgeonname->view()->setAttribute(Qt::WA_TranslucentBackground); // Make background translucent
-//    ui->comboBox_surgeonname->showPopup(); // Open the combo box dropdown list
-//}
-
 
 // Show setup screen after 3 seconds
 void MainWindow::transitionToNewScreen() {
@@ -311,7 +301,6 @@ void MainWindow::transitionToNewScreen() {
 // Set limits and input validation
 void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValue)
 {
-    //qDebug() << dig << value;
 
     if (value > maxValue)
     {
@@ -339,16 +328,6 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
 // keypad showing code
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
-//    QComboBox *comboBox=ui->comboBox_surgeonname;
-
-//    if (event->type() == QEvent::MouseButtonPress) {
-//                QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
-//                if (comboBox->popup()->isVisible() &&
-//                    !comboBox->rect().contains(mouseEvent->pos()) &&
-//                    !comboBox->view()->rect().contains(mouseEvent->globalPos() - comboBox->mapToGlobal(QPoint(0, 0)))) {
-//                    comboBox->hidePopup();
-//                }
-//            }
 
   if(object == ui->label_vacpreset && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
@@ -1570,8 +1549,6 @@ if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->c
            sp=query.value(58).toInt();
 
            loadPresets();
-
-        qDebug()<<vp<<vip<<vitp<<lp<<lp2<<dp<<ap<<sp;
 
            itemname1 = query.value(0).toString();
              ui->label_dia->setText(itemname1);
@@ -3306,7 +3283,7 @@ void MainWindow::siloil()
             avgfp=fp->convert(CHANNEL_0);
             float value1 = ui->label_siloil->text().toInt();
             float value2 = (((avgfp-fp0)/(fp1+fp2+fp3))*(55*(value1/100)))+45;
-            qDebug()<<value2;
+//            qDebug()<<value2;
             hhandler->vso_ontime((value2/(100*freq))/resolution);
             hhandler->vso_period((1/freq)/resolution);
         }
@@ -3372,7 +3349,6 @@ void MainWindow::configOnOff()
     query.bindValue(ap1,"ap");
     query.bindValue(sp1,"sp");
 
-    qDebug()<<vp1<<vip1<<vitp1<<lp1<<lp21<<dp1<<ap1<<sp1;
 
     mydb.close();
 

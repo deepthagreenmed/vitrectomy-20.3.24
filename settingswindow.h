@@ -129,7 +129,6 @@ private:
       textkeypad *text;
       int led1value;
       int led2value;
-      QStringList items;
       int tlpedal=0;
       int blpedal=0;
       int trpedal=0;

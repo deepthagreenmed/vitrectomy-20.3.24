@@ -276,9 +276,6 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onCutterTypeChanged);
 
 
-    items << "LED1 On/Off" << "LED2 On/Off" << "Vitrectomy On/Off" << "Diathermy On/Off" << "Silicon Oil On/Off";
-
-
     connect(ui->comboBox_20,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBox20);
     connect(ui->comboBox_21,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBox21);
     connect(ui->comboBox_23,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBox23);
@@ -365,20 +362,12 @@ bool settingswindow::eventFilter(QObject* object, QEvent* event)
 
 // Set limits and input validation
 void settingswindow::updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue) {
-    //qDebug()<<value;
     if (value > maxValue) {
         int temp=value;
-        //value=0;
-        //dig=0;
         label->setText("");
-       // msg->setText(QString("Value must be between 0 and %1.").arg(maxValue));
-       // msg->show();
-       // timermsg->start(1000);
         label->setText(QString::number(dig));
     } else {
         label->setText(QString::number(value));
-       // msg->close();
-       // timermsg->stop();
     }
 }
 
@@ -1217,7 +1206,6 @@ void settingswindow::on_clickedspace()
 void settingswindow::on_clickedentertext()
 {
     QString docnamenew = ui->lineEdit_5->text();
-    //qDebug()<<ui->lineEdit_5->text();
     QSqlDatabase db1 = QSqlDatabase::addDatabase("QSQLITE");
     db1.setDatabaseName(PATH);
 
@@ -1372,7 +1360,6 @@ void settingswindow::comboBox20(int index)
         //writeGPIO(960,sp);
         emit siloil_pedal(960,sp);
     }
-    qDebug()<<"cb20";
 
 
 }
@@ -1413,7 +1400,6 @@ void settingswindow::comboBox23(int index)
         //writeGPIO(961,sp);
         emit siloil_pedal(961,sp);
     }
-    qDebug()<<"cb23";
 
 
 
@@ -1451,8 +1437,6 @@ void settingswindow::comboBox21(int index)
         //writeGPIO(962,sp);
         emit siloil_pedal(962,sp);
     }
-
-    qDebug()<<"cb21";
 
 
 }
@@ -1493,7 +1477,6 @@ void settingswindow::comboBox24(int index)
         //writeGPIO(963,sp);
         emit siloil_pedal(963,sp);
     }
-    qDebug()<<"cb24";
 
 
 }
