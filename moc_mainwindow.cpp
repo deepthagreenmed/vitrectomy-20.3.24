@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[71];
-    char stringdata0[959];
+    QByteArrayData data[74];
+    char stringdata0[990];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -57,52 +57,55 @@ QT_MOC_LITERAL(21, 192, 5), // "digit"
 QT_MOC_LITERAL(22, 198, 15), // "on_clickedenter"
 QT_MOC_LITERAL(23, 214, 19), // "on_clickedbackspace"
 QT_MOC_LITERAL(24, 234, 9), // "vitvalset"
-QT_MOC_LITERAL(25, 244, 6), // "siloil"
-QT_MOC_LITERAL(26, 251, 13), // "led1_setvalue"
-QT_MOC_LITERAL(27, 265, 3), // "pin"
-QT_MOC_LITERAL(28, 269, 5), // "value"
-QT_MOC_LITERAL(29, 275, 13), // "led2_setvalue"
-QT_MOC_LITERAL(30, 289, 12), // "vit_setvalue"
-QT_MOC_LITERAL(31, 302, 12), // "dia_setvalue"
-QT_MOC_LITERAL(32, 315, 15), // "siloil_setvalue"
-QT_MOC_LITERAL(33, 331, 8), // "dacvalue"
-QT_MOC_LITERAL(34, 340, 11), // "pressureval"
-QT_MOC_LITERAL(35, 352, 21), // "transitionToNewScreen"
-QT_MOC_LITERAL(36, 374, 7), // "setZero"
-QT_MOC_LITERAL(37, 382, 11), // "updateLabel"
-QT_MOC_LITERAL(38, 394, 12), // "updateLabel2"
-QT_MOC_LITERAL(39, 407, 9), // "diathermy"
-QT_MOC_LITERAL(40, 417, 14), // "airinjectoroff"
-QT_MOC_LITERAL(41, 432, 14), // "updatetimedate"
-QT_MOC_LITERAL(42, 447, 19), // "increaseVaccumValue"
-QT_MOC_LITERAL(43, 467, 19), // "decreaseVaccumValue"
-QT_MOC_LITERAL(44, 487, 23), // "increaseVitrectomyValue"
-QT_MOC_LITERAL(45, 511, 23), // "decreaseVitrectomyValue"
-QT_MOC_LITERAL(46, 535, 22), // "increaseDiathermyValue"
-QT_MOC_LITERAL(47, 558, 22), // "decreaseDiathermyValue"
-QT_MOC_LITERAL(48, 581, 24), // "increaseAirInjectorValue"
-QT_MOC_LITERAL(49, 606, 24), // "decreaseAirInjectorValue"
-QT_MOC_LITERAL(50, 631, 16), // "increaseledvalue"
-QT_MOC_LITERAL(51, 648, 16), // "decreaseledvalue"
-QT_MOC_LITERAL(52, 665, 17), // "increaseled2value"
-QT_MOC_LITERAL(53, 683, 17), // "decreaseled2value"
-QT_MOC_LITERAL(54, 701, 23), // "increasesiliconoilvalue"
-QT_MOC_LITERAL(55, 725, 23), // "decreasesiliconoilvalue"
-QT_MOC_LITERAL(56, 749, 18), // "showsettingswindow"
-QT_MOC_LITERAL(57, 768, 12), // "siloil_onoff"
-QT_MOC_LITERAL(58, 781, 20), // "vac_linear_nonlinear"
-QT_MOC_LITERAL(59, 802, 10), // "led1_onoff"
-QT_MOC_LITERAL(60, 813, 9), // "dia_onoff"
-QT_MOC_LITERAL(61, 823, 8), // "ai_onoff"
-QT_MOC_LITERAL(62, 832, 9), // "vit_onoff"
-QT_MOC_LITERAL(63, 842, 10), // "setsurgeon"
-QT_MOC_LITERAL(64, 853, 20), // "vit_linear_nonlinear"
-QT_MOC_LITERAL(65, 874, 10), // "led2_onoff"
-QT_MOC_LITERAL(66, 885, 12), // "comboboxload"
-QT_MOC_LITERAL(67, 898, 17), // "onComboBoxClicked"
-QT_MOC_LITERAL(68, 916, 14), // "timerCompleted"
-QT_MOC_LITERAL(69, 931, 15), // "showsetupscreen"
-QT_MOC_LITERAL(70, 947, 11) // "drain_onoff"
+QT_MOC_LITERAL(25, 244, 12), // "openComboBox"
+QT_MOC_LITERAL(26, 257, 5), // "index"
+QT_MOC_LITERAL(27, 263, 11), // "configOnOff"
+QT_MOC_LITERAL(28, 275, 6), // "siloil"
+QT_MOC_LITERAL(29, 282, 13), // "led1_setvalue"
+QT_MOC_LITERAL(30, 296, 3), // "pin"
+QT_MOC_LITERAL(31, 300, 5), // "value"
+QT_MOC_LITERAL(32, 306, 13), // "led2_setvalue"
+QT_MOC_LITERAL(33, 320, 12), // "vit_setvalue"
+QT_MOC_LITERAL(34, 333, 12), // "dia_setvalue"
+QT_MOC_LITERAL(35, 346, 15), // "siloil_setvalue"
+QT_MOC_LITERAL(36, 362, 8), // "dacvalue"
+QT_MOC_LITERAL(37, 371, 11), // "pressureval"
+QT_MOC_LITERAL(38, 383, 21), // "transitionToNewScreen"
+QT_MOC_LITERAL(39, 405, 7), // "setZero"
+QT_MOC_LITERAL(40, 413, 11), // "updateLabel"
+QT_MOC_LITERAL(41, 425, 12), // "updateLabel2"
+QT_MOC_LITERAL(42, 438, 9), // "diathermy"
+QT_MOC_LITERAL(43, 448, 14), // "airinjectoroff"
+QT_MOC_LITERAL(44, 463, 14), // "updatetimedate"
+QT_MOC_LITERAL(45, 478, 19), // "increaseVaccumValue"
+QT_MOC_LITERAL(46, 498, 19), // "decreaseVaccumValue"
+QT_MOC_LITERAL(47, 518, 23), // "increaseVitrectomyValue"
+QT_MOC_LITERAL(48, 542, 23), // "decreaseVitrectomyValue"
+QT_MOC_LITERAL(49, 566, 22), // "increaseDiathermyValue"
+QT_MOC_LITERAL(50, 589, 22), // "decreaseDiathermyValue"
+QT_MOC_LITERAL(51, 612, 24), // "increaseAirInjectorValue"
+QT_MOC_LITERAL(52, 637, 24), // "decreaseAirInjectorValue"
+QT_MOC_LITERAL(53, 662, 16), // "increaseledvalue"
+QT_MOC_LITERAL(54, 679, 16), // "decreaseledvalue"
+QT_MOC_LITERAL(55, 696, 17), // "increaseled2value"
+QT_MOC_LITERAL(56, 714, 17), // "decreaseled2value"
+QT_MOC_LITERAL(57, 732, 23), // "increasesiliconoilvalue"
+QT_MOC_LITERAL(58, 756, 23), // "decreasesiliconoilvalue"
+QT_MOC_LITERAL(59, 780, 18), // "showsettingswindow"
+QT_MOC_LITERAL(60, 799, 12), // "siloil_onoff"
+QT_MOC_LITERAL(61, 812, 20), // "vac_linear_nonlinear"
+QT_MOC_LITERAL(62, 833, 10), // "led1_onoff"
+QT_MOC_LITERAL(63, 844, 9), // "dia_onoff"
+QT_MOC_LITERAL(64, 854, 8), // "ai_onoff"
+QT_MOC_LITERAL(65, 863, 9), // "vit_onoff"
+QT_MOC_LITERAL(66, 873, 10), // "setsurgeon"
+QT_MOC_LITERAL(67, 884, 20), // "vit_linear_nonlinear"
+QT_MOC_LITERAL(68, 905, 10), // "led2_onoff"
+QT_MOC_LITERAL(69, 916, 12), // "comboboxload"
+QT_MOC_LITERAL(70, 929, 17), // "onComboBoxClicked"
+QT_MOC_LITERAL(71, 947, 14), // "timerCompleted"
+QT_MOC_LITERAL(72, 962, 15), // "showsetupscreen"
+QT_MOC_LITERAL(73, 978, 11) // "drain_onoff"
 
     },
     "MainWindow\0updateText\0\0text\0setFPValues\0"
@@ -111,7 +114,8 @@ QT_MOC_LITERAL(70, 947, 11) // "drain_onoff"
     "receiveString3\0led1val\0led2val\0vacval\0"
     "vaclnl\0vitval\0vitlnl\0typevit\0diaval\0"
     "on_clicked\0digit\0on_clickedenter\0"
-    "on_clickedbackspace\0vitvalset\0siloil\0"
+    "on_clickedbackspace\0vitvalset\0"
+    "openComboBox\0index\0configOnOff\0siloil\0"
     "led1_setvalue\0pin\0value\0led2_setvalue\0"
     "vit_setvalue\0dia_setvalue\0siloil_setvalue\0"
     "dacvalue\0pressureval\0transitionToNewScreen\0"
@@ -140,7 +144,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      63,   14, // methods
+      65,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -148,69 +152,71 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  329,    2, 0x0a /* Public */,
-       4,    0,  332,    2, 0x0a /* Public */,
-       5,    1,  333,    2, 0x0a /* Public */,
-       7,    1,  336,    2, 0x0a /* Public */,
-       9,    1,  339,    2, 0x0a /* Public */,
-      10,    1,  342,    2, 0x0a /* Public */,
-      11,    1,  345,    2, 0x0a /* Public */,
-      12,    1,  348,    2, 0x0a /* Public */,
-      13,    1,  351,    2, 0x0a /* Public */,
-      14,    1,  354,    2, 0x0a /* Public */,
-      15,    1,  357,    2, 0x0a /* Public */,
-      16,    1,  360,    2, 0x0a /* Public */,
-      17,    1,  363,    2, 0x0a /* Public */,
-      18,    1,  366,    2, 0x0a /* Public */,
-      19,    1,  369,    2, 0x0a /* Public */,
-      20,    1,  372,    2, 0x0a /* Public */,
-      22,    0,  375,    2, 0x0a /* Public */,
-      23,    0,  376,    2, 0x0a /* Public */,
-      24,    0,  377,    2, 0x0a /* Public */,
-      25,    0,  378,    2, 0x08 /* Private */,
-      26,    2,  379,    2, 0x08 /* Private */,
-      29,    2,  384,    2, 0x08 /* Private */,
-      30,    2,  389,    2, 0x08 /* Private */,
-      31,    2,  394,    2, 0x08 /* Private */,
-      32,    2,  399,    2, 0x08 /* Private */,
-      33,    0,  404,    2, 0x08 /* Private */,
-      34,    0,  405,    2, 0x08 /* Private */,
-      35,    0,  406,    2, 0x08 /* Private */,
-      36,    0,  407,    2, 0x08 /* Private */,
-      37,    0,  408,    2, 0x08 /* Private */,
-      38,    0,  409,    2, 0x08 /* Private */,
-      39,    0,  410,    2, 0x08 /* Private */,
-      40,    0,  411,    2, 0x08 /* Private */,
-      41,    0,  412,    2, 0x08 /* Private */,
-      42,    0,  413,    2, 0x08 /* Private */,
-      43,    0,  414,    2, 0x08 /* Private */,
-      44,    0,  415,    2, 0x08 /* Private */,
-      45,    0,  416,    2, 0x08 /* Private */,
-      46,    0,  417,    2, 0x08 /* Private */,
-      47,    0,  418,    2, 0x08 /* Private */,
-      48,    0,  419,    2, 0x08 /* Private */,
-      49,    0,  420,    2, 0x08 /* Private */,
-      50,    0,  421,    2, 0x08 /* Private */,
-      51,    0,  422,    2, 0x08 /* Private */,
-      52,    0,  423,    2, 0x08 /* Private */,
-      53,    0,  424,    2, 0x08 /* Private */,
-      54,    0,  425,    2, 0x08 /* Private */,
-      55,    0,  426,    2, 0x08 /* Private */,
-      56,    0,  427,    2, 0x08 /* Private */,
-      57,    0,  428,    2, 0x08 /* Private */,
-      58,    0,  429,    2, 0x08 /* Private */,
-      59,    0,  430,    2, 0x08 /* Private */,
-      60,    0,  431,    2, 0x08 /* Private */,
-      61,    0,  432,    2, 0x08 /* Private */,
-      62,    0,  433,    2, 0x08 /* Private */,
-      63,    0,  434,    2, 0x08 /* Private */,
-      64,    0,  435,    2, 0x08 /* Private */,
-      65,    0,  436,    2, 0x08 /* Private */,
-      66,    0,  437,    2, 0x08 /* Private */,
-      67,    0,  438,    2, 0x08 /* Private */,
-      68,    0,  439,    2, 0x08 /* Private */,
-      69,    0,  440,    2, 0x08 /* Private */,
-      70,    0,  441,    2, 0x08 /* Private */,
+       1,    1,  339,    2, 0x0a /* Public */,
+       4,    0,  342,    2, 0x0a /* Public */,
+       5,    1,  343,    2, 0x0a /* Public */,
+       7,    1,  346,    2, 0x0a /* Public */,
+       9,    1,  349,    2, 0x0a /* Public */,
+      10,    1,  352,    2, 0x0a /* Public */,
+      11,    1,  355,    2, 0x0a /* Public */,
+      12,    1,  358,    2, 0x0a /* Public */,
+      13,    1,  361,    2, 0x0a /* Public */,
+      14,    1,  364,    2, 0x0a /* Public */,
+      15,    1,  367,    2, 0x0a /* Public */,
+      16,    1,  370,    2, 0x0a /* Public */,
+      17,    1,  373,    2, 0x0a /* Public */,
+      18,    1,  376,    2, 0x0a /* Public */,
+      19,    1,  379,    2, 0x0a /* Public */,
+      20,    1,  382,    2, 0x0a /* Public */,
+      22,    0,  385,    2, 0x0a /* Public */,
+      23,    0,  386,    2, 0x0a /* Public */,
+      24,    0,  387,    2, 0x0a /* Public */,
+      25,    1,  388,    2, 0x08 /* Private */,
+      27,    0,  391,    2, 0x08 /* Private */,
+      28,    0,  392,    2, 0x08 /* Private */,
+      29,    2,  393,    2, 0x08 /* Private */,
+      32,    2,  398,    2, 0x08 /* Private */,
+      33,    2,  403,    2, 0x08 /* Private */,
+      34,    2,  408,    2, 0x08 /* Private */,
+      35,    2,  413,    2, 0x08 /* Private */,
+      36,    0,  418,    2, 0x08 /* Private */,
+      37,    0,  419,    2, 0x08 /* Private */,
+      38,    0,  420,    2, 0x08 /* Private */,
+      39,    0,  421,    2, 0x08 /* Private */,
+      40,    0,  422,    2, 0x08 /* Private */,
+      41,    0,  423,    2, 0x08 /* Private */,
+      42,    0,  424,    2, 0x08 /* Private */,
+      43,    0,  425,    2, 0x08 /* Private */,
+      44,    0,  426,    2, 0x08 /* Private */,
+      45,    0,  427,    2, 0x08 /* Private */,
+      46,    0,  428,    2, 0x08 /* Private */,
+      47,    0,  429,    2, 0x08 /* Private */,
+      48,    0,  430,    2, 0x08 /* Private */,
+      49,    0,  431,    2, 0x08 /* Private */,
+      50,    0,  432,    2, 0x08 /* Private */,
+      51,    0,  433,    2, 0x08 /* Private */,
+      52,    0,  434,    2, 0x08 /* Private */,
+      53,    0,  435,    2, 0x08 /* Private */,
+      54,    0,  436,    2, 0x08 /* Private */,
+      55,    0,  437,    2, 0x08 /* Private */,
+      56,    0,  438,    2, 0x08 /* Private */,
+      57,    0,  439,    2, 0x08 /* Private */,
+      58,    0,  440,    2, 0x08 /* Private */,
+      59,    0,  441,    2, 0x08 /* Private */,
+      60,    0,  442,    2, 0x08 /* Private */,
+      61,    0,  443,    2, 0x08 /* Private */,
+      62,    0,  444,    2, 0x08 /* Private */,
+      63,    0,  445,    2, 0x08 /* Private */,
+      64,    0,  446,    2, 0x08 /* Private */,
+      65,    0,  447,    2, 0x08 /* Private */,
+      66,    0,  448,    2, 0x08 /* Private */,
+      67,    0,  449,    2, 0x08 /* Private */,
+      68,    0,  450,    2, 0x08 /* Private */,
+      69,    0,  451,    2, 0x08 /* Private */,
+      70,    0,  452,    2, 0x08 /* Private */,
+      71,    0,  453,    2, 0x08 /* Private */,
+      72,    0,  454,    2, 0x08 /* Private */,
+      73,    0,  455,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -232,12 +238,14 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   26,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   27,   28,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   27,   28,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   27,   28,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   27,   28,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   27,   28,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   30,   31,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   30,   31,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   30,   31,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   30,   31,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   30,   31,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -305,50 +313,52 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 16: _t->on_clickedenter(); break;
         case 17: _t->on_clickedbackspace(); break;
         case 18: _t->vitvalset(); break;
-        case 19: _t->siloil(); break;
-        case 20: _t->led1_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 21: _t->led2_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 22: _t->vit_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 23: _t->dia_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 24: _t->siloil_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 25: _t->dacvalue(); break;
-        case 26: _t->pressureval(); break;
-        case 27: _t->transitionToNewScreen(); break;
-        case 28: _t->setZero(); break;
-        case 29: _t->updateLabel(); break;
-        case 30: _t->updateLabel2(); break;
-        case 31: _t->diathermy(); break;
-        case 32: _t->airinjectoroff(); break;
-        case 33: _t->updatetimedate(); break;
-        case 34: _t->increaseVaccumValue(); break;
-        case 35: _t->decreaseVaccumValue(); break;
-        case 36: _t->increaseVitrectomyValue(); break;
-        case 37: _t->decreaseVitrectomyValue(); break;
-        case 38: _t->increaseDiathermyValue(); break;
-        case 39: _t->decreaseDiathermyValue(); break;
-        case 40: _t->increaseAirInjectorValue(); break;
-        case 41: _t->decreaseAirInjectorValue(); break;
-        case 42: _t->increaseledvalue(); break;
-        case 43: _t->decreaseledvalue(); break;
-        case 44: _t->increaseled2value(); break;
-        case 45: _t->decreaseled2value(); break;
-        case 46: _t->increasesiliconoilvalue(); break;
-        case 47: _t->decreasesiliconoilvalue(); break;
-        case 48: _t->showsettingswindow(); break;
-        case 49: _t->siloil_onoff(); break;
-        case 50: _t->vac_linear_nonlinear(); break;
-        case 51: _t->led1_onoff(); break;
-        case 52: _t->dia_onoff(); break;
-        case 53: _t->ai_onoff(); break;
-        case 54: _t->vit_onoff(); break;
-        case 55: _t->setsurgeon(); break;
-        case 56: _t->vit_linear_nonlinear(); break;
-        case 57: _t->led2_onoff(); break;
-        case 58: _t->comboboxload(); break;
-        case 59: _t->onComboBoxClicked(); break;
-        case 60: _t->timerCompleted(); break;
-        case 61: _t->showsetupscreen(); break;
-        case 62: _t->drain_onoff(); break;
+        case 19: _t->openComboBox((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->configOnOff(); break;
+        case 21: _t->siloil(); break;
+        case 22: _t->led1_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 23: _t->led2_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 24: _t->vit_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 25: _t->dia_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 26: _t->siloil_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 27: _t->dacvalue(); break;
+        case 28: _t->pressureval(); break;
+        case 29: _t->transitionToNewScreen(); break;
+        case 30: _t->setZero(); break;
+        case 31: _t->updateLabel(); break;
+        case 32: _t->updateLabel2(); break;
+        case 33: _t->diathermy(); break;
+        case 34: _t->airinjectoroff(); break;
+        case 35: _t->updatetimedate(); break;
+        case 36: _t->increaseVaccumValue(); break;
+        case 37: _t->decreaseVaccumValue(); break;
+        case 38: _t->increaseVitrectomyValue(); break;
+        case 39: _t->decreaseVitrectomyValue(); break;
+        case 40: _t->increaseDiathermyValue(); break;
+        case 41: _t->decreaseDiathermyValue(); break;
+        case 42: _t->increaseAirInjectorValue(); break;
+        case 43: _t->decreaseAirInjectorValue(); break;
+        case 44: _t->increaseledvalue(); break;
+        case 45: _t->decreaseledvalue(); break;
+        case 46: _t->increaseled2value(); break;
+        case 47: _t->decreaseled2value(); break;
+        case 48: _t->increasesiliconoilvalue(); break;
+        case 49: _t->decreasesiliconoilvalue(); break;
+        case 50: _t->showsettingswindow(); break;
+        case 51: _t->siloil_onoff(); break;
+        case 52: _t->vac_linear_nonlinear(); break;
+        case 53: _t->led1_onoff(); break;
+        case 54: _t->dia_onoff(); break;
+        case 55: _t->ai_onoff(); break;
+        case 56: _t->vit_onoff(); break;
+        case 57: _t->setsurgeon(); break;
+        case 58: _t->vit_linear_nonlinear(); break;
+        case 59: _t->led2_onoff(); break;
+        case 60: _t->comboboxload(); break;
+        case 61: _t->onComboBoxClicked(); break;
+        case 62: _t->timerCompleted(); break;
+        case 63: _t->showsetupscreen(); break;
+        case 64: _t->drain_onoff(); break;
         default: ;
         }
     }
@@ -383,13 +393,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 63)
+        if (_id < 65)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 63;
+        _id -= 65;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 63)
+        if (_id < 65)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 63;
+        _id -= 65;
     }
     return _id;
 }

@@ -25,6 +25,7 @@
 #include <QMessageBox>
 #include <QString>
 #include <QProcess>
+#include <QComboBox>
 
 #define PATH "/home/vitrectomy.db"
 //#define PATH2 "/home/vsodata10.txt"
@@ -68,9 +69,10 @@ public:
     void exportGPIO(int pin);
     void setGPIODirection(int pin, const std::string& direction);
     void writeGPIO(int pin, int value);
+    void loadPresets();
 
 
-
+signals:
 
 public slots:
     void updateText(const QString &text);
@@ -97,6 +99,8 @@ public slots:
 
 
 private slots:
+     void openComboBox(int index);
+     void configOnOff();
      void siloil();
      void led1_setvalue(int pin, int value);
      void led2_setvalue(int pin, int value);
@@ -170,14 +174,14 @@ private:
     QPropertyAnimation *animation3;
     QPropertyAnimation *animation4;
     QPropertyAnimation *animation5;
-    int vp=0;
-    int ap=0;
-    int vip=0;
-    int vitp=1;
-    int dp=0;
-    int lp=0;
-    int lp2=0;
-    int sp=0;
+    int vp;
+    int ap;
+    int vip;
+    int vitp;
+    int dp;
+    int lp;
+    int lp2;
+    int sp;
     int p=0;
     int avgfp=0;
     double fp0;
@@ -201,6 +205,7 @@ private:
     int vacpresetval;
     QTimer timesiloil;
     QTimer *clicktimer;
+
 
 };
 #endif // MAINWINDOW_H

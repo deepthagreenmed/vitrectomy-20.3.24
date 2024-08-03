@@ -14,7 +14,7 @@
 #include <QDateTime>
 #include <QRegExp>
 #include <QRegExpValidator>
-//#include <QThread>
+#include <QThread>
 
 #include <stdint.h>
 #include <cstdio>
@@ -30,16 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    int vp=0;
-    int ap=0;
-    int vip=0;
-    int vitp=1;
-    int dp=0;
-    int lp=0;
-    int lp2=0;
-    int sp=0;
-
-     clicktimer=new QTimer;
+    clicktimer=new QTimer;
 
     connect(ui->pushButton_vacinc, &QPushButton::clicked, this, &MainWindow::increaseVaccumValue);
     connect(ui->pushButton_vacdec, &QPushButton::clicked, this, &MainWindow::decreaseVaccumValue);
@@ -90,10 +81,13 @@ MainWindow::MainWindow(QWidget *parent)
     key = new keypad;
 
 
-    QTimer *timerfp = new QTimer;    connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
+    QTimer *timerfp = new QTimer;
+    connect(timerfp, &QTimer::timeout, this, &MainWindow::setFPValues);
     timerfp->start(1);
 
-
+    //ui->comboBox_surgeonname->setFocusPolicy(Qt::ClickFocus);
+    ui->comboBox_surgeonname->installEventFilter(this);
+    connect(ui->comboBox_surgeonname, &QComboBox::popupAboutToBeHidden, this, &MainWindow::onPopupAboutToBeHidden);
     connect(ui->comboBox_surgeonname, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onComboBoxClicked);
 
      timerforondscreen = new QTimer;
@@ -128,6 +122,18 @@ MainWindow::MainWindow(QWidget *parent)
 
      query.exec("select * from maindb where surgeon='"+surgeon+"'");
      if(query.next()){
+
+         vp=query.value(51).toInt();
+         vip=query.value(52).toInt();
+         vitp=query.value(53).toInt();
+         lp=query.value(54).toInt();
+         lp2=query.value(55).toInt();
+         dp=query.value(56).toInt();
+         ap=query.value(57).toInt();
+         sp=query.value(58).toInt();
+
+         loadPresets();
+
         itemname1 = query.value(0).toString();
           ui->label_dia->setText(itemname1);
           itemname34 = query.value(33).toString();
@@ -202,14 +208,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     timerfortd->start(1000);
     timer->start(1);
-
-    // code for animations
-    animation = new QPropertyAnimation(ui->label_31, "pos");
-    animation1 = new QPropertyAnimation(ui->label_33, "pos");
-    animation2 = new QPropertyAnimation(ui->label_32, "pos");
-    animation3 = new QPropertyAnimation(ui->label_30, "pos");
-    animation4 = new QPropertyAnimation(ui->label_29, "pos");
-    animation5 = new QPropertyAnimation(ui->label_42, "pos");
 
     ui->dial->setStyleSheet("");
     ui->dial->setStyle(QStyleFactory::create("Fusion"));
@@ -287,12 +285,25 @@ MainWindow::MainWindow(QWidget *parent)
 
     hhandler->vso_off();
 
+    QTimer *onofftimer=new QTimer;
+    connect(onofftimer, &QTimer::timeout, this, &MainWindow::configOnOff);
+    onofftimer->start(1000);
+
 }
+
+//void MainWindow::openComboBox(int index) {
+//    // Override showPopup method directly using a lambda
+//    ui->comboBox_surgeonname->setStyleSheet("QComboBox::drop-down { subcontrol-position: right; width: 20px; }");
+//    ui->comboBox_surgeonname->view()->setAttribute(Qt::WA_TranslucentBackground); // Make background translucent
+//    ui->comboBox_surgeonname->showPopup(); // Open the combo box dropdown list
+//}
+
 
 // Show setup screen after 3 seconds
 void MainWindow::transitionToNewScreen() {
     ui->label_22->hide();
     ui->label_12->hide();
+    ui->label_2->hide();
     ui->comboBox_surgeonname->move(30,34);
     ui->pushButton_start->hide();
 }
@@ -328,6 +339,17 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
 // keypad showing code
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
+    QComboBox *comboBox=ui->comboBox_surgeonname;
+
+    if (event->type() == QEvent::MouseButtonPress) {
+                QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+                if (comboBox->popup()->isVisible() &&
+                    !comboBox->rect().contains(mouseEvent->pos()) &&
+                    !comboBox->view()->rect().contains(mouseEvent->globalPos() - comboBox->mapToGlobal(QPoint(0, 0)))) {
+                    comboBox->hidePopup();
+                }
+            }
+
   if(object == ui->label_vacpreset && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
     if( k->button() == Qt::LeftButton ) {
@@ -618,7 +640,8 @@ void MainWindow::showsettingswindow()
     ui->pushButton_vitdec->lower();
     ui->label_vitpreset->lower();
     ui->label_vitactual->lower();
-    ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+    ui->pushButton_vitonoff->setText("OFF");
     hhandler->vit_off();
     disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
     disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
@@ -629,7 +652,8 @@ void MainWindow::showsettingswindow()
     ui->pushButton_siloildec->lower();
     ui->pushButton_siloilinc->lower();
     ui->label_siloil->lower();
-    ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    ui->pushButton_siloilonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+    ui->pushButton_siloilonoff->setText("OFF");
     hhandler->siloil_off();
     hhandler->vso_off();
     disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
@@ -643,7 +667,8 @@ void MainWindow::showsettingswindow()
     ui->pushButton_aiinc->lower();
     ui->label_aiactual->lower();
     ui->label_aipreset->lower();
-    ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    ui->pushButton_aionoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+    ui->pushButton_aionoff->setText("OFF");
     hhandler->ai_off();
     airinjectoroff();
     disconnect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
@@ -655,7 +680,8 @@ void MainWindow::showsettingswindow()
     ui->pushButton_diainc->lower();
     ui->pushButton_diadec->lower();
     ui->label_dia->lower();
-    ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    ui->pushButton_diaonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+    ui->pushButton_diaonoff->setText("OFF");
     hhandler->dia_off();
     timedia.stop();
     disconnect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
@@ -664,14 +690,16 @@ void MainWindow::showsettingswindow()
 
     lp=0;
     ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-    ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    ui->pushButton_led1onoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+    ui->pushButton_led1onoff->setText("OFF");
     led1->processUserInput(2);
     disconnect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
     disconnect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
 
     lp2=0;
     ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-    ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+    ui->pushButton_led2onoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+    ui->pushButton_led2onoff->setText("OFF");
     led2->processUserInput(2);
     disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
     disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
@@ -693,12 +721,9 @@ void MainWindow::siloil_onoff()
         ui->pushButton_siloilinc->raise();
         ui->label_siloil->raise();
 
-        animation->setStartValue(QPoint(930,160));
-        animation->setEndValue(QPoint(980, 160));
-        animation->setDuration(20);
-        animation->start();
+        ui->pushButton_siloilonoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+        ui->pushButton_siloilonoff->setText("ON");
 
-        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
         connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
         connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
@@ -716,12 +741,9 @@ void MainWindow::siloil_onoff()
         ui->pushButton_siloilinc->lower();
         ui->label_siloil->lower();
 
-        animation->setStartValue(QPoint(980,160));
-        animation->setEndValue(QPoint(930, 160));
-        animation->setDuration(20);
-        animation->start();
-
-        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        ui->pushButton_siloilonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+        ui->pushButton_siloilonoff->setText("OFF");
+        \
         disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
         disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
@@ -766,12 +788,8 @@ void MainWindow::led1_onoff()
         {
             ui->label_27->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
 
-            animation3->setStartValue(QPoint(800,640));
-            animation3->setEndValue(QPoint(850,640));
-            animation3->setDuration(20);
-            animation3->start();
-            ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-
+            ui->pushButton_led1onoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+            ui->pushButton_led1onoff->setText("ON");
 
             if(ui->label_led1->text().toInt() != 0)
             {
@@ -788,12 +806,9 @@ void MainWindow::led1_onoff()
         else
         {
             ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-            animation3->setStartValue(QPoint(850,640));
-            animation3->setEndValue(QPoint(800,640));
-            animation3->setDuration(20);
-            animation3->start();
-            ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
 
+            ui->pushButton_led1onoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+            ui->pushButton_led1onoff->setText("OFF");
             led1->processUserInput(2);
 
             disconnect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
@@ -813,11 +828,8 @@ void MainWindow::led2_onoff()
     if(lp2==0)
     {
         ui->label_41->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
-        animation5->setStartValue(QPoint(1060,640));
-        animation5->setEndValue(QPoint(1110,640));
-        animation5->setDuration(20);
-        animation5->start();
-        ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+        ui->pushButton_led2onoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+        ui->pushButton_led2onoff->setText("ON");
 
         if(ui->label_led2->text().toInt() != 0)
         {
@@ -833,11 +845,8 @@ void MainWindow::led2_onoff()
     }
     else
     {   ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-        animation5->setStartValue(QPoint(1110,640));
-        animation5->setEndValue(QPoint(1060,640));
-        animation5->setDuration(20);
-        animation5->start();
-        ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        ui->pushButton_led2onoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+        ui->pushButton_led2onoff->setText("OFF");
 
         led2->processUserInput(2);
 
@@ -861,12 +870,9 @@ void MainWindow::dia_onoff()
             ui->pushButton_diainc->raise();
             ui->pushButton_diadec->raise();
             ui->label_dia->raise();
-            animation2->setStartValue(QPoint(1440,620));
-            animation2->setEndValue(QPoint(1490,620));
-            animation2->setDuration(20);
-            animation2->start();
-            ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-            //qDebug()<<"dia on";
+            ui->pushButton_diaonoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+            ui->pushButton_diaonoff->setText("ON");
+
             timedia.start(1000);
             connect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
 
@@ -883,11 +889,8 @@ void MainWindow::dia_onoff()
             ui->pushButton_diainc->lower();
             ui->pushButton_diadec->lower();
             ui->label_dia->lower();
-            animation2->setStartValue(QPoint(1490,620));
-            animation2->setEndValue(QPoint(1440,620));
-            animation2->setDuration(20);
-            animation2->start();
-            ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+            ui->pushButton_diaonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+            ui->pushButton_diaonoff->setText("OFF");
             hhandler->dia_off();
 
             timedia.stop();
@@ -916,14 +919,8 @@ void MainWindow::ai_onoff()
             ui->label_aipreset->raise();
             ui->label_aiactual->raise();
 
-            animation4->setStartValue(QPoint(1300,160));
-            animation4->setEndValue(QPoint(1350,160));
-            animation4->setDuration(20);
-            animation4->start();
-            ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-
-
-
+            ui->pushButton_aionoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+            ui->pushButton_aionoff->setText("ON");
 
             //int flow=90+ (int)(preset* 1.5);
             int flow=130;
@@ -976,11 +973,8 @@ void MainWindow::ai_onoff()
             ui->pushButton_aiinc->lower();
             ui->label_aiactual->lower();
             ui->label_aipreset->lower();
-            animation4->setStartValue(QPoint(1350,160));
-            animation4->setEndValue(QPoint(1300,160));
-            animation4->setDuration(20);
-            animation4->start();
-            ui->label_29->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+            ui->pushButton_aionoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+            ui->pushButton_aionoff->setText("OFF");
 
             hhandler->ai_off();
             airinjectoroff();
@@ -1004,16 +998,13 @@ void MainWindow::vit_onoff()
             ui->label_38->setStyleSheet("background-color: rgb(116, 184, 222);");
 
             ui->label_24->setStyleSheet("font: 40pt ;color: rgb(0, 0, 0);");
+            ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+            ui->pushButton_vitonoff->setText("ON");
             ui->pushButton_vitinc->raise();
             ui->pushButton_vitdec->raise();
             ui->label_vitpreset->raise();
             ui->label_vitactual->raise();
 
-            animation1->setStartValue(QPoint(380,640));
-            animation1->setEndValue(QPoint(430,640));
-            animation1->setDuration(20);
-            animation1->start();
-            ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
             vip=1;
 
 
@@ -1028,16 +1019,13 @@ void MainWindow::vit_onoff()
         else if(vip==1)
             {   ui->label_38->setStyleSheet("");
                 ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
+                ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+                ui->pushButton_vitonoff->setText("OFF");
                 ui->pushButton_vitinc->lower();
                 ui->pushButton_vitdec->lower();
                 ui->label_vitpreset->lower();
                 ui->label_vitactual->lower();
 
-                animation1->setStartValue(QPoint(430,640));
-                animation1->setEndValue(QPoint(380,640));
-                animation1->setDuration(20);
-                ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-                animation1->start();
                 vip=0;
 
                hhandler->vit_off();
@@ -1528,6 +1516,7 @@ void MainWindow::timerCompleted()
 {
     ui->label_22->lower();
     ui->label_12->lower();
+    ui->label_2->lower();
     ui->comboBox_surgeonname->move(30,34);
     ui->pushButton_start->lower();
 
@@ -1570,6 +1559,19 @@ if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->c
            QString itemname46;
            QString itemname47;
 
+
+           vp=query.value(51).toInt();
+           vip=query.value(52).toInt();
+           vitp=query.value(53).toInt();
+           lp=query.value(54).toInt();
+           lp2=query.value(55).toInt();
+           dp=query.value(56).toInt();
+           ap=query.value(57).toInt();
+           sp=query.value(58).toInt();
+
+           loadPresets();
+
+        qDebug()<<vp<<vip<<vitp<<lp<<lp2<<dp<<ap<<sp;
 
            itemname1 = query.value(0).toString();
              ui->label_dia->setText(itemname1);
@@ -1620,6 +1622,7 @@ void MainWindow::showsetupscreen()
 {
         ui->label_22->lower();
         ui->label_12->lower();
+        ui->label_2->lower();
         ui->comboBox_surgeonname->move(30,34);
         ui->pushButton_start->lower();
 }
@@ -3049,11 +3052,8 @@ void MainWindow::led1_setvalue(int pin, int value)
     {
         ui->label_27->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
 
-        animation3->setStartValue(QPoint(800,640));
-        animation3->setEndValue(QPoint(850,640));
-        animation3->setDuration(250);
-        animation3->start();
-        ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+        ui->pushButton_led1onoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+        ui->pushButton_led1onoff->setText("ON");
 
 
         if(ui->label_led1->text().toInt() != 0)
@@ -3071,11 +3071,8 @@ lp=1;
     else
     {
         ui->label_27->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-        animation3->setStartValue(QPoint(850,640));
-        animation3->setEndValue(QPoint(800,640));
-        animation3->setDuration(250);
-        animation3->start();
-        ui->label_30->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        ui->pushButton_led1onoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+        ui->pushButton_led1onoff->setText("OFF");
 
         led1->processUserInput(2);
 
@@ -3095,12 +3092,8 @@ void MainWindow::led2_setvalue(int pin, int value)
     if(lp2==0)
     {
         ui->label_41->setStyleSheet("font: 40pt ;color: rgb(0,0,0);");
-        animation5->setStartValue(QPoint(1060,640));
-        animation5->setEndValue(QPoint(1110,640));
-        animation5->setDuration(250);
-        animation5->start();
-        ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-
+        ui->pushButton_led2onoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+        ui->pushButton_led2onoff->setText("ON");
         if(ui->label_led2->text().toInt() != 0)
         {
             led2->processUserInput(1);
@@ -3115,12 +3108,8 @@ void MainWindow::led2_setvalue(int pin, int value)
     }
     else
     {   ui->label_41->setStyleSheet("font: 40pt ;color: rgb(255,255,255);");
-        animation5->setStartValue(QPoint(1110,640));
-        animation5->setEndValue(QPoint(1060,640));
-        animation5->setDuration(250);
-        animation5->start();
-        ui->label_42->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-
+        ui->pushButton_led2onoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+        ui->pushButton_led2onoff->setText("OFF");
         led2->processUserInput(2);
 
         disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
@@ -3145,11 +3134,8 @@ void MainWindow::vit_setvalue(int pin, int value)
         ui->label_vitpreset->raise();
         ui->label_vitactual->raise();
 
-        animation1->setStartValue(QPoint(380,640));
-        animation1->setEndValue(QPoint(430,640));
-        animation1->setDuration(250);
-        animation1->start();
-        ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
+        ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+        ui->pushButton_vitonoff->setText("ON");
         vip=1;
 
 
@@ -3169,11 +3155,8 @@ void MainWindow::vit_setvalue(int pin, int value)
             ui->label_vitpreset->lower();
             ui->label_vitactual->lower();
 
-            animation1->setStartValue(QPoint(430,640));
-            animation1->setEndValue(QPoint(380,640));
-            animation1->setDuration(250);
-            ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
-            animation1->start();
+            ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+            ui->pushButton_vitonoff->setText("OFF");
             vip=0;
 
            hhandler->vit_off();
@@ -3200,12 +3183,8 @@ void MainWindow::dia_setvalue(int pin, int value)
         ui->pushButton_diainc->raise();
         ui->pushButton_diadec->raise();
         ui->label_dia->raise();
-        animation2->setStartValue(QPoint(1440,620));
-        animation2->setEndValue(QPoint(1490,620));
-        animation2->setDuration(250);
-        animation2->start();
-        ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
-        //qDebug()<<"dia on";
+        ui->pushButton_diaonoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+        ui->pushButton_diaonoff->setText("ON");
         timedia.start(1000);
         connect(&timedia, &QTimer::timeout, this, &MainWindow::diathermy);
 
@@ -3222,11 +3201,8 @@ void MainWindow::dia_setvalue(int pin, int value)
         ui->pushButton_diainc->lower();
         ui->pushButton_diadec->lower();
         ui->label_dia->lower();
-        animation2->setStartValue(QPoint(1490,620));
-        animation2->setEndValue(QPoint(1440,620));
-        animation2->setDuration(250);
-        animation2->start();
-        ui->label_32->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        ui->pushButton_diaonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+        ui->pushButton_diaonoff->setText("OFF");
         hhandler->dia_off();
 
         timedia.stop();
@@ -3252,12 +3228,9 @@ void MainWindow::siloil_setvalue(int pin, int value)
         ui->pushButton_siloilinc->raise();
         ui->label_siloil->raise();
 
-        animation->setStartValue(QPoint(930,160));
-        animation->setEndValue(QPoint(980, 160));
-        animation->setDuration(250);
-        animation->start();
+        ui->pushButton_siloilonoff->setStyleSheet("image: url(:/new/prefix1/img/on.png);border:none;");
+        ui->pushButton_siloilonoff->setText("ON");
 
-        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/on1.png);");
         connect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
         connect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
@@ -3275,12 +3248,9 @@ void MainWindow::siloil_setvalue(int pin, int value)
         ui->pushButton_siloilinc->lower();
         ui->label_siloil->lower();
 
-        animation->setStartValue(QPoint(980,160));
-        animation->setEndValue(QPoint(930, 160));
-        animation->setDuration(250);
-        animation->start();
+        ui->pushButton_siloilonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+        ui->pushButton_siloilonoff->setText("OFF");
 
-        ui->label_31->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
         disconnect(ui->pushButton_siloilinc, &QPushButton::clicked, this, &MainWindow::increasesiliconoilvalue);
         disconnect(ui->pushButton_siloildec, &QPushButton::clicked, this, &MainWindow::decreasesiliconoilvalue);
 
@@ -3318,7 +3288,8 @@ void MainWindow::siloil()
         ui->pushButton_vitdec->lower();
         ui->label_vitpreset->lower();
         ui->label_vitactual->lower();
-        ui->label_33->setStyleSheet("image: url(:/new/prefix1/img/fpled.png);");
+        ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:none;");
+        ui->pushButton_vitonoff->setText("OFF");
         hhandler->vit_off();
         disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
         disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
@@ -3370,4 +3341,145 @@ void MainWindow::writeGPIO(int pin, int value) {
     }
     valueFile << value;
     valueFile.close();
+}
+
+void MainWindow::configOnOff()
+{
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName(PATH);
+
+    mydb.open();
+
+    QSqlQuery query;
+    QString vp1=QString::number(vp);
+    QString vip1=QString::number(vip);
+    QString vitp1=QString::number(vitp);
+    QString lp1=QString::number(lp);
+    QString lp21=QString::number(lp2);
+    QString dp1=QString::number(dp);
+    QString ap1=QString::number(ap);
+    QString sp1=QString::number(sp);
+
+    query.prepare("update maindb set vp='"+vp1+"',vip='"+vip1+"',vitp='"+vitp1+"',lp='"+lp1+"',lp2='"+lp21+"',dp='"+dp1+"',ap='"+ap1+"',sp='"+sp1+"'where surgeon='"+surgeonid+"'");
+    query.exec();
+
+    query.bindValue(vp1,"vp");
+    query.bindValue(vip1,"vip");
+    query.bindValue(vitp1,"vitp");
+    query.bindValue(lp1,"lp");
+    query.bindValue(lp21,"lp2");
+    query.bindValue(dp1,"dp");
+    query.bindValue(ap1,"ap");
+    query.bindValue(sp1,"sp");
+
+    qDebug()<<vp1<<vip1<<vitp1<<lp1<<lp21<<dp1<<ap1<<sp1;
+
+    mydb.close();
+
+}
+
+void MainWindow::loadPresets()
+{
+    QString styleoff="image: url(:/new/prefix1/img/off.png);border:none;";
+    QString styleon="image: url(:/new/prefix1/img/on.png);border:none;";
+
+//    if(vp==0)
+//    {
+//       ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/nonbg1.png);");
+//    }
+//    if(vp==1)
+//    {
+//        ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/linbg3.png);");
+//    }
+
+
+
+    if(vip==0)
+    {
+        ui->pushButton_vitonoff->setStyleSheet(styleoff);
+        ui->pushButton_vitonoff->setText("OFF");
+    }
+    if(vip==1)
+    {
+        ui->pushButton_vitonoff->setStyleSheet(styleon);
+        ui->pushButton_vitonoff->setText("ON");
+    }
+
+
+
+//    if(vitp==0)
+//    {
+//       ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
+//    }
+//    if(vitp==1)
+//    {
+//        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
+//    }
+
+
+
+    if(lp==0)
+    {
+        ui->pushButton_led1onoff->setStyleSheet(styleoff);
+        ui->pushButton_led1onoff->setText("OFF");
+    }
+    if(lp==1)
+    {
+        ui->pushButton_led1onoff->setStyleSheet(styleon);
+        ui->pushButton_led1onoff->setText("ON");
+    }
+
+
+
+    if(lp2==0)
+    {
+        ui->pushButton_led2onoff->setStyleSheet(styleoff);
+        ui->pushButton_led2onoff->setText("OFF");
+    }
+    if(lp2==1)
+    {
+        ui->pushButton_led2onoff->setStyleSheet(styleon);
+        ui->pushButton_led2onoff->setText("ON");
+    }
+
+
+
+    if(dp==0)
+    {
+        ui->pushButton_diaonoff->setStyleSheet(styleoff);
+        ui->pushButton_diaonoff->setText("OFF");
+    }
+    if(dp==1)
+    {
+        ui->pushButton_diaonoff->setStyleSheet(styleon);
+        ui->pushButton_diaonoff->setText("ON");
+    }
+
+
+
+    if(ap==0)
+    {
+        ui->pushButton_aionoff->setStyleSheet(styleoff);
+        ui->pushButton_aionoff->setText("OFF");
+    }
+    if(ap==1)
+    {
+        ui->pushButton_aionoff->setStyleSheet(styleon);
+        ui->pushButton_aionoff->setText("ON");
+    }
+
+
+
+    if(sp==0)
+    {
+        ui->pushButton_siloilonoff->setStyleSheet(styleoff);
+        ui->pushButton_siloilonoff->setText("OFF");
+    }
+    if(sp==1)
+    {
+        ui->pushButton_siloilonoff->setStyleSheet(styleon);
+        ui->pushButton_siloilonoff->setText("ON");
+    }
+
+
 }

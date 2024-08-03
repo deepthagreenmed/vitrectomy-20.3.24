@@ -63,7 +63,6 @@ signals:
 
 public slots:
     void updateSurgeon();
-    void updateComboBoxes(int index);
     void on_clicked(const QString& digit);
      void on_clickedbackspace();
      void on_clickedenter();

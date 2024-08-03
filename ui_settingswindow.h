@@ -13,7 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
@@ -65,16 +64,12 @@ public:
     QPushButton *pushButton_saveforall;
     QPushButton *pushButton_save_5;
     QComboBox *comboBox_20;
-    QComboBox *comboBox_21;
-    QComboBox *comboBox_23;
-    QComboBox *comboBox_24;
     QLabel *label_11;
     QLabel *label_20;
     QLabel *label_35;
-    QFrame *line;
-    QFrame *line_2;
-    QFrame *line_3;
-    QFrame *line_4;
+    QComboBox *comboBox_21;
+    QComboBox *comboBox_23;
+    QComboBox *comboBox_24;
     QWidget *tab_10;
     QPushButton *pushButton_oneinc;
     QPushButton *pushButton_onedec;
@@ -263,7 +258,11 @@ public:
         comboBox_mode->addItem(QString());
         comboBox_mode->setObjectName(QString::fromUtf8("comboBox_mode"));
         comboBox_mode->setGeometry(QRect(600, 310, 461, 81));
-        comboBox_mode->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";"));
+        comboBox_mode->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";\n"
+"background-color: rgb(0, 0, 0);\n"
+"color: rgb(255,255,255);\n"
+"border-radius:20px;\n"
+"font-weight: bold;"));
         comboBox_mode->setIconSize(QSize(50, 16));
         comboBox_mode->setFrame(true);
         lineEdit_vac = new QLineEdit(tab_8);
@@ -322,7 +321,11 @@ public:
         comboBox_cuttermode->addItem(QString());
         comboBox_cuttermode->setObjectName(QString::fromUtf8("comboBox_cuttermode"));
         comboBox_cuttermode->setGeometry(QRect(630, 310, 401, 81));
-        comboBox_cuttermode->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";"));
+        comboBox_cuttermode->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";\n"
+"background-color: rgb(0, 0, 0);\n"
+"color: rgb(255,255,255);\n"
+"border-radius:20px;\n"
+"font-weight: bold;"));
         label_13 = new QLabel(tab_7);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         label_13->setGeometry(QRect(0, -20, 1311, 1091));
@@ -352,7 +355,11 @@ public:
         comboBox_cuttertype->addItem(QString());
         comboBox_cuttertype->setObjectName(QString::fromUtf8("comboBox_cuttertype"));
         comboBox_cuttertype->setGeometry(QRect(630, 440, 391, 71));
-        comboBox_cuttertype->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";"));
+        comboBox_cuttertype->setStyleSheet(QString::fromUtf8("font: 45pt \"Ubuntu\";\n"
+"background-color: rgb(0, 0, 0);\n"
+"color: rgb(255,255,255);\n"
+"border-radius:20px;\n"
+"font-weight: bold;"));
         lineEdit_maxcutrate = new QLineEdit(tab_7);
         lineEdit_maxcutrate->setObjectName(QString::fromUtf8("lineEdit_maxcutrate"));
         lineEdit_maxcutrate->setGeometry(QRect(750, 560, 281, 81));
@@ -399,54 +406,18 @@ public:
         comboBox_20->addItem(QString());
         comboBox_20->addItem(QString());
         comboBox_20->setObjectName(QString::fromUtf8("comboBox_20"));
-        comboBox_20->setGeometry(QRect(35, 176, 351, 111));
-        comboBox_20->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
-"QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 16pt \"Ubuntu\";\n"
-"background-color: rgb(255, 255, 255);}\n"
-""));
-        comboBox_21 = new QComboBox(tab_9);
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->setObjectName(QString::fromUtf8("comboBox_21"));
-        comboBox_21->setEnabled(true);
-        comboBox_21->setGeometry(QRect(38, 376, 351, 111));
-        comboBox_21->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
-"QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 16pt \"Ubuntu\";\n"
-"background-color: rgb(255, 255, 255);}\n"
-""));
-        comboBox_23 = new QComboBox(tab_9);
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->setObjectName(QString::fromUtf8("comboBox_23"));
-        comboBox_23->setGeometry(QRect(749, 180, 351, 111));
-        comboBox_23->setLayoutDirection(Qt::RightToLeft);
-        comboBox_23->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
-"QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 16pt \"Ubuntu\";\n"
-"background-color: rgb(255, 255, 255);}\n"
-""));
-        comboBox_24 = new QComboBox(tab_9);
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->setObjectName(QString::fromUtf8("comboBox_24"));
-        comboBox_24->setGeometry(QRect(750, 380, 351, 111));
-        comboBox_24->setLayoutDirection(Qt::RightToLeft);
-        comboBox_24->setStyleSheet(QString::fromUtf8("QComboBox::item:selected { background-color: lightblue; color: black; 	}\n"
-"QComboBox::drop-down { border-radius: 20px;background-color: rgb(0, 0, 0);}\n"
-"QComboBox{font: 16pt \"Ubuntu\";\n"
-"background-color: rgb(255, 255, 255);}\n"
-""));
+        comboBox_20->setGeometry(QRect(60, 240, 321, 61));
+        comboBox_20->setStyleSheet(QString::fromUtf8("\n"
+"background-color: rgb(0, 0, 0);\n"
+"\n"
+"color: rgb(255, 255, 255);\n"
+"\n"
+"border-radius:20px;\n"
+"\n"
+"\n"
+"font:20pt \"Ubuntu\";\n"
+"\n"
+"font-weight: bold;"));
         label_11 = new QLabel(tab_9);
         label_11->setObjectName(QString::fromUtf8("label_11"));
         label_11->setGeometry(QRect(0, -20, 1301, 1098));
@@ -462,44 +433,73 @@ public:
         label_35->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "font: 30pt \"Ubuntu\";border-radius: 20px;\n"
 "background-color: rgb(53, 63, 99);"));
-        line = new QFrame(tab_9);
-        line->setObjectName(QString::fromUtf8("line"));
-        line->setGeometry(QRect(383, 177, 3, 108));
-        line->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);"));
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
-        line_2 = new QFrame(tab_9);
-        line_2->setObjectName(QString::fromUtf8("line_2"));
-        line_2->setGeometry(QRect(750, 383, 3, 108));
-        line_2->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);"));
-        line_2->setFrameShape(QFrame::VLine);
-        line_2->setFrameShadow(QFrame::Sunken);
-        line_3 = new QFrame(tab_9);
-        line_3->setObjectName(QString::fromUtf8("line_3"));
-        line_3->setGeometry(QRect(749, 180, 3, 108));
-        line_3->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);"));
-        line_3->setFrameShape(QFrame::VLine);
-        line_3->setFrameShadow(QFrame::Sunken);
-        line_4 = new QFrame(tab_9);
-        line_4->setObjectName(QString::fromUtf8("line_4"));
-        line_4->setGeometry(QRect(387, 380, 3, 108));
-        line_4->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);"));
-        line_4->setFrameShape(QFrame::VLine);
-        line_4->setFrameShadow(QFrame::Sunken);
+        comboBox_21 = new QComboBox(tab_9);
+        comboBox_21->addItem(QString());
+        comboBox_21->addItem(QString());
+        comboBox_21->addItem(QString());
+        comboBox_21->addItem(QString());
+        comboBox_21->addItem(QString());
+        comboBox_21->setObjectName(QString::fromUtf8("comboBox_21"));
+        comboBox_21->setGeometry(QRect(60, 360, 321, 61));
+        comboBox_21->setStyleSheet(QString::fromUtf8("\n"
+"background-color: rgb(0, 0, 0);\n"
+"\n"
+"color: rgb(255, 255, 255);\n"
+"\n"
+"border-radius:20px;\n"
+"\n"
+"\n"
+"font:20pt \"Ubuntu\";\n"
+"\n"
+"font-weight: bold;"));
+        comboBox_23 = new QComboBox(tab_9);
+        comboBox_23->addItem(QString());
+        comboBox_23->addItem(QString());
+        comboBox_23->addItem(QString());
+        comboBox_23->addItem(QString());
+        comboBox_23->addItem(QString());
+        comboBox_23->setObjectName(QString::fromUtf8("comboBox_23"));
+        comboBox_23->setGeometry(QRect(750, 240, 321, 61));
+        comboBox_23->setStyleSheet(QString::fromUtf8("\n"
+"background-color: rgb(0, 0, 0);\n"
+"\n"
+"color: rgb(255, 255, 255);\n"
+"\n"
+"border-radius:20px;\n"
+"\n"
+"\n"
+"font:20pt \"Ubuntu\";\n"
+"\n"
+"font-weight: bold;"));
+        comboBox_24 = new QComboBox(tab_9);
+        comboBox_24->addItem(QString());
+        comboBox_24->addItem(QString());
+        comboBox_24->addItem(QString());
+        comboBox_24->addItem(QString());
+        comboBox_24->addItem(QString());
+        comboBox_24->setObjectName(QString::fromUtf8("comboBox_24"));
+        comboBox_24->setGeometry(QRect(750, 360, 321, 61));
+        comboBox_24->setStyleSheet(QString::fromUtf8("\n"
+"background-color: rgb(0, 0, 0);\n"
+"\n"
+"color: rgb(255, 255, 255);\n"
+"\n"
+"border-radius:20px;\n"
+"\n"
+"\n"
+"font:20pt \"Ubuntu\";\n"
+"\n"
+"font-weight: bold;"));
         tabWidget_2->addTab(tab_9, QString());
         label_11->raise();
         label_35->raise();
         pushButton_saveforall->raise();
         pushButton_save_5->raise();
-        comboBox_24->raise();
-        comboBox_23->raise();
-        comboBox_21->raise();
         comboBox_20->raise();
         label_20->raise();
-        line->raise();
-        line_2->raise();
-        line_3->raise();
-        line_4->raise();
+        comboBox_21->raise();
+        comboBox_23->raise();
+        comboBox_24->raise();
         tab_10 = new QWidget();
         tab_10->setObjectName(QString::fromUtf8("tab_10"));
         pushButton_oneinc = new QPushButton(tab_10);
@@ -1093,6 +1093,9 @@ public:
         comboBox_20->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
         comboBox_20->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
+        label_11->setText(QString());
+        label_20->setText(QString());
+        label_35->setText(QString());
         comboBox_21->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
         comboBox_21->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
         comboBox_21->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
@@ -1111,9 +1114,6 @@ public:
         comboBox_24->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
         comboBox_24->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
-        label_11->setText(QString());
-        label_20->setText(QString());
-        label_35->setText(QString());
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_9), QCoreApplication::translate("settingswindow", "Foot Pedal", nullptr));
         pushButton_oneinc->setText(QString());
         pushButton_onedec->setText(QString());

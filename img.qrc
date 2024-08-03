@@ -117,5 +117,7 @@
         <file>img/logo3.png</file>
         <file>img/back1.png</file>
         <file>img/ledsw.png</file>
+        <file>img/off.png</file>
+        <file>img/on.png</file>
     </qresource>
 </RCC>

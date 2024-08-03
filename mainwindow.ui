@@ -157,23 +157,6 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_siloilonoff">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>160</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
-background-color: rgba(191, 64, 64, 0);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_siloil">
     <property name="geometry">
      <rect>
@@ -432,40 +415,6 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_led1onoff">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>640</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
-background-color: rgba(191, 64, 64, 0);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_diaonoff">
-    <property name="geometry">
-     <rect>
-      <x>1440</x>
-      <y>620</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
-background-color: rgba(191, 64, 64, 0);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_vaclinearnonlinear">
     <property name="geometry">
      <rect>
@@ -516,35 +465,6 @@ font: 65pt &quot;Ubuntu&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_surgeonname">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>28</y>
-      <width>781</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu</family>
-      <pointsize>1</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/docidbox.png);
-font: 1pt &quot;Ubuntu&quot;;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_siloildec">
     <property name="geometry">
      <rect>
@@ -567,7 +487,7 @@ color:white;;}</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_surgeonname">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -602,10 +522,10 @@ color:white;;}</string>
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>1420</x>
+      <x>1430</x>
       <y>600</y>
-      <width>491</width>
-      <height>471</height>
+      <width>481</width>
+      <height>481</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -768,74 +688,6 @@ color:white;;}</string>
      <string>END CASE</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_29">
-    <property name="geometry">
-     <rect>
-      <x>1300</x>
-      <y>160</y>
-      <width>51</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/new/prefix1/img/fpled.png);
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_30">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>640</y>
-      <width>51</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/new/prefix1/img/fpled.png);
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_31">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>160</y>
-      <width>51</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/new/prefix1/img/fpled.png);
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_32">
-    <property name="geometry">
-     <rect>
-      <x>1440</x>
-      <y>620</y>
-      <width>51</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/new/prefix1/img/fpled.png);
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_28">
     <property name="geometry">
      <rect>
@@ -917,7 +769,7 @@ color: rgb(165, 29, 45);</string>
      <rect>
       <x>10</x>
       <y>600</y>
-      <width>491</width>
+      <width>501</width>
       <height>471</height>
      </rect>
     </property>
@@ -931,10 +783,10 @@ color: rgb(165, 29, 45);</string>
    <widget class="QLabel" name="label_17">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>520</x>
       <y>600</y>
       <width>901</width>
-      <height>471</height>
+      <height>481</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1015,23 +867,6 @@ color: rgb(165, 29, 45);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_aionoff">
-    <property name="geometry">
-     <rect>
-      <x>1300</x>
-      <y>160</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
-background-color: rgba(191, 64, 64, 0);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_led2">
     <property name="geometry">
      <rect>
@@ -1095,40 +930,6 @@ background-color: rgba(242, 179, 179, 0);}
 QPushButton::hover{background-color: #0085ff;
 border-radius: 20px;
 color:white;;}</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_led2onoff">
-    <property name="geometry">
-     <rect>
-      <x>1060</x>
-      <y>640</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
-background-color: rgba(191, 64, 64, 0);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_42">
-    <property name="geometry">
-     <rect>
-      <x>1060</x>
-      <y>640</y>
-      <width>51</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">image: url(:/new/prefix1/img/fpled.png);
-</string>
     </property>
     <property name="text">
      <string/>
@@ -1287,21 +1088,21 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QComboBox" name="comboBox_surgeonname">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>670</x>
       <y>620</y>
       <width>751</width>
       <height>61</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
     <property name="styleSheet">
-     <string notr="true">QComboBox{font: 35pt &quot;Ubuntu&quot;;background-color: rgb(255, 255, 255);}
-
-
-QComboBox::item:selected {
-                            
-	background-color: rgb(26, 95, 180);
-        color: rgb(255, 255, 255);                    }
-</string>
+     <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255,255,255);
+border-radius:20px;
+font:30pt &quot;Ubuntu&quot;;
+font-weight: bold;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_12">
@@ -1458,34 +1259,143 @@ background-color: rgba(191, 64, 64, 0);</string>
      <string>DRAIN OFF</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>536</x>
+      <y>519</y>
+      <width>1301</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+font: 75 30pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Posterior Vitrectomy System</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="pushButton_vitonoff">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>640</y>
-      <width>101</width>
-      <height>51</height>
+      <x>400</x>
+      <y>610</y>
+      <width>81</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/img/backbg3.png);
-background-color: rgba(191, 64, 64, 0);</string>
+     <string notr="true">image: url(:/new/prefix1/img/off.png);
+border: none;
+</string>
     </property>
     <property name="text">
-     <string/>
+     <string>OFF</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_33">
+   <widget class="QPushButton" name="pushButton_led1onoff">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>640</y>
-      <width>51</width>
-      <height>51</height>
+      <x>810</x>
+      <y>620</y>
+      <width>81</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">image: url(:/new/prefix1/img/fpled.png);
+     <string notr="true">image: url(:/new/prefix1/img/off.png);
+border: none;
+</string>
+    </property>
+    <property name="text">
+     <string>OFF</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_led2onoff">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>620</y>
+      <width>81</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/new/prefix1/img/off.png);
+border: none;
+</string>
+    </property>
+    <property name="text">
+     <string>OFF</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_diaonoff">
+    <property name="geometry">
+     <rect>
+      <x>1460</x>
+      <y>620</y>
+      <width>81</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/new/prefix1/img/off.png);
+border: none;
+</string>
+    </property>
+    <property name="text">
+     <string>OFF</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_aionoff">
+    <property name="geometry">
+     <rect>
+      <x>1310</x>
+      <y>150</y>
+      <width>81</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/new/prefix1/img/off.png);
+border: none;
+</string>
+    </property>
+    <property name="text">
+     <string>OFF</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_siloilonoff">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>160</y>
+      <width>81</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/new/prefix1/img/off.png);
+border: none;
+</string>
+    </property>
+    <property name="text">
+     <string>OFF</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>28</y>
+      <width>781</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/new/prefix1/img/docidbox.png);
+font: 1pt &quot;Ubuntu&quot;;
 </string>
     </property>
     <property name="text">
@@ -1497,7 +1407,7 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>label_16</zorder>
    <zorder>label_14</zorder>
    <zorder>label_13</zorder>
-   <zorder>label</zorder>
+   <zorder>label_surgeonname</zorder>
    <zorder>pushButton_settingswindow</zorder>
    <zorder>label_vacpreset</zorder>
    <zorder>label_vacactual</zorder>
@@ -1507,20 +1417,15 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>label_21</zorder>
    <zorder>label_25</zorder>
    <zorder>pushButton_endcase</zorder>
-   <zorder>label_32</zorder>
-   <zorder>pushButton_diaonoff</zorder>
    <zorder>label_28</zorder>
    <zorder>pushButton_vaclinearnonlinear</zorder>
-   <zorder>label_surgeonname</zorder>
    <zorder>label_38</zorder>
    <zorder>label_23</zorder>
    <zorder>pushButton_aiinc</zorder>
    <zorder>label_aipreset</zorder>
    <zorder>label_aiactual</zorder>
    <zorder>pushButton_aidec</zorder>
-   <zorder>label_29</zorder>
    <zorder>label_17</zorder>
-   <zorder>pushButton_aionoff</zorder>
    <zorder>label_led2</zorder>
    <zorder>label_41</zorder>
    <zorder>pushButton_led2dec</zorder>
@@ -1535,9 +1440,6 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>pushButton_led1inc</zorder>
    <zorder>label_27</zorder>
    <zorder>label_led1</zorder>
-   <zorder>label_30</zorder>
-   <zorder>pushButton_led1onoff</zorder>
-   <zorder>label_42</zorder>
    <zorder>pushButton_led1dec</zorder>
    <zorder>pushButton_led2inc</zorder>
    <zorder>pushButton_vitinc</zorder>
@@ -1549,10 +1451,7 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>label_siloil</zorder>
    <zorder>label_26</zorder>
    <zorder>pushButton_siloilinc</zorder>
-   <zorder>label_31</zorder>
    <zorder>pushButton_siloildec</zorder>
-   <zorder>pushButton_siloilonoff</zorder>
-   <zorder>pushButton_led2onoff</zorder>
    <zorder>label_15</zorder>
    <zorder>label_43</zorder>
    <zorder>label_date</zorder>
@@ -1562,11 +1461,17 @@ background-color: rgba(191, 64, 64, 0);</string>
    <zorder>pushButton_vacdec</zorder>
    <zorder>pushButton_drain</zorder>
    <zorder>pushButton_vitonoff</zorder>
-   <zorder>label_33</zorder>
+   <zorder>pushButton_led1onoff</zorder>
+   <zorder>pushButton_led2onoff</zorder>
+   <zorder>pushButton_diaonoff</zorder>
+   <zorder>pushButton_aionoff</zorder>
+   <zorder>pushButton_siloilonoff</zorder>
+   <zorder>label_3</zorder>
    <zorder>label_12</zorder>
+   <zorder>label_2</zorder>
    <zorder>label_22</zorder>
-   <zorder>pushButton_start</zorder>
    <zorder>comboBox_surgeonname</zorder>
+   <zorder>pushButton_start</zorder>
   </widget>
  </widget>
  <resources/>

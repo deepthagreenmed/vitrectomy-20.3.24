@@ -30,7 +30,6 @@ public:
     QLabel *label_aipreset;
     QLabel *label_vitpreset;
     QLabel *label_dia;
-    QPushButton *pushButton_siloilonoff;
     QLabel *label_siloil;
     QLabel *label_led1;
     QPushButton *pushButton_aidec;
@@ -42,13 +41,10 @@ public:
     QPushButton *pushButton_vitinc;
     QPushButton *pushButton_led1inc;
     QPushButton *pushButton_siloilinc;
-    QPushButton *pushButton_led1onoff;
-    QPushButton *pushButton_diaonoff;
     QPushButton *pushButton_vaclinearnonlinear;
     QLabel *label_aiactual;
-    QLabel *label_surgeonname;
     QPushButton *pushButton_siloildec;
-    QLabel *label;
+    QLabel *label_surgeonname;
     QLabel *label_13;
     QLabel *label_14;
     QLabel *label_16;
@@ -60,10 +56,6 @@ public:
     QLabel *label_26;
     QLabel *label_27;
     QPushButton *pushButton_endcase;
-    QLabel *label_29;
-    QLabel *label_30;
-    QLabel *label_31;
-    QLabel *label_32;
     QLabel *label_28;
     QLabel *label_dialvalue;
     QDial *dial;
@@ -73,12 +65,9 @@ public:
     QLabel *label_34;
     QLabel *label_35;
     QLabel *label_19;
-    QPushButton *pushButton_aionoff;
     QLabel *label_led2;
     QPushButton *pushButton_led2inc;
     QPushButton *pushButton_led2dec;
-    QPushButton *pushButton_led2onoff;
-    QLabel *label_42;
     QLabel *label_41;
     QPushButton *pushButton_vitlinearnonlinear;
     QLabel *label_44;
@@ -97,8 +86,14 @@ public:
     QPushButton *pushButton_vacinc;
     QPushButton *pushButton_vacdec;
     QPushButton *pushButton_drain;
+    QLabel *label_2;
     QPushButton *pushButton_vitonoff;
-    QLabel *label_33;
+    QPushButton *pushButton_led1onoff;
+    QPushButton *pushButton_led2onoff;
+    QPushButton *pushButton_diaonoff;
+    QPushButton *pushButton_aionoff;
+    QPushButton *pushButton_siloilonoff;
+    QLabel *label_3;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -158,11 +153,6 @@ public:
         label_dia->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/textbox2.png);\n"
 "font: 65pt \"Ubuntu\";"));
         label_dia->setAlignment(Qt::AlignCenter);
-        pushButton_siloilonoff = new QPushButton(centralwidget);
-        pushButton_siloilonoff->setObjectName(QString::fromUtf8("pushButton_siloilonoff"));
-        pushButton_siloilonoff->setGeometry(QRect(930, 160, 101, 51));
-        pushButton_siloilonoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
         label_siloil = new QLabel(centralwidget);
         label_siloil->setObjectName(QString::fromUtf8("label_siloil"));
         label_siloil->setGeometry(QRect(830, 330, 291, 131));
@@ -285,16 +275,6 @@ public:
 "QPushButton::hover{background-color: #0085ff;\n"
 "border-radius: 20px;\n"
 "color:white;;}"));
-        pushButton_led1onoff = new QPushButton(centralwidget);
-        pushButton_led1onoff->setObjectName(QString::fromUtf8("pushButton_led1onoff"));
-        pushButton_led1onoff->setGeometry(QRect(800, 640, 101, 51));
-        pushButton_led1onoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
-        pushButton_diaonoff = new QPushButton(centralwidget);
-        pushButton_diaonoff->setObjectName(QString::fromUtf8("pushButton_diaonoff"));
-        pushButton_diaonoff->setGeometry(QRect(1440, 620, 101, 51));
-        pushButton_diaonoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
         pushButton_vaclinearnonlinear = new QPushButton(centralwidget);
         pushButton_vaclinearnonlinear->setObjectName(QString::fromUtf8("pushButton_vaclinearnonlinear"));
         pushButton_vaclinearnonlinear->setGeometry(QRect(530, 160, 101, 51));
@@ -315,19 +295,6 @@ public:
         label_aiactual->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/textbox2.png);\n"
 "font: 65pt \"Ubuntu\";"));
         label_aiactual->setAlignment(Qt::AlignCenter);
-        label_surgeonname = new QLabel(centralwidget);
-        label_surgeonname->setObjectName(QString::fromUtf8("label_surgeonname"));
-        label_surgeonname->setGeometry(QRect(20, 28, 781, 81));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Ubuntu"));
-        font1.setPointSize(1);
-        font1.setBold(false);
-        font1.setItalic(false);
-        font1.setWeight(50);
-        label_surgeonname->setFont(font1);
-        label_surgeonname->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/docidbox.png);\n"
-"font: 1pt \"Ubuntu\";"));
-        label_surgeonname->setAlignment(Qt::AlignCenter);
         pushButton_siloildec = new QPushButton(centralwidget);
         pushButton_siloildec->setObjectName(QString::fromUtf8("pushButton_siloildec"));
         pushButton_siloildec->setGeometry(QRect(1120, 350, 81, 91));
@@ -338,17 +305,17 @@ public:
 "QPushButton::hover{background-color: #0085ff;\n"
 "border-radius: 20px;\n"
 "color:white;;}"));
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(10, 140, 641, 451));
-        label->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);"));
+        label_surgeonname = new QLabel(centralwidget);
+        label_surgeonname->setObjectName(QString::fromUtf8("label_surgeonname"));
+        label_surgeonname->setGeometry(QRect(10, 140, 641, 451));
+        label_surgeonname->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);"));
         label_13 = new QLabel(centralwidget);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         label_13->setGeometry(QRect(1270, 140, 641, 451));
         label_13->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);"));
         label_14 = new QLabel(centralwidget);
         label_14->setObjectName(QString::fromUtf8("label_14"));
-        label_14->setGeometry(QRect(1420, 600, 491, 471));
+        label_14->setGeometry(QRect(1430, 600, 481, 481));
         label_14->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);"));
         label_16 = new QLabel(centralwidget);
         label_16->setObjectName(QString::fromUtf8("label_16"));
@@ -395,26 +362,6 @@ public:
 "border-radius: 20px;\n"
 "font: 20pt \"Ubuntu\";\n"
 "color:white;;}"));
-        label_29 = new QLabel(centralwidget);
-        label_29->setObjectName(QString::fromUtf8("label_29"));
-        label_29->setGeometry(QRect(1300, 160, 51, 51));
-        label_29->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
-""));
-        label_30 = new QLabel(centralwidget);
-        label_30->setObjectName(QString::fromUtf8("label_30"));
-        label_30->setGeometry(QRect(800, 640, 51, 51));
-        label_30->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
-""));
-        label_31 = new QLabel(centralwidget);
-        label_31->setObjectName(QString::fromUtf8("label_31"));
-        label_31->setGeometry(QRect(930, 160, 51, 51));
-        label_31->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
-""));
-        label_32 = new QLabel(centralwidget);
-        label_32->setObjectName(QString::fromUtf8("label_32"));
-        label_32->setGeometry(QRect(1440, 620, 51, 51));
-        label_32->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
-""));
         label_28 = new QLabel(centralwidget);
         label_28->setObjectName(QString::fromUtf8("label_28"));
         label_28->setGeometry(QRect(530, 150, 101, 71));
@@ -440,11 +387,11 @@ public:
         dial->setNotchesVisible(false);
         label_38 = new QLabel(centralwidget);
         label_38->setObjectName(QString::fromUtf8("label_38"));
-        label_38->setGeometry(QRect(10, 600, 491, 471));
+        label_38->setGeometry(QRect(10, 600, 501, 471));
         label_38->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);"));
         label_17 = new QLabel(centralwidget);
         label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(510, 600, 901, 471));
+        label_17->setGeometry(QRect(520, 600, 901, 481));
         label_17->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);\n"
 ""));
         label_18 = new QLabel(centralwidget);
@@ -465,11 +412,6 @@ public:
         label_19->setObjectName(QString::fromUtf8("label_19"));
         label_19->setGeometry(QRect(660, 140, 601, 451));
         label_19->setStyleSheet(QString::fromUtf8("background-color: rgb(116, 184, 222);"));
-        pushButton_aionoff = new QPushButton(centralwidget);
-        pushButton_aionoff->setObjectName(QString::fromUtf8("pushButton_aionoff"));
-        pushButton_aionoff->setGeometry(QRect(1300, 160, 101, 51));
-        pushButton_aionoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
         label_led2 = new QLabel(centralwidget);
         label_led2->setObjectName(QString::fromUtf8("label_led2"));
         label_led2->setGeometry(QRect(1160, 710, 191, 81));
@@ -500,16 +442,6 @@ public:
 "QPushButton::hover{background-color: #0085ff;\n"
 "border-radius: 20px;\n"
 "color:white;;}"));
-        pushButton_led2onoff = new QPushButton(centralwidget);
-        pushButton_led2onoff->setObjectName(QString::fromUtf8("pushButton_led2onoff"));
-        pushButton_led2onoff->setGeometry(QRect(1060, 640, 101, 51));
-        pushButton_led2onoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
-        label_42 = new QLabel(centralwidget);
-        label_42->setObjectName(QString::fromUtf8("label_42"));
-        label_42->setGeometry(QRect(1060, 640, 51, 51));
-        label_42->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
-""));
         label_41 = new QLabel(centralwidget);
         label_41->setObjectName(QString::fromUtf8("label_41"));
         label_41->setGeometry(QRect(1190, 630, 191, 61));
@@ -552,15 +484,13 @@ public:
         label_time->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";"));
         comboBox_surgeonname = new QComboBox(centralwidget);
         comboBox_surgeonname->setObjectName(QString::fromUtf8("comboBox_surgeonname"));
-        comboBox_surgeonname->setGeometry(QRect(680, 620, 751, 61));
-        comboBox_surgeonname->setStyleSheet(QString::fromUtf8("QComboBox{font: 35pt \"Ubuntu\";background-color: rgb(255, 255, 255);}\n"
-"\n"
-"\n"
-"QComboBox::item:selected {\n"
-"                            \n"
-"	background-color: rgb(26, 95, 180);\n"
-"        color: rgb(255, 255, 255);                    }\n"
-""));
+        comboBox_surgeonname->setGeometry(QRect(670, 620, 751, 61));
+        comboBox_surgeonname->setFocusPolicy(Qt::ClickFocus);
+        comboBox_surgeonname->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);\n"
+"color: rgb(255,255,255);\n"
+"border-radius:20px;\n"
+"font:30pt \"Ubuntu\";\n"
+"font-weight: bold;"));
         label_12 = new QLabel(centralwidget);
         label_12->setObjectName(QString::fromUtf8("label_12"));
         label_12->setGeometry(QRect(0, 0, 1920, 1080));
@@ -617,15 +547,52 @@ public:
         pushButton_drain->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
 "color: rgb(255, 120, 0);\n"
 "background-color: rgba(191, 64, 64, 0);"));
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(536, 519, 1301, 61));
+        label_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 75 30pt \"Ubuntu\";"));
         pushButton_vitonoff = new QPushButton(centralwidget);
         pushButton_vitonoff->setObjectName(QString::fromUtf8("pushButton_vitonoff"));
-        pushButton_vitonoff->setGeometry(QRect(380, 640, 101, 51));
-        pushButton_vitonoff->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/backbg3.png);\n"
-"background-color: rgba(191, 64, 64, 0);"));
-        label_33 = new QLabel(centralwidget);
-        label_33->setObjectName(QString::fromUtf8("label_33"));
-        label_33->setGeometry(QRect(380, 640, 51, 51));
-        label_33->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/fpled.png);\n"
+        pushButton_vitonoff->setGeometry(QRect(400, 610, 81, 81));
+        pushButton_vitonoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
+"border: none;\n"
+""));
+        pushButton_led1onoff = new QPushButton(centralwidget);
+        pushButton_led1onoff->setObjectName(QString::fromUtf8("pushButton_led1onoff"));
+        pushButton_led1onoff->setGeometry(QRect(810, 620, 81, 81));
+        pushButton_led1onoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
+"border: none;\n"
+""));
+        pushButton_led2onoff = new QPushButton(centralwidget);
+        pushButton_led2onoff->setObjectName(QString::fromUtf8("pushButton_led2onoff"));
+        pushButton_led2onoff->setGeometry(QRect(1050, 620, 81, 81));
+        pushButton_led2onoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
+"border: none;\n"
+""));
+        pushButton_diaonoff = new QPushButton(centralwidget);
+        pushButton_diaonoff->setObjectName(QString::fromUtf8("pushButton_diaonoff"));
+        pushButton_diaonoff->setGeometry(QRect(1460, 620, 81, 81));
+        pushButton_diaonoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
+"border: none;\n"
+""));
+        pushButton_aionoff = new QPushButton(centralwidget);
+        pushButton_aionoff->setObjectName(QString::fromUtf8("pushButton_aionoff"));
+        pushButton_aionoff->setGeometry(QRect(1310, 150, 81, 81));
+        pushButton_aionoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
+"border: none;\n"
+""));
+        pushButton_siloilonoff = new QPushButton(centralwidget);
+        pushButton_siloilonoff->setObjectName(QString::fromUtf8("pushButton_siloilonoff"));
+        pushButton_siloilonoff->setGeometry(QRect(750, 160, 81, 81));
+        pushButton_siloilonoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
+"border: none;\n"
+""));
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(20, 28, 781, 81));
+        label_3->setStyleSheet(QString::fromUtf8("background-image: url(:/new/prefix1/img/docidbox.png);\n"
+"font: 1pt \"Ubuntu\";\n"
 ""));
         MainWindow->setCentralWidget(centralwidget);
         label_39->raise();
@@ -633,7 +600,7 @@ public:
         label_16->raise();
         label_14->raise();
         label_13->raise();
-        label->raise();
+        label_surgeonname->raise();
         pushButton_settingswindow->raise();
         label_vacpreset->raise();
         label_vacactual->raise();
@@ -643,20 +610,15 @@ public:
         label_21->raise();
         label_25->raise();
         pushButton_endcase->raise();
-        label_32->raise();
-        pushButton_diaonoff->raise();
         label_28->raise();
         pushButton_vaclinearnonlinear->raise();
-        label_surgeonname->raise();
         label_38->raise();
         label_23->raise();
         pushButton_aiinc->raise();
         label_aipreset->raise();
         label_aiactual->raise();
         pushButton_aidec->raise();
-        label_29->raise();
         label_17->raise();
-        pushButton_aionoff->raise();
         label_led2->raise();
         label_41->raise();
         pushButton_led2dec->raise();
@@ -671,9 +633,6 @@ public:
         pushButton_led1inc->raise();
         label_27->raise();
         label_led1->raise();
-        label_30->raise();
-        pushButton_led1onoff->raise();
-        label_42->raise();
         pushButton_led1dec->raise();
         pushButton_led2inc->raise();
         pushButton_vitinc->raise();
@@ -685,10 +644,7 @@ public:
         label_siloil->raise();
         label_26->raise();
         pushButton_siloilinc->raise();
-        label_31->raise();
         pushButton_siloildec->raise();
-        pushButton_siloilonoff->raise();
-        pushButton_led2onoff->raise();
         label_15->raise();
         label_43->raise();
         label_date->raise();
@@ -698,11 +654,17 @@ public:
         pushButton_vacdec->raise();
         pushButton_drain->raise();
         pushButton_vitonoff->raise();
-        label_33->raise();
+        pushButton_led1onoff->raise();
+        pushButton_led2onoff->raise();
+        pushButton_diaonoff->raise();
+        pushButton_aionoff->raise();
+        pushButton_siloilonoff->raise();
+        label_3->raise();
         label_12->raise();
+        label_2->raise();
         label_22->raise();
-        pushButton_start->raise();
         comboBox_surgeonname->raise();
+        pushButton_start->raise();
 
         retranslateUi(MainWindow);
 
@@ -718,7 +680,6 @@ public:
         label_aipreset->setText(QCoreApplication::translate("MainWindow", "60", nullptr));
         label_vitpreset->setText(QCoreApplication::translate("MainWindow", "60", nullptr));
         label_dia->setText(QCoreApplication::translate("MainWindow", "40", nullptr));
-        pushButton_siloilonoff->setText(QString());
         label_siloil->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_led1->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         pushButton_aidec->setText(QString());
@@ -730,13 +691,10 @@ public:
         pushButton_vitinc->setText(QString());
         pushButton_led1inc->setText(QString());
         pushButton_siloilinc->setText(QString());
-        pushButton_led1onoff->setText(QString());
-        pushButton_diaonoff->setText(QString());
         pushButton_vaclinearnonlinear->setText(QString());
         label_aiactual->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        label_surgeonname->setText(QString());
         pushButton_siloildec->setText(QString());
-        label->setText(QString());
+        label_surgeonname->setText(QString());
         label_13->setText(QString());
         label_14->setText(QString());
         label_16->setText(QString());
@@ -748,10 +706,6 @@ public:
         label_26->setText(QCoreApplication::translate("MainWindow", "SILICON OIL", nullptr));
         label_27->setText(QCoreApplication::translate("MainWindow", "LED-1", nullptr));
         pushButton_endcase->setText(QCoreApplication::translate("MainWindow", "END CASE", nullptr));
-        label_29->setText(QString());
-        label_30->setText(QString());
-        label_31->setText(QString());
-        label_32->setText(QString());
         label_28->setText(QString());
         label_dialvalue->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_38->setText(QString());
@@ -760,12 +714,9 @@ public:
         label_34->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_35->setText(QCoreApplication::translate("MainWindow", "100", nullptr));
         label_19->setText(QString());
-        pushButton_aionoff->setText(QString());
         label_led2->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         pushButton_led2inc->setText(QString());
         pushButton_led2dec->setText(QString());
-        pushButton_led2onoff->setText(QString());
-        label_42->setText(QString());
         label_41->setText(QCoreApplication::translate("MainWindow", "LED-2", nullptr));
         pushButton_vitlinearnonlinear->setText(QString());
         label_44->setText(QString());
@@ -783,8 +734,14 @@ public:
         pushButton_vacinc->setText(QString());
         pushButton_vacdec->setText(QString());
         pushButton_drain->setText(QCoreApplication::translate("MainWindow", "DRAIN OFF", nullptr));
-        pushButton_vitonoff->setText(QString());
-        label_33->setText(QString());
+        label_2->setText(QCoreApplication::translate("MainWindow", "Posterior Vitrectomy System", nullptr));
+        pushButton_vitonoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        pushButton_led1onoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        pushButton_led2onoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        pushButton_diaonoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        pushButton_aionoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        pushButton_siloilonoff->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        label_3->setText(QString());
     } // retranslateUi
 
 };
