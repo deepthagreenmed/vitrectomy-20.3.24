@@ -279,6 +279,7 @@ settingswindow::settingswindow(QWidget *parent) :
     // Connect the combo box's index changed signal to the slot
     connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onCutterTypeChanged);
 
+    pedals ped;
 
     connect(ui->comboBox_tl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTL);
     connect(ui->comboBox_bl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBL);
@@ -1331,36 +1332,41 @@ void settingswindow::comboBoxTL(int index)
 {
     if(tl1 == "LED1 On/Off")
     {
-        lp=!lp;
+        //lp=!lp;
         //writeGPIO(960,lp);
+        lp=readGPIO(960);
         emit led1_pedal(960,lp);
 
     }
     if(tl1 == "LED2 On/Off")
     {
-        lp2=!lp2;
+        //lp2=!lp2;
         //writeGPIO(960,lp2);
+        lp2=readGPIO(960);
         emit led2_pedal(960,lp2);
 
     }
     if(tl1 == "Vitrectomy On/Off")
     {
-        vip=!vip;
+        //vip=!vip;
         //writeGPIO(960,vip);
+        vip=readGPIO(960);
         emit vit_pedal(960,vip);
 
     }
     if(tl1 == "Diathermy On/Off")
     {
-        dp=!dp;
+        //dp=!dp;
         //writeGPIO(960,dp);
+        dp=readGPIO(960);
         emit dia_pedal(960,dp);
 
     }
     if(tl1 == "Silicon Oil On/Off")
     {
-        sp=!sp;
+        //sp=!sp;
         //writeGPIO(960,sp);
+        sp=readGPIO(960);
         emit siloil_pedal(960,sp);
     }
 
@@ -1371,36 +1377,41 @@ void settingswindow::comboBoxBR(int index)
 {
     if(tr1 == "LED1 On/Off")
     {
-        lp=!lp;
+        //lp=!lp;
         //writeGPIO(961,lp);
+        lp=readGPIO(961);
         emit led1_pedal(961,lp);
 
     }
     if(tr1 == "LED2 On/Off")
     {
-        lp2=!lp2;
+        //lp2=!lp2;
         //writeGPIO(961,lp2);
+        lp2=readGPIO(961);
         emit led2_pedal(961,lp2);
 
     }
     if(tr1 == "Vitrectomy On/Off")
     {
-        vip=!vip;
+        //vip=!vip;
         //writeGPIO(961,vip);
+        vip=readGPIO(961);
         emit vit_pedal(961,vip);
 
     }
     if(tr1 == "Diathermy On/Off")
     {
-        dp=!dp;
+        //dp=!dp;
         //writeGPIO(961,dp);
+        dp=readGPIO(961);
         emit dia_pedal(961,dp);
 
     }
     if(tr1 == "Silicon Oil On/Off")
     {
-        sp=!sp;
+        //sp=!sp;
         //writeGPIO(961,sp);
+        sp=readGPIO(961);
         emit siloil_pedal(961,sp);
     }
 
@@ -1412,32 +1423,37 @@ void settingswindow::comboBoxBL(int index)
 {
     if(bl1 == "LED1 On/Off")
     {
-        lp=!lp;
+        //lp=!lp;
         //writeGPIO(962,lp);
+        lp=readGPIO(962);
         emit led1_pedal(962,lp);
     }
     if(bl1 == "LED2 On/Off")
     {
-        lp2=!lp2;
+        //lp2=!lp2;
         //writeGPIO(962,lp2);
+        lp2=readGPIO(962);
         emit led2_pedal(962,lp2);
     }
     if(bl1 == "Vitrectomy On/Off")
     {
-        vip=!vip;
+        //vip=!vip;
         //writeGPIO(962,vip);
+        vip=readGPIO(962);
         emit vit_pedal(962,vip);
     }
     if(bl1 == "Diathermy On/Off")
     {
-        dp=!dp;
+        //dp=!dp;
         //writeGPIO(962,dp);
+        dp=readGPIO(962);
         emit dia_pedal(962,dp);
     }
     if(bl1 == "Silicon Oil On/Off")
     {
-        sp=!sp;
+        //sp=!sp;
         //writeGPIO(962,sp);
+        sp=readGPIO(962);
         emit siloil_pedal(962,sp);
     }
 
@@ -1448,36 +1464,41 @@ void settingswindow::comboBoxTR(int index)
 {
     if(br1 == "LED1 On/Off")
     {
-        lp=!lp;
+        //lp=!lp;
         //writeGPIO(963,lp);
+        lp=readGPIO(963);
         emit led1_pedal(963,lp);
 
     }
     if(br1 == "LED2 On/Off")
     {
-        lp2=!lp2;
+        //lp2=!lp2;
         //writeGPIO(963,lp2);
+        lp2=readGPIO(963);
         emit led2_pedal(963,lp2);
 
     }
     if(br1 == "Vitrectomy On/Off")
     {
-        vip=!vip;
+        //vip=!vip;
         //writeGPIO(963,vip);
+        vip=readGPIO(963);
         emit vit_pedal(963,vip);
 
     }
     if(br1 == "Diathermy On/Off")
     {
-        dp=!dp;
+        //dp=!dp;
         //writeGPIO(963,dp);
+        dp=readGPIO(963);
         emit dia_pedal(963,dp);
 
     }
     if(br1 == "Silicon Oil On/Off")
     {
-        sp=!sp;
+        //sp=!sp;
         //writeGPIO(963,sp);
+        sp=readGPIO(963);
         emit siloil_pedal(963,sp);
     }
 
@@ -1491,4 +1512,17 @@ void settingswindow::fpsettings()
 //    if(sum!=100){
 //        QMessageBox::information(nullptr, "Information", "check the Total of positons 0,1,2,3.");
 //    }
+}
+
+int settingswindow::readGPIO(int pin)
+{
+    QFile file(QString("/sys/class/gpio/gpio%1/value").arg(pin));
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Unable to open GPIO file.";
+        return -1;
+    }
+    QTextStream stream(&file);
+    QString value = stream.readLine();
+    file.close();
+    return value.toInt();
 }

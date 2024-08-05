@@ -22,6 +22,14 @@ class settingswindow : public QDialog
 {
     Q_OBJECT
 
+//    struct pedals {
+//        int lp=0;
+//        int lp2=0;
+//        int vip=0;
+//        int dp=0;
+//        int sp=0;
+//    };
+
 public:
     explicit settingswindow(QWidget *parent = nullptr);
     ~settingswindow();
@@ -37,6 +45,7 @@ public:
     int vip=0;
     int dp=0;
     int sp=0;
+    int readGPIO(int pin);
 
 
 signals:
