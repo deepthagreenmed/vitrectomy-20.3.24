@@ -97,6 +97,7 @@ public slots:
     //save for current surgeon
     void on_save_clicked();
     void on_fp_settings_clicked();
+    //void onTimeout();
 
 
 private slots:
@@ -134,11 +135,9 @@ private:
       textkeypad *text;
       int led1value;
       int led2value;
-//      int tlpedal=0;
-//      int blpedal=0;
-//      int trpedal=0;
-//      int brpedal=0;
+      QTimer *timergpio;
       QTimer* clicktimer;
+      int counter;
 
 
 

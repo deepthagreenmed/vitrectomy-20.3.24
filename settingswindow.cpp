@@ -1466,24 +1466,78 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
 
     if(pos == "LED1 On/Off")
     {
-        emit led1_pedal(pin,value);
+        if(value != lp)
+        {
+            lp=value;
+            counter++;
+            if(counter==2)
+            {
+                lp=!lp;
+                emit led1_pedal(pin,lp);
+                counter=0;
+            }
+        }
 
     }
     if(pos == "LED2 On/Off")
     {
-        emit led2_pedal(pin,value);
+        if(value != lp2)
+        {
+            lp2=value;
+            counter++;
+            if(counter==2)
+            {
+                lp2=!lp2;
+                emit led2_pedal(pin,lp2);
+                counter=0;
+            }
+        }
+
     }
     if(pos == "Vitrectomy On/Off")
     {
-        emit vit_pedal(pin,value);
+        if(value != vip)
+        {
+            vip=value;
+            counter++;
+            if(counter==2)
+            {
+                vip=!vip;
+                emit vit_pedal(pin,vip);
+                counter=0;
+            }
+        }
+
     }
     if(pos == "Diathermy On/Off")
     {
-        emit dia_pedal(pin,value);
+        if(value != dp)
+        {
+            dp=value;
+            counter++;
+            if(counter==2)
+            {
+               dp=!dp;
+               emit dia_pedal(pin,dp);
+               counter=0;
+            }
+        }
+
     }
     if(pos == "Silicon Oil On/Off")
     {
-        emit siloil_pedal(pin,value);
+        if(value != sp)
+        {
+            sp=value;
+            counter++;
+            if(counter==2)
+            {
+                sp=!sp;
+                emit siloil_pedal(pin,sp);
+                counter=0;
+            }
+        }
+
     }
 }
 

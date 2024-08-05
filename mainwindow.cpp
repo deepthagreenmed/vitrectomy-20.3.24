@@ -3120,7 +3120,7 @@ void MainWindow::led1_setvalue(int pin, int value)
         connect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
 
 
-lp=1;
+        lp=1;
 
     }
     else
