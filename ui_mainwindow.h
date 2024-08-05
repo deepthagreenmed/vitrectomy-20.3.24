@@ -483,7 +483,7 @@ public:
         label_time->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";"));
         label_12 = new QLabel(centralwidget);
         label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setGeometry(QRect(0, 0, 1920, 1080));
+        label_12->setGeometry(QRect(-10, 0, 1920, 1080));
         label_12->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/logo3.png);"));
         label_22 = new QLabel(centralwidget);
         label_22->setObjectName(QString::fromUtf8("label_22"));
@@ -539,44 +539,50 @@ public:
 "background-color: rgba(191, 64, 64, 0);"));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(536, 519, 1301, 61));
+        label_2->setGeometry(QRect(530, 520, 1301, 61));
         label_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 75 30pt \"Ubuntu\";"));
         pushButton_vitonoff = new QPushButton(centralwidget);
         pushButton_vitonoff->setObjectName(QString::fromUtf8("pushButton_vitonoff"));
         pushButton_vitonoff->setGeometry(QRect(400, 610, 81, 81));
         pushButton_vitonoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
-"border: none;\n"
+"border: 3px solid black;\n"
+"border-radius:40px;\n"
 ""));
         pushButton_led1onoff = new QPushButton(centralwidget);
         pushButton_led1onoff->setObjectName(QString::fromUtf8("pushButton_led1onoff"));
         pushButton_led1onoff->setGeometry(QRect(810, 620, 81, 81));
         pushButton_led1onoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
-"border: none;\n"
+"border: 3px solid black;\n"
+"border-radius:40px;\n"
 ""));
         pushButton_led2onoff = new QPushButton(centralwidget);
         pushButton_led2onoff->setObjectName(QString::fromUtf8("pushButton_led2onoff"));
         pushButton_led2onoff->setGeometry(QRect(1050, 620, 81, 81));
         pushButton_led2onoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
-"border: none;\n"
+"border: 3px solid black;\n"
+"border-radius:40px;\n"
 ""));
         pushButton_diaonoff = new QPushButton(centralwidget);
         pushButton_diaonoff->setObjectName(QString::fromUtf8("pushButton_diaonoff"));
         pushButton_diaonoff->setGeometry(QRect(1460, 620, 81, 81));
         pushButton_diaonoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
-"border: none;\n"
+"border: 3px solid black;\n"
+"border-radius:40px;\n"
 ""));
         pushButton_aionoff = new QPushButton(centralwidget);
         pushButton_aionoff->setObjectName(QString::fromUtf8("pushButton_aionoff"));
         pushButton_aionoff->setGeometry(QRect(1310, 150, 81, 81));
         pushButton_aionoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
-"border: none;\n"
+"border: 3px solid black;\n"
+"border-radius:40px;\n"
 ""));
         pushButton_siloilonoff = new QPushButton(centralwidget);
         pushButton_siloilonoff->setObjectName(QString::fromUtf8("pushButton_siloilonoff"));
         pushButton_siloilonoff->setGeometry(QRect(750, 160, 81, 81));
         pushButton_siloilonoff->setStyleSheet(QString::fromUtf8("image: url(:/new/prefix1/img/off.png);\n"
-"border: none;\n"
+"border: 3px solid black;\n"
+"border-radius:40px;\n"
 ""));
         comboBox_surgeonname = new QComboBox(centralwidget);
         comboBox_surgeonname->addItem(QString());
@@ -606,6 +612,7 @@ public:
 "color: rgb(255,255,255);\n"
 "border-radius:20px;\n"
 "font-weight: bold;"));
+        comboBox_surgeonname->setMaxVisibleItems(20);
         MainWindow->setCentralWidget(centralwidget);
         label_39->raise();
         label_20->raise();
@@ -674,8 +681,8 @@ public:
         label_12->raise();
         label_22->raise();
         label_2->raise();
-        comboBox_surgeonname->raise();
         pushButton_start->raise();
+        comboBox_surgeonname->raise();
 
         retranslateUi(MainWindow);
 

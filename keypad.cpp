@@ -1,6 +1,10 @@
 #include "keypad.h"
 #include "ui_keypad.h"
 
+#include <iostream>
+#include <chrono>
+#include <thread>
+
 #include <QDebug>
 
 keypad::keypad(QWidget *parent) :
@@ -81,6 +85,8 @@ void keypad::enterenter()
 
 void keypad::keysound()
 {
-    hhandler->speaker_on(50);
+    hhandler->speaker_on(20);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    hhandler->speaker_off();
 }
 

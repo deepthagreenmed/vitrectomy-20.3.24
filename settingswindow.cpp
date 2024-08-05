@@ -45,6 +45,10 @@ settingswindow::settingswindow(QWidget *parent) :
     clicktimer->setInterval(200);
     clicktimer->setSingleShot(true);
 
+    QTimer *timer1=new QTimer;
+    connect(timer1, &QTimer::timeout, this, &settingswindow::fpsettings);
+    timer1->start(1000);
+
 
     //code to load database in the starting
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
@@ -176,10 +180,10 @@ settingswindow::settingswindow(QWidget *parent) :
     ui->lineEdit_vac->setText(itemname36);
     ui->comboBox_mode->setCurrentText(itemname37);
 
-    ui->comboBox_20->setCurrentText(itemname39);
-    ui->comboBox_23->setCurrentText(itemname40);
-    ui->comboBox_21->setCurrentText(itemname41);
-    ui->comboBox_24->setCurrentText(itemname42);
+    ui->comboBox_tl->setCurrentText(itemname39);
+    ui->comboBox_br->setCurrentText(itemname40);
+    ui->comboBox_bl->setCurrentText(itemname41);
+    ui->comboBox_tr->setCurrentText(itemname42);
     ui->lineEdit_5->setText(itemname43);
 
 
@@ -276,10 +280,10 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onCutterTypeChanged);
 
 
-    connect(ui->comboBox_20,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBox20);
-    connect(ui->comboBox_21,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBox21);
-    connect(ui->comboBox_23,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBox23);
-    connect(ui->comboBox_24,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBox24);
+    connect(ui->comboBox_tl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTL);
+    connect(ui->comboBox_bl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBL);
+    connect(ui->comboBox_br,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBR);
+    connect(ui->comboBox_tr,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTR);
 
 
     connect(ui->listWidget, &QListWidget::itemClicked, this, &settingswindow::updateSurgeon);
@@ -602,10 +606,10 @@ void settingswindow::on_saveforall_clicked()
 
     QSqlQuery qry;
 
-    tl1=ui->comboBox_20->currentText();
-    tr1=ui->comboBox_23->currentText();
-    bl1=ui->comboBox_21->currentText();
-    br1=ui->comboBox_24->currentText();
+    tl1=ui->comboBox_tl->currentText();
+    tr1=ui->comboBox_br->currentText();
+    bl1=ui->comboBox_bl->currentText();
+    br1=ui->comboBox_tr->currentText();
     db1.open();
 
     qry.prepare("update maindb set ftopleft='"+tl1+"',ftopright='"+tr1+"',fbottomleft='"+bl1+"',fbottomright='"+br1+"'");
@@ -633,10 +637,10 @@ void settingswindow::on_save_clicked()
     QSqlQuery qry;
     QString surgeon;
     surgeon=ui->lineEdit_5->text();
-    tl1=ui->comboBox_20->currentText();
-    tr1=ui->comboBox_23->currentText();
-    bl1=ui->comboBox_21->currentText();
-    br1=ui->comboBox_24->currentText();
+    tl1=ui->comboBox_tl->currentText();
+    tr1=ui->comboBox_br->currentText();
+    bl1=ui->comboBox_bl->currentText();
+    br1=ui->comboBox_tr->currentText();
     db1.open();
 
     qry.prepare("update maindb set ftopleft='"+tl1+"',ftopright='"+tr1+"',fbottomleft='"+bl1+"',fbottomright='"+br1+"' where surgeon='"+surgeon+"'");
@@ -741,10 +745,10 @@ ui->comboBox_cuttermode->setCurrentText(itemname35);
 ui->comboBox_cuttertype->setCurrentText(itemname48);
 ui->lineEdit_vac->setText(itemname36);
 ui->comboBox_mode->setCurrentText(itemname37);
-ui->comboBox_20->setCurrentText(itemname39);
-ui->comboBox_23->setCurrentText(itemname40);
-ui->comboBox_21->setCurrentText(itemname41);
-ui->comboBox_24->setCurrentText(itemname42);
+ui->comboBox_tl->setCurrentText(itemname39);
+ui->comboBox_br->setCurrentText(itemname40);
+ui->comboBox_bl->setCurrentText(itemname41);
+ui->comboBox_tr->setCurrentText(itemname42);
 ui->lineEdit_5->setText(itemname43);
 
  ui->lineEdit_zero->setText(itemname44);
@@ -1323,7 +1327,7 @@ void settingswindow::swap_onoff()
 
 }
 
-void settingswindow::comboBox20(int index)
+void settingswindow::comboBoxTL(int index)
 {
     if(tl1 == "LED1 On/Off")
     {
@@ -1363,7 +1367,7 @@ void settingswindow::comboBox20(int index)
 
 }
 
-void settingswindow::comboBox23(int index)
+void settingswindow::comboBoxBR(int index)
 {
     if(tr1 == "LED1 On/Off")
     {
@@ -1404,7 +1408,7 @@ void settingswindow::comboBox23(int index)
 
 }
 
-void settingswindow::comboBox21(int index)
+void settingswindow::comboBoxBL(int index)
 {
     if(bl1 == "LED1 On/Off")
     {
@@ -1440,7 +1444,7 @@ void settingswindow::comboBox21(int index)
 
 }
 
-void settingswindow::comboBox24(int index)
+void settingswindow::comboBoxTR(int index)
 {
     if(br1 == "LED1 On/Off")
     {
@@ -1478,4 +1482,13 @@ void settingswindow::comboBox24(int index)
     }
 
 
+}
+
+void settingswindow::fpsettings()
+{
+    double sum=ui->lineEdit_zero->text().toDouble()+ui->lineEdit_one->text().toDouble()+ui->lineEdit_two->text().toDouble()+ui->lineEdit_three->text().toDouble();
+    ui->label_110->setText(QString::number(sum));
+//    if(sum!=100){
+//        QMessageBox::information(nullptr, "Information", "check the Total of positons 0,1,2,3.");
+//    }
 }

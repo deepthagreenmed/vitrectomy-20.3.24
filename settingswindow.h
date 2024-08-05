@@ -62,6 +62,7 @@ signals:
 
 
 public slots:
+    void fpsettings();
     void updateSurgeon();
     void on_clicked(const QString& digit);
      void on_clickedbackspace();
@@ -92,6 +93,7 @@ public slots:
     void on_saveforall_clicked();
     //save for current surgeon
     void on_save_clicked();
+    void on_fp_settings_clicked();
 
 
 private slots:
@@ -100,7 +102,7 @@ private slots:
     void onCutterTypeChanged(int index);
     void loadDatabaseFromList(const QString &currentText);
     //footpedal settings
-    void on_fp_settings_clicked();
+
     //tabs
     void on_tab_dia_clicked();
     void on_tab_led_clicked();
@@ -109,10 +111,10 @@ private slots:
     void on_tab_fp_clicked();
     void on_tab_fppreset_clicked();
 
-    void comboBox20(int index);
-    void comboBox23(int index);
-    void comboBox21(int index);
-    void comboBox24(int index);
+    void comboBoxTL(int index);
+    void comboBoxBR(int index);
+    void comboBoxBL(int index);
+    void comboBoxTR(int index);
 
 
 private:

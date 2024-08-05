@@ -1088,7 +1088,7 @@ background-color: rgba(191, 64, 64, 0);
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>0</y>
       <width>1920</width>
       <height>1080</height>
@@ -1242,8 +1242,8 @@ background-color: rgba(191, 64, 64, 0);</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>536</x>
-      <y>519</y>
+      <x>530</x>
+      <y>520</y>
       <width>1301</width>
       <height>61</height>
      </rect>
@@ -1267,7 +1267,8 @@ font: 75 30pt &quot;Ubuntu&quot;;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/new/prefix1/img/off.png);
-border: none;
+border: 3px solid black;
+border-radius:40px;
 </string>
     </property>
     <property name="text">
@@ -1285,7 +1286,8 @@ border: none;
     </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/new/prefix1/img/off.png);
-border: none;
+border: 3px solid black;
+border-radius:40px;
 </string>
     </property>
     <property name="text">
@@ -1303,7 +1305,8 @@ border: none;
     </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/new/prefix1/img/off.png);
-border: none;
+border: 3px solid black;
+border-radius:40px;
 </string>
     </property>
     <property name="text">
@@ -1321,7 +1324,8 @@ border: none;
     </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/new/prefix1/img/off.png);
-border: none;
+border: 3px solid black;
+border-radius:40px;
 </string>
     </property>
     <property name="text">
@@ -1339,7 +1343,8 @@ border: none;
     </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/new/prefix1/img/off.png);
-border: none;
+border: 3px solid black;
+border-radius:40px;
 </string>
     </property>
     <property name="text">
@@ -1357,7 +1362,8 @@ border: none;
     </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/new/prefix1/img/off.png);
-border: none;
+border: 3px solid black;
+border-radius:40px;
 </string>
     </property>
     <property name="text">
@@ -1379,6 +1385,9 @@ background-color: rgb(0, 0, 0);
 color: rgb(255,255,255);
 border-radius:20px;
 font-weight: bold;</string>
+    </property>
+    <property name="maxVisibleItems">
+     <number>20</number>
     </property>
     <item>
      <property name="text">
@@ -1548,8 +1557,8 @@ font-weight: bold;</string>
    <zorder>label_12</zorder>
    <zorder>label_22</zorder>
    <zorder>label_2</zorder>
-   <zorder>comboBox_surgeonname</zorder>
    <zorder>pushButton_start</zorder>
+   <zorder>comboBox_surgeonname</zorder>
   </widget>
  </widget>
  <resources/>

@@ -66,10 +66,10 @@ public:
     QLabel *label_11;
     QLabel *label_20;
     QLabel *label_35;
-    QComboBox *comboBox_20;
-    QComboBox *comboBox_21;
-    QComboBox *comboBox_23;
-    QComboBox *comboBox_24;
+    QComboBox *comboBox_tl;
+    QComboBox *comboBox_bl;
+    QComboBox *comboBox_br;
+    QComboBox *comboBox_tr;
     QWidget *tab_10;
     QPushButton *pushButton_oneinc;
     QPushButton *pushButton_onedec;
@@ -412,54 +412,54 @@ public:
         label_35->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "font: 30pt \"Ubuntu\";border-radius: 20px;\n"
 "background-color: rgb(53, 63, 99);"));
-        comboBox_20 = new QComboBox(tab_9);
-        comboBox_20->addItem(QString());
-        comboBox_20->addItem(QString());
-        comboBox_20->addItem(QString());
-        comboBox_20->addItem(QString());
-        comboBox_20->addItem(QString());
-        comboBox_20->setObjectName(QString::fromUtf8("comboBox_20"));
-        comboBox_20->setGeometry(QRect(10, 290, 291, 61));
-        comboBox_20->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
+        comboBox_tl = new QComboBox(tab_9);
+        comboBox_tl->addItem(QString());
+        comboBox_tl->addItem(QString());
+        comboBox_tl->addItem(QString());
+        comboBox_tl->addItem(QString());
+        comboBox_tl->addItem(QString());
+        comboBox_tl->setObjectName(QString::fromUtf8("comboBox_tl"));
+        comboBox_tl->setGeometry(QRect(10, 290, 291, 61));
+        comboBox_tl->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"
 "border-radius:20px;\n"
 "font-weight: bold;"));
-        comboBox_21 = new QComboBox(tab_9);
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->addItem(QString());
-        comboBox_21->setObjectName(QString::fromUtf8("comboBox_21"));
-        comboBox_21->setGeometry(QRect(10, 440, 291, 61));
-        comboBox_21->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
+        comboBox_bl = new QComboBox(tab_9);
+        comboBox_bl->addItem(QString());
+        comboBox_bl->addItem(QString());
+        comboBox_bl->addItem(QString());
+        comboBox_bl->addItem(QString());
+        comboBox_bl->addItem(QString());
+        comboBox_bl->setObjectName(QString::fromUtf8("comboBox_bl"));
+        comboBox_bl->setGeometry(QRect(10, 440, 291, 61));
+        comboBox_bl->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"
 "border-radius:20px;\n"
 "font-weight: bold;"));
-        comboBox_23 = new QComboBox(tab_9);
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->addItem(QString());
-        comboBox_23->setObjectName(QString::fromUtf8("comboBox_23"));
-        comboBox_23->setGeometry(QRect(770, 450, 291, 61));
-        comboBox_23->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
+        comboBox_br = new QComboBox(tab_9);
+        comboBox_br->addItem(QString());
+        comboBox_br->addItem(QString());
+        comboBox_br->addItem(QString());
+        comboBox_br->addItem(QString());
+        comboBox_br->addItem(QString());
+        comboBox_br->setObjectName(QString::fromUtf8("comboBox_br"));
+        comboBox_br->setGeometry(QRect(770, 450, 291, 61));
+        comboBox_br->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"
 "border-radius:20px;\n"
 "font-weight: bold;"));
-        comboBox_24 = new QComboBox(tab_9);
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->addItem(QString());
-        comboBox_24->setObjectName(QString::fromUtf8("comboBox_24"));
-        comboBox_24->setGeometry(QRect(770, 290, 291, 61));
-        comboBox_24->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
+        comboBox_tr = new QComboBox(tab_9);
+        comboBox_tr->addItem(QString());
+        comboBox_tr->addItem(QString());
+        comboBox_tr->addItem(QString());
+        comboBox_tr->addItem(QString());
+        comboBox_tr->addItem(QString());
+        comboBox_tr->setObjectName(QString::fromUtf8("comboBox_tr"));
+        comboBox_tr->setGeometry(QRect(770, 290, 291, 61));
+        comboBox_tr->setStyleSheet(QString::fromUtf8("font: 20pt \"Ubuntu\";\n"
 "background-color: rgb(0, 0, 0);\n"
 "color: rgb(255,255,255);\n"
 "border-radius:20px;\n"
@@ -470,10 +470,10 @@ public:
         pushButton_saveforall->raise();
         pushButton_save_5->raise();
         label_20->raise();
-        comboBox_20->raise();
-        comboBox_21->raise();
-        comboBox_23->raise();
-        comboBox_24->raise();
+        comboBox_tl->raise();
+        comboBox_bl->raise();
+        comboBox_br->raise();
+        comboBox_tr->raise();
         tab_10 = new QWidget();
         tab_10->setObjectName(QString::fromUtf8("tab_10"));
         pushButton_oneinc = new QPushButton(tab_10);
@@ -1064,29 +1064,29 @@ public:
         label_11->setText(QString());
         label_20->setText(QString());
         label_35->setText(QString());
-        comboBox_20->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
-        comboBox_20->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
-        comboBox_20->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
-        comboBox_20->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
-        comboBox_20->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
+        comboBox_tl->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_tl->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_tl->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_tl->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_tl->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
-        comboBox_21->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
-        comboBox_21->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
-        comboBox_21->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
-        comboBox_21->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
-        comboBox_21->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
+        comboBox_bl->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_bl->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_bl->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_bl->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_bl->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
-        comboBox_23->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
-        comboBox_23->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
-        comboBox_23->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
-        comboBox_23->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
-        comboBox_23->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
+        comboBox_br->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_br->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_br->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_br->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_br->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
-        comboBox_24->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
-        comboBox_24->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
-        comboBox_24->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
-        comboBox_24->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
-        comboBox_24->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
+        comboBox_tr->setItemText(0, QCoreApplication::translate("settingswindow", "LED1 On/Off", nullptr));
+        comboBox_tr->setItemText(1, QCoreApplication::translate("settingswindow", "LED2 On/Off", nullptr));
+        comboBox_tr->setItemText(2, QCoreApplication::translate("settingswindow", "Vitrectomy On/Off", nullptr));
+        comboBox_tr->setItemText(3, QCoreApplication::translate("settingswindow", "Diathermy On/Off", nullptr));
+        comboBox_tr->setItemText(4, QCoreApplication::translate("settingswindow", "Silicon Oil On/Off", nullptr));
 
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_9), QCoreApplication::translate("settingswindow", "Foot Pedal", nullptr));
         pushButton_oneinc->setText(QString());

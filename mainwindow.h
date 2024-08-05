@@ -16,6 +16,8 @@
 #include <sstream>
 #include <cmath>
 #include <unistd.h>
+#include <chrono>
+#include <thread>
 
 #include <QLabel>
 #include <QSqlDatabase>
@@ -70,6 +72,8 @@ public:
     void setGPIODirection(int pin, const std::string& direction);
     void writeGPIO(int pin, int value);
     void loadPresets();
+    void fpsettings();
+
 
 
 signals:
@@ -99,6 +103,7 @@ public slots:
 
 
 private slots:
+     void keysound();
      void configOnOff();
      void siloil();
      void led1_setvalue(int pin, int value);
@@ -183,10 +188,10 @@ private:
     int sp;
     int p=0;
     int avgfp=0;
-    double fp0;
-    double fp1;
-    double fp2;
-    double fp3;
+    double fp0=2*40.95;
+    double fp1=8*40.95;
+    double fp2=45*40.95;
+    double fp3=45*40.95;
     hwHandler *hhandler;
     footpedal *fp;
     Vaccum *vac;
@@ -204,7 +209,10 @@ private:
     int vacpresetval;
     QTimer timesiloil;
     QTimer *clicktimer;
+    QTimer *timercb;
 
 
 };
 #endif // MAINWINDOW_H
+
+

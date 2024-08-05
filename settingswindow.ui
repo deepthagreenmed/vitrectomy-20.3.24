@@ -785,7 +785,7 @@ background-color: rgb(53, 63, 99);</string>
       <string/>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_20">
+    <widget class="QComboBox" name="comboBox_tl">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -827,7 +827,7 @@ font-weight: bold;</string>
       </property>
      </item>
     </widget>
-    <widget class="QComboBox" name="comboBox_21">
+    <widget class="QComboBox" name="comboBox_bl">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -869,7 +869,7 @@ font-weight: bold;</string>
       </property>
      </item>
     </widget>
-    <widget class="QComboBox" name="comboBox_23">
+    <widget class="QComboBox" name="comboBox_br">
      <property name="geometry">
       <rect>
        <x>770</x>
@@ -911,7 +911,7 @@ font-weight: bold;</string>
       </property>
      </item>
     </widget>
-    <widget class="QComboBox" name="comboBox_24">
+    <widget class="QComboBox" name="comboBox_tr">
      <property name="geometry">
       <rect>
        <x>770</x>
@@ -958,10 +958,10 @@ font-weight: bold;</string>
     <zorder>pushButton_saveforall</zorder>
     <zorder>pushButton_save_5</zorder>
     <zorder>label_20</zorder>
-    <zorder>comboBox_20</zorder>
-    <zorder>comboBox_21</zorder>
-    <zorder>comboBox_23</zorder>
-    <zorder>comboBox_24</zorder>
+    <zorder>comboBox_tl</zorder>
+    <zorder>comboBox_bl</zorder>
+    <zorder>comboBox_br</zorder>
+    <zorder>comboBox_tr</zorder>
    </widget>
    <widget class="QWidget" name="tab_10">
     <attribute name="title">
