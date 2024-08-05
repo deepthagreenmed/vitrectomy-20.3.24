@@ -69,7 +69,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     vacpresetval = ui->label_vacpreset->text().toInt();
 
-    //fpsettings();
 
     for(int gpioPin=960; gpioPin<965; gpioPin++)
     {
@@ -3518,24 +3517,3 @@ void MainWindow::keysound()
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     hhandler->speaker_off();
 }
-
-void MainWindow::fpsettings()
-{
-    QSqlDatabase db1 = QSqlDatabase::addDatabase("QSQLITE");
-    db1.setDatabaseName(PATH);
-    db1.open();
-    QSqlQuery query;
-    query.prepare("select * from maindb where surgeon='"+surgeon+"'");
-    query.exec();
-    if(query.next())
-    {
-        fp0=query.value(43).toString().toDouble()*40.95;
-        fp1=query.value(44).toString().toDouble()*40.95;
-        fp2=query.value(45).toString().toDouble()*40.95;
-        fp3=query.value(46).toString().toDouble()*40.95;
-    }
-    qDebug()<<fp0<<fp1<<fp2<<fp3;
-    db1.close();
-
-}
-

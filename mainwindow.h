@@ -72,7 +72,7 @@ public:
     void setGPIODirection(int pin, const std::string& direction);
     void writeGPIO(int pin, int value);
     void loadPresets();
-    void fpsettings();
+
 
 
 
