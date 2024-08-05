@@ -22,13 +22,6 @@ class settingswindow : public QDialog
 {
     Q_OBJECT
 
-//    struct pedals {
-//        int lp=0;
-//        int lp2=0;
-//        int vip=0;
-//        int dp=0;
-//        int sp=0;
-//    };
 
 public:
     explicit settingswindow(QWidget *parent = nullptr);
@@ -40,12 +33,13 @@ public:
     void populatetype();
     void updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue);
     int flag2=0;
-    int lp=0;
-    int lp2=0;
-    int vip=0;
-    int dp=0;
-    int sp=0;
+    int lp;
+    int lp2;
+    int vip;
+    int dp;
+    int sp;
     int readGPIO(int pin);
+    void gpiofp(int pin, int value, QString pos);
 
 
 signals:
@@ -120,10 +114,10 @@ private slots:
     void on_tab_fp_clicked();
     void on_tab_fppreset_clicked();
 
-    void comboBoxTL(int index);
-    void comboBoxBR(int index);
-    void comboBoxBL(int index);
-    void comboBoxTR(int index);
+    void comboBoxTL();
+    void comboBoxBR();
+    void comboBoxBL();
+    void comboBoxTR();
 
 
 private:
@@ -140,10 +134,10 @@ private:
       textkeypad *text;
       int led1value;
       int led2value;
-      int tlpedal=0;
-      int blpedal=0;
-      int trpedal=0;
-      int brpedal=0;
+//      int tlpedal=0;
+//      int blpedal=0;
+//      int trpedal=0;
+//      int brpedal=0;
       QTimer* clicktimer;
 
 

@@ -280,11 +280,17 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onCutterTypeChanged);
 
 
-    connect(ui->comboBox_tl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTL);
-    connect(ui->comboBox_bl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBL);
-    connect(ui->comboBox_br,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBR);
-    connect(ui->comboBox_tr,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTR);
+//    connect(ui->comboBox_tl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTL);
+//    connect(ui->comboBox_bl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBL);
+//    connect(ui->comboBox_br,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBR);
+//    connect(ui->comboBox_tr,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTR);
 
+    QTimer *timergpio=new QTimer;
+    connect(timergpio,&QTimer::timeout,this,&settingswindow::comboBoxTL);
+    connect(timergpio,&QTimer::timeout,this,&settingswindow::comboBoxBL);
+    connect(timergpio,&QTimer::timeout,this,&settingswindow::comboBoxBR);
+    connect(timergpio,&QTimer::timeout,this,&settingswindow::comboBoxTR);
+    timergpio->start(1000);
 
     connect(ui->listWidget, &QListWidget::itemClicked, this, &settingswindow::updateSurgeon);
 
@@ -619,6 +625,8 @@ void settingswindow::on_saveforall_clicked()
     qry.bindValue(bl1,"fbottomleft");
     qry.bindValue(br1,"fbottomright");
 
+    qDebug()<<tl1<<tr1<<bl1<<br1;
+
     db1.close();
     QSqlDatabase::removeDatabase("QSQLITE");
 
@@ -649,6 +657,9 @@ void settingswindow::on_save_clicked()
     qry.bindValue(tr1,"ftopright");
     qry.bindValue(bl1,"fbottomleft");
     qry.bindValue(br1,"fbottomright");
+
+
+    qDebug()<<tl1<<tr1<<bl1<<br1;
 
     db1.close();
     QSqlDatabase::removeDatabase("QSQLITE");
@@ -1327,181 +1338,153 @@ void settingswindow::swap_onoff()
 
 }
 
-void settingswindow::comboBoxTL(int index)
+void settingswindow::comboBoxTL()
 {
     if(tl1 == "LED1 On/Off")
     {
-        //lp=!lp;
-        //writeGPIO(960,lp);
-        lp=readGPIO(960);
-        emit led1_pedal(960,lp);
+        gpiofp(961,lp,tl1);
 
     }
     if(tl1 == "LED2 On/Off")
     {
-        //lp2=!lp2;
-        //writeGPIO(960,lp2);
-        lp2=readGPIO(960);
-        emit led2_pedal(960,lp2);
+         gpiofp(961,lp2,tl1);
 
     }
     if(tl1 == "Vitrectomy On/Off")
     {
-        //vip=!vip;
-        //writeGPIO(960,vip);
-        vip=readGPIO(960);
-        emit vit_pedal(960,vip);
+         gpiofp(961,vip,tl1);
 
     }
     if(tl1 == "Diathermy On/Off")
     {
-        //dp=!dp;
-        //writeGPIO(960,dp);
-        dp=readGPIO(960);
-        emit dia_pedal(960,dp);
+         gpiofp(961,dp,tl1);
 
     }
     if(tl1 == "Silicon Oil On/Off")
     {
-        //sp=!sp;
-        //writeGPIO(960,sp);
-        sp=readGPIO(960);
-        emit siloil_pedal(960,sp);
+         gpiofp(961,sp,tl1);
     }
 
+    qDebug()<<"top left"<<readGPIO(961);
 
 }
 
-void settingswindow::comboBoxBR(int index)
-{
-    if(tr1 == "LED1 On/Off")
-    {
-        //lp=!lp;
-        //writeGPIO(961,lp);
-        lp=readGPIO(961);
-        emit led1_pedal(961,lp);
-
-    }
-    if(tr1 == "LED2 On/Off")
-    {
-        //lp2=!lp2;
-        //writeGPIO(961,lp2);
-        lp2=readGPIO(961);
-        emit led2_pedal(961,lp2);
-
-    }
-    if(tr1 == "Vitrectomy On/Off")
-    {
-        //vip=!vip;
-        //writeGPIO(961,vip);
-        vip=readGPIO(961);
-        emit vit_pedal(961,vip);
-
-    }
-    if(tr1 == "Diathermy On/Off")
-    {
-        //dp=!dp;
-        //writeGPIO(961,dp);
-        dp=readGPIO(961);
-        emit dia_pedal(961,dp);
-
-    }
-    if(tr1 == "Silicon Oil On/Off")
-    {
-        //sp=!sp;
-        //writeGPIO(961,sp);
-        sp=readGPIO(961);
-        emit siloil_pedal(961,sp);
-    }
-
-
-
-}
-
-void settingswindow::comboBoxBL(int index)
-{
-    if(bl1 == "LED1 On/Off")
-    {
-        //lp=!lp;
-        //writeGPIO(962,lp);
-        lp=readGPIO(962);
-        emit led1_pedal(962,lp);
-    }
-    if(bl1 == "LED2 On/Off")
-    {
-        //lp2=!lp2;
-        //writeGPIO(962,lp2);
-        lp2=readGPIO(962);
-        emit led2_pedal(962,lp2);
-    }
-    if(bl1 == "Vitrectomy On/Off")
-    {
-        //vip=!vip;
-        //writeGPIO(962,vip);
-        vip=readGPIO(962);
-        emit vit_pedal(962,vip);
-    }
-    if(bl1 == "Diathermy On/Off")
-    {
-        //dp=!dp;
-        //writeGPIO(962,dp);
-        dp=readGPIO(962);
-        emit dia_pedal(962,dp);
-    }
-    if(bl1 == "Silicon Oil On/Off")
-    {
-        //sp=!sp;
-        //writeGPIO(962,sp);
-        sp=readGPIO(962);
-        emit siloil_pedal(962,sp);
-    }
-
-
-}
-
-void settingswindow::comboBoxTR(int index)
+void settingswindow::comboBoxBR()
 {
     if(br1 == "LED1 On/Off")
     {
-        //lp=!lp;
-        //writeGPIO(963,lp);
-        lp=readGPIO(963);
-        emit led1_pedal(963,lp);
+        gpiofp(963,lp,br1);
 
     }
     if(br1 == "LED2 On/Off")
     {
-        //lp2=!lp2;
-        //writeGPIO(963,lp2);
-        lp2=readGPIO(963);
-        emit led2_pedal(963,lp2);
+         gpiofp(963,lp2,br1);
 
     }
     if(br1 == "Vitrectomy On/Off")
     {
-        //vip=!vip;
-        //writeGPIO(963,vip);
-        vip=readGPIO(963);
-        emit vit_pedal(963,vip);
+         gpiofp(963,vip,br1);
 
     }
     if(br1 == "Diathermy On/Off")
     {
-        //dp=!dp;
-        //writeGPIO(963,dp);
-        dp=readGPIO(963);
-        emit dia_pedal(963,dp);
+         gpiofp(963,dp,br1);
 
     }
     if(br1 == "Silicon Oil On/Off")
     {
-        //sp=!sp;
-        //writeGPIO(963,sp);
-        sp=readGPIO(963);
-        emit siloil_pedal(963,sp);
+         gpiofp(963,sp,br1);
     }
 
+    qDebug()<<"bottom right"<<readGPIO(963);
 
+}
+
+void settingswindow::comboBoxBL()
+{
+    if(bl1 == "LED1 On/Off")
+    {
+        gpiofp(962,lp,bl1);
+
+    }
+    if(bl1 == "LED2 On/Off")
+    {
+         gpiofp(962,lp2,bl1);
+
+    }
+    if(bl1 == "Vitrectomy On/Off")
+    {
+         gpiofp(962,vip,bl1);
+
+    }
+    if(bl1 == "Diathermy On/Off")
+    {
+         gpiofp(962,dp,bl1);
+
+    }
+    if(bl1 == "Silicon Oil On/Off")
+    {
+         gpiofp(962,sp,bl1);
+    }
+
+    qDebug()<<"bottom left"<<readGPIO(962);
+}
+
+void settingswindow::comboBoxTR()
+{
+    if(tr1 == "LED1 On/Off")
+    {
+        gpiofp(964,lp,tr1);
+
+    }
+    if(tr1 == "LED2 On/Off")
+    {
+         gpiofp(964,lp2,tr1);
+
+    }
+    if(tr1 == "Vitrectomy On/Off")
+    {
+         gpiofp(964,vip,tr1);
+
+    }
+    if(tr1 == "Diathermy On/Off")
+    {
+         gpiofp(964,dp,tr1);
+
+    }
+    if(tr1 == "Silicon Oil On/Off")
+    {
+         gpiofp(964,sp,tr1);
+    }
+
+    qDebug()<<"top right"<<readGPIO(964);
+}
+
+void settingswindow::gpiofp(int pin,int value, QString pos)
+{
+    value=readGPIO(pin);
+
+    if(pos == "LED1 On/Off")
+    {
+        emit led1_pedal(pin,value);
+
+    }
+    if(pos == "LED2 On/Off")
+    {
+        emit led2_pedal(pin,value);
+    }
+    if(pos == "Vitrectomy On/Off")
+    {
+        emit vit_pedal(pin,value);
+    }
+    if(pos == "Diathermy On/Off")
+    {
+        emit dia_pedal(pin,value);
+    }
+    if(pos == "Silicon Oil On/Off")
+    {
+        emit siloil_pedal(pin,value);
+    }
 }
 
 void settingswindow::fpsettings()

@@ -172,12 +172,6 @@ private:
     QTimer *timerforondscreen ;
     int frequency;
     float dutycycle;
-    QPropertyAnimation *animation;
-    QPropertyAnimation *animation1;
-    QPropertyAnimation *animation2;
-    QPropertyAnimation *animation3;
-    QPropertyAnimation *animation4;
-    QPropertyAnimation *animation5;
     int vp;
     int ap;
     int vip;

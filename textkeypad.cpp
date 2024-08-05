@@ -11,7 +11,6 @@ textkeypad::textkeypad(QWidget *parent) :
 
     clicktimer=new QTimer;
 
-
     connect(ui->pushButton, &QPushButton::clicked, this, &textkeypad::entertext);
 
 
@@ -45,19 +44,29 @@ void textkeypad::entertext()
          digit = button->text();
          emit textsignal(digit);
      }
+     clicktimer->start();
     }
 }
 
 void textkeypad::enterback()
 {
+    if(!clicktimer->isActive()) {
     emit backsignal();
+        clicktimer->start();
+    }
 }
 void textkeypad::enterspace()
 {
+    if(!clicktimer->isActive()) {
     emit spacesignal();
+        clicktimer->start();
+    }
 }
 
 void textkeypad::enterenter()
 {
+     if(!clicktimer->isActive()) {
     emit entersignal();
+         clicktimer->start();
+     }
 }

@@ -65,8 +65,6 @@ MainWindow::MainWindow(QWidget *parent)
     clicktimer->setInterval(200);
     clicktimer->setSingleShot(true);
 
-
-
     vacpresetval = ui->label_vacpreset->text().toInt();
 
 
@@ -114,15 +112,15 @@ MainWindow::MainWindow(QWidget *parent)
      QString itemname47;
      query.exec("SELECT lastselected FROM maindb LIMIT 1");
     QString itemname48;
-    if(query.next()){
+    while(query.next()){
         itemname48=query.value(0).toString();
         surgeonind=itemname48.toInt();
     }
 
-    QString vacmode, vitmode;
+    QString vacmode2, vitmode;
 
      query.exec("select * from maindb where surgeon='"+surgeon+"'");
-     if(query.next()){
+     while(query.next()){
 
          vp=query.value(51).toInt();
          vip=query.value(52).toInt();
@@ -143,18 +141,30 @@ MainWindow::MainWindow(QWidget *parent)
           ui->label_led1->setText(query.value(49).toString());
           ui->label_led2->setText(query.value(50).toString());
           ui->label_vacpreset->setText(query.value(35).toString());
-          vacmode=query.value(36).toString();
+          vacmode2=query.value(36).toString();
           vitmode=query.value(34).toString();
 
           itemname35 = query.value(34).toString();
 
-          if(itemname35=="Linear")
+          if(vitp==0)
           {
                 ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
           }
           else
           {
                ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
+          }
+
+          if(vp==0)
+          {
+               ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
+
+          }
+          else
+          {
+
+              ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
+
           }
 
         itemname43 = query.value(42).toString();
@@ -171,7 +181,7 @@ MainWindow::MainWindow(QWidget *parent)
 
      }
 
-     vaclnl(vacmode);
+     vaclnl(vacmode2);
      vitlnl(vitmode);
 
     mydb1.close();
@@ -334,21 +344,6 @@ void MainWindow::updateLabelValue(QLabel* label, int dig, int value, int maxValu
 bool MainWindow::eventFilter(QObject* object, QEvent* event)
 {
 
-//    if (object==ui->comboBox && event->type() == QEvent::MouseButtonRelease)
-//    {
-//        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
-//        if (ui->comboBox->rect().contains(mouseEvent->pos()))
-//        {
-//            // Click inside the combo box, do nothing
-//            return false;
-//        }
-//        else
-//        {
-//            // Click outside the combo box, close it
-//            ui->comboBox->hidePopup();
-//            return true;
-//        }
-//    }
 
   if(object == ui->label_vacpreset && event->type() == QEvent::MouseButtonPress) {
     QMouseEvent *k = static_cast<QMouseEvent *> (event);
@@ -1562,10 +1557,10 @@ if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->c
             qDebug() << "Error updating lastselected column:";
         }
 
-        QString vacmode, vitmode;
+        QString vacmode2, vitmode;
 
        query.exec("select * from maindb where surgeon='"+surgeonid+"'");
-       if(query.next()){
+       while(query.next()){
            QString itemname1;
            QString itemname34;
            QString itemname35;
@@ -1595,13 +1590,14 @@ if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->c
            ui->label_led1->setText(query.value(49).toString());
            ui->label_led2->setText(query.value(50).toString());
            ui->label_vacpreset->setText(query.value(35).toString());
-           vacmode=query.value(36).toString();
+           vacmode2=query.value(36).toString();
            vitmode=query.value(34).toString();
 
            madtype = query.value(48).toString();
 
            itemname35 = query.value(34).toString();
-           if(itemname35=="Linear")
+
+           if(vitp==0)
            {
                 ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
 
@@ -1612,6 +1608,20 @@ if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->c
                ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
 
            }
+
+           if(vp==0)
+           {
+                ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
+
+           }
+           else
+           {
+
+               ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
+
+           }
+
+
                 itemname44= query.value(43).toString();
                fp0=itemname44.toDouble()*40.95;
                 itemname45 = query.value(44).toString();
@@ -1622,7 +1632,7 @@ if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->c
                fp3=itemname47.toDouble()*40.95;
            }
 
-       vaclnl(vacmode);
+       vaclnl(vacmode2);
        vitlnl(vitmode);
 
     mydb1.close();
@@ -2893,28 +2903,28 @@ void MainWindow::drain_onoff()
 void MainWindow::receiveString0(QString val)
 {
     fp0=val.toDouble()*40.95;
-    qDebug()<<fp0;
+    //qDebug()<<fp0;
 }
 
 //fp1
 void MainWindow::receiveString1(QString val)
 {
     fp1=val.toDouble()*40.95;
-    qDebug()<<fp1;
+    //qDebug()<<fp1;
 }
 
 //fp2
 void MainWindow::receiveString2(QString val)
 {
     fp2=val.toDouble()*40.95;
-    qDebug()<<fp2;
+    //qDebug()<<fp2;
 }
 
 //fp3
 void MainWindow::receiveString3(QString val)
 {
     fp3=val.toDouble()*40.95;
-    qDebug()<<fp3;
+    //qDebug()<<fp3;
 
 }
 
@@ -3048,7 +3058,7 @@ void MainWindow::setFPValues()
         ui->label_dialvalue->setText("3");
         hhandler->speaker_off();
     }
-    qDebug()<<avgfp;
+    //qDebug()<<avgfp;
 
 }
 
@@ -3090,7 +3100,7 @@ void MainWindow::dacvalue()
 void MainWindow::led1_setvalue(int pin, int value)
 {
     lp=value;
-    lp=win2->lp;
+    //lp=win2->lp;
     //writeGPIO(pin,lp);
     qDebug()<<"led1 pedal"<<lp;
     if(lp==0)
@@ -3131,7 +3141,7 @@ lp=1;
 void MainWindow::led2_setvalue(int pin, int value)
 {
     lp2=value;
-    lp2=win2->lp2;
+    //lp2=win2->lp2;
     //writeGPIO(pin,lp2);
     qDebug()<<"led2 pedal"<<lp2;
     if(lp2==0)
@@ -3166,7 +3176,7 @@ void MainWindow::led2_setvalue(int pin, int value)
 void MainWindow::vit_setvalue(int pin, int value)
 {
     vip=value;
-    vip=win2->vip;
+    //vip=win2->vip;
     //writeGPIO(pin,vip);
     qDebug()<<"vit pedal"<<vip;
     if(vip==0)
@@ -3218,7 +3228,7 @@ void MainWindow::vit_setvalue(int pin, int value)
 void MainWindow::dia_setvalue(int pin, int value)
 {
     dp=value;
-    dp=win2->dp;
+    //dp=win2->dp;
     //writeGPIO(pin,dp);
     qDebug()<<"dia pedal"<<dp;
     if(dp==0)
@@ -3262,7 +3272,7 @@ void MainWindow::dia_setvalue(int pin, int value)
 void MainWindow::siloil_setvalue(int pin, int value)
 {
     sp=value;
-    sp=win2->sp;
+    //sp=win2->sp;
     //writeGPIO(pin,sp);
     qDebug()<<"silicon oil pedal"<<sp;
     if(sp==0)
@@ -3405,19 +3415,21 @@ void MainWindow::configOnOff()
     QString ap1=QString::number(ap);
     QString sp1=QString::number(sp);
 
-    query.prepare("update maindb set vp='"+vp1+"',vip='"+vip1+"',vitp='"+vitp1+"',lp='"+lp1+"',lp2='"+lp21+"',dp='"+dp1+"',ap='"+ap1+"',sp='"+sp1+"'where surgeon='"+surgeonid+"'");
+    query.prepare("update maindb set vp1='"+vp1+"',vip1='"+vip1+"',vitp1='"+vitp1+"',lp1='"+lp1+"',lp21='"+lp21+"',dp1='"+dp1+"',ap1='"+ap1+"',sp1='"+sp1+"'where surgeon='"+surgeonid+"'");
     query.exec();
 
-    query.bindValue(vp1,"vp");
-    query.bindValue(vip1,"vip");
-    query.bindValue(vitp1,"vitp");
-    query.bindValue(lp1,"lp");
-    query.bindValue(lp21,"lp2");
-    query.bindValue(dp1,"dp");
-    query.bindValue(ap1,"ap");
-    query.bindValue(sp1,"sp");
+    query.bindValue(vp1,"vp1");
+    query.bindValue(vip1,"vip1");
+    query.bindValue(vitp1,"vitp1");
+    query.bindValue(lp1,"lp1");
+    query.bindValue(lp21,"lp21");
+    query.bindValue(dp1,"dp1");
+    query.bindValue(ap1,"ap1");
+    query.bindValue(sp1,"sp1");
 
-    //qDebug()<<vip1<<lp1<<lp21<<dp1<<ap1<<sp1;
+    qDebug()<<vip1<<lp1<<lp21<<dp1<<ap1<<sp1<<vp1<<vitp1;
+
+    loadPresets();
 
 
     mydb.close();
@@ -3429,7 +3441,43 @@ void MainWindow::loadPresets()
     QString styleoff="image: url(:/new/prefix1/img/off.png);border:3px solid black;border-radius:40px;";
     QString styleon="image: url(:/new/prefix1/img/on.png);border:3px solid black;border-radius:40px;";
 
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName(PATH);
+    mydb.open();
+    QSqlQuery query;
+    query.exec("select * from maindb where surgeon='"+surgeonid+"'");
+    while(query.next()){
 
+        vp=query.value(51).toInt();
+        qDebug()<<"vac_mode"<<vp;
+        vip=query.value(52).toInt();
+        vitp=query.value(53).toInt();
+        lp=query.value(54).toInt();
+        lp2=query.value(55).toInt();
+        dp=query.value(56).toInt();
+        ap=query.value(57).toInt();
+        sp=query.value(58).toInt();
+    }
+
+    mydb.close();
+
+    if(vp==1)
+    {
+        ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/nonbg1.png);");
+    }
+    else if(vp==0)
+    {
+        ui->label_28->setStyleSheet("image: url(:/new/prefix1/img/linbg3.png);");
+    }
+
+    if(vitp==1)
+    {
+        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/nlinvit2.png);");
+    }
+    else if(vitp==0)
+    {
+        ui->label_44->setStyleSheet("image: url(:/new/prefix1/img/linvit1.png);");
+    }
 
     if(vip==0)
     {
@@ -3506,7 +3554,8 @@ void MainWindow::loadPresets()
         ui->pushButton_siloilonoff->setText("ON");
     }
 
-    //qDebug()<<vip<<lp<<lp2<<dp<<ap<<sp;
+    qDebug()<<vip<<lp<<lp2<<dp<<ap<<sp<<vp<<vitp;
+
 
 
 }
@@ -3514,6 +3563,6 @@ void MainWindow::loadPresets()
 void MainWindow::keysound()
 {
     hhandler->speaker_on(50);
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(250));
     hhandler->speaker_off();
 }

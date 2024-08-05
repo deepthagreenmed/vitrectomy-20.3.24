@@ -195,10 +195,10 @@ static const uint qt_meta_data_settingswindow[] = {
       59,    0,  405,    2, 0x08 /* Private */,
       60,    0,  406,    2, 0x08 /* Private */,
       61,    0,  407,    2, 0x08 /* Private */,
-      62,    1,  408,    2, 0x08 /* Private */,
-      63,    1,  411,    2, 0x08 /* Private */,
-      64,    1,  414,    2, 0x08 /* Private */,
-      65,    1,  417,    2, 0x08 /* Private */,
+      62,    0,  408,    2, 0x08 /* Private */,
+      63,    0,  409,    2, 0x08 /* Private */,
+      64,    0,  410,    2, 0x08 /* Private */,
+      65,    0,  411,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -256,10 +256,10 @@ static const uint qt_meta_data_settingswindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   53,
-    QMetaType::Void, QMetaType::Int,   53,
-    QMetaType::Void, QMetaType::Int,   53,
-    QMetaType::Void, QMetaType::Int,   53,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -323,10 +323,10 @@ void settingswindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 50: _t->on_tab_vit_clicked(); break;
         case 51: _t->on_tab_fp_clicked(); break;
         case 52: _t->on_tab_fppreset_clicked(); break;
-        case 53: _t->comboBoxTL((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 54: _t->comboBoxBR((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 55: _t->comboBoxBL((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 56: _t->comboBoxTR((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 53: _t->comboBoxTL(); break;
+        case 54: _t->comboBoxBR(); break;
+        case 55: _t->comboBoxBL(); break;
+        case 56: _t->comboBoxTR(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
