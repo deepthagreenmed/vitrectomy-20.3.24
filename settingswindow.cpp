@@ -279,7 +279,6 @@ settingswindow::settingswindow(QWidget *parent) :
     // Connect the combo box's index changed signal to the slot
     connect(ui->comboBox_cuttertype, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &settingswindow::onCutterTypeChanged);
 
-    pedals ped;
 
     connect(ui->comboBox_tl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxTL);
     connect(ui->comboBox_bl,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&settingswindow::comboBoxBL);

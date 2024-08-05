@@ -2,6 +2,7 @@
 #define TEXTKEYPAD_H
 
 #include <QDialog>
+#include <QTimer>
 
 namespace Ui {
 class textkeypad;
@@ -31,6 +32,7 @@ private slots:
 
 private:
     Ui::textkeypad *ui;
+    QTimer *clicktimer;
 };
 
 #endif // TEXTKEYPAD_H
