@@ -1468,7 +1468,6 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
     {
         if(value != lp)
         {
-            lp=value;
             counter++;
             if(counter==2)
             {
@@ -1476,6 +1475,8 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
                 emit led1_pedal(pin,lp);
                 counter=0;
             }
+            lp=value;
+
         }
 
     }
@@ -1483,7 +1484,6 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
     {
         if(value != lp2)
         {
-            lp2=value;
             counter++;
             if(counter==2)
             {
@@ -1491,6 +1491,7 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
                 emit led2_pedal(pin,lp2);
                 counter=0;
             }
+            lp2=value;
         }
 
     }
@@ -1498,7 +1499,6 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
     {
         if(value != vip)
         {
-            vip=value;
             counter++;
             if(counter==2)
             {
@@ -1506,6 +1506,7 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
                 emit vit_pedal(pin,vip);
                 counter=0;
             }
+            vip=value;
         }
 
     }
@@ -1513,7 +1514,6 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
     {
         if(value != dp)
         {
-            dp=value;
             counter++;
             if(counter==2)
             {
@@ -1521,6 +1521,7 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
                emit dia_pedal(pin,dp);
                counter=0;
             }
+            dp=value;
         }
 
     }
@@ -1528,7 +1529,6 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
     {
         if(value != sp)
         {
-            sp=value;
             counter++;
             if(counter==2)
             {
@@ -1536,6 +1536,7 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
                 emit siloil_pedal(pin,sp);
                 counter=0;
             }
+            sp=value;
         }
 
     }
