@@ -1476,7 +1476,6 @@ void settingswindow::gpiofp(int pin,int value, QString pos)
                 counter=0;
             }
             lp=value;
-
         }
 
     }
