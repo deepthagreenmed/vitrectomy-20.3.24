@@ -70,7 +70,7 @@ settingswindow::settingswindow(QWidget *parent) :
 
 
 
-    //ui->tabWidget_2->removeTab(1);
+
     ui->tabWidget_2->setCurrentIndex(0);
     ui->vit->setStyleSheet("image: url(:/new/prefix1/img/diaicon2.png);");
 
@@ -181,9 +181,9 @@ settingswindow::settingswindow(QWidget *parent) :
     ui->comboBox_mode->setCurrentText(itemname37);
 
     ui->comboBox_tl->setCurrentText(itemname39);
-    ui->comboBox_br->setCurrentText(itemname40);
+    ui->comboBox_tr->setCurrentText(itemname40);
     ui->comboBox_bl->setCurrentText(itemname41);
-    ui->comboBox_tr->setCurrentText(itemname42);
+    ui->comboBox_br->setCurrentText(itemname42);
     ui->lineEdit_5->setText(itemname43);
 
 
@@ -290,7 +290,7 @@ settingswindow::settingswindow(QWidget *parent) :
     connect(timergpio,&QTimer::timeout,this,&settingswindow::comboBoxBL);
     connect(timergpio,&QTimer::timeout,this,&settingswindow::comboBoxBR);
     connect(timergpio,&QTimer::timeout,this,&settingswindow::comboBoxTR);
-    timergpio->start(1000);
+    timergpio->start(100);
 
     connect(ui->listWidget, &QListWidget::itemClicked, this, &settingswindow::updateSurgeon);
 
@@ -605,17 +605,15 @@ void settingswindow::on_saveforall_clicked()
 {
 
     db1 = QSqlDatabase::addDatabase("QSQLITE");
-        db1.setDatabaseName(PATH);
-     db1.open();
-
-
+    db1.setDatabaseName(PATH);
+    db1.open();
 
     QSqlQuery qry;
 
     tl1=ui->comboBox_tl->currentText();
-    tr1=ui->comboBox_br->currentText();
+    br1=ui->comboBox_br->currentText();
     bl1=ui->comboBox_bl->currentText();
-    br1=ui->comboBox_tr->currentText();
+    tr1=ui->comboBox_tr->currentText();
     db1.open();
 
     qry.prepare("update maindb set ftopleft='"+tl1+"',ftopright='"+tr1+"',fbottomleft='"+bl1+"',fbottomright='"+br1+"'");
@@ -646,9 +644,9 @@ void settingswindow::on_save_clicked()
     QString surgeon;
     surgeon=ui->lineEdit_5->text();
     tl1=ui->comboBox_tl->currentText();
-    tr1=ui->comboBox_br->currentText();
+    br1=ui->comboBox_br->currentText();
     bl1=ui->comboBox_bl->currentText();
-    br1=ui->comboBox_tr->currentText();
+    tr1=ui->comboBox_tr->currentText();
     db1.open();
 
     qry.prepare("update maindb set ftopleft='"+tl1+"',ftopright='"+tr1+"',fbottomleft='"+bl1+"',fbottomright='"+br1+"' where surgeon='"+surgeon+"'");
@@ -757,9 +755,9 @@ ui->comboBox_cuttertype->setCurrentText(itemname48);
 ui->lineEdit_vac->setText(itemname36);
 ui->comboBox_mode->setCurrentText(itemname37);
 ui->comboBox_tl->setCurrentText(itemname39);
-ui->comboBox_br->setCurrentText(itemname40);
+ui->comboBox_tr->setCurrentText(itemname40);
 ui->comboBox_bl->setCurrentText(itemname41);
-ui->comboBox_tr->setCurrentText(itemname42);
+ui->comboBox_br->setCurrentText(itemname42);
 ui->lineEdit_5->setText(itemname43);
 
  ui->lineEdit_zero->setText(itemname44);
@@ -1365,7 +1363,7 @@ void settingswindow::comboBoxTL()
          gpiofp(961,sp,tl1);
     }
 
-    qDebug()<<"top left"<<readGPIO(961);
+    qDebug()<<"top left 961"<<readGPIO(961);
 
 }
 
@@ -1373,30 +1371,30 @@ void settingswindow::comboBoxBR()
 {
     if(br1 == "LED1 On/Off")
     {
-        gpiofp(963,lp,br1);
+        gpiofp(962,lp,br1);
 
     }
     if(br1 == "LED2 On/Off")
     {
-         gpiofp(963,lp2,br1);
+         gpiofp(962,lp2,br1);
 
     }
     if(br1 == "Vitrectomy On/Off")
     {
-         gpiofp(963,vip,br1);
+         gpiofp(962,vip,br1);
 
     }
     if(br1 == "Diathermy On/Off")
     {
-         gpiofp(963,dp,br1);
+         gpiofp(962,dp,br1);
 
     }
     if(br1 == "Silicon Oil On/Off")
     {
-         gpiofp(963,sp,br1);
+         gpiofp(962,sp,br1);
     }
 
-    qDebug()<<"bottom right"<<readGPIO(963);
+    qDebug()<<"bottom right 962"<<readGPIO(962);
 
 }
 
@@ -1404,141 +1402,168 @@ void settingswindow::comboBoxBL()
 {
     if(bl1 == "LED1 On/Off")
     {
-        gpiofp(962,lp,bl1);
+        gpiofp(964,lp,bl1);
 
     }
     if(bl1 == "LED2 On/Off")
     {
-         gpiofp(962,lp2,bl1);
+         gpiofp(964,lp2,bl1);
 
     }
     if(bl1 == "Vitrectomy On/Off")
     {
-         gpiofp(962,vip,bl1);
+         gpiofp(964,vip,bl1);
 
     }
     if(bl1 == "Diathermy On/Off")
     {
-         gpiofp(962,dp,bl1);
+         gpiofp(964,dp,bl1);
 
     }
     if(bl1 == "Silicon Oil On/Off")
     {
-         gpiofp(962,sp,bl1);
+         gpiofp(964,sp,bl1);
     }
 
-    qDebug()<<"bottom left"<<readGPIO(962);
+    qDebug()<<"bottom left 964"<<readGPIO(964);
 }
 
 void settingswindow::comboBoxTR()
 {
     if(tr1 == "LED1 On/Off")
     {
-        gpiofp(964,lp,tr1);
+        gpiofp(963,lp,tr1);
 
     }
     if(tr1 == "LED2 On/Off")
     {
-         gpiofp(964,lp2,tr1);
+         gpiofp(963,lp2,tr1);
 
     }
     if(tr1 == "Vitrectomy On/Off")
     {
-         gpiofp(964,vip,tr1);
+         gpiofp(963,vip,tr1);
 
     }
     if(tr1 == "Diathermy On/Off")
     {
-         gpiofp(964,dp,tr1);
+         gpiofp(963,dp,tr1);
 
     }
     if(tr1 == "Silicon Oil On/Off")
     {
-         gpiofp(964,sp,tr1);
+         gpiofp(963,sp,tr1);
     }
 
-    qDebug()<<"top right"<<readGPIO(964);
+    qDebug()<<"top right 963"<<readGPIO(963);
 }
 
 void settingswindow::gpiofp(int pin,int value, QString pos)
 {
     value=readGPIO(pin);
 
-    if(pos == "LED1 On/Off")
+    if(pos=="LED1 On/Off")
     {
         if(value != lp)
         {
-            counter++;
-            if(counter==2)
+            counter1++;
+            if(counter1%2==0)
             {
-                lp=!lp;
-                emit led1_pedal(pin,lp);
-                counter=0;
+                //lp=!lp;
+                emit led1_pedal(pin,value);
             }
             lp=value;
         }
-
+        else
+        {
+            counter1++;
+            if(counter1%2==0)
+            {
+            }
+        }
     }
-    if(pos == "LED2 On/Off")
+
+    if(pos=="LED2 On/Off")
     {
         if(value != lp2)
         {
-            counter++;
-            if(counter==2)
+            counter2++;
+            if(counter2%2==0)
             {
-                lp2=!lp2;
-                emit led2_pedal(pin,lp2);
-                counter=0;
+                //lp2=!lp2;
+                emit led2_pedal(pin,value);
             }
             lp2=value;
         }
-
+        else
+        {
+            counter2++;
+            if(counter2%2==0)
+            {
+            }
+        }
     }
-    if(pos == "Vitrectomy On/Off")
+    if(pos=="Vitrectomy On/Off")
     {
         if(value != vip)
         {
-            counter++;
-            if(counter==2)
+            counter3++;
+            if(counter3%2==0)
             {
-                vip=!vip;
-                emit vit_pedal(pin,vip);
-                counter=0;
+                //vip=!vip;
+                emit vit_pedal(pin,value);
             }
             vip=value;
         }
-
+        else
+        {
+            counter3++;
+            if(counter3%2==0)
+            {
+            }
+        }
     }
-    if(pos == "Diathermy On/Off")
+    if(pos=="Diathermy On/Off")
     {
         if(value != dp)
         {
-            counter++;
-            if(counter==2)
+            counter4++;
+            if(counter4%2==0)
             {
-               dp=!dp;
-               emit dia_pedal(pin,dp);
-               counter=0;
+                //dp=!dp;
+                emit dia_pedal(pin,value);
             }
             dp=value;
         }
-
+        else
+        {
+            counter4++;
+            if(counter4%2==0)
+            {
+            }
+        }
     }
-    if(pos == "Silicon Oil On/Off")
+    if(pos=="Silicon Oil On/Off")
     {
         if(value != sp)
         {
-            counter++;
-            if(counter==2)
+            counter5++;
+            if(counter5%2==0)
             {
-                sp=!sp;
-                emit siloil_pedal(pin,sp);
-                counter=0;
+                //sp=!sp;
+                emit siloil_pedal(pin,value);
             }
             sp=value;
         }
-
+        else
+        {
+            counter5++;
+            if(counter5%2==0)
+            {
+            }
+        }
     }
+
 }
 
 void settingswindow::fpsettings()

@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::showsetupscreen);
 
 
-    clicktimer->setInterval(200);
+    clicktimer->setInterval(100);
     clicktimer->setSingleShot(true);
 
     vacpresetval = ui->label_vacpreset->text().toInt();
@@ -3058,7 +3058,7 @@ void MainWindow::setFPValues()
         ui->label_dialvalue->setText("3");
         hhandler->speaker_off();
     }
-    //qDebug()<<avgfp;
+    qDebug()<<avgfp;
 
 }
 
@@ -3136,6 +3136,8 @@ void MainWindow::led1_setvalue(int pin, int value)
        lp=0;
     }
 
+    //configOnOff();
+
 }
 
 void MainWindow::led2_setvalue(int pin, int value)
@@ -3171,6 +3173,8 @@ void MainWindow::led2_setvalue(int pin, int value)
         disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
        lp2=0;
     }
+
+    //configOnOff();
 }
 
 void MainWindow::vit_setvalue(int pin, int value)
@@ -3203,26 +3207,27 @@ void MainWindow::vit_setvalue(int pin, int value)
     }
 
     else if(vip==1)
-        {   ui->label_38->setStyleSheet("");
-            ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
-            ui->pushButton_vitinc->lower();
-            ui->pushButton_vitdec->lower();
-            ui->label_vitpreset->lower();
-            ui->label_vitactual->lower();
+    {   ui->label_38->setStyleSheet("");
+        ui->label_24->setStyleSheet("font: 40pt;color: rgb(255, 255, 255);");
+        ui->pushButton_vitinc->lower();
+        ui->pushButton_vitdec->lower();
+        ui->label_vitpreset->lower();
+        ui->label_vitactual->lower();
 
-            ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:3px solid black;border-radius:40px;");
-            ui->pushButton_vitonoff->setText("OFF");
-            vip=0;
+        ui->pushButton_vitonoff->setStyleSheet("image: url(:/new/prefix1/img/off.png);border:3px solid black;border-radius:40px;");
+        ui->pushButton_vitonoff->setText("OFF");
+        vip=0;
 
-           hhandler->vit_off();
-
-
-        disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
-        disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
+       hhandler->vit_off();
 
 
+    disconnect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
+    disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
     }
+
+    //configOnOff();
+
 }
 
 void MainWindow::dia_setvalue(int pin, int value)
@@ -3267,6 +3272,8 @@ void MainWindow::dia_setvalue(int pin, int value)
         disconnect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
        dp=0;
     }
+
+    //configOnOff();
 }
 
 void MainWindow::siloil_setvalue(int pin, int value)
@@ -3318,7 +3325,7 @@ void MainWindow::siloil_setvalue(int pin, int value)
         sp=0;
     }
 
-
+    //configOnOff();
 }
 
 //Silicon oil
@@ -3447,7 +3454,6 @@ void MainWindow::loadPresets()
     QSqlQuery query;
     query.exec("select * from maindb where surgeon='"+surgeonid+"'");
     while(query.next()){
-
         vp=query.value(51).toInt();
         qDebug()<<"vac_mode"<<vp;
         vip=query.value(52).toInt();
@@ -3566,3 +3572,4 @@ void MainWindow::keysound()
     std::this_thread::sleep_for(std::chrono::milliseconds(250));
     hhandler->speaker_off();
 }
+

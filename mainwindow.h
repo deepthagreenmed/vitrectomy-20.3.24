@@ -76,6 +76,7 @@ public:
 
 
 
+
 signals:
 
 public slots:
@@ -103,6 +104,7 @@ public slots:
 
 
 private slots:
+
      void keysound();
      void configOnOff();
      void siloil();
@@ -204,6 +206,11 @@ private:
     QTimer timesiloil;
     QTimer *clicktimer;
     QTimer *timercb;
+    int counter1=0;
+    int counter2=0;
+    int counter3=0;
+    int counter4=0;
+    int counter5=0;
 
 
 };
