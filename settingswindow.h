@@ -137,13 +137,16 @@ private:
       int led2value;
       QTimer *timergpio;
       QTimer* clicktimer;
-      int counter1=0;
-      int counter2=0;
-      int counter3=0;
-      int counter4=0;
-      int counter5=0;
-
-
+      int flag_1=0;
+      int state1=0;
+      int flag_2=0;
+      int state2=0;
+      int flag_3=0;
+      int state3=0;
+      int flag_4=0;
+      int state4=0;
+      int flag_5=0;
+      int state5=0;
 
 
 };

@@ -1460,119 +1460,133 @@ void settingswindow::comboBoxTR()
 
 void settingswindow::gpiofp(int pin,int value, QString pos)
 {
-    value=readGPIO(pin);
-
     if(pos=="LED1 On/Off")
     {
-        if(value != lp)
+        int value1 = readGPIO(pin);
+        if(value1==0 && flag_1==0 && state1==0)
         {
-            counter1++;
-            if(counter1%2==0)
-            {
-                //lp=!lp;
-                emit led1_pedal(pin,value);
-            }
-            lp=value;
+            state1=1;
         }
-        else
+        if(value1==1 && flag_1==0 && state1==1)
         {
-            counter1++;
-            if(counter1%2==0)
-            {
-            }
+            flag_1=1;
+            state1=2;
+            emit led1_pedal(pin,1);
+        }
+        if(value1==0 && flag_1==1 && state1==2)
+        {
+            state1=3;
+        }
+        if(value1==1 && flag_1==1 && state1==3)
+        {
+            emit led1_pedal(pin,0);
+            flag_1=0;
+            state1=0;
         }
     }
 
     if(pos=="LED2 On/Off")
     {
-        if(value != lp2)
+        int value2 = readGPIO(pin);
+        if(value2==0 && flag_2==0 && state2==0)
         {
-            counter2++;
-            if(counter2%2==0)
-            {
-                //lp2=!lp2;
-                emit led2_pedal(pin,value);
-            }
-            lp2=value;
+            state2=1;
         }
-        else
+        if(value2==1 && flag_2==0 && state2==1)
         {
-            counter2++;
-            if(counter2%2==0)
-            {
-            }
+            flag_2=1;
+            state2=2;
+            emit led2_pedal(pin,1);
+        }
+        if(value2==0 && flag_2==1 && state2==2)
+        {
+            state2=3;
+        }
+        if(value2==1 && flag_2==1 && state2==3)
+        {
+            emit led2_pedal(pin,0);
+            flag_2=0;
+            state2=0;
         }
     }
     if(pos=="Vitrectomy On/Off")
     {
-        if(value != vip)
+        int value3 = readGPIO(pin);
+        if(value3==0 && flag_3==0 && state3==0)
         {
-            counter3++;
-            if(counter3%2==0)
-            {
-                //vip=!vip;
-                emit vit_pedal(pin,value);
-            }
-            vip=value;
+            state3=1;
         }
-        else
+        if(value3==1 && flag_3==0 && state3==1)
         {
-            counter3++;
-            if(counter3%2==0)
-            {
-            }
+            flag_3=1;
+            state3=2;
+            emit vit_pedal(pin,1);
+        }
+        if(value3==0 && flag_3==1 && state3==2)
+        {
+            state3=3;
+        }
+        if(value3==1 && flag_3==1 && state3==3)
+        {
+            emit vit_pedal(pin,0);
+            flag_3=0;
+            state3=0;
         }
     }
     if(pos=="Diathermy On/Off")
     {
-        if(value != dp)
+        int value4 = readGPIO(pin);
+        if(value4==0 && flag_4==0 && state4==0)
         {
-            counter4++;
-            if(counter4%2==0)
-            {
-                //dp=!dp;
-                emit dia_pedal(pin,value);
-            }
-            dp=value;
+            state4=1;
         }
-        else
+        if(value4==1 && flag_4==0 && state4==1)
         {
-            counter4++;
-            if(counter4%2==0)
-            {
-            }
+            flag_4=1;
+            state4=2;
+            emit dia_pedal(pin,1);
+        }
+        if(value4==0 && flag_4==1 && state4==2)
+        {
+            state4=3;
+        }
+        if(value4==1 && flag_4==1 && state4==3)
+        {
+            emit dia_pedal(pin,0);
+            flag_4=0;
+            state4=0;
         }
     }
     if(pos=="Silicon Oil On/Off")
     {
-        if(value != sp)
+        int value5 = readGPIO(pin);
+        if(value5==0 && flag_5==0 && state5==0)
         {
-            counter5++;
-            if(counter5%2==0)
-            {
-                //sp=!sp;
-                emit siloil_pedal(pin,value);
-            }
-            sp=value;
+            state5=1;
         }
-        else
+        if(value5==1 && flag_5==0 && state5==1)
         {
-            counter5++;
-            if(counter5%2==0)
-            {
-            }
+            flag_5=1;
+            state5=2;
+            emit siloil_pedal(pin,1);
+        }
+        if(value5==0 && flag_5==1 && state5==2)
+        {
+            state5=3;
+        }
+        if(value5==1 && flag_5==1 && state5==3)
+        {
+            emit siloil_pedal(pin,0);
+            flag_5=0;
+            state5=0;
         }
     }
-
 }
 
 void settingswindow::fpsettings()
 {
     double sum=ui->lineEdit_zero->text().toDouble()+ui->lineEdit_one->text().toDouble()+ui->lineEdit_two->text().toDouble()+ui->lineEdit_three->text().toDouble();
     ui->label_110->setText(QString::number(sum));
-//    if(sum!=100){
-//        QMessageBox::information(nullptr, "Information", "check the Total of positons 0,1,2,3.");
-//    }
 }
 
 int settingswindow::readGPIO(int pin)
