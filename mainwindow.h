@@ -104,8 +104,6 @@ public slots:
 
 
 private slots:
-
-     void keysound();
      void configOnOff();
      void siloil();
      void led1_setvalue(int pin, int value);

@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::showsetupscreen);
 
 
-    clicktimer->setInterval(100);
+    clicktimer->setInterval(200);
     clicktimer->setSingleShot(true);
 
     vacpresetval = ui->label_vacpreset->text().toInt();
@@ -725,7 +725,7 @@ void MainWindow::siloil_onoff()
         timesiloil.start(100);
         connect(&timesiloil, &QTimer::timeout, this, &MainWindow::siloil);
 
-        keysound();
+        hhandler->buzz();
 
         sp=1;
 
@@ -749,7 +749,7 @@ void MainWindow::siloil_onoff()
 
         timesiloil.stop();
         disconnect(&timesiloil, &QTimer::timeout, this, &MainWindow::siloil);
-keysound();
+hhandler->buzz();
         sp=0;
         }
     clicktimer->start();
@@ -796,7 +796,7 @@ void MainWindow::led1_onoff()
             connect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
             connect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
 
-            keysound();
+            hhandler->buzz();
 
 
     lp=1;
@@ -812,7 +812,7 @@ void MainWindow::led1_onoff()
 
             disconnect(ui->pushButton_led1inc, &QPushButton::clicked, this, &MainWindow::increaseledvalue);
             disconnect(ui->pushButton_led1dec, &QPushButton::clicked, this, &MainWindow::decreaseledvalue);
-            keysound();
+            hhandler->buzz();
            lp=0;
         }
         clicktimer->start();
@@ -839,7 +839,7 @@ void MainWindow::led2_onoff()
         connect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
         connect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
 
-        keysound();
+        hhandler->buzz();
 
 
         lp2=1;
@@ -854,7 +854,7 @@ void MainWindow::led2_onoff()
 
         disconnect(ui->pushButton_led2inc, &QPushButton::clicked, this, &MainWindow::increaseled2value);
         disconnect(ui->pushButton_led2dec, &QPushButton::clicked, this, &MainWindow::decreaseled2value);
-        keysound();
+        hhandler->buzz();
        lp2=0;
     }
     clicktimer->start();
@@ -883,7 +883,7 @@ void MainWindow::dia_onoff()
             connect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             connect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
 
-            keysound();
+            hhandler->buzz();
 
             dp=1;
 
@@ -904,7 +904,7 @@ void MainWindow::dia_onoff()
 
             disconnect(ui->pushButton_diainc, &QPushButton::clicked, this, &MainWindow::increaseDiathermyValue);
             disconnect(ui->pushButton_diadec, &QPushButton::clicked, this, &MainWindow::decreaseDiathermyValue);
-            keysound();
+            hhandler->buzz();
            dp=0;
         }
         clicktimer->start();
@@ -969,7 +969,7 @@ void MainWindow::ai_onoff()
             connect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             connect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
 
-            keysound();
+            hhandler->buzz();
 
             ap=1;
 
@@ -990,7 +990,7 @@ void MainWindow::ai_onoff()
 
             disconnect(ui->pushButton_aiinc, &QPushButton::clicked, this, &MainWindow::increaseAirInjectorValue);
             disconnect(ui->pushButton_aidec, &QPushButton::clicked, this, &MainWindow::decreaseAirInjectorValue);
-            keysound();
+            hhandler->buzz();
             ap=0;
         }
     clicktimer->start();
@@ -1021,7 +1021,7 @@ void MainWindow::vit_onoff()
             connect(ui->pushButton_vitinc, &QPushButton::clicked, this, &MainWindow::increaseVitrectomyValue);
             connect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
-            keysound();
+            hhandler->buzz();
 
 
 
@@ -1036,7 +1036,7 @@ void MainWindow::vit_onoff()
                 ui->pushButton_vitdec->lower();
                 ui->label_vitpreset->lower();
                 ui->label_vitactual->lower();
-keysound();
+hhandler->buzz();
                 vip=0;
 
                hhandler->vit_off();
@@ -2364,10 +2364,10 @@ void MainWindow::updateLabel()
 
         //irrigation/aspiration
           l->writeDAC(0);
-          int avg1 = vac->convert(CHANNEL_1)*0.1894;
           ui->label_vacactual->setText("0");
           if(vip==1){hhandler->vit_off();}
           if(vip==0){hhandler->vit_off();}
+          hhandler->speaker_off();
 
 
       }
@@ -2458,13 +2458,21 @@ void MainWindow::updateLabel()
               {
                   //swap
                l->writeDAC(0);
-               int avg1 = vac->convert(CHANNEL_1)*0.1894;
-               ui->label_vacactual->setText(QString::number(avg1));
+               ui->label_vacactual->setText("0");
+
               }
           }
 
 
           if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
+
+          if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt() && ui->label_vacactual->text().toInt()>0) {
+              hhandler->speaker_on(ui->label_vacactual->text().toInt(),1,0,0);
+          }
+          else
+          {
+              hhandler->speaker_off();
+          }
 
       }
       //vitrectomy
@@ -2607,6 +2615,8 @@ void MainWindow::updateLabel()
 
        if(vip==0) {hhandler->vit_off();ui->label_vitactual->setText("0");}
 
+       hhandler->speaker_on(75,0,0,1);
+
      }
   }
 
@@ -2649,8 +2659,8 @@ void MainWindow::updateLabel()
         if(vip==0){hhandler->vit_off();}
 
        l->writeDAC(0);
-       int avg1=vac->convert(CHANNEL_1)*0.1894;
        ui->label_vacactual->setText("0");
+       hhandler->speaker_off();
 
     }
     if(ui->label_dialvalue->text() == "2")
@@ -2722,10 +2732,6 @@ void MainWindow::updateLabel()
 
         }
 
-        if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt()) {
-            hhandler->speaker_on(ui->label_vacactual->text().toInt());
-        }
-
 
 
         file.close();
@@ -2736,9 +2742,16 @@ void MainWindow::updateLabel()
         {
             //swap
             l->writeDAC(0);
-            int avg1=vac->convert(CHANNEL_1)*0.1894;
-            ui->label_vacactual->setText(QString::number(avg1));
+            ui->label_vacactual->setText("0");
         }
+    }
+
+    if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt() && ui->label_vacactual->text().toInt()>0) {
+        hhandler->speaker_on(ui->label_vacactual->text().toInt(),1,0,0);
+    }
+    else
+    {
+        hhandler->speaker_off();
     }
 
     }
@@ -2804,9 +2817,10 @@ void MainWindow::updateLabel()
         }
 
 
-
         file.close();
         file2.close();
+
+        hhandler->speaker_on(75,0,0,1);
 
     }
   }
@@ -2972,8 +2986,6 @@ void MainWindow::setFPValues()
 {
     flag2=win2->flag2;
 
-   // QTimer *timersp=new QTimer;
-
     avgfp=fp->convert(CHANNEL_0);
 
     if(avgfp>=0 && avgfp<=fp0)
@@ -3023,15 +3035,11 @@ void MainWindow::setFPValues()
         ui->label_dialvalue->setText("2");
 
         if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt() && ui->label_vacactual->text().toInt()>0) {
-            hhandler->speaker_on(ui->label_vacactual->text().toInt());
-           // disconnect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
-           // timersp->stop();
+            hhandler->speaker_on(ui->label_vacactual->text().toInt(),1,0,0);
         }
         else
         {
             hhandler->speaker_off();
-            //connect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
-            //timersp->start(1500);
         }
 
     }
@@ -3054,12 +3062,12 @@ void MainWindow::setFPValues()
             ui->dial->setValue(fp0+fp1+fp2+fp3);
         }
         ui->label_dialvalue->setText("3");
-        hhandler->speaker_on(75);
-        std::this_thread::sleep_for(std::chrono::seconds(3));
-        hhandler->  .speaker_off();
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        hhandler->speaker_on(75,0,0,1);
+        //std::this_thread::sleep_for(std::chrono::seconds(3));
+        //hhandler->speaker_off();
+        //std::this_thread::sleep_for(std::chrono::seconds(3));
     }
-    qDebug()<<avgfp;
+    //qDebug()<<avgfp;
 
 }
 
@@ -3559,11 +3567,3 @@ void MainWindow::loadPresets()
 
 
 }
-
-void MainWindow::keysound()
-{
-    hhandler->speaker_on(50);
-    std::this_thread::sleep_for(std::chrono::milliseconds(250));
-    hhandler->speaker_off();
-}
-

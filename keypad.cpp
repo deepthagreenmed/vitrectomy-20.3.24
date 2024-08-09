@@ -55,7 +55,8 @@ void keypad::entertext()
         digit = button->text();
         emit textsignal(digit);
      }
-     keysound();
+     hhandler->buzz();
+
      clicktimer->start();
     }
 }
@@ -66,7 +67,7 @@ void keypad::enterback()
 
     back = true;
     emit backsignal();
-    keysound();
+    hhandler->buzz();
 
     clicktimer->start();
    }
@@ -77,16 +78,9 @@ void keypad::enterenter()
     if(!clicktimer->isActive()) {
 
     emit entersignal();
-    keysound();
+    hhandler->buzz();
 
     clicktimer->start();
    }
-}
-
-void keypad::keysound()
-{
-    hhandler->speaker_on(20);
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    hhandler->speaker_off();
 }
 

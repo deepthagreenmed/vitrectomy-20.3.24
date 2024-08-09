@@ -20,7 +20,6 @@ public:
     ~keypad();
     QString digit;
     bool back = false;
-    void keysound();
 
 signals:
     void textsignal(const QString& digit);
