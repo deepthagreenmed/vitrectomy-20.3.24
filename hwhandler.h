@@ -54,7 +54,9 @@
 #define MOT_CTRL_REG                32
 #define MOT_COUNT_REG               36
 
-#define SPEAKER_ON                  0x81
+#define SPEAKER_ASPIRATION          0x81
+#define SPEAKER_IRRIGATION          0x82
+#define SPEAKER_OCCLUSION           0x84
 #define SPEAKER_OFF                 0x00
 
 
@@ -64,7 +66,6 @@ class hwHandler: public QThread
 
 public:
     explicit hwHandler(QObject *parent = 0);
-
     int memfd;
     static void vit_on(int count, QString madtype);
     static void vit_off();
@@ -91,8 +92,10 @@ public:
     static void safety_vent_on();
     static void safety_vent_off();
 
-    static void speaker_on(uint8_t value);
+    static void speaker_on(uint8_t value, uint8_t asp, uint8_t irr, uint8_t occ);
     static void speaker_off();
+
+    static void buzz();
 
 signals:
 

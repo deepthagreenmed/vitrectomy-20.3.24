@@ -2972,7 +2972,7 @@ void MainWindow::setFPValues()
 {
     flag2=win2->flag2;
 
-    QTimer *timersp=new QTimer;
+   // QTimer *timersp=new QTimer;
 
     avgfp=fp->convert(CHANNEL_0);
 
@@ -3000,7 +3000,6 @@ void MainWindow::setFPValues()
             ui->dial->setValue(fp0+fp1);
         }
         ui->label_dialvalue->setText("1");
-        //keysound();
         hhandler->speaker_off();
     }
     if(avgfp>(fp0+fp1) && avgfp<=(fp0+fp1+fp2))
@@ -3023,21 +3022,16 @@ void MainWindow::setFPValues()
         }
         ui->label_dialvalue->setText("2");
 
-        if(flag2==0) {
-            if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt() && ui->label_vacactual->text().toInt()>0) {
-                hhandler->speaker_on(ui->label_vacactual->text().toInt());
-                disconnect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
-                timersp->stop();
-            }
-            else
-            {
-                hhandler->speaker_off();
-                connect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
-                timersp->start(1500);
-            }
-         if(flag2==1)
-         {
-         }
+        if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt() && ui->label_vacactual->text().toInt()>0) {
+            hhandler->speaker_on(ui->label_vacactual->text().toInt());
+           // disconnect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
+           // timersp->stop();
+        }
+        else
+        {
+            hhandler->speaker_off();
+            //connect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
+            //timersp->start(1500);
         }
 
     }
@@ -3060,7 +3054,10 @@ void MainWindow::setFPValues()
             ui->dial->setValue(fp0+fp1+fp2+fp3);
         }
         ui->label_dialvalue->setText("3");
-        //hhandler->speaker_off();
+        hhandler->speaker_on(75);
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+        hhandler->  .speaker_off();
+        std::this_thread::sleep_for(std::chrono::seconds(3));
     }
     qDebug()<<avgfp;
 
