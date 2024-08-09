@@ -104,7 +104,6 @@ public slots:
 
 
 private slots:
-     void fpone();
      void configOnOff();
      void siloil();
      void led1_setvalue(int pin, int value);
