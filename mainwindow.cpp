@@ -279,9 +279,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timerpres, &QTimer::timeout, this, &MainWindow::pressureval);
     timerpres->start(100); // milliseconds
 
-    QTimer *timerdac = new QTimer;
-    connect(timerdac, &QTimer::timeout, this, &MainWindow::dacvalue);
-    timerdac->start(1);
 
     connect(win2, &settingswindow::led1_pedal, this, &MainWindow::led1_setvalue);
     connect(win2, &settingswindow::led2_pedal, this, &MainWindow::led2_setvalue);
@@ -2332,7 +2329,8 @@ void MainWindow::updateLabel()
       if(ui->label_dialvalue->text() == "0")
       {
           l->writeDAC(0);
-          ui->label_vacactual->setText("0");
+          int avg1 = vac->convert(CHANNEL_1)*0.1894;
+          ui->label_vacactual->setText(QString::number(avg1));
          if(vip==1){hhandler->vit_off();}
          if(vip==0){hhandler->vit_off();}
 
@@ -2364,7 +2362,8 @@ void MainWindow::updateLabel()
 
         //irrigation/aspiration
           l->writeDAC(0);
-          ui->label_vacactual->setText("0");
+          int avg1 = vac->convert(CHANNEL_1)*0.1894;
+          ui->label_vacactual->setText(QString::number(avg1));
           if(vip==1){hhandler->vit_off();}
           if(vip==0){hhandler->vit_off();}
           hhandler->speaker_off();
@@ -2458,7 +2457,8 @@ void MainWindow::updateLabel()
               {
                   //swap
                l->writeDAC(0);
-               ui->label_vacactual->setText("0");
+               int avg1 = vac->convert(CHANNEL_1)*0.1894;
+               ui->label_vacactual->setText(QString::number(avg1));
 
               }
           }
@@ -2633,7 +2633,8 @@ void MainWindow::updateLabel()
         if(vip==1){hhandler->vit_off();}
         if(vip==0){hhandler->vit_off();}
         l->writeDAC(0);
-        ui->label_vacactual->setText("0");
+        int avg1 = vac->convert(CHANNEL_1)*0.1894;
+        ui->label_vacactual->setText(QString::number(avg1));
         hhandler->speaker_off();
     }
     if(ui->label_dialvalue->text() == "1")
@@ -2659,7 +2660,8 @@ void MainWindow::updateLabel()
         if(vip==0){hhandler->vit_off();}
 
        l->writeDAC(0);
-       ui->label_vacactual->setText("0");
+       int avg1 = vac->convert(CHANNEL_1)*0.1894;
+       ui->label_vacactual->setText(QString::number(avg1));
        hhandler->speaker_off();
 
     }
@@ -2742,7 +2744,8 @@ void MainWindow::updateLabel()
         {
             //swap
             l->writeDAC(0);
-            ui->label_vacactual->setText("0");
+            int avg1 = vac->convert(CHANNEL_1)*0.1894;
+            ui->label_vacactual->setText(QString::number(avg1));
         }
     }
 
@@ -3089,22 +3092,6 @@ void MainWindow::pressureval()
     //ui->label_3->setText(QString::number(bar));
 }
 
-void MainWindow::dacvalue()
-{
-    if(avgfp>=0 && avgfp<=fp0)
-    {
-        l->writeDAC(0);
-        ui->label_vacactual->setText("0");
-    }
-
-    else if(avgfp>fp0 && avgfp<=(fp0+fp1))
-    {
-        l->writeDAC(0);
-        int avg1=vac->convert(CHANNEL_1)*0.1894;
-        ui->label_vacactual->setText(QString::number(avg1));
-    }
-
-}
 
 void MainWindow::led1_setvalue(int pin, int value)
 {
@@ -3342,7 +3329,7 @@ void MainWindow::siloil()
     {
         l->writeDAC(0);
         int avg1 = vac->convert(CHANNEL_1)*0.1894;
-        ui->label_vacactual->setText("0");
+        ui->label_vacactual->setText(QString::number(avg1));
 
         ui->label_vitactual->setText("0");
         vip=0;
@@ -3566,4 +3553,12 @@ void MainWindow::loadPresets()
 
 
 
+}
+
+void MainWindow::fpone()
+{
+    if(ui->label_dialvalue->text() == "1")
+    {
+        ui->label_vacactual->setText("0");
+    }
 }

@@ -104,6 +104,7 @@ public slots:
 
 
 private slots:
+     void fpone();
      void configOnOff();
      void siloil();
      void led1_setvalue(int pin, int value);
@@ -111,7 +112,6 @@ private slots:
      void vit_setvalue(int pin, int value);
      void dia_setvalue(int pin, int value);
      void siloil_setvalue(int pin, int value);
-    void dacvalue();
     void pressureval();
     void transitionToNewScreen();
     void setZero();

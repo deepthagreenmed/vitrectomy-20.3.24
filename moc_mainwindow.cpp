@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[72];
-    char stringdata0[971];
+    char stringdata0[968];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -57,53 +57,53 @@ QT_MOC_LITERAL(21, 192, 5), // "digit"
 QT_MOC_LITERAL(22, 198, 15), // "on_clickedenter"
 QT_MOC_LITERAL(23, 214, 19), // "on_clickedbackspace"
 QT_MOC_LITERAL(24, 234, 9), // "vitvalset"
-QT_MOC_LITERAL(25, 244, 11), // "configOnOff"
-QT_MOC_LITERAL(26, 256, 6), // "siloil"
-QT_MOC_LITERAL(27, 263, 13), // "led1_setvalue"
-QT_MOC_LITERAL(28, 277, 3), // "pin"
-QT_MOC_LITERAL(29, 281, 5), // "value"
-QT_MOC_LITERAL(30, 287, 13), // "led2_setvalue"
-QT_MOC_LITERAL(31, 301, 12), // "vit_setvalue"
-QT_MOC_LITERAL(32, 314, 12), // "dia_setvalue"
-QT_MOC_LITERAL(33, 327, 15), // "siloil_setvalue"
-QT_MOC_LITERAL(34, 343, 8), // "dacvalue"
-QT_MOC_LITERAL(35, 352, 11), // "pressureval"
-QT_MOC_LITERAL(36, 364, 21), // "transitionToNewScreen"
-QT_MOC_LITERAL(37, 386, 7), // "setZero"
-QT_MOC_LITERAL(38, 394, 11), // "updateLabel"
-QT_MOC_LITERAL(39, 406, 12), // "updateLabel2"
-QT_MOC_LITERAL(40, 419, 9), // "diathermy"
-QT_MOC_LITERAL(41, 429, 14), // "airinjectoroff"
-QT_MOC_LITERAL(42, 444, 14), // "updatetimedate"
-QT_MOC_LITERAL(43, 459, 19), // "increaseVaccumValue"
-QT_MOC_LITERAL(44, 479, 19), // "decreaseVaccumValue"
-QT_MOC_LITERAL(45, 499, 23), // "increaseVitrectomyValue"
-QT_MOC_LITERAL(46, 523, 23), // "decreaseVitrectomyValue"
-QT_MOC_LITERAL(47, 547, 22), // "increaseDiathermyValue"
-QT_MOC_LITERAL(48, 570, 22), // "decreaseDiathermyValue"
-QT_MOC_LITERAL(49, 593, 24), // "increaseAirInjectorValue"
-QT_MOC_LITERAL(50, 618, 24), // "decreaseAirInjectorValue"
-QT_MOC_LITERAL(51, 643, 16), // "increaseledvalue"
-QT_MOC_LITERAL(52, 660, 16), // "decreaseledvalue"
-QT_MOC_LITERAL(53, 677, 17), // "increaseled2value"
-QT_MOC_LITERAL(54, 695, 17), // "decreaseled2value"
-QT_MOC_LITERAL(55, 713, 23), // "increasesiliconoilvalue"
-QT_MOC_LITERAL(56, 737, 23), // "decreasesiliconoilvalue"
-QT_MOC_LITERAL(57, 761, 18), // "showsettingswindow"
-QT_MOC_LITERAL(58, 780, 12), // "siloil_onoff"
-QT_MOC_LITERAL(59, 793, 20), // "vac_linear_nonlinear"
-QT_MOC_LITERAL(60, 814, 10), // "led1_onoff"
-QT_MOC_LITERAL(61, 825, 9), // "dia_onoff"
-QT_MOC_LITERAL(62, 835, 8), // "ai_onoff"
-QT_MOC_LITERAL(63, 844, 9), // "vit_onoff"
-QT_MOC_LITERAL(64, 854, 10), // "setsurgeon"
-QT_MOC_LITERAL(65, 865, 20), // "vit_linear_nonlinear"
-QT_MOC_LITERAL(66, 886, 10), // "led2_onoff"
-QT_MOC_LITERAL(67, 897, 12), // "comboboxload"
-QT_MOC_LITERAL(68, 910, 17), // "onComboBoxClicked"
-QT_MOC_LITERAL(69, 928, 14), // "timerCompleted"
-QT_MOC_LITERAL(70, 943, 15), // "showsetupscreen"
-QT_MOC_LITERAL(71, 959, 11) // "drain_onoff"
+QT_MOC_LITERAL(25, 244, 5), // "fpone"
+QT_MOC_LITERAL(26, 250, 11), // "configOnOff"
+QT_MOC_LITERAL(27, 262, 6), // "siloil"
+QT_MOC_LITERAL(28, 269, 13), // "led1_setvalue"
+QT_MOC_LITERAL(29, 283, 3), // "pin"
+QT_MOC_LITERAL(30, 287, 5), // "value"
+QT_MOC_LITERAL(31, 293, 13), // "led2_setvalue"
+QT_MOC_LITERAL(32, 307, 12), // "vit_setvalue"
+QT_MOC_LITERAL(33, 320, 12), // "dia_setvalue"
+QT_MOC_LITERAL(34, 333, 15), // "siloil_setvalue"
+QT_MOC_LITERAL(35, 349, 11), // "pressureval"
+QT_MOC_LITERAL(36, 361, 21), // "transitionToNewScreen"
+QT_MOC_LITERAL(37, 383, 7), // "setZero"
+QT_MOC_LITERAL(38, 391, 11), // "updateLabel"
+QT_MOC_LITERAL(39, 403, 12), // "updateLabel2"
+QT_MOC_LITERAL(40, 416, 9), // "diathermy"
+QT_MOC_LITERAL(41, 426, 14), // "airinjectoroff"
+QT_MOC_LITERAL(42, 441, 14), // "updatetimedate"
+QT_MOC_LITERAL(43, 456, 19), // "increaseVaccumValue"
+QT_MOC_LITERAL(44, 476, 19), // "decreaseVaccumValue"
+QT_MOC_LITERAL(45, 496, 23), // "increaseVitrectomyValue"
+QT_MOC_LITERAL(46, 520, 23), // "decreaseVitrectomyValue"
+QT_MOC_LITERAL(47, 544, 22), // "increaseDiathermyValue"
+QT_MOC_LITERAL(48, 567, 22), // "decreaseDiathermyValue"
+QT_MOC_LITERAL(49, 590, 24), // "increaseAirInjectorValue"
+QT_MOC_LITERAL(50, 615, 24), // "decreaseAirInjectorValue"
+QT_MOC_LITERAL(51, 640, 16), // "increaseledvalue"
+QT_MOC_LITERAL(52, 657, 16), // "decreaseledvalue"
+QT_MOC_LITERAL(53, 674, 17), // "increaseled2value"
+QT_MOC_LITERAL(54, 692, 17), // "decreaseled2value"
+QT_MOC_LITERAL(55, 710, 23), // "increasesiliconoilvalue"
+QT_MOC_LITERAL(56, 734, 23), // "decreasesiliconoilvalue"
+QT_MOC_LITERAL(57, 758, 18), // "showsettingswindow"
+QT_MOC_LITERAL(58, 777, 12), // "siloil_onoff"
+QT_MOC_LITERAL(59, 790, 20), // "vac_linear_nonlinear"
+QT_MOC_LITERAL(60, 811, 10), // "led1_onoff"
+QT_MOC_LITERAL(61, 822, 9), // "dia_onoff"
+QT_MOC_LITERAL(62, 832, 8), // "ai_onoff"
+QT_MOC_LITERAL(63, 841, 9), // "vit_onoff"
+QT_MOC_LITERAL(64, 851, 10), // "setsurgeon"
+QT_MOC_LITERAL(65, 862, 20), // "vit_linear_nonlinear"
+QT_MOC_LITERAL(66, 883, 10), // "led2_onoff"
+QT_MOC_LITERAL(67, 894, 12), // "comboboxload"
+QT_MOC_LITERAL(68, 907, 17), // "onComboBoxClicked"
+QT_MOC_LITERAL(69, 925, 14), // "timerCompleted"
+QT_MOC_LITERAL(70, 940, 15), // "showsetupscreen"
+QT_MOC_LITERAL(71, 956, 11) // "drain_onoff"
 
     },
     "MainWindow\0updateText\0\0text\0setFPValues\0"
@@ -112,10 +112,10 @@ QT_MOC_LITERAL(71, 959, 11) // "drain_onoff"
     "receiveString3\0led1val\0led2val\0vacval\0"
     "vaclnl\0vitval\0vitlnl\0typevit\0diaval\0"
     "on_clicked\0digit\0on_clickedenter\0"
-    "on_clickedbackspace\0vitvalset\0configOnOff\0"
-    "siloil\0led1_setvalue\0pin\0value\0"
-    "led2_setvalue\0vit_setvalue\0dia_setvalue\0"
-    "siloil_setvalue\0dacvalue\0pressureval\0"
+    "on_clickedbackspace\0vitvalset\0fpone\0"
+    "configOnOff\0siloil\0led1_setvalue\0pin\0"
+    "value\0led2_setvalue\0vit_setvalue\0"
+    "dia_setvalue\0siloil_setvalue\0pressureval\0"
     "transitionToNewScreen\0setZero\0updateLabel\0"
     "updateLabel2\0diathermy\0airinjectoroff\0"
     "updatetimedate\0increaseVaccumValue\0"
@@ -170,12 +170,12 @@ static const uint qt_meta_data_MainWindow[] = {
       24,    0,  382,    2, 0x0a /* Public */,
       25,    0,  383,    2, 0x08 /* Private */,
       26,    0,  384,    2, 0x08 /* Private */,
-      27,    2,  385,    2, 0x08 /* Private */,
-      30,    2,  390,    2, 0x08 /* Private */,
-      31,    2,  395,    2, 0x08 /* Private */,
-      32,    2,  400,    2, 0x08 /* Private */,
-      33,    2,  405,    2, 0x08 /* Private */,
-      34,    0,  410,    2, 0x08 /* Private */,
+      27,    0,  385,    2, 0x08 /* Private */,
+      28,    2,  386,    2, 0x08 /* Private */,
+      31,    2,  391,    2, 0x08 /* Private */,
+      32,    2,  396,    2, 0x08 /* Private */,
+      33,    2,  401,    2, 0x08 /* Private */,
+      34,    2,  406,    2, 0x08 /* Private */,
       35,    0,  411,    2, 0x08 /* Private */,
       36,    0,  412,    2, 0x08 /* Private */,
       37,    0,  413,    2, 0x08 /* Private */,
@@ -236,12 +236,12 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   28,   29,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   28,   29,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   28,   29,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   28,   29,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   28,   29,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   29,   30,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   29,   30,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   29,   30,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   29,   30,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   29,   30,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -308,14 +308,14 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 16: _t->on_clickedenter(); break;
         case 17: _t->on_clickedbackspace(); break;
         case 18: _t->vitvalset(); break;
-        case 19: _t->configOnOff(); break;
-        case 20: _t->siloil(); break;
-        case 21: _t->led1_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 22: _t->led2_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 23: _t->vit_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 24: _t->dia_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 25: _t->siloil_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 26: _t->dacvalue(); break;
+        case 19: _t->fpone(); break;
+        case 20: _t->configOnOff(); break;
+        case 21: _t->siloil(); break;
+        case 22: _t->led1_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 23: _t->led2_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 24: _t->vit_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 25: _t->dia_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 26: _t->siloil_setvalue((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 27: _t->pressureval(); break;
         case 28: _t->transitionToNewScreen(); break;
         case 29: _t->setZero(); break;
