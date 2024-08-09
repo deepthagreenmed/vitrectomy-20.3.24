@@ -11,6 +11,7 @@
 #include <QMouseEvent>
 #include <QLineEdit>
 #include <QListWidget>
+#include <QString>
 
 #define PATH "/home/vitrectomy.db"
 
@@ -33,13 +34,8 @@ public:
     void populatetype();
     void updateLineEditValue(QLineEdit* label, int dig, int value, int maxValue);
     int flag2=0;
-    int lp;
-    int lp2;
-    int vip;
-    int dp;
-    int sp;
     int readGPIO(int pin);
-    void gpiofp(int pin, int value, QString pos);
+
 
 
 signals:
@@ -62,6 +58,7 @@ signals:
     void vit_pedal(int pin, int value);
     void dia_pedal(int pin, int value);
     void siloil_pedal(int pin, int value);
+
 
 
 public slots:
@@ -101,6 +98,7 @@ public slots:
 
 
 private slots:
+    void gpiofp(int pin, QString pos);
     //swap on/off
     void swap_onoff();
     void onCutterTypeChanged(int index);

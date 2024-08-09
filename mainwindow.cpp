@@ -189,7 +189,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_surgeonname->setCurrentIndex(surgeonind);
 
     win2=new settingswindow(this);
-    win2->on_fp_settings_clicked();
 
     QObject::connect(win2, &settingswindow::stringPassed, this, &MainWindow::receiveString);
 
@@ -289,6 +288,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(win2, &settingswindow::vit_pedal, this, &MainWindow::vit_setvalue);
     connect(win2, &settingswindow::dia_pedal, this, &MainWindow::dia_setvalue);
     connect(win2, &settingswindow::siloil_pedal, this, &MainWindow::siloil_setvalue);
+
 
     hhandler->vso_off();
 
@@ -1535,7 +1535,6 @@ void MainWindow::timerCompleted()
 // Combo box
 void MainWindow::onComboBoxClicked()
 {
-    //fpsettings();
     timerforondscreen->stop();
 if((ui->comboBox_surgeonname->currentIndex())>=0 && (ui->comboBox_surgeonname->currentIndex())<20)
 {
@@ -3024,16 +3023,21 @@ void MainWindow::setFPValues()
         }
         ui->label_dialvalue->setText("2");
 
-        if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt() && ui->label_vacactual->text().toInt()>=0) {
-            hhandler->speaker_on(ui->label_vacactual->text().toInt());
-            disconnect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
-            timersp->stop();
-        }
-        else
-        {
-            hhandler->speaker_off();
-            connect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
-            timersp->start(1500);
+        if(flag2==0) {
+            if(ui->label_vacactual->text().toInt() <= ui->label_vacpreset->text().toInt() && ui->label_vacactual->text().toInt()>0) {
+                hhandler->speaker_on(ui->label_vacactual->text().toInt());
+                disconnect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
+                timersp->stop();
+            }
+            else
+            {
+                hhandler->speaker_off();
+                connect(timersp, &QTimer::timeout, this, &MainWindow::keysound);
+                timersp->start(1500);
+            }
+         if(flag2==1)
+         {
+         }
         }
 
     }
@@ -3056,7 +3060,7 @@ void MainWindow::setFPValues()
             ui->dial->setValue(fp0+fp1+fp2+fp3);
         }
         ui->label_dialvalue->setText("3");
-        hhandler->speaker_off();
+        //hhandler->speaker_off();
     }
     qDebug()<<avgfp;
 
@@ -3136,7 +3140,6 @@ void MainWindow::led1_setvalue(int pin, int value)
        lp=0;
     }
 
-    //configOnOff();
 
 }
 
@@ -3174,7 +3177,6 @@ void MainWindow::led2_setvalue(int pin, int value)
        lp2=0;
     }
 
-    //configOnOff();
 }
 
 void MainWindow::vit_setvalue(int pin, int value)
@@ -3225,9 +3227,6 @@ void MainWindow::vit_setvalue(int pin, int value)
     disconnect(ui->pushButton_vitdec, &QPushButton::clicked, this, &MainWindow::decreaseVitrectomyValue);
 
     }
-
-    //configOnOff();
-
 }
 
 void MainWindow::dia_setvalue(int pin, int value)
@@ -3273,7 +3272,6 @@ void MainWindow::dia_setvalue(int pin, int value)
        dp=0;
     }
 
-    //configOnOff();
 }
 
 void MainWindow::siloil_setvalue(int pin, int value)
@@ -3325,7 +3323,6 @@ void MainWindow::siloil_setvalue(int pin, int value)
         sp=0;
     }
 
-    //configOnOff();
 }
 
 //Silicon oil
